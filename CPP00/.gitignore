@@ -1,0 +1,17 @@
+# Object files
+*.o
+
+# Object directories (anywhere in repo)
+**/obj/
+
+# Executables (any name inside any exercise folder)
+**/ex*/megaphone
+
+# macOS system files
+.DS_Store
+
+# Vim / editor swap files
+*.swp
+
+# Backup / temporary files
+*~
