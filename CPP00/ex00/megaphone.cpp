@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 16:02:55 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/02 16:11:34 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/03 18:39:13 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
  * avoid undefined behavior if char is signed and negative. 
  * std::toupper returns an int, so we cast back to char for correct output.
  */
-static void	print_upper(char *str)
+static void	printUpper(char *str)
 {
 	int i = 0;
 
@@ -62,7 +62,7 @@ int	main(int argc, char **argv)
 	}
 	while (i < argc)
 	{
-		print_upper(argv[i]);
+		printUpper(argv[i]);
 		i++;
 	}
 	std::cout << '\n';
