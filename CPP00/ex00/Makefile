@@ -6,7 +6,7 @@
 #    By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/02 16:13:18 by diade-so          #+#    #+#              #
-#    Updated: 2026/01/02 17:04:34 by diade-so         ###   ########.fr        #
+#    Updated: 2026/01/05 19:47:55 by diade-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ all: $(NAME)
 
 # Create obj folder if it doesn't exist, compile .o files, then link
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 # pattern rule to comiple .cpp -> .o in obj/, create folder if needed
 $(OBJ_DIR)/%.o: %.cpp
