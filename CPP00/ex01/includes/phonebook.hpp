@@ -3,7 +3,6 @@
 
 #include "contact.hpp"
 #include "colors.hpp"
-#include <iostream>
 #include <string>
 
 class PhoneBook
@@ -12,7 +11,8 @@ public:
 	//constructor
 	PhoneBook();
 	void		addContact();
-//	void		searchContacts() const; 
+	void		searchContacts() const;
+	bool		isEmpty() const;
 
 private:
 	// input helpers
@@ -28,11 +28,16 @@ private:
 	void		printContactSummary(const Contact& contact) const;
 	void		printContactTable() const;
 
-	// validationi helper
-	int			getValidIndex() const;
+	// constants
+	enum
+	{
+		USER_INDEX_OFFSET = 1,
+		MAX_CONTACTS = 8,
+		PHONE_LEN = 10,
+	};
 
 	//members
-	Contact		_contacts[8];
+	Contact		_contacts[MAX_CONTACTS];
 	int			_nextIndex;
 	int			_totalContacts;
 };
