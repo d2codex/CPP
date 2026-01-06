@@ -1,7 +1,6 @@
 #include "contact.hpp"
 
-Contact::Contact() : _firstName(""), _lastName(""), _nickName(""),
-				     _phoneNumber(""), _darkestSecret("")
+Contact::Contact()
 {
     // nothing else needed
 }
