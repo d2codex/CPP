@@ -1,6 +1,8 @@
 #include "contact.hpp"
 #include "phonebook.hpp"
+#include "utils.hpp"
 #include <cstdlib>
+#include <iostream>
 
 PhoneBook::PhoneBook() : _nextIndex(0), _totalContacts(0)
 {
@@ -23,16 +25,13 @@ static std::string	trim(const std::string& str)
 
 static bool	isValidName(const std::string& str)
 {
-	size_t i = 0;
-
-	while (i < str.length())
+	for (size_t i = 0; i < str.length(); i++)
 	{
 		char c = str[i];
 		if (!std::isalpha(static_cast<unsigned char>(c)) &&
 			c != ' ' &&
 			c != '-')
 			return (false);
-		i++;
 	}
 	return (true);
 }
@@ -44,9 +43,8 @@ std::string	PhoneBook::promptName(const std::string& prompt)
 	while (true)
 	{
 		std::cout << prompt << YEL " > " << RESET;
-		std::getline(std::cin, input);
-		if (!std::cin)
-			exit (0);
+		if (!std::getline(std::cin, input))
+			throw std::runtime_error("EOF");
 		input = trim(input);
 		if (input.empty())
 		{
@@ -66,18 +64,14 @@ std::string	PhoneBook::promptName(const std::string& prompt)
 
 static bool	isAllDigits(const std::string& str)
 {
-	size_t	i = 0;
-
-	while (i < str.length())
+	for (size_t i = 0; i < str.length(); i++)
 	{
 		if (!std::isdigit(static_cast<unsigned char>(str[i])))
 			return (false);
-		i++;
 	}
 	return (true);
 }
 
-//prompts user until they enter a valid 10-digit phone number
 std::string	PhoneBook::promptPhoneNumber(const std::string& prompt)
 {
 	std::string input;
@@ -85,14 +79,11 @@ std::string	PhoneBook::promptPhoneNumber(const std::string& prompt)
 	while (true)
 	{
 		std::cout << prompt << " (10 digits)" << YEL " > " << RESET;
-		std::getline(std::cin, input);
-
-		if (!std::cin)
-			exit (0);
+		if (!std::getline(std::cin, input))
+			throw std::runtime_error("EOF");
 		input = trim(input);
-		if (input.length() == 10 && isAllDigits(input))
+		if (input.length() == PHONE_LEN && isAllDigits(input))
 			return (input);
-
 		std::cout << RED << "Invalid phone number.  Must be eactly 10 digits.\n"
 				  << RESET;
 	}
@@ -106,7 +97,7 @@ std::string	PhoneBook::promptNonEmpty(const std::string& prompt)
 	{
 		std::cout << prompt << YEL " > " << RESET;
 		if (!std::getline(std::cin, input))
-			exit (0);
+			throw std::runtime_error("EOF");
 		if (!input.empty())
 			return (input);
 		std::cout << RED << "Input cannot be empty.  Please try again.\n"
@@ -116,26 +107,15 @@ std::string	PhoneBook::promptNonEmpty(const std::string& prompt)
 
 bool	PhoneBook::confirmSave() const
 {
-	std::string input;
-	std::cout << YEL << "Save this contact? Type YES to save, NO to cancel.\n"
-			  << RESET;
+	const std::string message =
+		CYN "Save this contact? Type YES to save, NO to cancel.\n" RESET;
 
-	while (true)
-	{
-		std::cout << YEL "> " << RESET;
-		if (!std::getline(std::cin, input))
-			exit (0);
-		if (input == "YES" || input == "yes")
-			return (true);
-		if (input == "NO" || input == "no")
-			return (false);
-		std::cout << "Invalid input. Please type YES or NO.\n";
-	}
+	return (promptYesNo(message));
 }
 
 void	PhoneBook::printContactSummary(const Contact& contact) const
 {
-	std::cout << YEL << "You entered:\n" << RESET;
+	std::cout << YEL << "Contact Information:\n" << RESET;
 	std::cout << "First Name    : " << contact.getFirstName() << "\n"
 			  << "Last Name     : " << contact.getLastName() << "\n"
 			  << "Nickname      : " << contact.getNickName() << "\n"
@@ -145,23 +125,12 @@ void	PhoneBook::printContactSummary(const Contact& contact) const
 
 bool	PhoneBook::confirmReplacement(const Contact& oldContact) const
 {
-	std::string input;
-	
-	std::cout << "The phonebook is full. This will replace the oldest contact:\n";
+	std::cout << MAG << "The phonebook is full. Replace the oldest contact?\n"
+			  << RESET;
 	printContactSummary(oldContact);
-	std::cout << "Type YES to replace, NO to cancel.\n";
+	const std::string message = "Type YES to replace, NO to cancel.\n";
 
-	while (true)
-	{
-		std::cout << YEL "> " << RESET;
-		if (!std::getline(std::cin, input))
-			exit (0);
-		if (input == "YES" || input == "yes")
-			return (true);
-		if (input == "NO" || input == "no")
-			return (false);
-		std::cout << "Invalid input. Please type YES or NO.\n";
-	}
+	return (promptYesNo(message));
 }
 
 void	PhoneBook::addContact()
@@ -172,25 +141,18 @@ void	PhoneBook::addContact()
 	std::string phone = promptPhoneNumber("Enter phone number");
 	std::string secret = promptNonEmpty("Enter darkest secret");
 
-	// temporarily store contact information
 	Contact temp;
 	temp.setContact(first, last, nick, phone, secret);
-	//show what they typed
 	printContactSummary(temp);
-
 	if (!confirmSave())
 		return ;
-	if (_totalContacts == 8)
+	if (_totalContacts == MAX_CONTACTS)
 	{
 		if (!confirmReplacement(_contacts[_nextIndex]))
 			return ;
 	}
-
-	//save to array
 	_contacts[_nextIndex].setContact(first, last, nick, phone, secret);
-	//update circular index
-	_nextIndex = (_nextIndex + 1) % 8;
-	
-	if (_totalContacts < 8)
+	_nextIndex = (_nextIndex + 1) % MAX_CONTACTS;
+	if (_totalContacts < MAX_CONTACTS)
 		_totalContacts++;
 }
