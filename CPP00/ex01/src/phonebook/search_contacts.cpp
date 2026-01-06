@@ -6,6 +6,13 @@
 
 static const size_t TABLE_COL_WIDTH = 10;
 
+/**
+ * @brief Truncate a string to the given width, adding '.' if needed.
+ *
+ * @param str The string to truncate.
+ * @param width Max width for the string.
+ * @return Truncated string.
+ */
 static std::string truncate(const std::string& str, size_t width)
 {
 	if(str.length() > width)
@@ -13,6 +20,13 @@ static std::string truncate(const std::string& str, size_t width)
 	return (str);
 }
 
+/**
+ * @brief Align a string to the right within a given width.
+ *
+ * @param str The string to align.
+ * @param width Total width to align to.
+ * @return Right-aligned string.
+ */
 static std::string alignRight(const std::string& str, size_t width)
 {
 	if (str.length() >= width)
@@ -20,11 +34,25 @@ static std::string alignRight(const std::string& str, size_t width)
 	return (std::string(width - str.length(), ' ') + str);
 }
 
+/**
+ * @brief Format a string for table display.
+ *
+ * Combines truncation and right alignment using TABLE_COL_WIDTH.
+ *
+ * @param str The string to format.
+ * @return Formatted string.
+ */
 static std::string formatField(const std::string& str)
 {
 	return (alignRight(truncate(str, TABLE_COL_WIDTH), TABLE_COL_WIDTH));
 }
 
+/**
+ * @brief Print the phonebook as a table.
+ *
+ * Displays index, first name, last name, and nickname.
+ * Each column is truncated and aligned for readability.
+ */
 void PhoneBook::printContactTable() const
 {
 	std::cout << YEL "-------------------------------------------\n" << RESET;
@@ -46,6 +74,13 @@ void PhoneBook::printContactTable() const
 	}
 }
 
+/**
+ * @brief Displays the contacts, search contacts by index.
+ *
+ * Prompts user to enter index or RETURN to exit.
+ * Validates input and prints the contact summary.
+ * Throws std::runtime_error on EOF.
+ */
 void PhoneBook::searchContacts() const
 {
 	if (_totalContacts == 0)

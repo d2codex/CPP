@@ -6,6 +6,12 @@
 #include <string>
 #include <cstdlib>
 
+/**
+ * @brief Ask the user to confirm program exit.
+ *
+ * Displays a warning message and returns true if the user confirms
+ * the exit, false otherwise.
+ */
 static bool confirmExit()
 {
 	const std::string message =
@@ -17,11 +23,24 @@ static bool confirmExit()
 	return (promptYesNo(message));
 }
 
+/**
+ * @brief Check if the phonebook has no stored contacts.
+ *
+ * @return true if the phonebook is empty, false otherwise.
+ */
 bool PhoneBook::isEmpty() const
 {
 	return (_totalContacts == 0);
 }
 
+/**
+ * @brief Entry point of the PhoneBook program.
+ *
+ * Displays the main menu, processes user commands, and handles
+ * end-of-file conditions using exceptions.
+ *
+ * @return Exit status of the program.
+ */
 int	main(void)
 {
 	PhoneBook phonebook;

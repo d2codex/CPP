@@ -4,6 +4,14 @@
 #include <sstream>
 #include <iostream>
 
+/**
+ * @brief Convert an integer to a string.
+ *
+ * Uses a string stream to format the integer as a std::string.
+ *
+ * @param n Integer to convert.
+ * @return The integer as a std::string.
+ */
 std::string intToString(int n)
 {
 	std::ostringstream	oss;
@@ -12,12 +20,29 @@ std::string intToString(int n)
 	return (oss.str());
 }
 
+/**
+ * @brief Convert all letters in a string to uppercase.
+ *
+ * Modifies the string in-place.
+ *
+ * @param str The string to transform.
+ */
 void	toUpperCase(std::string& str)
 {
 	for (std::string::size_type i = 0; i < str.size(); ++i)
 		str[i] = std::toupper(str[i]);
 }
 
+/**
+ * @brief Prompt the user for a YES/NO answer.
+ *
+ * Displays the message and returns true for YES, false for NO.
+ * Throws a runtime_error if std::getline detects EOF.
+ *
+ * @param message The prompt message to display.
+ * @return true if user types YES, false if NO.
+ * @throws std::runtime_error on EOF.
+ */
 bool promptYesNo(const std::string& message)
 {
 	std::string	input;
