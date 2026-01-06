@@ -9,7 +9,8 @@ NAME = phonebook
 SRCS = src/main.cpp \
 	   src/contact/contact.cpp \
 	   src/phonebook/add_contact.cpp \
-	  # src/phonebook/search_contacts.cpp
+	   src/phonebook/search_contacts.cpp \
+	   src/utils/utils.cpp
 
 # Object files go in obj/ folder
 OBJ_DIR = obj
