@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 23:42:48 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/06 23:42:53 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/07 01:38:42 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <stdexcept> // std::runtime_error
 
 /**
  * @brief Ask the user to confirm program exit.
@@ -85,8 +86,9 @@ int	main(void)
 			std::cout << "\n";
 		}
 	}
-	catch (const std::runtime_error& e)
+	catch (const std::runtime_error& exception)
 	{
+		std::cout << "\n" << RED << "Caught an error: " << exception.what() << RESET;
 		std::cout << "\n" << BLU << "Input stream closed.\n" << RESET;
 	}
 	std::cout << BLU << "Goodbye and have a nice day.\n" << RESET;
