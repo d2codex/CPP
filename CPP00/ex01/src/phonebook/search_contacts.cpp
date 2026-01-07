@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 23:42:04 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/06 23:42:14 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/07 01:47:22 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ void PhoneBook::searchContacts() const
 		toUpperCase(input);
 		if (input == "RETURN")
 			return ;
-		std::istringstream iss(input);
+		std::istringstream iss; // default constructor create empty stream
+		iss.str(input); // set content of stream to input string
 
 		int	index;
 		if (!(iss >> index) || index < 1 || index > _totalContacts)
