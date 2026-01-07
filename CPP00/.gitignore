@@ -6,6 +6,7 @@
 
 # Executables (any name inside any exercise folder)
 **/ex*/megaphone
+**/ex*/phonebook
 
 # macOS system files
 .DS_Store
