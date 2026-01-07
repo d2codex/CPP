@@ -113,11 +113,11 @@ void PhoneBook::searchContacts() const
 		toUpperCase(input);
 		if (input == "RETURN")
 			return ;
-		std::istringstream iss; // default constructor create empty stream
-		iss.str(input); // set content of stream to input string
+		std::istringstream inStream; // default constructor create empty stream
+		inStream.str(input); // set content of stream to input string
 
 		int	index;
-		if (!(iss >> index) || index < 1 || index > _totalContacts)
+		if (!(inStream >> index) || index < 1 || index > _totalContacts)
 		{
 			if (_totalContacts == 1)
 				std::cout << RED << "Invalid input. Valid index: 1\n" << RESET;

@@ -26,10 +26,10 @@
  */
 std::string intToString(int n)
 {
-	std::ostringstream	oss;
+	std::ostringstream	outStream;
 
-	oss << n;
-	return (oss.str());
+	outStream << n;
+	return (outStream.str());
 }
 
 /**
