@@ -14,6 +14,7 @@
 #include "contact.hpp"
 #include "utils.hpp"
 #include <iostream>
+#include <iomanip>
 #include <sstream>
 
 static const size_t TABLE_COL_WIDTH = 10;
@@ -33,33 +34,6 @@ static std::string truncate(const std::string& str, size_t width)
 }
 
 /**
- * @brief Align a string to the right within a given width.
- *
- * @param str The string to align.
- * @param width Total width to align to.
- * @return Right-aligned string.
- */
-static std::string alignRight(const std::string& str, size_t width)
-{
-	if (str.length() >= width)
-		return (str);
-	return (std::string(width - str.length(), ' ') + str);
-}
-
-/**
- * @brief Format a string for table display.
- *
- * Combines truncation and right alignment using TABLE_COL_WIDTH.
- *
- * @param str The string to format.
- * @return Formatted string.
- */
-static std::string formatField(const std::string& str)
-{
-	return (alignRight(truncate(str, TABLE_COL_WIDTH), TABLE_COL_WIDTH));
-}
-
-/**
  * @brief Print the phonebook as a table.
  *
  * Displays index, first name, last name, and nickname.
@@ -70,18 +44,29 @@ void PhoneBook::printContactTable() const
 	std::cout << YEL "-------------------------------------------\n" << RESET;
 	std::cout << YEL "              THE YELLOW PAGE              \n" << RESET;
 	std::cout << YEL "-------------------------------------------\n" << RESET;
-	std::cout << formatField("Index")	   << YEL << "|" << RESET
-			  << formatField("First Name") << YEL << "|" << RESET
-			  << formatField("Last Name")  << YEL << "|" << RESET
-			  << formatField("Nickname")   << "\n";
-	std::cout << YEL "-------------------------------------------\n" << RESET;
 
+	//header
+	std::cout << std::setw(TABLE_COL_WIDTH) << "Index"		<< YEL << "|" << RESET
+			  << std::setw(TABLE_COL_WIDTH) << "First Name" << YEL << "|" << RESET
+			  << std::setw(TABLE_COL_WIDTH) << "Last Name"	<< YEL << "|" << RESET
+			  << std::setw(TABLE_COL_WIDTH) << "Nickname"	<< "\n";
+
+	std::cout << YEL "-------------------------------------------\n" << RESET;
+	
+	// table rows
 	for (int i = 0; i < _totalContacts; i++)
 	{
-		std::cout << formatField(intToString(i + 1))		  << YEL << "|" << RESET
-				  << formatField(_contacts[i].getFirstName()) << YEL << "|" << RESET
-				  << formatField(_contacts[i].getLastName())  << YEL << "|" << RESET
-				  << formatField(_contacts[i].getNickName())  << "\n";
+		const Contact& c = _contacts[i];
+
+		std::string first = truncate(c.getFirstName(), TABLE_COL_WIDTH);
+		std::string last  = truncate(c.getLastName(), TABLE_COL_WIDTH);
+		std::string nick  = truncate(c.getNickName(), TABLE_COL_WIDTH);
+
+		std::cout << std::setw(TABLE_COL_WIDTH) << i + 1 << YEL << "|" << RESET
+				  << std::setw(TABLE_COL_WIDTH) << first << YEL << "|" << RESET
+				  << std::setw(TABLE_COL_WIDTH) << last  << YEL << "|" << RESET
+				  << std::setw(TABLE_COL_WIDTH) << nick  << YEL << "\n" << RESET;
+
 		std::cout << YEL "-------------------------------------------\n" << RESET;
 	}
 }
