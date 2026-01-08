@@ -49,7 +49,7 @@ void Contact::setContact(const std::string& first,
  */
 const std::string& Contact::getFirstName() const
 {
-	return _firstName;
+	return (_firstName);
 }
 
 /**
@@ -58,7 +58,7 @@ const std::string& Contact::getFirstName() const
  */
 const std::string& Contact::getLastName() const
 {
-	return _lastName;
+	return (_lastName);
 }
 
 /**
@@ -67,7 +67,7 @@ const std::string& Contact::getLastName() const
  */
 const std::string& Contact::getNickName() const
 {
-    return _nickName;
+    return (_nickName);
 }
 
 /**
@@ -76,7 +76,7 @@ const std::string& Contact::getNickName() const
  */
 const std::string& Contact::getPhoneNumber() const
 {
-    return _phoneNumber;
+    return (_phoneNumber);
 }
 
 /**
@@ -85,5 +85,5 @@ const std::string& Contact::getPhoneNumber() const
  */
 const std::string& Contact::getDarkestSecret() const
 {
-    return _darkestSecret;
+    return (_darkestSecret);
 }

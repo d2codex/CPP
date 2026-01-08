@@ -88,7 +88,7 @@ int	main(void)
 	catch (const std::runtime_error& exception)
 	{
 		std::cin.clear(); // resets cin state
-		std::cout << "\n" << RED << "Caught an error: " 
+		std::cout << "\n" << RED << "Caught an error: "
 				  << exception.what() << "\n" << RESET;
 	}
 	std::cout << BLU << "Goodbye and have a nice day.\n" << RESET;
