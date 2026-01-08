@@ -42,7 +42,7 @@ std::string intToString(int n)
 void	toUpperCase(std::string& str)
 {
 	for (std::string::size_type i = 0; i < str.size(); ++i)
-		str[i] = std::toupper(str[i]);
+		str[i] = std::toupper(static_cast<unsigned char>(str[i]));
 }
 
 /**
