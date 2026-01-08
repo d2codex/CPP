@@ -13,7 +13,6 @@
 #include "utils.hpp"
 #include "colors.hpp"
 #include <cctype>
-#include <sstream>
 #include <iostream>
 
 /**
