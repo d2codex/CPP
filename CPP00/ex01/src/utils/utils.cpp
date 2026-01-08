@@ -17,22 +17,6 @@
 #include <iostream>
 
 /**
- * @brief Convert an integer to a string.
- *
- * Uses a string stream to format the integer as a std::string.
- *
- * @param n Integer to convert.
- * @return The integer as a std::string.
- */
-std::string intToString(int n)
-{
-	std::ostringstream	outStream;
-
-	outStream << n;
-	return (outStream.str());
-}
-
-/**
  * @brief Convert all letters in a string to uppercase.
  *
  * Modifies the string in-place.

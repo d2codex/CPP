@@ -17,7 +17,6 @@
 #include <stdexcept>
 
 // String manipulation
-std::string	intToString(int n);
 void		toUpperCase(std::string& str);
 std::string	trim(const std::string& str);
 
