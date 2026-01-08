@@ -87,11 +87,12 @@ void PhoneBook::printContactTable() const
 }
 
 /**
- * @brief Displays the contacts, search contacts by index.
+ * @brief Displays contacts and allows searching by index.
  *
- * Prompts user to enter index or RETURN to exit.
- * Validates input and prints the contact summary.
- * Throws std::runtime_error on EOF.
+ * Prompts for an index or "RETURN" to go back. Validates input and prints
+ * the contact summary. Uses safeGetline(), which throws on EOF or failure.
+ *
+ * @throws std::runtime_error If input stream is closed or fails.
  */
 void PhoneBook::searchContacts() const
 {
@@ -108,8 +109,7 @@ void PhoneBook::searchContacts() const
 		
 		std::cout << "Enter the index number or RETURN to return to the main menu.\n"
 				  << YEL << " > " RESET;
-		if (!std::getline(std::cin, input))
-			throw std::runtime_error("EOF");
+		safeGetline(input);
 		toUpperCase(input);
 		if (input == "RETURN")
 			return ;

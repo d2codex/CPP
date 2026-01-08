@@ -46,6 +46,24 @@ void	toUpperCase(std::string& str)
 }
 
 /**
+ * @brief Trim leading/trailing spaces from a string.
+ *
+ * @param str The string to trim.
+ * @return A trimmed copy of the string.
+ */
+std::string	trim(const std::string& str)
+{
+	size_t start = 0;
+	size_t end = str.length();
+
+	while (start < end && std::isspace(static_cast<unsigned char>(str[start])))
+		start++;
+	while (end > start && std::isspace(static_cast<unsigned char>(str[end - 1])))
+		end--;
+	return (str.substr(start, end - start));
+}
+
+/**
  * @brief Prompt the user for a YES/NO answer.
  *
  * Displays the message and returns true for YES, false for NO.
@@ -75,4 +93,28 @@ bool promptYesNo(const std::string& message)
 		std::cout << RED << "Invalid input. Please type YES or NO.\n"
 				  << RESET;
 	}
+}
+
+/**
+ * @brief Safely reads a line of input from std::cin into a string.
+ *
+ * Reads a line using std::getline() and checks for end-of-file or input
+ * failure. Throws a std::runtime_error if the input stream is closed (EOF)
+ * or in a failure state.
+ *
+ * @param out Reference to the string where the input will be stored.
+ * @return true If the input was successfully read.
+ * @throws std::runtime_error If the input stream is closed (EOF) or fails.
+ */
+bool	safeGetline(std::string& out)
+{
+	if (!std::getline(std::cin, out))
+	{
+		if (std::cin.eof())
+			throw std::runtime_error("EOF");
+		else {
+			throw std::runtime_error("Input failure");
+		}
+	}
+	return (true);
 }

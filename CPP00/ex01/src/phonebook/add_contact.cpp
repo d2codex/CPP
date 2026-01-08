@@ -24,27 +24,6 @@
  */
 PhoneBook::PhoneBook() : _nextIndex(0), _totalContacts(0)
 {
-    // _contacts array will default-construct each Contact automatically
-}
-
-/**
- * @brief Trim leading/trailing spaces or hyphens from a string.
- *
- * @param str The string to trim.
- * @return A trimmed copy of the string.
- */
-static std::string	trim(const std::string& str)
-{
-	size_t start = 0;
-	size_t end = str.length();
-
-	while (start < end && (std::isspace(static_cast<unsigned char>(str[start]))
-			|| str[start] == '-'))
-		start++;
-	while (end > start && (std::isspace(static_cast<unsigned char>(str[end - 1]))
-			|| str[end] == '-'))
-		end--;
-	return (str.substr(start, end - start));
 }
 
 /**
@@ -69,13 +48,15 @@ static bool	isValidName(const std::string& str)
 }
 
 /**
- * @brief Prompt the user to enter a valid name.
+ * @brief Prompt the user to enter a validated name string.
  *
- * Uses std::getline and validates input with trim and isValidName.
- * Throws std::runtime_error on EOF.
+ * Displays the given prompt, reads input via safeGetline(), trims it,
+ * and validates using isValidName. Repeats until a valid non-empty
+ * string is entered.
  *
- * @param prompt The prompt message to display.
- * @return The validated name string.
+ * @param prompt The prompt message to display to the user.
+ * @return A validated name string.
+ * @throws std::runtime_error If input stream is closed (EOF) or fails.
  */
 std::string	PhoneBook::promptName(const std::string& prompt)
 {
@@ -84,8 +65,7 @@ std::string	PhoneBook::promptName(const std::string& prompt)
 	while (true)
 	{
 		std::cout << prompt << YEL " > " << RESET;
-		if (!std::getline(std::cin, input))
-			throw std::runtime_error("EOF");
+		safeGetline(input);
 		input = trim(input);
 		if (input.empty())
 		{
@@ -120,13 +100,14 @@ static bool	isAllDigits(const std::string& str)
 }
 
 /**
- * @brief Prompt the user for a 10-digit phone number.
+ * @brief Prompt the user for a validated 10-digit phone number.
  *
- * Trims whitespace and validates length/digits.
- * Throws std::runtime_error on EOF.
+ * Displays the given prompt, reads input via safeGetline(), trims it,
+ * and validates that it is exactly 10 digits. Repeats until valid.
  *
- * @param prompt The prompt message.
- * @return The validated phone number string.
+ * @param prompt The prompt message to display to the user.
+ * @return The validated 10-digit phone number string.
+ * @throws std::runtime_error If input stream is closed (EOF) or fails.
  */
 std::string	PhoneBook::promptPhoneNumber(const std::string& prompt)
 {
@@ -135,8 +116,7 @@ std::string	PhoneBook::promptPhoneNumber(const std::string& prompt)
 	while (true)
 	{
 		std::cout << prompt << " (10 digits)" << YEL " > " << RESET;
-		if (!std::getline(std::cin, input))
-			throw std::runtime_error("EOF");
+		safeGetline(input);
 		input = trim(input);
 		if (input.length() == PHONE_LEN && isAllDigits(input))
 			return (input);
@@ -146,12 +126,14 @@ std::string	PhoneBook::promptPhoneNumber(const std::string& prompt)
 }
 
 /**
- * @brief Prompt the user for non-empty input.
+ * @brief Prompt the user for a non-empty input string.
  *
- * Throws std::runtime_error on EOF.
+ * Displays the given prompt and reads input via safeGetline(). Repeats
+ * until the user enters a non-empty string.
  *
- * @param prompt The prompt message.
+ * @param prompt The message to display to the user.
  * @return The non-empty input string.
+ * @throws std::runtime_error If input stream is closed (EOF) or fails.
  */
 std::string	PhoneBook::promptNonEmpty(const std::string& prompt)
 {
@@ -160,8 +142,8 @@ std::string	PhoneBook::promptNonEmpty(const std::string& prompt)
 	while (true)
 	{
 		std::cout << prompt << YEL " > " << RESET;
-		if (!std::getline(std::cin, input))
-			throw std::runtime_error("EOF");
+		safeGetline(input);
+		input = trim(input);
 		if (!input.empty())
 			return (input);
 		std::cout << RED << "Input cannot be empty.  Please try again.\n"
@@ -229,7 +211,7 @@ void	PhoneBook::addContact()
 {
 	std::string first = promptName("Enter first name");
 	std::string last = promptName("Enter last name");
-	std::string nick = promptName("Enter nickname");
+	std::string nick = promptNonEmpty("Enter nickname");
 	std::string phone = promptPhoneNumber("Enter phone number");
 	std::string secret = promptNonEmpty("Enter darkest secret");
 

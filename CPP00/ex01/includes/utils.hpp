@@ -14,12 +14,15 @@
 #define UTILS_HPP
 
 #include <string>
+#include <stdexcept>
 
 // String manipulation
-std::string intToString(int n);
+std::string	intToString(int n);
 void		toUpperCase(std::string& str);
+std::string	trim(const std::string& str);
 
 // user interaction
 bool		promptYesNo(const std::string& message);
+bool		safeGetline(std::string& out);
 
 # endif

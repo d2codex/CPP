@@ -49,8 +49,8 @@ bool PhoneBook::isEmpty() const
 /**
  * @brief Entry point of the PhoneBook program.
  *
- * Displays the main menu, processes user commands, and handles
- * end-of-file conditions using exceptions.
+ * Displays the main menu, processes user commands (ADD, SEARCH, EXIT),
+ * and handles EOF or input failures via exceptions.
  *
  * @return Exit status of the program.
  */
@@ -67,8 +67,7 @@ int	main(void)
 			std::cout << "Type SEARCH to display the phonebook\n";
 			std::cout << "Type EXIT to exit the program\n";
 			std::cout << YEL << "> " << RESET;
-			if (!std::getline(std::cin, command))
-				throw std::runtime_error("EOF");
+			safeGetline(command);
 			toUpperCase(command);
 			if (command == "ADD")
 				phonebook.addContact();
@@ -88,8 +87,9 @@ int	main(void)
 	}
 	catch (const std::runtime_error& exception)
 	{
-		std::cout << "\n" << RED << "Caught an error: " << exception.what() << RESET;
-		std::cout << "\n" << BLU << "Input stream closed.\n" << RESET;
+		std::cin.clear(); // resets cin state
+		std::cout << "\n" << RED << "Caught an error: " 
+				  << exception.what() << "\n" << RESET;
 	}
 	std::cout << BLU << "Goodbye and have a nice day.\n" << RESET;
 	return (0);
