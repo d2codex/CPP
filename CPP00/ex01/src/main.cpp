@@ -62,11 +62,14 @@ int	main(void)
 	{
 		while (true)
 		{
-			std::cout << YEL << "    === Welcome to the PhoneBook ===\n" << RESET;
-			std::cout << "Type ADD to add a contact to the phonebook\n";
-			std::cout << "Type SEARCH to display the phonebook\n";
-			std::cout << "Type EXIT to exit the program\n";
-			std::cout << YEL << "> " << RESET;
+			std::cout << YEL
+					  << "    === Welcome to the PhoneBook ===\n"
+					  << RESET
+					  << "Type ADD to add a contact to the phonebook\n"
+					  << "Type SEARCH to display the phonebook\n"
+					  << "Type EXIT to exit the program\n"
+					  << YEL << "> " << RESET;
+
 			safeGetline(command);
 			toUpperCase(command);
 			if (command == "ADD")
