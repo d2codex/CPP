@@ -20,6 +20,23 @@
 #include <stdexcept> // std::runtime_error
 
 /**
+ * @brief Prints the main menu to stdout.
+ *
+ * Displays the welcome message, available commands (ADD, SEARCH, EXIT),
+ * and a prompt for user input.
+ */
+void	printMainMenu()
+{
+	std::cout << YEL
+              << "    === Welcome to the PhoneBook ===\n"
+              << RESET
+              << "Type ADD to add a contact to the phonebook\n"
+              << "Type SEARCH to display the phonebook\n"
+              << "Type EXIT to exit the program\n"
+              << YEL << "> " << RESET;
+}
+
+/**
  * @brief Ask the user to confirm program exit.
  *
  * Displays a warning message and returns true if the user confirms
@@ -62,14 +79,7 @@ int	main(void)
 	{
 		while (true)
 		{
-			std::cout << YEL
-					  << "    === Welcome to the PhoneBook ===\n"
-					  << RESET
-					  << "Type ADD to add a contact to the phonebook\n"
-					  << "Type SEARCH to display the phonebook\n"
-					  << "Type EXIT to exit the program\n"
-					  << YEL << "> " << RESET;
-
+			printMainMenu();
 			safeGetline(command);
 			toUpperCase(command);
 			if (command == "ADD")
