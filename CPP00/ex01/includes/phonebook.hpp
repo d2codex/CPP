@@ -22,8 +22,12 @@ class PhoneBook
 public:
 	//constructor
 	PhoneBook();
+
+	// main actions
 	void		addContact();
 	void		searchContacts() const;
+
+	// utility
 	bool		isEmpty() const;
 
 private:

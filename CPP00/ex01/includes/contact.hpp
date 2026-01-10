@@ -18,7 +18,9 @@
 class Contact
 {	
 public:
+	// constructor
 	Contact();
+
 	// set all fields at once
 	void setContact(const std::string& first,
 					const std::string& last,
