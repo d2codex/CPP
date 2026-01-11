@@ -1,18 +1,70 @@
-# Object files
-*.o
+## Editor
+.vscode/*
+*.swp
+*~
+\#*\#
 
-# Object directories (anywhere in repo)
-**/obj/
-
-# Executables (any name inside any exercise folder)
-**/ex*/megaphone
-**/ex*/phonebook
-
-# macOS system files
+## macOS system files
 .DS_Store
 
-# Vim / editor swap files
-*.swp
+## Prerequisites
+*.d
 
-# Backup / temporary files
+## Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+## Object directories (anywhere in repo)
+**/obj/
+
+## Linker output
+*.ilk
+*.map
+*.exp
+
+## Precompiled Headers
+*.gch
+*.pch
+
+## Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+## Shared objects (including Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+## Executables (any name inside any exercise folder)
+**/ex*/megaphone
+**/ex*/phonebook
+**/ex*/account
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+## Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+## Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+## Backup / temporary files
 *~
