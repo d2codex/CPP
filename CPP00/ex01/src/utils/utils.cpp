@@ -86,10 +86,9 @@ bool promptYesNo(const std::string& message)
  * or in a failure state.
  *
  * @param out Reference to the string where the input will be stored.
- * @return true If the input was successfully read.
  * @throws std::runtime_error If the input stream is closed (EOF) or fails.
  */
-bool	safeGetline(std::string& out)
+void	safeGetline(std::string& out)
 {
 	if (!std::getline(std::cin, out))
 	{
@@ -99,5 +98,4 @@ bool	safeGetline(std::string& out)
 			throw std::runtime_error("Input failure");
 		}
 	}
-	return (true);
 }

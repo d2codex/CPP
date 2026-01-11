@@ -22,6 +22,6 @@ std::string	trim(const std::string& str);
 
 // user interaction
 bool		promptYesNo(const std::string& message);
-bool		safeGetline(std::string& out);
+void		safeGetline(std::string& out);
 
 # endif
