@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 01:09:34 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/11 01:09:37 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/12 14:16:03 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
 int Account::_totalNbWithdrawals = 0;
 
-// Constructor/destructor
+/**
+ * @brief Construct a new Account with an initial deposit
+ * @param initial_deposit Initial balance
+ */
 Account::Account(int initial_deposit)
 	: _accountIndex(_nbAccounts),
 	  _amount(initial_deposit),
@@ -37,6 +40,9 @@ Account::Account(int initial_deposit)
 			  << ";created\n";
 }
 
+/**
+ * @brief Destroy the Account and log closure
+ */
 Account::~Account(void)
 {
 	_displayTimestamp();
@@ -45,7 +51,9 @@ Account::~Account(void)
 			  << ";closed\n";
 }
 
-// static helper functions
+/**
+ * @brief Display current timestamp in [YYYYMMDD_HHMMSS] format
+ */
 void Account::_displayTimestamp(void)
 {
 	std::time_t epochTime;
@@ -63,33 +71,42 @@ void Account::_displayTimestamp(void)
 			  << "] ";
 }
 
-// static public functions
+/** @return Total number of accounts */
 int	Account::getNbAccounts(void)
 {
 	return (_nbAccounts);
 }
 
+/** @return Total balance of all accounts */
 int	Account::getTotalAmount(void)
 {
 	return (_totalAmount);
 }
 
+/** @return Total number of deposits across all accounts */
 int	Account::getNbDeposits(void)
 {
 	return (_totalNbDeposits);
 }
 
+/** @return Total number of withdrawals across all accounts */
 int	Account::getNbWithdrawals(void)
 {
 	return (_totalNbWithdrawals);
 }
 
+/**
+ * @brief Display summary of all accounts
+ */
 void	Account::displayAccountsInfos(void)
 {
 	_displayTimestamp();
 }
 
-// member functions
+/**
+ * @brief Make a deposit to this account and update totals
+ * @param deposit Amount to deposit
+ */
 void	Account::makeDeposit(int deposit)
 {
 	_displayTimestamp();
@@ -111,6 +128,11 @@ void	Account::makeDeposit(int deposit)
 			  << '\n';
 }
 
+/**
+ * @brief Attempt to withdraw from this account
+ * @param withdrawal Amount to withdraw
+ * @return true if successful, false if refused
+ */
 bool	Account::makeWithdrawal(int withdrawal)
 {
 	_displayTimestamp();
@@ -124,10 +146,8 @@ bool	Account::makeWithdrawal(int withdrawal)
 				  << ";withdrawal:refused\n";
 		return (false);
 	}
-
 	_amount -= withdrawal;
 	_nbWithdrawals++;
-
 	_totalAmount -= withdrawal;
 	_totalNbWithdrawals++;
 
@@ -141,11 +161,15 @@ bool	Account::makeWithdrawal(int withdrawal)
 	return (true);
 }
 
+/** @return Current account balance */
 int	Account::checkAmount(void) const
 {
 	return (_amount);
 }
 
+/**
+ * @brief Display the current status of this account
+ */
 void	Account::displayStatus(void) const
 {
 	_displayTimestamp();
