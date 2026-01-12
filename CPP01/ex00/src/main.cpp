@@ -2,6 +2,13 @@
 #include "colors.hpp"
 #include <iostream>
 
+/**
+ * @brief Test Zombie class and free functions
+ *
+ * - Creates a heap zombie using newZombie() and announces it
+ * - Creates a stack zombie using randomChump()
+ * - Demonstrates debug logging and proper heap deletion
+ */
 int	main(void)
 {
 	Zombie* ptr = newZombie("Foo");
