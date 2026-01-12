@@ -44,6 +44,7 @@
 **/ex*/megaphone
 **/ex*/phonebook
 **/ex*/account
+**/ex*/zombie
 *.exe
 *.out
 *.app
