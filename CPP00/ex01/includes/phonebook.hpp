@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 23:43:26 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/06 23:43:30 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/12 14:07:57 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 #include "colors.hpp"
 #include <string>
 
+/**
+ * @class PhoneBook
+ * @brief Manages a collection of up to 8 contacts
+ *
+ * Provides functions to add, search, and display contacts.
+ */
 class PhoneBook
 {
 public:

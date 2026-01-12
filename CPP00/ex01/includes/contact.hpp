@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 18:20:55 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/03 18:26:59 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/12 14:06:55 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 #include <string>
 
+/**
+ * @class Contact
+ * @brief Stores information for a single contact in the phonebook
+ *
+ * Contains first name, last name, nickname, phone number, and secret.
+ */
 class Contact
 {	
 public:
