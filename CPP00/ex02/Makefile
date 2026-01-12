@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes -I..
 
 # Program name (target)
 NAME = account
