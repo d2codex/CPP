@@ -64,9 +64,7 @@ int	main(void)
 				if (test[i].N <= DISPLAY_LIMIT)
 				{
 					for (int j = 0; j < test[i].N; j++)
-					{
 						horde[j].announce();
-					}
 				}
 				else
 				{
@@ -76,9 +74,7 @@ int	main(void)
 				}
 			}
 			else
-			{
 				std::cout << GRN "Test Passed (invalid rejected)\n" RESET;
-			}
 		}
 		else
 			std::cout << RED "Test failed\n" RESET;
