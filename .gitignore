@@ -45,6 +45,7 @@
 **/ex*/phonebook
 **/ex*/account
 **/ex*/zombie
+**/ex*/horde
 *.exe
 *.out
 *.app
