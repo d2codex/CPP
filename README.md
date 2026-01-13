@@ -97,6 +97,36 @@ make debug
 ./zombie
 ```
 
+### 🧠 Exercise 01 – Moar brainz!
+
+**Description:** Create a horde of Zombies allocated dynamically using
+arrays.
+
+Purpose: Extend dynamic allocation concepts by managing multiple objects
+on the heap and handling edge cases safely.
+
+Key Learnings:
+* Dynamic allocation of object arrays using new[]
+* Proper deallocation with delete[]
+* Validating user input before allocation
+* Graceful handling of allocation failure (std::bad_alloc)
+* Use of compile-time debug mode (DEBUG macro)
+* Tracking object lifecycle with static class members
+* Writing structured test cases using a struct
+* Automating tests with loops instead of manual calls
+* Defensive programming with size limits (MAX_HORDE_SIZE)
+
+**Build & Run:**
+```bash
+make
+./horde
+```
+
+**Build with debug mode:**
+```bash
+make debug
+./horde
+```
 ---
 
 ## 📝 Notes
