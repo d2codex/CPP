@@ -3,14 +3,28 @@
 #include <iostream>
 #include <cstddef>
 
+/**
+ * @brief Defines a test case for zombieHorde().
+ *
+ * Stores input parameters and the expected outcome for a single
+ * test execution.
+ */
 struct testCases
 {
 	const char* description;
 	const char*	name;
 	int			N;
-	bool		shouldPass;
+	bool		expectPass;
 };
 
+/**
+ * @brief Entry point for zombieHorde() tests.
+ *
+ * Executes a set of predefined test cases to validate correct
+ * behavior, boundary handling, and error rejection. In DEBUG
+ * mode, construction and destruction counters are reset between
+ * tests for accurate diagnostics.
+ */
 int	main(void)
 {
 
@@ -29,7 +43,7 @@ int	main(void)
 		
 		Zombie* horde = zombieHorde(test[i].N, test[i].name);
 		bool gotPointer = (horde != NULL);
-		bool expected = test[i].shouldPass;
+		bool expected = test[i].expectPass;
 		if (gotPointer == expected)
 		{
 			if (horde)

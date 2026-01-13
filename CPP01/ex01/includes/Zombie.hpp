@@ -12,6 +12,14 @@
 #define MAX_HORDE_SIZE 1000000
 #define DISPLAY_LIMIT 5
 
+/**
+ * @class Zombie
+ * @brief Represents a single zombie with a name.
+ *
+ * The Zombie class supports announcing itself and can be used
+ * as part of a dynamically allocated horde. In DEBUG mode,
+ * construction and destruction are tracked with static counters.
+ */
 class Zombie
 {
 public:

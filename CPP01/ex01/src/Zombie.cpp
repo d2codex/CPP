@@ -8,6 +8,12 @@ int Zombie::s_constructed = 0;
 int Zombie::s_destroyed = 0;
 #endif
 
+/**
+ * @brief Default Zombie constructor.
+ *
+ * Initializes a Zombie with an empty name. In DEBUG mode, increments
+ * the construction counter and prints limited construction output.
+ */
 Zombie::Zombie() : _name()
 {
 	#ifdef DEBUG
@@ -24,6 +30,12 @@ Zombie::Zombie() : _name()
 	#endif
 }
 
+/**
+ * @brief Zombie destructor.
+ *
+ * In DEBUG mode, increments the destruction counter, prints limited
+ * destruction output, and prints a summary once all Zombies are destroyed.
+ */
 Zombie::~Zombie()
 {
 	#ifdef DEBUG
@@ -46,6 +58,11 @@ Zombie::~Zombie()
 }
 
 #ifdef DEBUG
+/**
+ * @brief Reset DEBUG construction and destruction counters.
+ *
+ * Intended for use between test cases.
+ */
 void Zombie::resetCounters()
 {
     s_constructed = 0;
@@ -53,11 +70,21 @@ void Zombie::resetCounters()
 }
 #endif
 
+/**
+ * @brief Announce the Zombie.
+ *
+ * Prints the Zombie's name followed by its signature message.
+ */
 void	Zombie::announce(void)
 {
 	std::cout << _name << ": BraiiiiiiinnnzzzZ...\n";
 }
 
+/**
+ * @brief Set the Zombie's name.
+ *
+ * @param name Name assigned to the Zombie.
+ */
 void	Zombie::setZombieName(const std::string& name)
 {
 	_name = name;

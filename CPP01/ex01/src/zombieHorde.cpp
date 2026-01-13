@@ -3,6 +3,21 @@
 #include <string>
 #include <iostream>
 
+/**
+ * @brief Create a horde of Zombies.
+ *
+ * Allocates an array of N Zombies on the heap and assigns each Zombie
+ * the given name. The function validates the requested size and
+ * handles memory allocation failures.
+ *
+ * @param N Number of Zombies to create.
+ * @param name Name assigned to each Zombie.
+ *
+ * @return Pointer to the allocated Zombie array, or NULL if:
+ *         - N <= 0
+ *         - N exceeds MAX_HORDE_SIZE
+ *         - memory allocation fails
+ */
 Zombie* zombieHorde(int N, std::string name)
 {
 	if (N <= 0)
