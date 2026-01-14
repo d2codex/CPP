@@ -94,8 +94,7 @@ void	safeGetline(std::string& out)
 	{
 		if (std::cin.eof())
 			throw std::runtime_error("EOF");
-		else {
+		else
 			throw std::runtime_error("Input failure");
-		}
 	}
 }
