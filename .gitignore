@@ -46,6 +46,7 @@
 **/ex*/account
 **/ex*/zombie
 **/ex*/horde
+**/ex*/brain
 *.exe
 *.out
 *.app
