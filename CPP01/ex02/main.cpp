@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 14:15:12 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/14 14:15:15 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/14 15:35:12 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(void)
 			  << "Memory addr of actual stringPTR: " << &stringPTR
 			  << RESET << '\n';
 
-	// treat it just like the original string use &to get the address
+	// treat it just like the original string use & to get the address
 	// of the reference, which is the same as the original str
 	std::cout << YEL
 			  << std::left << std::setw(LABLE_WIDTH)
