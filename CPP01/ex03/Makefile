@@ -9,7 +9,8 @@ NAME = weapon
 SRCS = src/main.cpp \
 	   src/HumanA.cpp \
 	   src/HumanB.cpp \
-	   src/Weapon.cpp
+	   src/Weapon.cpp \
+	   src/utils.cpp
 
 # Object files go in obj/ folder
 OBJ_DIR = obj
