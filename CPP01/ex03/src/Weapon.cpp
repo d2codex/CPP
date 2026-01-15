@@ -1,13 +1,19 @@
 #include "Weapon.hpp"
+#include "utils.hpp"
 #include <string>
+#include <stdexcept>
 
-Weapon::Weapon(std::string weaponName) : _type(weaponName)
+Weapon::Weapon(const std::string& type) : _type(type)
 {
+	if (isBlank(type))
+		throw std::invalid_argument("Weapon type cannot be empty");
 }
 
-void Weapon::setType(const std::string& name)
+void Weapon::setType(const std::string& type)
 {
-	_type = name;
+	if (isBlank(type))
+		throw std::invalid_argument("Weapon type cannot be empty");
+	_type = type;
 }
 
 const std::string& Weapon::getType() const
