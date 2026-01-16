@@ -2,9 +2,10 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes -I../
 DEBUGFLAGS = -DDEBUG
 
+BIN_DIR = bin
 # Program name (target)
-NAME = weapon
-TEST_NAME = test_runner
+NAME = $(BIN_DIR)/weapon
+TEST_NAME = $(BIN_DIR)/test_runner
 
 # Source files
 CORE_SRCS = src/HumanA.cpp \
@@ -34,12 +35,14 @@ all: $(NAME)
 
 # Create obj folder if it doesn't exist, compile .o files, then link
 $(NAME): $(CORE_OBJS) $(APP_OBJS)
+	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 # build tests
 tests: $(TEST_NAME)
 
 $(TEST_NAME): $(CORE_OBJS) $(TEST_OBJS)
+	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 # compile src files
@@ -51,6 +54,12 @@ $(SRC_OBJ_DIR)/%.o: src/%.cpp
 $(TEST_OBJ_DIR)/%.o: tests/%.cpp
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+run: $(NAME)
+	./$(NAME)
+
+run_tests: $(TEST_NAME)
+	./$(TEST_NAME)
 
 # remove object files only
 clean:
