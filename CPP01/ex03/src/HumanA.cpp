@@ -1,4 +1,6 @@
 #include "HumanA.hpp"
+#include "Weapon.hpp"
+#include "colors.hpp"
 #include "utils.hpp"
 #include <iostream>
 #include <stdexcept>
@@ -8,6 +10,7 @@ HumanA::HumanA(const std::string& name, Weapon& weapon)
 {
 	if (isBlank(name))
 		throw std::invalid_argument("Name cannot be empty");
+	DBUG(std::cout << CYN "HumanA Constructed: " << _name << RESET << '\n';)
 }
 
 void HumanA::attack() const
