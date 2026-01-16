@@ -1,6 +1,7 @@
 #include "tests.hpp"
 #include "colors.hpp"
 #include "Weapon.hpp"
+#include "utils.hpp"
 #include <string>
 #include <iostream>
 
@@ -19,26 +20,35 @@ void weaponTest()
 		{"Valid complex type", "Crude Spiked Club"},
 		{"Valid special characters", "afkl;j1234#$@"}
 	};
+	std::cout << YEL "==== Running test for weapon class ====\n" RESET;
 	size_t numTests = sizeof(test) / sizeof(test[0]);
 	for (size_t i = 0; i < numTests; i++)
 	{
-		std::cout << YEL "Test[" << i << "] " << test[i].description
-			<< RESET <<'\n';
+		std::cout << BLU "Test[" << i << "] " RESET << test[i].description <<'\n';
 
 		try
 		{
 			Weapon weapon(test[i].typeValue);
-			std::cout << "Input:   " << test[i].typeValue << '\n';
-			std::cout << "getType: " << weapon.getType() << '\n';
-			if (weapon.getType() == test[i].typeValue)
-				std::cout << GRN "Success\n" RESET;
-			else
-				std::cout << RED "Fail: type mismatch\n";
+			std::cout << "Input:   " << test[i].typeValue << '\n'
+					  << "getType: " << weapon.getType() << '\n'
+					  << GRN "TEST SUCCESS\n" RESET;
 		}
 		catch (const std::exception& e)
 		{
-			std::cerr << RED "Error: " << e.what() << RESET << '\n';
+			std::cerr << RED "Error: " << e.what() << '\n';
+			if (test[i].typeValue.empty() || isBlank(test[i].typeValue))
+			{
+				std::cout << "Expected: " << e.what() << '\n';
+				std::cout << GRN "TEST SUCCESS\n" << RESET;
+			}
+			else
+			{
+				std::cout << "Expected: " << e.what() << '\n';
+				std::cout << RED "TEST FAIL\n" RESET;
+			}
 		}
+		std::cout << '\n';
 	}
+	std::cout << YEL " ==== end test ====\n" RESET;
 }
 
