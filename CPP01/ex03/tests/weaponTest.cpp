@@ -13,6 +13,9 @@ struct WeaponTest
 
 void weaponTest()
 {
+	int	passed = 0;
+	int failed = 1;
+
 	WeaponTest test[] = {
 		{"Valid Normal case", "club"},
 		{"Invalid Empty type", ""},
@@ -30,25 +33,36 @@ void weaponTest()
 		{
 			Weapon weapon(test[i].typeValue);
 			std::cout << "Input:   " << test[i].typeValue << '\n'
-					  << "getType: " << weapon.getType() << '\n'
+					  << "Result:  " << weapon.getType() << '\n'
 					  << GRN "TEST SUCCESS\n" RESET;
+			passed++;
 		}
 		catch (const std::exception& e)
 		{
-			std::cerr << RED "Error: " << e.what() << '\n';
+			std::cerr << RED "Error:    " << e.what() << RESET << '\n';
 			if (test[i].typeValue.empty() || isBlank(test[i].typeValue))
 			{
 				std::cout << "Expected: " << e.what() << '\n';
-				std::cout << GRN "TEST SUCCESS\n" << RESET;
+				std::cout << GRN "TEST SUCCESS\n" RESET;
+				passed++;
 			}
 			else
 			{
 				std::cout << "Expected: " << e.what() << '\n';
 				std::cout << RED "TEST FAIL\n" RESET;
+				failed++;
 			}
 		}
 		std::cout << '\n';
 	}
-	std::cout << YEL " ==== end test ====\n" RESET;
+
+	std::cout << BLU "==== weaponTest summary ====" RESET << '\n';
+	if (failed == 0)
+		std::cout << GRN "All tests passed!\n" RESET;
+	std::cout << GRN "Tests passed: " << passed << RESET << '\n'
+			  << RED "Tests failed: " << failed << RESET << '\n'
+			  << "Total tests: " << numTests << '\n';	
+
+	std::cout << YEL "==== end test ====\n" RESET;
 }
 
