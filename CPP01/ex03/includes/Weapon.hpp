@@ -1,6 +1,12 @@
 #ifndef WEAPON_HPP
 #define WEAPON_HPP
 
+#ifdef DEBUG
+#define DBUG(x) x
+#else
+#define DBUG(x)
+#endif
+
 #include <string>
 
 class Weapon
