@@ -1,4 +1,5 @@
 #include "Weapon.hpp"
+#include "colors.hpp"
 #include "utils.hpp"
 #include <string>
 #include <stdexcept>
@@ -8,7 +9,7 @@ Weapon::Weapon(const std::string& type) : _type(type)
 {
 	if (isBlank(type))
 		throw std::invalid_argument("Weapon type cannot be empty");
-	DBUG(std::cout << "Weapon constructed: " << _type << '\n';)
+	DBUG(std::cout << CYN "Weapon constructed: " << _type << RESET << '\n';)
 }
 
 void Weapon::setType(const std::string& type)
