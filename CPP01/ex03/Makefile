@@ -68,6 +68,7 @@ clean:
 # remove object files and executable
 fclean: clean
 	rm -f $(NAME) $(TEST_NAME)
+	rm -rf $(BIN_DIR)
 
 # rebuild everything
 re: fclean all
