@@ -11,10 +11,10 @@ struct WeaponTest
 	std::string typeValue;
 };
 
-void weaponTest()
+int weaponTest()
 {
 	int	passed = 0;
-	int failed = 1;
+	int failed = 0;
 
 	WeaponTest test[] = {
 		{"Valid Normal case", "club"},
@@ -32,8 +32,8 @@ void weaponTest()
 		try
 		{
 			Weapon weapon(test[i].typeValue);
-			std::cout << "Input:   " << test[i].typeValue << '\n'
-					  << "Result:  " << weapon.getType() << '\n'
+			std::cout << "Input:  " << test[i].typeValue << '\n'
+					  << "Result: " << weapon.getType() << '\n'
 					  << GRN "TEST SUCCESS\n" RESET;
 			passed++;
 		}
@@ -56,13 +56,15 @@ void weaponTest()
 		std::cout << '\n';
 	}
 
-	std::cout << BLU "==== weaponTest summary ====" RESET << '\n';
-	if (failed == 0)
-		std::cout << GRN "All tests passed!\n" RESET;
-	std::cout << GRN "Tests passed: " << passed << RESET << '\n'
+	std::cout << BLU "========== weaponTest summary =========" RESET << '\n'
+			  << "Result:\n"
+			  << GRN "Tests passed: " << passed << RESET << '\n'
 			  << RED "Tests failed: " << failed << RESET << '\n'
 			  << "Total tests: " << numTests << '\n';	
+	if (failed == 0)
+		std::cout << GRN "All tests passed!\n" RESET;
 
-	std::cout << YEL "==== end test ====\n" RESET;
+	std::cout << BLU "=======================================\n" RESET;
+	return (failed);
 }
 
