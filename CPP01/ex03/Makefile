@@ -4,28 +4,51 @@ DEBUGFLAGS = -DDEBUG
 
 # Program name (target)
 NAME = weapon
+TEST_NAME = test_runner
 
 # Source files
-SRCS = src/main.cpp \
-	   src/HumanA.cpp \
-	   src/HumanB.cpp \
-	   src/Weapon.cpp \
-	   src/utils.cpp
+CORE_SRCS = src/HumanA.cpp \
+	   		src/HumanB.cpp \
+			src/Weapon.cpp \
+			src/utils.cpp
 
-# Object files go in obj/ folder
+APP_SRCS = src/main.cpp
+
+TEST_SRCS = tests/main.cpp \
+			tests/weaponTest.cpp \
+
+
+# Object directories
 OBJ_DIR = obj
-OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
+SRC_OBJ_DIR = $(OBJ_DIR)/src
+TEST_OBJ_DIR = $(OBJ_DIR)/tests
+
+# Object files
+CORE_OBJS = $(patsubst src/%.cpp,$(SRC_OBJ_DIR)/%.o,$(CORE_SRCS))
+APP_OBJS = $(patsubst src/%.cpp,$(SRC_OBJ_DIR)/%.o,$(APP_SRCS))
+TEST_OBJS = $(patsubst tests/%.cpp,$(TEST_OBJ_DIR)/%.o,$(TEST_SRCS))
 
 # ----------------- Rules -----------------
-# build the executable
+# default build (application)
 all: $(NAME)
 
 # Create obj folder if it doesn't exist, compile .o files, then link
-$(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+$(NAME): $(CORE_OBJS) $(APP_OBJS)
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
-# pattern rule to comiple .cpp -> .o in obj/, create folder if needed
-$(OBJ_DIR)/%.o: %.cpp
+# build tests
+tests: $(TEST_NAME)
+
+$(TEST_NAME): $(CORE_OBJS) $(TEST_OBJS)
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+# compile src files
+$(SRC_OBJ_DIR)/%.o: src/%.cpp
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# compile tests files
+$(TEST_OBJ_DIR)/%.o: tests/%.cpp
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
@@ -35,13 +58,12 @@ clean:
 
 # remove object files and executable
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(TEST_NAME)
 
 # rebuild everything
 re: fclean all
 
-# ----------------- Rules -----------------
 debug: CXXFLAGS += $(DEBUGFLAGS)
 debug: re
 
-.PHONY: all clean fclean re
+.PHONY: all tests clean fclean re debug
