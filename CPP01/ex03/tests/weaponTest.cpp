@@ -1,7 +1,6 @@
 #include "tests.hpp"
 #include "colors.hpp"
 #include "Weapon.hpp"
-#include "utils.hpp"
 #include <string>
 #include <iostream>
 
@@ -9,6 +8,7 @@ struct WeaponTest
 {
 	std::string description;
 	std::string typeValue;
+	bool		shouldThrow;
 };
 
 int weaponTest()
@@ -17,11 +17,12 @@ int weaponTest()
 	int failed = 0;
 
 	WeaponTest test[] = {
-		{"Valid Normal case", "club"},
-		{"Invalid Empty type", ""},
-		{"Invalid White spaces only", "		 "},
-		{"Valid complex type", "Crude Spiked Club"},
-		{"Valid special characters", "afkl;j1234#$@"}
+		{"Valid Normal case", "club", false},
+		{"Invalid Empty type", "", true},
+		{"Invalid White spaces only", "		 ", true},
+		{"Valid complex type", "Crude Spiked Club", false},
+		{"Valid special characters", "afkl;j1234#$@", false},
+		{"Valid spaces before and after", " swordfish  ", false}
 	};
 	std::cout << YEL "==== Running test for weapon class ====\n" RESET;
 	size_t numTests = sizeof(test) / sizeof(test[0]);
@@ -32,15 +33,31 @@ int weaponTest()
 		try
 		{
 			Weapon weapon(test[i].typeValue);
+			std::string result = weapon.getType();
 			std::cout << "Input:  " << test[i].typeValue << '\n'
-					  << "Result: " << weapon.getType() << '\n'
-					  << GRN "TEST SUCCESS\n" RESET;
-			passed++;
+					  << "Result: " << result << '\n';
+
+			if (test[i].shouldThrow)
+			{
+				std::cout << RED "TEST FAIL (expected throw)\n" RESET;
+				failed++;
+			}
+			else if (test[i].typeValue == result)
+			{
+				std::cout << GRN "TEST PASSED\n" RESET;
+				passed++;
+			}
+			else
+			{
+				std::cout << RED "TEST FAIL (output mismatch)\n" RESET;
+				failed++;
+			}
+
 		}
 		catch (const std::exception& e)
 		{
 			std::cerr << RED "Error:    " << e.what() << RESET << '\n';
-			if (test[i].typeValue.empty() || isBlank(test[i].typeValue))
+			if (test[i].shouldThrow)
 			{
 				std::cout << "Expected: " << e.what() << '\n';
 				std::cout << GRN "TEST SUCCESS\n" RESET;
@@ -57,7 +74,6 @@ int weaponTest()
 	}
 
 	std::cout << BLU "========== weaponTest summary =========" RESET << '\n'
-			  << "Result:\n"
 			  << GRN "Tests passed: " << passed << RESET << '\n'
 			  << RED "Tests failed: " << failed << RESET << '\n'
 			  << "Total tests: " << numTests << '\n';	
@@ -65,6 +81,6 @@ int weaponTest()
 		std::cout << GRN "All tests passed!\n" RESET;
 
 	std::cout << BLU "=======================================\n" RESET;
+	std::cout << YEL "=============END UNIT TEST=============\n" RESET;
 	return (failed);
 }
-
