@@ -16,6 +16,7 @@ CORE_SRCS = src/HumanA.cpp \
 APP_SRCS = src/main.cpp
 
 TEST_SRCS = tests/main.cpp \
+			tests/humanATest.cpp \
 			tests/weaponTest.cpp \
 
 
