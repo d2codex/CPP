@@ -63,7 +63,12 @@ int	validateArgsTest()
 			"",
 			"a", "", true
 		},
-
+		{
+			"Invalid file nonexistant",
+			"nofile.txt",
+			"Error: Cannot open file",
+			"a", "b", false
+		},
 	};
 
 	std::cout << YEL "=== Running test for validateArgs() ===\n" RESET;
