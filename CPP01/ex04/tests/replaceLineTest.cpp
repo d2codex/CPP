@@ -5,14 +5,13 @@
 #include <iostream>
 #include <fstream>
 
-struct TestCase
+struct LineTestCase
 {
 	std::string desc;
 	std::string line;
 	std::string expected;
 	std::string	s1;
 	std::string s2;
-	bool		shouldPass;
 };
 
 /**
@@ -31,97 +30,97 @@ int	replaceLineTest()
 	int passed = 0;
 	int failed = 0;
 
-	TestCase test[] = {
+	LineTestCase test[] = {
 		// Normal
 		{
 			"Valid normal case",
 			"hallo", "hbllo",
-			"a", "b", true
+			"a", "b"
 		},
 		// No match (should still pass, just no change)
 		{
 			"No match case",
 			"hello", "hello",
-			"x", "y", true
+			"x", "y"
 		},
 		// Replace with longer string
 		{
 			"Replace with longer string",
 			"hello", "heyyyo",
-			"ll", "yyy", true
+			"ll", "yyy"
 		},
 		// Replace with shorter string
 		{
 			"Replace with shorter string",
 			"hello", "heo",
-			"ll", "", true
+			"ll", ""
 		},
 		// Replace with empty line (still valid if s1 is not empty)
 		{
 			"Valid empty line",
 			"", "",
-			"a", "b", true
+			"a", "b"
 		},
 		// Replace with whitespace (space)
 		{
 			"Replace space",
 			"a b c", "a-X-b-X-c",
-			" ", "-X-", true
+			" ", "-X-"
 		},
 		// Replace with tab
 		{
 			"Replace tab",
 			"a\tb\tc", "a-X-b-X-c",
-			"\t", "-X-", true
+			"\t", "-X-"
 		},
 		// Replace with special characters
 		{
 			"Replace special chars",
 			"hello!world!", "hello?world?",
-			"!", "?", true
+			"!", "?"
 		},
 		// Multiple occurrences
 		{
 			"Multiple occurrences",
 			"aaaa", "bbbb",
-			"a", "b", true
+			"a", "b"
 		},
 		// Overlapping pattern case (important!)
 		// Example: replace "aa" in "aaaa" -> should become "bb" if handled correctly
 		{
 			"Overlapping pattern",
 			"aaaa", "bb",
-			"aa", "b", true
+			"aa", "b"
 		},
 		// Replacement where s2 contains s1 (expands output)
 		{
 			"s2 contains s1",
 			"abc", "abxxc",
-			"b", "bxx", true
+			"b", "bxx"
 		},
 		// Replacement where s1 contains s2 (shrinks output)
 		{
 			"s1 contains s2",
 			"abxxc", "abc",
-			"xx", "", true
+			"xx", ""
 		}
 	};
 
 	std::cout << YEL "=== Running test for replaceLine() ===\n" RESET;
 	size_t	numTests = sizeof(test) / sizeof(test[0]);
-
 	for (size_t i = 0; i < numTests; i++)
 	{
-		std::cout << BLU "Test[" << i << "] " RESET << test[i].desc << '\n';
-		std::string result = replaceLine(test[i].line, test[i].s1, test[i].s2);
+		LineTestCase& t = test[i];
+		std::cout << BLU "Test[" << i << "] " RESET << t.desc << '\n';
+		std::string result = replaceLine(t.line, t.s1, t.s2);
 
 		std::cout << "Result:   " << result << '\n'
-				  << "Expected: " << test[i].expected << '\n'
-				  << "Line:     " << test[i].line << '\n'
-				  << "s1 input: " << test[i].s1 << '\n'
-				  << "s2 input: " << test[i].s2 << '\n';
+				  << "Expected: " << t.expected << '\n'
+				  << "Line:     " << t.line << '\n'
+				  << "s1 input: " << t.s1 << '\n'
+				  << "s2 input: " << t.s2 << '\n';
 
-		if (result == test[i].expected)
+		if (result == t.expected)
 		{
 			std::cout << GRN "TEST PASSED\n" RESET;
 			passed++;
@@ -133,7 +132,6 @@ int	replaceLineTest()
 		}
 		std::cout << '\n';
 	}
-
 	std::cout << BLU "========= replaceLine summary ========" RESET << '\n'
 			  << GRN "Tests passed: " << passed << RESET << '\n'
 			  << RED "Tests failed: " << failed << RESET << '\n'
