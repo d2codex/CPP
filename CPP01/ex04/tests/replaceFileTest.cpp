@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   replaceFileTest.cpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/18 23:44:18 by diade-so          #+#    #+#             */
+/*   Updated: 2026/01/18 23:45:19 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "replace.hpp"
 #include "tests.hpp"
 #include "colors.hpp"
 #include <string>
 #include <iostream>
 #include <fstream>
+
 
 struct FileTestCase
 {
@@ -17,6 +30,15 @@ struct FileTestCase
     bool shouldFail; // For cases like permission denied or missing file
 };
 
+/**
+ * @brief Compares two files byte-by-byte.
+ *
+ * Opens both files in binary mode and compares their contents.
+ *
+ * @param file1 First file path.
+ * @param file2 Second file path.
+ * @return True if files match exactly.
+ */
 static bool filesMatch(const std::string& file1, const std::string& file2)
 {
 	//std::ios::binary tells stream to read file as raw bytes
@@ -35,6 +57,12 @@ static bool filesMatch(const std::string& file1, const std::string& file2)
     return (std::equal(it1, end, it2));
 }
 
+/**
+ * @brief Creates a file and writes the given content.
+ *
+ * @param filename Path of file to create.
+ * @param content  Content to write into the file.
+ */
 static void createFile(const std::string& filename, const std::string& content)
 {
     std::ofstream out(filename.c_str());
@@ -42,6 +70,14 @@ static void createFile(const std::string& filename, const std::string& content)
     out.close();
 }
 
+/**
+ * @brief Runs unit tests for replaceFile().
+ *
+ * For each test case, it creates input/expected files, runs
+ * replaceFile(), compares output, and cleans up temporary files.
+ *
+ * @return int Number of failed tests.
+ */
 int replaceFileTest()
 {
     int passed = 0;
