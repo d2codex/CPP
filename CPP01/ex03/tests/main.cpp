@@ -18,6 +18,10 @@ int	main(void)
 	totalTestSuites++;
 	totalFailures += humanATest();
 	totalTestSuites++;
+	totalFailures += humanBWeaponTest();
+	totalTestSuites++;
+	totalFailures += humanBNoWeaponTest();
+	totalTestSuites++;
 
 	std::cout << YEL "============= Test summary ============" RESET << '\n'
 			  << WHT "Total test suits: " << totalTestSuites << RESET << '\n'

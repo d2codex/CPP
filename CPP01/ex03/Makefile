@@ -17,6 +17,8 @@ APP_SRCS = src/main.cpp
 
 TEST_SRCS = tests/main.cpp \
 			tests/humanATest.cpp \
+			tests/humanBNoWeaponTest.cpp \
+			tests/humanBWeaponTest.cpp \
 			tests/weaponTest.cpp \
 
 
