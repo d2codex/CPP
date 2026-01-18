@@ -16,10 +16,13 @@ int	main(void)
 
 	totalFailures += weaponTest();
 	totalTestSuites++;
+
 	totalFailures += humanATest();
 	totalTestSuites++;
+
 	totalFailures += humanBWeaponTest();
 	totalTestSuites++;
+
 	totalFailures += humanBNoWeaponTest();
 	totalTestSuites++;
 
