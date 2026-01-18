@@ -2,5 +2,6 @@
 #define TESTS_HPP
 
 int	replaceLineTest();
+int	replaceFileTest();
 
 #endif

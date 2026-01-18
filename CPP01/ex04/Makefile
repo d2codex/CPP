@@ -1,5 +1,5 @@
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes -I../
+CXXFLAGS = -g3 -Wall -Wextra -Werror -std=c++98 -Iincludes -I../
 DEBUGFLAGS = -DDEBUG
 
 BIN_DIR = bin
@@ -13,6 +13,7 @@ CORE_SRCS = src/replace.cpp
 APP_SRCS = src/main.cpp
 
 TEST_SRCS = tests/main.cpp \
+			tests/replaceFileTest.cpp \
 			tests/replaceLineTest.cpp
 
 
