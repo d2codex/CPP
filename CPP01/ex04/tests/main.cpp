@@ -13,8 +13,10 @@ int	main(void)
 	int	totalFailures = 0;
 	int	totalTestSuites = 0;
 
-	totalFailures += validateArgsTest();
-	totalTestSuites++;
+	if (replaceLineTest())
+		totalTestSuites++;
+	else
+		totalFailures++;
 
 	std::cout << YEL "============= Test summary ============" RESET << '\n'
 			  << WHT "Total test suits: " << totalTestSuites << RESET << '\n'

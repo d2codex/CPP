@@ -13,7 +13,7 @@ CORE_SRCS = src/replace.cpp
 APP_SRCS = src/main.cpp
 
 TEST_SRCS = tests/main.cpp \
-			tests/validateArgsTest.cpp
+			tests/replaceLineTest.cpp
 
 
 # Object directories
