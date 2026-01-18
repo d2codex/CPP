@@ -4,33 +4,60 @@
 #include <fstream>
 #include <string>
 
-
-bool	validateArgs(const std::string& filename,
-				 const std::string& s1,
-				 const std::string& s2)
+std::string replaceLine(const std::string& line,
+						const std::string& s1, const std::string& s2)
 {
-	(void)s2;
+	std::string result;
+	std::size_t pos = 0;
+	std::size_t found;
 
-	//check s1 and s2 not empty
-	if (s1.empty())
+	while ((found = line.find(s1, pos)) != std::string::npos)
 	{
-		std::cerr << RED "Error: Search string cannot be empty\n" RESET;
-		return (false);
+		result += line.substr(pos, found - pos);
+		result += s2;
+		pos = found +s1.length();
 	}
-	//check filename access
-//	std::ifstream file(filename.c_str());
+	result += line.substr(pos);
+	return (result);
+}
 
-	// more explicit way
-	std::ifstream file;
-	file.open(filename.c_str());
+int	replaceFile(const std::string& filename,
+			    const std::string& s1, const std::string& s2)
+{
+	std::ifstream	inFile(filename.c_str());
+	std::ofstream	outFile((filename + ".replace").c_str(), std::ios::trunc);
 
-	if (!file)
+/*	//explicit version
+	std::ofstream outFile; //create the stream object
+	//std::ios::out implies create if not exists
+	outFile.open(filename + ".replace", std::ios::out | std::ios::trunc);
+*/
+	if (!inFile || !outFile)
 	{
-		std::cerr << RED "Error: Cannot open file\n" RESET;
-		return (false);
+		std::cerr << RED "Error: file could not be opened\n" RESET;
+		return (1);
 	}
-
-	DBUG(std::cout << BLU "File successfully opened!\n" RESET;)
-
-	return (true);
+	std::string line;
+	bool	firstLine = true;
+	while (std::getline(inFile, line))
+	{
+		if (!firstLine)
+			outFile << '\n';
+		std::string modifiedLine = replaceLine(line, s1, s2);
+		DBUG(std::cout << modifiedLine <<  '\n';)
+		outFile << modifiedLine;
+		
+		if (!outFile)
+		{
+			std::cout << "outfile bad\n";
+			return (1);
+		}
+		firstLine = false;
+	}
+	if (inFile.bad())
+	{
+		std::cout << "infile bad\n";
+		return (1);
+	}
+	return (0);
 }

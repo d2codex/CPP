@@ -9,8 +9,9 @@
 
 #include <string>
 
-bool	validateArgs(const std::string& filename,
-					 const std::string& s1,
-					 const std::string& s2);
+std::string replaceLine(const std::string& line,
+						const std::string& s1, const std::string& s2);
+int			replaceFile(const std::string& filename,
+						const std::string& s1, const std::string& s2);
 
 #endif
