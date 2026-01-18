@@ -38,21 +38,16 @@ int	replaceFile(const std::string& filename,
 		return (1);
 	}
 	std::string line;
-	bool	firstLine = true;
 	while (std::getline(inFile, line))
 	{
-		if (!firstLine)
-			outFile << '\n';
 		std::string modifiedLine = replaceLine(line, s1, s2);
-		DBUG(std::cout << modifiedLine <<  '\n';)
-		outFile << modifiedLine;
-		
+		DBUG(std::cout << modifiedLine << '\n';)
+		outFile << modifiedLine << '\n';
 		if (!outFile)
 		{
 			std::cout << "outfile bad\n";
 			return (1);
 		}
-		firstLine = false;
 	}
 	if (inFile.bad())
 	{
