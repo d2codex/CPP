@@ -13,10 +13,9 @@ int	main(void)
 	int	totalFailures = 0;
 	int	totalTestSuites = 0;
 
-	if (replaceLineTest())
-		totalTestSuites++;
-	else
-		totalFailures++;
+	totalTestSuites++;
+	totalFailures += replaceLineTest();
+
 
 	std::cout << YEL "============= Test summary ============" RESET << '\n'
 			  << WHT "Total test suits: " << totalTestSuites << RESET << '\n'
