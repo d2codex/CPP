@@ -8,13 +8,17 @@ int	main(void)
 	
     std::cout << YEL << "=======================================\n"
 					 << "         Running all unit tests\n"
-					 << "=======================================\n";
+					 << "=======================================\n"
+					 << RESET;
 	
 	int	totalFailures = 0;
 	int	totalTestSuites = 0;
 
 	totalTestSuites++;
 	totalFailures += replaceLineTest();
+	
+	totalTestSuites++;
+	totalFailures += replaceFileTest();
 
 
 	std::cout << YEL "============= Test summary ============" RESET << '\n'
