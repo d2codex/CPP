@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   humanATest.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/18 23:27:32 by diade-so          #+#    #+#             */
+/*   Updated: 2026/01/18 23:29:08 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "tests.hpp"
 #include "colors.hpp"
 #include "HumanA.hpp"
@@ -6,6 +18,14 @@
 #include <iostream>
 #include <sstream>
 
+/**
+ * @struct HumanATest
+ * @brief Test case structure for HumanA unit tests.
+ *
+ * Each entry describes one test scenario for HumanA construction and
+ * attack() output. `shouldThrow` indicates whether construction should
+ * raise an exception.
+ */
 struct HumanATest
 {
 	std::string description;
@@ -15,6 +35,14 @@ struct HumanATest
 	bool shouldThrow;
 };
 
+/**
+ * @brief Runs unit tests for HumanA.
+ *
+ * Constructs a Weapon and HumanA for each test case. Captures std::cout
+ * output from HumanA::attack() and compares it with the expected output.
+ *
+ * @return Number of failed tests (0 if all pass).
+ */
 int	humanATest()
 {
 	int passed = 0;

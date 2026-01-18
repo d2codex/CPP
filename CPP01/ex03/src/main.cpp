@@ -1,11 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/18 23:22:41 by diade-so          #+#    #+#             */
+/*   Updated: 2026/01/18 23:22:44 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Weapon.hpp"
 #include "HumanA.hpp"
 #include "HumanB.hpp"
 #include "colors.hpp"
 #include <iostream>
 
-
-
+/**
+ * @brief Demo program for HumanA and HumanB behavior.
+ *
+ * Creates two scenarios:
+ *   - HumanA owns a Weapon by reference.
+ *   - HumanB is assigned a Weapon later.
+ *
+ * Shows how updating the Weapon affects each human.
+ */
 int	main(void)
 {
 	{

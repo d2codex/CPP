@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   humanBNoWeaponTest.cpp                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/18 23:30:17 by diade-so          #+#    #+#             */
+/*   Updated: 2026/01/18 23:30:34 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "tests.hpp"
 #include "colors.hpp"
 #include "HumanB.hpp"
@@ -6,6 +18,15 @@
 #include <iostream>
 #include <sstream>
 
+/**
+ * @brief Unit test for HumanB when no weapon is set.
+ *
+ * Constructs a HumanB with a valid name but without assigning a weapon.
+ * Captures output from HumanB::attack() and compares it to the expected
+ * string "Plankton attacks with their hands\n".
+ *
+ * @return Number of failed tests (0 if test passes).
+ */
 int humanBNoWeaponTest()
 {
 	int passed = 0;

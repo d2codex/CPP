@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   humanBWeaponTest.cpp                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/18 23:31:09 by diade-so          #+#    #+#             */
+/*   Updated: 2026/01/18 23:34:40 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "tests.hpp"
 #include "colors.hpp"
 #include "HumanB.hpp"
@@ -6,6 +18,10 @@
 #include <iostream>
 #include <sstream>
 
+/**
+ * @struct HumanBTest
+ * @brief Holds data for one HumanB unit test.
+ */
 struct HumanBTest
 {
 	std::string description;
@@ -13,9 +29,12 @@ struct HumanBTest
 	std::string weaponType;
 	std::string expectedOutput;
 	bool		shouldThrow;
-	bool		hasWeapon;
 };
 
+/**
+ * @brief Runs unit tests for HumanB with a weapon set.
+ * @return Number of failed tests.
+ */
 int	humanBWeaponTest()
 {
 	int passed = 0;
@@ -27,15 +46,13 @@ int	humanBWeaponTest()
 			"SpongeBob",
 			"hammerhead",
 			"SpongeBob attacks with their hammerhead\n",
-			false,
-			true
+			false
 		},
 		{
 			"Invalid Empty name",
 			"",
 			"club",
 			"",
-			true,
 			true
 		},
 		{
@@ -43,7 +60,6 @@ int	humanBWeaponTest()
 			"			  ",
 			"club",
 			"",
-			true,
 			true
 		},
 		{
@@ -51,24 +67,21 @@ int	humanBWeaponTest()
 			"Sponge Bob Square Pants",
 			"stingray",
 			"Sponge Bob Square Pants attacks with their stingray\n",
-			false,
-			true
+			false
 		},
 		{
 			"Valid special characters name",
 			"aafk;af12",
 			"starfish",
 			"aafk;af12 attacks with their starfish\n",
-			false,
-			true
+			false
 		},
 		{
 			"Valid spaces before and after name",
 			"	Squidward ",
 			"club",
 			"	Squidward  attacks with their club\n",
-			false,
-			true
+			false
 		},
 	};
 

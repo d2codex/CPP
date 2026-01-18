@@ -1,9 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   weaponTest.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/18 23:36:32 by diade-so          #+#    #+#             */
+/*   Updated: 2026/01/18 23:36:34 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "tests.hpp"
 #include "colors.hpp"
 #include "Weapon.hpp"
 #include <string>
 #include <iostream>
 
+/**
+ * @struct WeaponTest
+ * @brief Holds input and expected outcome for a weapon test.
+ */
 struct WeaponTest
 {
 	std::string description;
@@ -11,6 +27,14 @@ struct WeaponTest
 	bool		shouldThrow;
 };
 
+/**
+ * @brief Runs the unit tests for the Weapon class.
+ *
+ * Iterates through predefined test cases, verifies expected
+ * behavior, and prints pass/fail results.
+ *
+ * @return Number of failed tests.
+ */
 int weaponTest()
 {
 	int	passed = 0;
