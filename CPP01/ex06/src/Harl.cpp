@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/19 11:00:35 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/19 11:00:36 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/19 11:14:34 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,15 @@ void Harl::complainLevel(std::string level)
 
 	std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
-	int	lvl = -1;
 	size_t	numLevels = sizeof(levels) / sizeof(levels[0]);
+	int	lvl = numLevels;
 	for (size_t i = 0; i < numLevels; i++)
 	{
 		if (levels[i] == level)
+		{
 			lvl = i;
+			break ;
+		}
 	}
 	
 	switch (lvl)
