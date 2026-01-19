@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Harl.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/19 11:00:35 by diade-so          #+#    #+#             */
+/*   Updated: 2026/01/19 11:00:36 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Harl.hpp"
 #include "colors.hpp"
 #include <string>
@@ -52,11 +64,11 @@ void	Harl::error(void)
 }
 
 /**
- * @brief Dispatch a complaint based on the given level.
+ * @brief Print messages from the given level and above.
  *
- * Matches the input level against known levels and calls the
- * corresponding member function. Prints a message if no match
- * is found.
+ * The function checks the input level and executes all complaint methods
+ * at that level and higher (DEBUG → ERROR). If the level is unknown, it
+ * prints a fallback message.
  *
  * @param level Complaint severity ("DEBUG", "INFO", "WARNING", "ERROR").
  */
