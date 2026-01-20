@@ -14,6 +14,9 @@ CORE_SRCS = src/Fixed.cpp \
 APP_SRCS = src/main.cpp
 
 TEST_SRCS = tests/main.cpp \
+			tests/testDefaultCtor.cpp \
+			tests/testCopyCtor.cpp \
+			tests/testAssignmentCtor.cpp
 
 
 # Object directories
