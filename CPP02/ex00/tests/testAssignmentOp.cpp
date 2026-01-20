@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   testAssignmentCtor.cpp                             :+:      :+:    :+:   */
+/*   testAssignmentOp.cpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 23:02:25 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/20 23:03:21 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/20 23:08:31 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@
  *
  * @return Number of failed tests (0 if the test passes).
  */
-int	testAssignmentCtor(void)
+int	testAssignmentOp(void)
 {
 	int passed = 0;
 	int failed = 0;
 	int numTests = 1;
 
-	std::cout << YEL "=== Running test for AssignmentCtor ===\n" RESET;
+	std::cout << YEL "==== Running test for AssignmentOp ====\n" RESET;
 	std::cout << BLU "Copy assignment operator test\n" RESET;
 
 	Fixed a;
@@ -55,7 +55,7 @@ int	testAssignmentCtor(void)
 	}
 	std::cout << '\n';
 
-	std::cout << BLU "======== AssignmentCtor summary =======\n" RESET
+	std::cout << BLU "========= AssignmentOp summary ========\n" RESET
 			  << GRN "Tests passed: " << passed << RESET << '\n'
 			  << RED "Tests failed: " << failed << RESET << '\n'
 			  << "Total tests: " << numTests << '\n';	

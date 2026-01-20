@@ -3,6 +3,6 @@
 
 int	testDefaultCtor();
 int	testCopyCtor();
-int testAssignmentCtor();
+int testAssignmentOp();
 
 #endif

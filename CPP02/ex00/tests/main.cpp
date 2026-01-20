@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 23:01:11 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/20 23:01:13 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/20 23:05:35 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(void)
 	totalFailures += testCopyCtor();
 
 	totalTestSuites++;
-	totalFailures += testAssignmentCtor();
+	totalFailures += testAssignmentOp();
 
 
 	std::cout << YEL "============= Test summary ============" RESET << '\n'

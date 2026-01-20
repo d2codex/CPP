@@ -6,7 +6,7 @@
 #    By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/20 23:01:18 by diade-so          #+#    #+#              #
-#    Updated: 2026/01/20 23:01:20 by diade-so         ###   ########.fr        #
+#    Updated: 2026/01/20 23:05:17 by diade-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ APP_SRCS = src/main.cpp
 TEST_SRCS = tests/main.cpp \
 			tests/testDefaultCtor.cpp \
 			tests/testCopyCtor.cpp \
-			tests/testAssignmentCtor.cpp
+			tests/testAssignmentOp.cpp
 
 
 # Object directories

@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 23:01:44 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/20 23:02:09 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/20 23:08:14 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	testCopyCtor(void)
 	}
 	std::cout << '\n';
 
-	std::cout << BLU "========= DefaultCtor summary =========\n" RESET
+	std::cout << BLU "=========== CopyCtor summary ==========\n" RESET
 			  << GRN "Tests passed: " << passed << RESET << '\n'
 			  << RED "Tests failed: " << failed << RESET << '\n'
 			  << "Total tests: " << numTests << '\n';	
