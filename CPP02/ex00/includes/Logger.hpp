@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Logger.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/20 17:18:40 by diade-so          #+#    #+#             */
+/*   Updated: 2026/01/20 17:18:42 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LOGGER_HPP
 #define LOGGER_HPP
 
@@ -18,6 +30,11 @@
 #define LOG_WARNING(msg) Logger::warning(msg)
 #define LOG_ERROR(msg)   Logger::error(msg)
 
+/**
+ * @brief Simple static logger supporting multiple log levels.
+ *
+ * The logger is static-only; instantiation is disabled.
+ */
 class Logger
 {
 public:
