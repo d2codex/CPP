@@ -11,7 +11,7 @@ void Logger::setThreshold(logLevel level)
 }
 
 void	Logger::writeLog(const std::string& prefix,
-							 const std::string& message, int level)
+							 const std::string& message, logLevel level)
 {
 	if (level >= _threshold)
 		std::cout << prefix << message << std::endl;
@@ -19,22 +19,22 @@ void	Logger::writeLog(const std::string& prefix,
 
 void	Logger::debug(const std::string& message)
 {
-	writeLog(YEL "[DEBUG] " RESET, message, 0);
+	writeLog(YEL "[DEBUG] " RESET, message, DEBUG);
 }
 
 void	Logger::info(const std::string& message)
 {
-	writeLog(BLU "[INFO] " RESET, message, 1);
+	writeLog(BLU "[INFO] " RESET, message, INFO);
 }
 
 void	Logger::warning(const std::string& message)
 {
-	writeLog(MAG "[WARNING] " RESET, message, 2);
+	writeLog(MAG "[WARNING] " RESET, message, WARNING);
 }
 
 void	Logger::error(const std::string& message)
 {
-	writeLog(RED "[ERROR] " RESET, message, 3);
+	writeLog(RED "[ERROR] " RESET, message, ERROR);
 }
 
 Logger::logLevel	Logger::stringToLevel(const std::string& levelStr)
