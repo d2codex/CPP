@@ -34,17 +34,17 @@ int	main(void)
 	int	totalFailures = 0;
 	int	totalTestSuites = 0;
 
+	totalTestSuites++;
 	totalFailures += weaponTest();
-	totalTestSuites++;
 
+	totalTestSuites++;
 	totalFailures += humanATest();
-	totalTestSuites++;
 
+	totalTestSuites++;
 	totalFailures += humanBWeaponTest();
-	totalTestSuites++;
 
-	totalFailures += humanBNoWeaponTest();
 	totalTestSuites++;
+	totalFailures += humanBNoWeaponTest();
 
 	std::cout << YEL "============= Test summary ============" RESET << '\n'
 			  << WHT "Total test suits: " << totalTestSuites << RESET << '\n'
