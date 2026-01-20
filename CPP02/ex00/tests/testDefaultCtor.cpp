@@ -1,14 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   testDefaultCtor.cpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/20 23:01:06 by diade-so          #+#    #+#             */
+/*   Updated: 2026/01/20 23:01:09 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 #include "colors.hpp"
 #include <iostream>
 #include <string>
 
+/**
+ * @brief Test case for Fixed raw bit values.
+ *
+ * Holds a description and a raw integer value used to
+ * validate getRawBits() and setRawBits().
+ */
 struct FixedRawTests
 {
 	std::string desc;
 	int			raw;
 };
 
+/**
+ * @brief Unit tests for the Fixed default constructor.
+ *
+ * Verifies that a Fixed object correctly stores and
+ * returns raw values after initialization.
+ *
+ * Each test:
+ * - Creates a Fixed instance
+ * - Sets raw bits manually
+ * - Confirms getRawBits() returns the expected value
+ *
+ * @return Number of failed tests (0 if all tests pass).
+ */
 int	testDefaultCtor(void)
 {
 	FixedRawTests test[] = {

@@ -1,8 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   testAssignmentCtor.cpp                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/20 23:02:25 by diade-so          #+#    #+#             */
+/*   Updated: 2026/01/20 23:03:21 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Fixed.hpp"
 #include "colors.hpp"
 #include <iostream>
 #include <string>
 
+/**
+ * @brief Unit test for the Fixed copy assignment operator.
+ *
+ * Verifies that assigning one Fixed object to another
+ * using the '=' operator correctly copies the raw
+ * fixed-point value.
+ *
+ * This test ensures:
+ * - operator= is invoked
+ * - The destination object receives the source value
+ *
+ * @return Number of failed tests (0 if the test passes).
+ */
 int	testAssignmentCtor(void)
 {
 	int passed = 0;
