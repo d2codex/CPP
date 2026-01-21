@@ -52,7 +52,7 @@ void	Logger::writeLog(const std::string& prefix,
  */
 void	Logger::debug(const std::string& message)
 {
-	writeLog(YEL "[DEBUG] " RESET, message, DEBUG);
+	writeLog(YEL("[DEBUG] "), message, DEBUG);
 }
 
 
@@ -61,7 +61,7 @@ void	Logger::debug(const std::string& message)
  */
 void	Logger::info(const std::string& message)
 {
-	writeLog(BLU "[INFO] " RESET, message, INFO);
+	writeLog(BLU("[INFO] "), message, INFO);
 }
 
 /**
@@ -69,7 +69,7 @@ void	Logger::info(const std::string& message)
  */
 void	Logger::warning(const std::string& message)
 {
-	writeLog(MAG "[WARNING] " RESET, message, WARNING);
+	writeLog(MAG("[WARNING] "), message, WARNING);
 }
 
 
@@ -78,7 +78,7 @@ void	Logger::warning(const std::string& message)
  */
 void	Logger::error(const std::string& message)
 {
-	writeLog(RED "[ERROR] " RESET, message, ERROR);
+	writeLog(RED("[ERROR] "), message, ERROR);
 }
 
 /**

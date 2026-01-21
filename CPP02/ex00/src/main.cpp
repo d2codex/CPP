@@ -19,14 +19,14 @@ int main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		std::cout << CYN "Usage: ./bin/Fixed <log mode>\n" RESET
+		std::cout << CYN("Usage: ./bin/Fixed <log mode>\n")
 				  << "Log modes: <debug> <info> <warning> <error> <none>\n";
 		return (1);
 	}
 	Logger::logLevel level = Logger::stringToLevel(argv[1]);
 	if (level == Logger::INVALID)
 	{
-		std::cout << RED "Error: Invalid log level\n" RESET;
+		std::cout << RED("Error: Invalid log level\n");
 		return (1);
 	}
 	Logger::setThreshold(level);
