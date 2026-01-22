@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 01:09:34 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/12 14:16:03 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/22 18:15:44 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,12 @@ int	Account::getNbWithdrawals(void)
 void	Account::displayAccountsInfos(void)
 {
 	_displayTimestamp();
+	//print log
+	std::cout << "account:" << _nbAccounts
+			  << ";total:"  << _totalAmount
+			  << ";deposits:" << _totalNbDeposits
+			  << ";withdrawals:" << _totalNbWithdrawals
+			  << "\n";
 }
 
 /**
