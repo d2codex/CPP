@@ -130,7 +130,7 @@ void	Account::makeDeposit(int deposit)
 			  << ";p_amount:" << p_amount
 			  << ";deposit:" << deposit
 			  << ";amount:" << _amount
-			  << "nb_deposits:" << _nbDeposits
+			  << ";nb_deposits:" << _nbDeposits
 			  << '\n';
 }
 
@@ -160,7 +160,7 @@ bool	Account::makeWithdrawal(int withdrawal)
 	std::cout << "index:" << _accountIndex
 			  << ";p_amount:" << p_amount
 			  << ";withdrawal:" << withdrawal
-			  << ";amount" << _amount
+			  << ";amount:" << _amount
 			  << ";nb_withdrawals:" << _nbWithdrawals
 			  << '\n';
 
