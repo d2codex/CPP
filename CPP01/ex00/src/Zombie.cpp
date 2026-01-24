@@ -27,7 +27,7 @@ Zombie::Zombie(std::string name) : _name(name)
  */
 Zombie::~Zombie()
 {
-	std::cout << "Self-Destructing...\n"
+	std::cout << "Self-Destructing..."
 			  << _name << '\n';
 }
 

@@ -11,15 +11,25 @@
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
+#include "colors.hpp"
 #include <string>
+#include <iostream>
 
 /**
- * @brief Create a heap-allocated zombie and return pointer
- * @param name Name of the zombie
- * @return Zombie* Pointer to the created zombie
+ * @brief Create a zombie on the heap and return it.
+ *
+ * @param name Name of the zombie. Must be a valid std::string.
+ * @return Zombie* Pointer to the heap-allocated zombie.
+ *
+ * @note Passing an invalid C-string (nullptr) causes std::string to throw
+ *       an exception before this function is entered. If invalid input is
+ *       possible, wrap the call in a try/catch block to avoid a crash.
  */
 Zombie* newZombie(std::string name)
 {
+	if (name.empty())
+		throw std::invalid_argument ("Name cannot be empty.");
+	
 	Zombie* zombie = new Zombie(name);
 	return (zombie);
 }

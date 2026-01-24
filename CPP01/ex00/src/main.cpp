@@ -23,9 +23,20 @@
  */
 int	main(void)
 {
-	Zombie* ptr = newZombie("Foo");
-	ptr->announce();
-	randomChump("Chump");
+	Zombie* ptr = NULL;
+	try
+	{
+		ptr = newZombie("spongebob");
+		if (!ptr)
+			return (1);
+		ptr->announce();
+		randomChump("plankton");
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << RED << "Error: " << e.what() << RESET << '\n';
+		return (1);
+	}
 
 	DBUG(std::cout << YEL "Heap allocated: " RESET << ptr << '\n';)
 	if (ptr)
