@@ -12,7 +12,7 @@
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes -I../
-DEBUGFLAGS = -DDEBUG
+DEBUGFLAGS = -DDEBUG -g
 
 # Program name (target)
 NAME = zombie
