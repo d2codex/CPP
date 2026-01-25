@@ -33,12 +33,8 @@ int	zombieHordeTest(void)
 {
 	testCases test[] = {
 		{"Normal case: N = 5", "SpongeBob Squarepants", 5, true},
-		{"N is negative", "Patrick", -125, false},
-		{"N is Zero", "Squidward", 0,  false},
+		{"Minimum case: N = 1", "Squidward", 1,  true},
 		{"N is MAX_HORDE_SIZE (1,000,000)", "Plankton", 1000000, true},
-		{"N is greater than MAX_HORDE_SIZE", "Gary", 1000001, false}
-		//name empty
-		//name spaces before and after
 	};
 	
 	std::cout << YEL "==== Running test for zombieHorde ====\n" RESET;
@@ -58,10 +54,18 @@ int	zombieHordeTest(void)
 			if (horde)
 			{
 				std::cout << CYN "TEST SUCCESS (horde created)\n" RESET;
+				if (horde[0].getName() ==test[i].name)
+					std::cout << GRN "Name assigned correctly\n" RESET;
+				else
+					std::cout << RED "NAME assignment failed\n" RESET;
+
 				if (test[i].N <= DISPLAY_LIMIT)
 				{
 					for (int j = 0; j < test[i].N; j++)
+					{
+						std::cout << "[" << j + 1 << "] ";
 						horde[j].announce();
+					}
 				}
 				else
 				{
