@@ -6,13 +6,13 @@
 #    By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/18 23:43:10 by diade-so          #+#    #+#              #
-#    Updated: 2026/01/18 23:43:12 by diade-so         ###   ########.fr        #
+#    Updated: 2026/01/24 22:46:46 by diade-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = c++
-CXXFLAGS = -g3 -Wall -Wextra -Werror -std=c++98 -Iincludes -I../
-DEBUGFLAGS = -DDEBUG
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes -I../
+DEBUGFLAGS = -DDEBUG -g
 
 BIN_DIR = bin
 # Program name (target)
@@ -27,7 +27,6 @@ APP_SRCS = src/main.cpp
 TEST_SRCS = tests/main.cpp \
 			tests/replaceFileTest.cpp \
 			tests/replaceLineTest.cpp
-
 
 # Object directories
 OBJ_DIR = obj
