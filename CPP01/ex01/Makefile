@@ -6,38 +6,69 @@
 #    By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 18:02:28 by diade-so          #+#    #+#              #
-#    Updated: 2026/01/13 18:02:31 by diade-so         ###   ########.fr        #
+#    Updated: 2026/01/24 23:08:24 by diade-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Iincludes -I../
-DEBUGFLAGS = -DDEBUG
+DEBUGFLAGS = -DDEBUG -g
 
+BIN_DIR = bin
 # Program name (target)
-NAME = horde
+NAME = $(BIN_DIR)/horde
+TEST_NAME = $(BIN_DIR)/test_runner
 
 # Source files
-SRCS = src/main.cpp \
-	   src/Zombie.cpp \
-	   src/zombieHorde.cpp
+CORE_SRCS = src/Zombie.cpp \
+			src/zombieHorde.cpp
 
-# Object files go in obj/ folder
+APP_SRCS = src/main.cpp
+
+TEST_SRCS = tests/main.cpp \
+			tests/zombieHordeTest.cpp \
+
+# Object directories
 OBJ_DIR = obj
-OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
+SRC_OBJ_DIR = $(OBJ_DIR)/src
+TEST_OBJ_DIR = $(OBJ_DIR)/tests
+
+# Object files
+CORE_OBJS = $(patsubst src/%.cpp,$(SRC_OBJ_DIR)/%.o,$(CORE_SRCS))
+APP_OBJS = $(patsubst src/%.cpp,$(SRC_OBJ_DIR)/%.o,$(APP_SRCS))
+TEST_OBJS = $(patsubst tests/%.cpp,$(TEST_OBJ_DIR)/%.o,$(TEST_SRCS))
 
 # ----------------- Rules -----------------
-# build the executable
+# default build (application)
 all: $(NAME)
 
 # Create obj folder if it doesn't exist, compile .o files, then link
-$(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+$(NAME): $(CORE_OBJS) $(APP_OBJS)
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
-# pattern rule to comiple .cpp -> .o in obj/, create folder if needed
-$(OBJ_DIR)/%.o: %.cpp
+# build tests
+tests: $(TEST_NAME)
+
+$(TEST_NAME): $(CORE_OBJS) $(TEST_OBJS)
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+# compile src files
+$(SRC_OBJ_DIR)/%.o: src/%.cpp
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# compile tests files
+$(TEST_OBJ_DIR)/%.o: tests/%.cpp
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+run: $(NAME)
+	./$(NAME)
+
+run_tests: $(TEST_NAME)
+	./$(TEST_NAME)
 
 # remove object files only
 clean:
@@ -45,13 +76,14 @@ clean:
 
 # remove object files and executable
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(TEST_NAME)
+	rm -rf $(BIN_DIR)
 
 # rebuild everything
 re: fclean all
 
-# ----------------- Rules -----------------
 debug: CXXFLAGS += $(DEBUGFLAGS)
 debug: re
 
-.PHONY: all clean fclean re
+.PHONY: all tests clean fclean re debug
+

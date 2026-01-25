@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:01:47 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/13 18:01:54 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/25 01:03:55 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ Zombie::Zombie() : _name()
 
 	if (s_constructed <= DISPLAY_LIMIT)
 	{
-		std::cout << "Constructing Zombie #" << s_constructed << '\n';
+		std::cout << YEL "Constructing Zombie #" << s_constructed
+				  << RESET << '\n';
 	}
 	else if (s_constructed == DISPLAY_LIMIT + 1)
 	{
@@ -101,4 +102,3 @@ void	Zombie::setZombieName(const std::string& name)
 {
 	_name = name;
 }
-

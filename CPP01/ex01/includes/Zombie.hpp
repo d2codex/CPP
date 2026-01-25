@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 18:01:58 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/13 18:02:00 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/25 00:32:27 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ private:
 	#endif
 };
 
-Zombie* zombieHorde(int N, std::string name);
+// free functions
+int			promptSize();
+std::string	promptName();
+Zombie*		zombieHorde(int N, std::string name);
 
 #endif
