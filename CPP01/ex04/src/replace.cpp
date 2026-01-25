@@ -60,17 +60,23 @@ int	replaceFile(const std::string& filename,
 			    const std::string& s1, const std::string& s2)
 {
 	std::ifstream	inFile(filename.c_str());
-	std::ofstream	outFile((filename + ".replace").c_str(), std::ios::trunc);
 
 /*	//explicit version
 	std::ofstream outFile; //create the stream object
-	//std::ios::out implies create if not exists
+	//std::ios::out is an flag for create if not exists
 	outFile.open(filename + ".replace", std::ios::out | std::ios::trunc);
 */
-	if (!inFile || !outFile)
+	if (!inFile)
 	{
-		std::cerr << RED "Error: file could not be opened\n" RESET;
+		std::cerr << RED "Error: cannot open input file "
+				  << filename << RESET << '\n';
 		return (1);
+	}
+	std::ofstream	outFile((filename + ".replace").c_str(), std::ios::trunc);
+	if (!outFile)
+	{
+		std::cerr << RED "Error: cannot create output file"
+				  << filename << ".replace" << RESET << '\n';
 	}
 	std::string line;
 	while (std::getline(inFile, line))
@@ -80,13 +86,15 @@ int	replaceFile(const std::string& filename,
 		outFile << modifiedLine << '\n';
 		if (!outFile)
 		{
-			std::cout << "outfile bad\n";
+			std::cerr << "Error. Could not write to "
+					  << filename << ".replace\n" << RESET;
 			return (1);
 		}
 	}
 	if (inFile.bad())
 	{
-		std::cout << "infile bad\n";
+		std::cerr << "Error: failure while reading file: "
+				  << filename << RESET << '\n';
 		return (1);
 	}
 	return (0);
