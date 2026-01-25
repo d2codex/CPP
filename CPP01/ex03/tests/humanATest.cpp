@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 23:27:32 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/18 23:29:08 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/24 23:03:18 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ struct HumanATest
  */
 int	humanATest()
 {
-	int passed = 0;
-	int failed = 0;
-
 	HumanATest test[] = {
 		{
 			"Valid Normal case",
@@ -94,6 +91,8 @@ int	humanATest()
 	};
 
 	std::cout << YEL "==== Running test for humanA class ====\n" RESET;
+	int passed = 0;
+	int failed = 0;
 	size_t numTests = sizeof(test) / sizeof(test[0]);
 	for (size_t i = 0; i < numTests; i++)
 	{
