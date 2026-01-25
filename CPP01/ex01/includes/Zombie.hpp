@@ -38,8 +38,9 @@ public:
 	Zombie();
 	~Zombie();
 
-	void announce(void);
-	void setZombieName(const std::string& name);
+	void		announce(void);
+	void		setZombieName(const std::string& name);
+	std::string getName(void) const;
 
 	#ifdef DEBUG
 	static void resetCounters();

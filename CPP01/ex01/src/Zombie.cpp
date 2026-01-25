@@ -102,3 +102,8 @@ void	Zombie::setZombieName(const std::string& name)
 {
 	_name = name;
 }
+
+std::string Zombie::getName(void) const
+{
+	return (_name);
+}
