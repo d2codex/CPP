@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 	if (argc != 4)
 	{
 		std::cout << CYN
-			"usage: ./bin/replace <filename> <string1> <string2>\n" RESET;
+			"usage: ./bin/replace <filename> <search_str> <replace_str>\n" RESET;
 		return (1);
 	}
 	std::string filename = argv[1];
