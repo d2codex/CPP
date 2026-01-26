@@ -28,37 +28,27 @@
  *       Passing a NULL C-string is invalid for std::string and results in
  *       undefined behavior unless explicitly handled.
  *
- * @note This version of main has been modified to catch exceptions thrown
- *       when invalid input (such as a NULL string) is provided.
- *       The original version supplied by the subject does not protect
- *       against this case and is therefore not exception-safe.
- *
- * Shows how updating the Weapon affects each human.
+ * @note The subject version of main does not include exception handling.
+ *       If you want to test invalid input (e.g. NULL), you would need to
+ *       add a try/catch block around the code.
  */
 int	main(void)
 {
-	try{
-
-		{
-			Weapon club = Weapon(NULL);
-
-			HumanA bob("Bob", club);
-			bob.attack();
-			club.setType("some other type of club");
-			bob.attack();
-		}
-		{
-			Weapon club = Weapon("crude spiked club");
-
-			HumanB jim("Jim");
-			jim.setWeapon(club);
-			jim.attack();
-			club.setType("some other type of club");
-			jim.attack();
-		}
-	}
-	catch (const std::exception& e)
 	{
-		std::cerr << RED "Error: " << e.what() << RESET << '\n';
+		Weapon club = Weapon(NULL);
+
+		HumanA bob("Bob", club);
+		bob.attack();
+		club.setType("some other type of club");
+		bob.attack();
+	}
+	{
+		Weapon club = Weapon("crude spiked club");
+
+		HumanB jim("Jim");
+		jim.setWeapon(club);
+		jim.attack();
+		club.setType("some other type of club");
+		jim.attack();
 	}
 }
