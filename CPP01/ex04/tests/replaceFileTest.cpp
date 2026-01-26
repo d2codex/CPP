@@ -45,16 +45,27 @@ static bool filesMatch(const std::string& file1, const std::string& file2)
 	//do not perform any text translation
 	//ifstream (const char* filename, ios_base::openmode mode = ios_base::in);
     std::ifstream f1(file1.c_str(), std::ios::in | std::ios::binary);
-    std::ifstream f2(file2.c_str(), std::ios::in | std::ios::binary);
+    if (!f1)
+		return (false);
 
-    if (!f1 || !f2)
+	std::ifstream f2(file2.c_str(), std::ios::in | std::ios::binary);
+    if (!f2)
         return (false);
 
     std::istreambuf_iterator<char> it1(f1);
     std::istreambuf_iterator<char> it2(f2);
     std::istreambuf_iterator<char> end;
 
-    return (std::equal(it1, end, it2));
+	while (it1 != end && it2 != end)
+	{
+		if (*it1 != *it2)
+			return (false);
+		++it1;
+		++it2;
+	}
+	if (it1 == end && it2 == end)
+		return (true);
+	return (false);
 }
 
 /**
@@ -107,7 +118,7 @@ int replaceFileTest()
             "testFiles/tmp_empty.txt",
             "testFiles/tmp_empty_expected.txt",
             "",
-			"\n",
+			"",
             "a", "b",
             false
         },
@@ -142,9 +153,15 @@ int replaceFileTest()
         if (t.shouldFail)
         {
             if (result != 0)
+			{
+				std::cout << GRN "TEST PASSED\n" RESET;
                 passed++;
+			}
             else
+			{
+				std::cout << RED "TEST FAILED\n" RESET;
                 failed++;
+			}
         }
         else
         {
@@ -164,9 +181,9 @@ int replaceFileTest()
         }
 
         // Cleanup
-		std::remove(t.inputFile.c_str());
-        std::remove((t.inputFile + ".replace").c_str());
-        std::remove(t.expectedFile.c_str());
+//		std::remove(t.inputFile.c_str());
+//      std::remove((t.inputFile + ".replace").c_str());
+//        std::remove(t.expectedFile.c_str());
     }
 	std::cout << BLU "========= replaceFile summary ========" RESET << '\n'
 			  << GRN "Tests passed: " << passed << RESET << '\n'
