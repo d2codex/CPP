@@ -71,6 +71,10 @@ run_tests: $(TEST_NAME)
 	./$(TEST_NAME)
 
 # remove object files only
+clean:
+	rm -rf $(OBJ_DIR)
+
+# remove object files and executable
 fclean: clean
 	rm -f $(NAME) $(TEST_NAME)
 	rm -rf $(BIN_DIR)
