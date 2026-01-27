@@ -14,6 +14,7 @@
 #include "colors.hpp"
 #include <cstdlib>
 #include <iostream>
+#include <climits>
 
 static bool initLogger(int argc, char **argv)
 {
@@ -44,23 +45,34 @@ int main(int argc, char **argv)
 {
 	if (!initLogger(argc, argv))
 		return (1);
+	try
+	{
+		Fixed a;
+		Fixed const b( 10 ); //int constructor
+		Fixed const c( 42.42f ); // float constructor
+		Fixed const d( b ); // copy constructor
 
-	Fixed a;
-	Fixed const b( 10 ); //int constructor
-	Fixed const c( 42.42f ); // float constructor
-	Fixed const d( b ); // copy constructor
+		a = Fixed( 1234.4321f ); //float constructor
 
-	a = Fixed( 1234.4321f ); //float constructor
+		std::cout << "a is " << a << std::endl;
+		std::cout << "b is " << b << std::endl;
+		std::cout << "c is " << c << std::endl;
+		std::cout << "d is " << d << std::endl;
 
-	std::cout << "a is " << a << std::endl;
-	std::cout << "b is " << b << std::endl;
-	std::cout << "c is " << c << std::endl;
-	std::cout << "d is " << d << std::endl;
+		std::cout << "a is " << a.toInt() << " as integer" << std::endl;
+		std::cout << "b is " << b.toInt() << " as integer" << std::endl;
+		std::cout << "c is " << c.toInt() << " as integer" << std::endl;
+		std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 
-	std::cout << "a is " << a.toInt() << " as integer" << std::endl;
-	std::cout << "b is " << b.toInt() << " as integer" << std::endl;
-	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
-	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+		Fixed max(INT_MAX);
+		Fixed min(INT_MIN);
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << RED_ON() << "Error: " << e.what() << '\n'
+				  << RESET();
+		return (1);
+	}
 
-	return 0;
+	return (0);
 }
