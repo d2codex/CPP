@@ -1,0 +1,185 @@
+\doxysection{Logger Class Reference}
+\hypertarget{classLogger}{}\label{classLogger}\index{Logger@{Logger}}
+
+
+Simple static logger supporting multiple log levels.  
+
+
+
+
+{\ttfamily \#include $<$Logger.\+hpp$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classLogger_a684a1cfa8dfbf6dfe47748cc745f2bc5}\label{classLogger_a684a1cfa8dfbf6dfe47748cc745f2bc5} 
+enum {\bfseries log\+Level} \{ \newline
+{\bfseries INVALID} = -\/1
+, {\bfseries DEBUG} = 0
+, {\bfseries INFO} = 1
+, {\bfseries WARNING} = 2
+, \newline
+{\bfseries ERROR} = 3
+, {\bfseries NONE} = 4
+, {\bfseries INVALID} = -\/1
+, {\bfseries DEBUG} = 0
+, \newline
+{\bfseries INFO} = 1
+, {\bfseries WARNING} = 2
+, {\bfseries ERROR} = 3
+, {\bfseries NONE} = 4
+, \newline
+{\bfseries INVALID} = -\/1
+, {\bfseries DEBUG} = 0
+, {\bfseries INFO} = 1
+, {\bfseries WARNING} = 2
+, \newline
+{\bfseries ERROR} = 3
+, {\bfseries NONE} = 4
+ \}
+\item 
+\Hypertarget{classLogger_a684a1cfa8dfbf6dfe47748cc745f2bc5}\label{classLogger_a684a1cfa8dfbf6dfe47748cc745f2bc5} 
+enum {\bfseries log\+Level} \{ \newline
+{\bfseries INVALID} = -\/1
+, {\bfseries DEBUG} = 0
+, {\bfseries INFO} = 1
+, {\bfseries WARNING} = 2
+, \newline
+{\bfseries ERROR} = 3
+, {\bfseries NONE} = 4
+, {\bfseries INVALID} = -\/1
+, {\bfseries DEBUG} = 0
+, \newline
+{\bfseries INFO} = 1
+, {\bfseries WARNING} = 2
+, {\bfseries ERROR} = 3
+, {\bfseries NONE} = 4
+, \newline
+{\bfseries INVALID} = -\/1
+, {\bfseries DEBUG} = 0
+, {\bfseries INFO} = 1
+, {\bfseries WARNING} = 2
+, \newline
+{\bfseries ERROR} = 3
+, {\bfseries NONE} = 4
+ \}
+\item 
+\Hypertarget{classLogger_a684a1cfa8dfbf6dfe47748cc745f2bc5}\label{classLogger_a684a1cfa8dfbf6dfe47748cc745f2bc5} 
+enum {\bfseries log\+Level} \{ \newline
+{\bfseries INVALID} = -\/1
+, {\bfseries DEBUG} = 0
+, {\bfseries INFO} = 1
+, {\bfseries WARNING} = 2
+, \newline
+{\bfseries ERROR} = 3
+, {\bfseries NONE} = 4
+, {\bfseries INVALID} = -\/1
+, {\bfseries DEBUG} = 0
+, \newline
+{\bfseries INFO} = 1
+, {\bfseries WARNING} = 2
+, {\bfseries ERROR} = 3
+, {\bfseries NONE} = 4
+, \newline
+{\bfseries INVALID} = -\/1
+, {\bfseries DEBUG} = 0
+, {\bfseries INFO} = 1
+, {\bfseries WARNING} = 2
+, \newline
+{\bfseries ERROR} = 3
+, {\bfseries NONE} = 4
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classLogger_add7ee9c8c596f811d359adca0ad1ab6f}{set\+Threshold}} (log\+Level level)
+\begin{DoxyCompactList}\small\item\em Set the minimum log level to print. \end{DoxyCompactList}\item 
+\Hypertarget{classLogger_a38b544d566463a65d0dbf4ff7f867962}\label{classLogger_a38b544d566463a65d0dbf4ff7f867962} 
+static void {\bfseries debug} (const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log a DEBUG message. \end{DoxyCompactList}\item 
+\Hypertarget{classLogger_ab4c4d86279176eb0ede726bc5b4d5ddb}\label{classLogger_ab4c4d86279176eb0ede726bc5b4d5ddb} 
+static void {\bfseries info} (const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log an INFO message. \end{DoxyCompactList}\item 
+\Hypertarget{classLogger_a5164af2f632902fa3c477d5c0cb463f7}\label{classLogger_a5164af2f632902fa3c477d5c0cb463f7} 
+static void {\bfseries warning} (const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log a WARNING message. \end{DoxyCompactList}\item 
+\Hypertarget{classLogger_ab6042fdfcbb14026098e0df9d6b32f27}\label{classLogger_ab6042fdfcbb14026098e0df9d6b32f27} 
+static void {\bfseries error} (const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log an ERROR message. \end{DoxyCompactList}\item 
+static log\+Level \mbox{\hyperlink{classLogger_a5a6c7418ebde0b4c56936bc3dbfc128c}{string\+To\+Level}} (const std\+::string \&level\+Str)
+\begin{DoxyCompactList}\small\item\em Convert a string to a log\+Level enum. \end{DoxyCompactList}\item 
+\Hypertarget{classLogger_ac64689a0eb8aafbf4a7a6c82d0459441}\label{classLogger_ac64689a0eb8aafbf4a7a6c82d0459441} 
+static void {\bfseries set\+Threshold} (log\+Level level)
+\item 
+\Hypertarget{classLogger_aed78385ee0ad9d124521735894abab46}\label{classLogger_aed78385ee0ad9d124521735894abab46} 
+static void {\bfseries debug} (const std\+::string \&message)
+\item 
+\Hypertarget{classLogger_a474176e6966186566a2a321cb5cbd739}\label{classLogger_a474176e6966186566a2a321cb5cbd739} 
+static void {\bfseries info} (const std\+::string \&message)
+\item 
+\Hypertarget{classLogger_a5025d14c1f40cc23e9cbb48f98f0d9a6}\label{classLogger_a5025d14c1f40cc23e9cbb48f98f0d9a6} 
+static void {\bfseries warning} (const std\+::string \&message)
+\item 
+\Hypertarget{classLogger_aafe8b4f6ed1259fbde150ab59e0785e7}\label{classLogger_aafe8b4f6ed1259fbde150ab59e0785e7} 
+static void {\bfseries error} (const std\+::string \&message)
+\item 
+\Hypertarget{classLogger_a1d6ddd5e27479d29c3fb8f455fb0ccb4}\label{classLogger_a1d6ddd5e27479d29c3fb8f455fb0ccb4} 
+static log\+Level {\bfseries string\+To\+Level} (const std\+::string \&level\+Str)
+\item 
+\Hypertarget{classLogger_ac64689a0eb8aafbf4a7a6c82d0459441}\label{classLogger_ac64689a0eb8aafbf4a7a6c82d0459441} 
+static void {\bfseries set\+Threshold} (log\+Level level)
+\item 
+\Hypertarget{classLogger_aed78385ee0ad9d124521735894abab46}\label{classLogger_aed78385ee0ad9d124521735894abab46} 
+static void {\bfseries debug} (const std\+::string \&message)
+\item 
+\Hypertarget{classLogger_a474176e6966186566a2a321cb5cbd739}\label{classLogger_a474176e6966186566a2a321cb5cbd739} 
+static void {\bfseries info} (const std\+::string \&message)
+\item 
+\Hypertarget{classLogger_a5025d14c1f40cc23e9cbb48f98f0d9a6}\label{classLogger_a5025d14c1f40cc23e9cbb48f98f0d9a6} 
+static void {\bfseries warning} (const std\+::string \&message)
+\item 
+\Hypertarget{classLogger_aafe8b4f6ed1259fbde150ab59e0785e7}\label{classLogger_aafe8b4f6ed1259fbde150ab59e0785e7} 
+static void {\bfseries error} (const std\+::string \&message)
+\item 
+\Hypertarget{classLogger_a1d6ddd5e27479d29c3fb8f455fb0ccb4}\label{classLogger_a1d6ddd5e27479d29c3fb8f455fb0ccb4} 
+static log\+Level {\bfseries string\+To\+Level} (const std\+::string \&level\+Str)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Simple static logger supporting multiple log levels. 
+
+The logger is static-\/only; instantiation is disabled. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classLogger_add7ee9c8c596f811d359adca0ad1ab6f}\label{classLogger_add7ee9c8c596f811d359adca0ad1ab6f} 
+\index{Logger@{Logger}!setThreshold@{setThreshold}}
+\index{setThreshold@{setThreshold}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{setThreshold()}{setThreshold()}}
+{\footnotesize\ttfamily void Logger\+::set\+Threshold (\begin{DoxyParamCaption}\item[{log\+Level}]{level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Set the minimum log level to print. 
+
+Messages below this level are ignored. \Hypertarget{classLogger_a5a6c7418ebde0b4c56936bc3dbfc128c}\label{classLogger_a5a6c7418ebde0b4c56936bc3dbfc128c} 
+\index{Logger@{Logger}!stringToLevel@{stringToLevel}}
+\index{stringToLevel@{stringToLevel}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{stringToLevel()}{stringToLevel()}}
+{\footnotesize\ttfamily Logger\+::log\+Level Logger\+::string\+To\+Level (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{level\+Str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert a string to a log\+Level enum. 
+
+Case-\/insensitive conversion. Returns INVALID if unknown. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ex00/includes/Logger.\+hpp\item 
+ex01/includes/Logger.\+hpp\item 
+ex02/includes/Logger.\+hpp\item 
+ex00/src/Logger.\+cpp\item 
+ex01/src/Logger.\+cpp\item 
+ex02/src/Logger.\+cpp\end{DoxyCompactItemize}
