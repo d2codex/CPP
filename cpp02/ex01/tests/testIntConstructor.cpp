@@ -6,11 +6,11 @@
 #include <climits>
 //#include <cmath>
 
-int testIntConstructor()
+int testIntConstructor(void)
 {
-	int fractionalBits = 8;
 	printHeader("Int Constructor");
 
+	int fractionalBits = 8;
 	int total = 0;
 	int failed = 0;
 
@@ -33,17 +33,17 @@ int testIntConstructor()
 		{failed++;}
 
 	// Case 4 - near INT_MAX
-	int allowedMax = INT_MAX >> fractionalBits;
-    Fixed d(allowedMax);
+	int maxAllowed = INT_MAX >> fractionalBits;
+    Fixed d(maxAllowed);
     total++;
-    if (!assertEqualInt("maxAllowed", allowedMax << fractionalBits, d.getRawBits()))
+    if (!assertEqualInt("maxAllowed", maxAllowed << fractionalBits, d.getRawBits()))
 		{failed++;}
 
     // Case 5 - near INT_MIN
-	int allowedMin = INT_MIN >> fractionalBits;
-    Fixed e(allowedMin);
+	int minAllowed = INT_MIN >> fractionalBits;
+    Fixed e(minAllowed);
     total++;
-    if (!assertEqualInt("minAllowed", allowedMin << fractionalBits, e.getRawBits()))
+    if (!assertEqualInt("minAllowed", minAllowed << fractionalBits, e.getRawBits()))
 		{failed++;}
 
 	printSummary("Int Constructor", failed, total);
