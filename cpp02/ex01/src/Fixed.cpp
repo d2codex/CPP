@@ -25,7 +25,7 @@
 Fixed::Fixed() : _fixedPoint(0)
 {
 	LOG_DEBUG("Default Constructor called");
-	DBG(std::cout << YEL("[DBG] ") << "Default fixedPoint initialized to "
+	DBG(std::cout << yel("[DBG] ") << "Default fixedPoint initialized to "
 				  << _fixedPoint << '\n';)
 }
 
@@ -54,7 +54,7 @@ Fixed::Fixed(const int integer)
 	_fixedPoint = integer << _fractionalBits;
 
 	LOG_DEBUG("Int Constructor called");
-	DBG(std::cout << YEL("[DBG] ") << "Int fixedPoint initialized to "
+	DBG(std::cout << yel("[DBG] ") << "Int fixedPoint initialized to "
 				  << _fixedPoint << '\n';)
 }
 
@@ -73,7 +73,7 @@ Fixed::Fixed(const float floatPoint)
 	: _fixedPoint(roundf(floatPoint * (1 << _fractionalBits)))
 {
 	LOG_DEBUG("Float Constructor called");
-	DBG(std::cout << YEL("[DBG] ") << "Float fixedPoint initialized to "
+	DBG(std::cout << yel("[DBG] ") << "Float fixedPoint initialized to "
 				  << _fixedPoint << '\n';)
 }
 
@@ -87,7 +87,7 @@ Fixed::Fixed(const float floatPoint)
 Fixed::Fixed(const Fixed& other) //: _fixedPoint(other._fixedPoint)
 {
 	LOG_DEBUG("Copy constructor called");
-	DBG(std::cout << YEL("[DBG] ") << "Copy fixedPoint initialized to "
+	DBG(std::cout << yel("[DBG] ") << "Copy fixedPoint initialized to "
 				  << other._fixedPoint << '\n';)
 	
 	*this = other;
@@ -131,7 +131,7 @@ Fixed::~Fixed()
 int	Fixed::getRawBits(void) const
 {
 	LOG_DEBUG("getRawBits member function called");
-	DBG(std::cout << YEL("[DBG] ") << "Raw bits: " << _fixedPoint << '\n';)
+	DBG(std::cout << yel("[DBG] ") << "Raw bits: " << _fixedPoint << '\n';)
 
 	return (_fixedPoint);
 }

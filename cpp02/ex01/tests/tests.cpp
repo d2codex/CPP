@@ -13,24 +13,24 @@ void printHeader(const std::string& testName)
 
 void printSummary(const std::string& testName, int failed, int total)
 {
-    std::cout << BLU("=============== Summary ===============\n")
+    std::cout << blu("=============== Summary ===============\n")
 			  << "Test: " << testName << '\n'
-              << RED("Tests failed: ") << failed << '\n'
+              << red("Tests failed: ") << failed << '\n'
               << "Total tests: " << total << '\n';
 
     if (failed == 0)
-        std::cout << GRN("All tests passed!\n")
-				  << BLU("=============END UNIT TEST=============\n");
+        std::cout << grn("All tests passed!\n")
+				  << blu("=============END UNIT TEST=============\n");
 }
 
 bool assertEqualInt(const std::string& name, int expected, int actual)
 {
 	if (expected == actual)
 	{
-		std::cout << GRN("PASS ") << name << '\n';
+		std::cout << grn("PASS ") << name << '\n';
 		return (true);
 	}
-	std::cout << RED("FAIL ") << name << '\n'
+	std::cout << red("FAIL ") << name << '\n'
 			  << "expected: " << expected << '\n'
 			  << "actual  : " << actual << '\n';
 	return (false);

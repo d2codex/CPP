@@ -69,8 +69,8 @@ int main(int argc, char **argv)
 	}
 	catch (std::exception& e)
 	{
-		std::cerr << RED_ON() << "Error: " << e.what() << '\n'
-				  << RESET();
+		std::cerr << RED << "Error: " << e.what() << '\n'
+				  << RESET;
 		return (1);
 	}
 

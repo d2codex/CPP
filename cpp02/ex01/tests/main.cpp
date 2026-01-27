@@ -20,7 +20,7 @@ int	main(void)
 {
 	Logger::setThreshold(Logger::WARNING);
 	
-    std::cout << YEL("=======================================\n"
+    std::cout << yel("=======================================\n"
 					 "         Running all unit tests\n"
 					 "=======================================\n");
 	
@@ -40,10 +40,10 @@ int	main(void)
 	totalFailures += testIntConstructor();
 
 
-	std::cout << YEL("============= Test summary ============\n")
-			  << WHT("Total test suits: ") << totalTestSuites << '\n'
-			  << RED("total failures: ") << totalFailures << '\n'
-			  << YEL("=======================================\n");
+	std::cout << yel("============= Test summary ============\n")
+			  << wht("Total test suits: ") << totalTestSuites << '\n'
+			  << red("total failures: ") << totalFailures << '\n'
+			  << yel("=======================================\n");
 	if (totalFailures == 0)
 		std::cout << GRN("ALL TESTS PASSED!\n");
 }

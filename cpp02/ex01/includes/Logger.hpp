@@ -13,7 +13,6 @@
 #ifndef LOGGER_HPP
 #define LOGGER_HPP
 
-#include "colors.hpp"
 #include <string>
 #include <iostream>
 

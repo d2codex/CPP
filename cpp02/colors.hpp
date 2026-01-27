@@ -16,60 +16,49 @@
 #include <string>
 
 /* =========================
-   Basic ANSI Color Wrappers
+   ANSI Color Macros
    ========================= */
 
-inline std::string BLK(const std::string& msg) { return (std::string("\033[30m") + msg + "\033[0m"); }
-inline std::string RED(const std::string& msg) { return (std::string("\033[31m") + msg + "\033[0m"); }
-inline std::string GRN(const std::string& msg) { return (std::string("\033[32m") + msg + "\033[0m"); }
-inline std::string YEL(const std::string& msg) { return (std::string("\033[33m") + msg + "\033[0m"); }
-inline std::string BLU(const std::string& msg) { return (std::string("\033[34m") + msg + "\033[0m"); }
-inline std::string MAG(const std::string& msg) { return (std::string("\033[35m") + msg + "\033[0m"); }
-inline std::string CYN(const std::string& msg) { return (std::string("\033[36m") + msg + "\033[0m"); }
-inline std::string WHT(const std::string& msg) { return (std::string("\033[37m") + msg + "\033[0m"); }
+#define BLK      "\033[30m"
+#define RED      "\033[31m"
+#define GRN      "\033[32m"
+#define YEL      "\033[33m"
+#define BLU      "\033[34m"
+#define MAG      "\033[35m"
+#define CYN      "\033[36m"
+#define WHT      "\033[37m"
 
-/* ==========================
-   Bright ANSI Color Wrappers
-   ========================== */
+#define BR_BLK   "\033[1;30m"
+#define BR_RED   "\033[1;31m"
+#define BR_GRN   "\033[1;32m"
+#define BR_YEL   "\033[1;33m"
+#define BR_BLU   "\033[1;34m"
+#define BR_MAG   "\033[1;35m"
+#define BR_CYN   "\033[1;36m"
+#define BR_WHT   "\033[1;37m"
 
-inline std::string brBLK(const std::string& msg) { return (std::string("\033[1;30m") + msg + "\033[0m"); }
-inline std::string brRED(const std::string& msg) { return (std::string("\033[1;31m") + msg + "\033[0m"); }
-inline std::string brGRN(const std::string& msg) { return (std::string("\033[1;32m") + msg + "\033[0m"); }
-inline std::string brYEL(const std::string& msg) { return (std::string("\033[1;33m") + msg + "\033[0m"); }
-inline std::string brBLU(const std::string& msg) { return (std::string("\033[1;34m") + msg + "\033[0m"); }
-inline std::string brMAG(const std::string& msg) { return (std::string("\033[1;35m") + msg + "\033[0m"); }
-inline std::string brCYN(const std::string& msg) { return (std::string("\033[1;36m") + msg + "\033[0m"); }
-inline std::string brWHT(const std::string& msg) { return (std::string("\033[1;37m") + msg + "\033[0m"); }
+#define RESET    "\033[0m"
 
 /* =========================
-   Color ON helpers (no reset)
+   Wrapper functions
    ========================= */
 
-inline std::string BLK_ON() { return "\033[30m"; }
-inline std::string RED_ON() { return "\033[31m"; }
-inline std::string GRN_ON() { return "\033[32m"; }
-inline std::string YEL_ON() { return "\033[33m"; }
-inline std::string BLU_ON() { return "\033[34m"; }
-inline std::string MAG_ON() { return "\033[35m"; }
-inline std::string CYN_ON() { return "\033[36m"; }
-inline std::string WHT_ON() { return "\033[37m"; }
+inline std::string blk(const std::string& msg) { return std::string(BLK) + msg + RESET; }
+inline std::string red(const std::string& msg) { return std::string(RED) + msg + RESET; }
+inline std::string grn(const std::string& msg) { return std::string(GRN) + msg + RESET; }
+inline std::string yel(const std::string& msg) { return std::string(YEL) + msg + RESET; }
+inline std::string blu(const std::string& msg) { return std::string(BLU) + msg + RESET; }
+inline std::string mag(const std::string& msg) { return std::string(MAG) + msg + RESET; }
+inline std::string cyn(const std::string& msg) { return std::string(CYN) + msg + RESET; }
+inline std::string wht(const std::string& msg) { return std::string(WHT) + msg + RESET; }
 
-/* ==========================
-   Bright Color ON helpers
-   ========================== */
+inline std::string brBlk(const std::string& msg) { return std::string(BR_BLK) + msg + RESET; }
+inline std::string brRed(const std::string& msg) { return std::string(BR_RED) + msg + RESET; }
+inline std::string brGrn(const std::string& msg) { return std::string(BR_GRN) + msg + RESET; }
+inline std::string brYel(const std::string& msg) { return std::string(BR_YEL) + msg + RESET; }
+inline std::string brBlu(const std::string& msg) { return std::string(BR_BLU) + msg + RESET; }
+inline std::string brMag(const std::string& msg) { return std::string(BR_MAG) + msg + RESET; }
+inline std::string brCyn(const std::string& msg) { return std::string(BR_CYN) + msg + RESET; }
+inline std::string brWht(const std::string& msg) { return std::string(BR_WHT) + msg + RESET; }
 
-inline std::string brBLK_ON() { return "\033[1;30m"; }
-inline std::string brRED_ON() { return "\033[1;31m"; }
-inline std::string brGRN_ON() { return "\033[1;32m"; }
-inline std::string brYEL_ON() { return "\033[1;33m"; }
-inline std::string brBLU_ON() { return "\033[1;34m"; }
-inline std::string brMAG_ON() { return "\033[1;35m"; }
-inline std::string brCYN_ON() { return "\033[1;36m"; }
-inline std::string brWHT_ON() { return "\033[1;37m"; }
-
-/* =========================
-   Reset helper
-   ========================= */
-
-inline std::string RESET() { return "\033[0m"; }
 #endif
