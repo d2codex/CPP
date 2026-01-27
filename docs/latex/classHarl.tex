@@ -1,0 +1,72 @@
+\doxysection{Harl Class Reference}
+\hypertarget{classHarl}{}\label{classHarl}\index{Harl@{Harl}}
+
+
+Simple logger that prints complaints at different levels.  
+
+
+
+
+{\ttfamily \#include $<$Harl.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classHarl_aa27036a940256d45cfd71680e53c5dce}{complain}} (std\+::string level)
+\begin{DoxyCompactList}\small\item\em Dispatch a complaint based on the given level. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classHarl_aa90d6e812efcfb584fe4bfa15f567b6d}{complain\+Level}} (std\+::string level)
+\begin{DoxyCompactList}\small\item\em Print messages from the given level and above. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Simple logger that prints complaints at different levels. 
+
+Prints complaint messages at different severity levels.
+
+The class maps a string level to a corresponding message function. Supported levels\+: DEBUG, INFO, WARNING, ERROR.
+
+The class contains four message methods and a dispatcher that prints messages from a given level and above. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classHarl_aa27036a940256d45cfd71680e53c5dce}\label{classHarl_aa27036a940256d45cfd71680e53c5dce} 
+\index{Harl@{Harl}!complain@{complain}}
+\index{complain@{complain}!Harl@{Harl}}
+\doxysubsubsection{\texorpdfstring{complain()}{complain()}}
+{\footnotesize\ttfamily void Harl\+::complain (\begin{DoxyParamCaption}\item[{std\+::string}]{level }\end{DoxyParamCaption})}
+
+
+
+Dispatch a complaint based on the given level. 
+
+Matches the input level against known levels and calls the corresponding member function. Prints a message if no match is found.
+
+
+\begin{DoxyParams}{Parameters}
+{\em level} & Complaint severity ("{}\+DEBUG"{}, "{}\+INFO"{}, "{}\+WARNING"{}, "{}\+ERROR"{}). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classHarl_aa90d6e812efcfb584fe4bfa15f567b6d}\label{classHarl_aa90d6e812efcfb584fe4bfa15f567b6d} 
+\index{Harl@{Harl}!complainLevel@{complainLevel}}
+\index{complainLevel@{complainLevel}!Harl@{Harl}}
+\doxysubsubsection{\texorpdfstring{complainLevel()}{complainLevel()}}
+{\footnotesize\ttfamily void Harl\+::complain\+Level (\begin{DoxyParamCaption}\item[{std\+::string}]{level }\end{DoxyParamCaption})}
+
+
+
+Print messages from the given level and above. 
+
+The function checks the input level and executes all complaint methods at that level and higher (DEBUG → ERROR). If the level is unknown, it prints a fallback message.
+
+
+\begin{DoxyParams}{Parameters}
+{\em level} & Complaint severity ("{}\+DEBUG"{}, "{}\+INFO"{}, "{}\+WARNING"{}, "{}\+ERROR"{}). \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+cpp01/ex05/includes/Harl.\+hpp\item 
+cpp01/ex06/includes/Harl.\+hpp\item 
+cpp01/ex05/src/Harl.\+cpp\item 
+cpp01/ex06/src/Harl.\+cpp\end{DoxyCompactItemize}

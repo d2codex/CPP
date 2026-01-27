@@ -1,0 +1,91 @@
+\doxysection{Phone\+Book Class Reference}
+\hypertarget{classPhoneBook}{}\label{classPhoneBook}\index{PhoneBook@{PhoneBook}}
+
+
+Manages a collection of up to 8 contacts.  
+
+
+
+
+{\ttfamily \#include $<$phonebook.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPhoneBook_a5ceec6599239f24ccecd83118c91e183}{Phone\+Book}} ()
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classPhoneBook}{Phone\+Book} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPhoneBook_adf91fd8b9571c1b1b5e7fdadf8d0e76e}{add\+Contact}} ()
+\begin{DoxyCompactList}\small\item\em Add a new contact to the phonebook. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPhoneBook_a94c6a7b138cbb865507429a74908232d}{search\+Contacts}} () const
+\begin{DoxyCompactList}\small\item\em Displays contacts and allows searching by index. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classPhoneBook_a3555ce06dfaa8df4f54de5832a489097}{is\+Empty}} () const
+\begin{DoxyCompactList}\small\item\em Check if the phonebook has no stored contacts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages a collection of up to 8 contacts. 
+
+Provides functions to add, search, and display contacts. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classPhoneBook_a5ceec6599239f24ccecd83118c91e183}\label{classPhoneBook_a5ceec6599239f24ccecd83118c91e183} 
+\index{PhoneBook@{PhoneBook}!PhoneBook@{PhoneBook}}
+\index{PhoneBook@{PhoneBook}!PhoneBook@{PhoneBook}}
+\doxysubsubsection{\texorpdfstring{PhoneBook()}{PhoneBook()}}
+{\footnotesize\ttfamily Phone\+Book\+::\+Phone\+Book (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Construct a new \doxylink{classPhoneBook}{Phone\+Book} object. 
+
+Initializes \+\_\+next\+Index and \+\_\+total\+Contacts to 0. \+\_\+contacts array is default-\/constructed automatically. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classPhoneBook_adf91fd8b9571c1b1b5e7fdadf8d0e76e}\label{classPhoneBook_adf91fd8b9571c1b1b5e7fdadf8d0e76e} 
+\index{PhoneBook@{PhoneBook}!addContact@{addContact}}
+\index{addContact@{addContact}!PhoneBook@{PhoneBook}}
+\doxysubsubsection{\texorpdfstring{addContact()}{addContact()}}
+{\footnotesize\ttfamily void Phone\+Book\+::add\+Contact (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Add a new contact to the phonebook. 
+
+Prompts user for first/last/nick/phone/secret. Validates input, confirms save, and handles circular storage. \Hypertarget{classPhoneBook_a3555ce06dfaa8df4f54de5832a489097}\label{classPhoneBook_a3555ce06dfaa8df4f54de5832a489097} 
+\index{PhoneBook@{PhoneBook}!isEmpty@{isEmpty}}
+\index{isEmpty@{isEmpty}!PhoneBook@{PhoneBook}}
+\doxysubsubsection{\texorpdfstring{isEmpty()}{isEmpty()}}
+{\footnotesize\ttfamily bool Phone\+Book\+::is\+Empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Check if the phonebook has no stored contacts. 
+
+\begin{DoxyReturn}{Returns}
+true if the phonebook is empty, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classPhoneBook_a94c6a7b138cbb865507429a74908232d}\label{classPhoneBook_a94c6a7b138cbb865507429a74908232d} 
+\index{PhoneBook@{PhoneBook}!searchContacts@{searchContacts}}
+\index{searchContacts@{searchContacts}!PhoneBook@{PhoneBook}}
+\doxysubsubsection{\texorpdfstring{searchContacts()}{searchContacts()}}
+{\footnotesize\ttfamily void Phone\+Book\+::search\+Contacts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Displays contacts and allows searching by index. 
+
+Prompts for an index or "{}\+RETURN"{} to go back. Validates input and prints the contact summary. Uses safe\+Getline(), which throws on EOF or failure.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & If input stream is closed or fails. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+cpp00/ex01/includes/phonebook.\+hpp\item 
+cpp00/ex01/src/main.\+cpp\item 
+cpp00/ex01/src/phonebook/add\+\_\+contact.\+cpp\item 
+cpp00/ex01/src/phonebook/search\+\_\+contacts.\+cpp\end{DoxyCompactItemize}

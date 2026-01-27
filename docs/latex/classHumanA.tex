@@ -1,0 +1,67 @@
+\doxysection{HumanA Class Reference}
+\hypertarget{classHumanA}{}\label{classHumanA}\index{HumanA@{HumanA}}
+
+
+A human that always has a weapon reference.  
+
+
+
+
+{\ttfamily \#include $<$Human\+A.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHumanA_aefbe499be3eeef7cab7d553146bd83e6}{HumanA}} (const std\+::string \&name, \mbox{\hyperlink{classWeapon}{Weapon}} \&weapon)
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{classHumanA}{HumanA} with a name and a weapon reference. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classHumanA_a33d1a99d40987d41da73d77de653531e}{attack}} () const
+\begin{DoxyCompactList}\small\item\em Make the human attack with their weapon. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A human that always has a weapon reference. 
+
+\doxylink{classHumanA}{HumanA} stores a reference to a \doxylink{classWeapon}{Weapon} and can attack using it. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classHumanA_aefbe499be3eeef7cab7d553146bd83e6}\label{classHumanA_aefbe499be3eeef7cab7d553146bd83e6} 
+\index{HumanA@{HumanA}!HumanA@{HumanA}}
+\index{HumanA@{HumanA}!HumanA@{HumanA}}
+\doxysubsubsection{\texorpdfstring{HumanA()}{HumanA()}}
+{\footnotesize\ttfamily Human\+A\+::\+HumanA (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{\mbox{\hyperlink{classWeapon}{Weapon}} \&}]{weapon }\end{DoxyParamCaption})}
+
+
+
+Construct a \doxylink{classHumanA}{HumanA} with a name and a weapon reference. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The human\textquotesingle{}s name. Must not be empty or whitespace. \\
+\hline
+{\em weapon} & Reference to the weapon the human will use.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If name is empty or whitespace only. \\
+\hline
+\end{DoxyExceptions}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classHumanA_a33d1a99d40987d41da73d77de653531e}\label{classHumanA_a33d1a99d40987d41da73d77de653531e} 
+\index{HumanA@{HumanA}!attack@{attack}}
+\index{attack@{attack}!HumanA@{HumanA}}
+\doxysubsubsection{\texorpdfstring{attack()}{attack()}}
+{\footnotesize\ttfamily void Human\+A\+::attack (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Make the human attack with their weapon. 
+
+Prints the attack message using the human name and weapon type. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+cpp01/ex03/includes/Human\+A.\+hpp\item 
+cpp01/ex03/src/Human\+A.\+cpp\end{DoxyCompactItemize}

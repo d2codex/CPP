@@ -1,0 +1,90 @@
+\doxysection{Weapon Class Reference}
+\hypertarget{classWeapon}{}\label{classWeapon}\index{Weapon@{Weapon}}
+
+
+Stores the type of weapon and allows updating it.  
+
+
+
+
+{\ttfamily \#include $<$Weapon.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classWeapon_a15713e1cdc47168887078cdec0ce81a3}{Weapon}} (const std\+::string \&type)
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{classWeapon}{Weapon} with a given type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classWeapon_a9cde8d9846f063ee06a0d1356b165868}{set\+Type}} (const std\+::string \&type)
+\begin{DoxyCompactList}\small\item\em Set the weapon type. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classWeapon_a0b903190634fe7ee8cf01ffa8419f19d}{get\+Type}} () const
+\begin{DoxyCompactList}\small\item\em Get the weapon type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Stores the type of weapon and allows updating it. 
+
+The weapon type must be non-\/empty and not only whitespace. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classWeapon_a15713e1cdc47168887078cdec0ce81a3}\label{classWeapon_a15713e1cdc47168887078cdec0ce81a3} 
+\index{Weapon@{Weapon}!Weapon@{Weapon}}
+\index{Weapon@{Weapon}!Weapon@{Weapon}}
+\doxysubsubsection{\texorpdfstring{Weapon()}{Weapon()}}
+{\footnotesize\ttfamily Weapon\+::\+Weapon (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type }\end{DoxyParamCaption})}
+
+
+
+Construct a \doxylink{classWeapon}{Weapon} with a given type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & \doxylink{classWeapon}{Weapon} type string. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if type is empty or whitespace only. \\
+\hline
+\end{DoxyExceptions}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classWeapon_a0b903190634fe7ee8cf01ffa8419f19d}\label{classWeapon_a0b903190634fe7ee8cf01ffa8419f19d} 
+\index{Weapon@{Weapon}!getType@{getType}}
+\index{getType@{getType}!Weapon@{Weapon}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily const std\+::string \& Weapon\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the weapon type. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::string\& Reference to the weapon type string. 
+\end{DoxyReturn}
+\Hypertarget{classWeapon_a9cde8d9846f063ee06a0d1356b165868}\label{classWeapon_a9cde8d9846f063ee06a0d1356b165868} 
+\index{Weapon@{Weapon}!setType@{setType}}
+\index{setType@{setType}!Weapon@{Weapon}}
+\doxysubsubsection{\texorpdfstring{setType()}{setType()}}
+{\footnotesize\ttfamily void Weapon\+::set\+Type (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type }\end{DoxyParamCaption})}
+
+
+
+Set the weapon type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & New weapon type. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if type is empty or whitespace only. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+cpp01/ex03/includes/Weapon.\+hpp\item 
+cpp01/ex03/src/Weapon.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,82 @@
+\doxysection{HumanB Class Reference}
+\hypertarget{classHumanB}{}\label{classHumanB}\index{HumanB@{HumanB}}
+
+
+Represents a human who can be assigned a weapon later.  
+
+
+
+
+{\ttfamily \#include $<$Human\+B.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classHumanB_a6d23e8e66303a69d76c9ae662eb0ffb6}{HumanB}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Construct a \doxylink{classHumanB}{HumanB} with a name and no initial weapon. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classHumanB_a060e4c54248437efb7aadb45fa498db8}{set\+Weapon}} (\mbox{\hyperlink{classWeapon}{Weapon}} \&weapon)
+\begin{DoxyCompactList}\small\item\em Assign a weapon to the human. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classHumanB_a64e0c25c13079a225986b5ebe81d8b8b}{attack}} () const
+\begin{DoxyCompactList}\small\item\em Make the human attack using their weapon or hands. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a human who can be assigned a weapon later. 
+
+The weapon is stored as a pointer and may be null until set. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classHumanB_a6d23e8e66303a69d76c9ae662eb0ffb6}\label{classHumanB_a6d23e8e66303a69d76c9ae662eb0ffb6} 
+\index{HumanB@{HumanB}!HumanB@{HumanB}}
+\index{HumanB@{HumanB}!HumanB@{HumanB}}
+\doxysubsubsection{\texorpdfstring{HumanB()}{HumanB()}}
+{\footnotesize\ttfamily Human\+B\+::\+HumanB (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})}
+
+
+
+Construct a \doxylink{classHumanB}{HumanB} with a name and no initial weapon. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The human\textquotesingle{}s name. Must not be empty or whitespace.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If name is empty or whitespace only. \\
+\hline
+\end{DoxyExceptions}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classHumanB_a64e0c25c13079a225986b5ebe81d8b8b}\label{classHumanB_a64e0c25c13079a225986b5ebe81d8b8b} 
+\index{HumanB@{HumanB}!attack@{attack}}
+\index{attack@{attack}!HumanB@{HumanB}}
+\doxysubsubsection{\texorpdfstring{attack()}{attack()}}
+{\footnotesize\ttfamily void Human\+B\+::attack (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Make the human attack using their weapon or hands. 
+
+Prints the attack message. If no weapon is set, attacks with hands. \Hypertarget{classHumanB_a060e4c54248437efb7aadb45fa498db8}\label{classHumanB_a060e4c54248437efb7aadb45fa498db8} 
+\index{HumanB@{HumanB}!setWeapon@{setWeapon}}
+\index{setWeapon@{setWeapon}!HumanB@{HumanB}}
+\doxysubsubsection{\texorpdfstring{setWeapon()}{setWeapon()}}
+{\footnotesize\ttfamily void Human\+B\+::set\+Weapon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classWeapon}{Weapon}} \&}]{weapon }\end{DoxyParamCaption})}
+
+
+
+Assign a weapon to the human. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em weapon} & Reference to the weapon to be assigned. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+cpp01/ex03/includes/Human\+B.\+hpp\item 
+cpp01/ex03/src/Human\+B.\+cpp\end{DoxyCompactItemize}

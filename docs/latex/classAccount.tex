@@ -1,0 +1,144 @@
+\doxysection{Account Class Reference}
+\hypertarget{classAccount}{}\label{classAccount}\index{Account@{Account}}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classAccount_a1ee69aa88053549e7f411abf07c0bebc}\label{classAccount_a1ee69aa88053549e7f411abf07c0bebc} 
+typedef \mbox{\hyperlink{classAccount}{Account}} {\bfseries t}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAccount_ac1a70272c94daa0879d56af60926d35c}{Account}} (int initial\+\_\+deposit)
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classAccount}{Account} with an initial deposit. \end{DoxyCompactList}\item 
+\Hypertarget{classAccount_ac6725c3bf6176569dacff2adf0602dbb}\label{classAccount_ac6725c3bf6176569dacff2adf0602dbb} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Account} (void)
+\begin{DoxyCompactList}\small\item\em Destroy the \doxylink{classAccount}{Account} and log closure. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classAccount_a7bcc312b756a3dc870727cc0cd405b30}{make\+Deposit}} (int deposit)
+\begin{DoxyCompactList}\small\item\em Make a deposit to this account and update totals. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classAccount_a62dc296bf2e7bdf590969dd25c3c6a4d}{make\+Withdrawal}} (int withdrawal)
+\begin{DoxyCompactList}\small\item\em Attempt to withdraw from this account. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classAccount_abe54daf701ebfc0b72c5ea28172eba6f}{check\+Amount}} (void) const
+\item 
+\Hypertarget{classAccount_af5fefc50f6f3fcdb869d36fcd0fcd3d0}\label{classAccount_af5fefc50f6f3fcdb869d36fcd0fcd3d0} 
+void {\bfseries display\+Status} (void) const
+\begin{DoxyCompactList}\small\item\em Display the current status of this account. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{classAccount_af5e4b82f92a80c0f474354cf7f6f0bd6}{get\+Nb\+Accounts}} (void)
+\item 
+static int \mbox{\hyperlink{classAccount_a5496a922e5dabe673313f1e7b19b8810}{get\+Total\+Amount}} (void)
+\item 
+static int \mbox{\hyperlink{classAccount_ae7c9beaa1cbd36ecd1ee7332969bf7a2}{get\+Nb\+Deposits}} (void)
+\item 
+static int \mbox{\hyperlink{classAccount_a363ff31afc04360a2d03f1310763e747}{get\+Nb\+Withdrawals}} (void)
+\item 
+\Hypertarget{classAccount_a405b79b5e38168b1b203d301d1a4a1f4}\label{classAccount_a405b79b5e38168b1b203d301d1a4a1f4} 
+static void {\bfseries display\+Accounts\+Infos} (void)
+\begin{DoxyCompactList}\small\item\em Display summary of all accounts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classAccount_ac1a70272c94daa0879d56af60926d35c}\label{classAccount_ac1a70272c94daa0879d56af60926d35c} 
+\index{Account@{Account}!Account@{Account}}
+\index{Account@{Account}!Account@{Account}}
+\doxysubsubsection{\texorpdfstring{Account()}{Account()}}
+{\footnotesize\ttfamily Account\+::\+Account (\begin{DoxyParamCaption}\item[{int}]{initial\+\_\+deposit }\end{DoxyParamCaption})}
+
+
+
+Construct a new \doxylink{classAccount}{Account} with an initial deposit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em initial\+\_\+deposit} & Initial balance \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classAccount_abe54daf701ebfc0b72c5ea28172eba6f}\label{classAccount_abe54daf701ebfc0b72c5ea28172eba6f} 
+\index{Account@{Account}!checkAmount@{checkAmount}}
+\index{checkAmount@{checkAmount}!Account@{Account}}
+\doxysubsubsection{\texorpdfstring{checkAmount()}{checkAmount()}}
+{\footnotesize\ttfamily int Account\+::check\+Amount (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+Current account balance 
+\end{DoxyReturn}
+\Hypertarget{classAccount_af5e4b82f92a80c0f474354cf7f6f0bd6}\label{classAccount_af5e4b82f92a80c0f474354cf7f6f0bd6} 
+\index{Account@{Account}!getNbAccounts@{getNbAccounts}}
+\index{getNbAccounts@{getNbAccounts}!Account@{Account}}
+\doxysubsubsection{\texorpdfstring{getNbAccounts()}{getNbAccounts()}}
+{\footnotesize\ttfamily int Account\+::get\+Nb\+Accounts (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyReturn}{Returns}
+Total number of accounts 
+\end{DoxyReturn}
+\Hypertarget{classAccount_ae7c9beaa1cbd36ecd1ee7332969bf7a2}\label{classAccount_ae7c9beaa1cbd36ecd1ee7332969bf7a2} 
+\index{Account@{Account}!getNbDeposits@{getNbDeposits}}
+\index{getNbDeposits@{getNbDeposits}!Account@{Account}}
+\doxysubsubsection{\texorpdfstring{getNbDeposits()}{getNbDeposits()}}
+{\footnotesize\ttfamily int Account\+::get\+Nb\+Deposits (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyReturn}{Returns}
+Total number of deposits across all accounts 
+\end{DoxyReturn}
+\Hypertarget{classAccount_a363ff31afc04360a2d03f1310763e747}\label{classAccount_a363ff31afc04360a2d03f1310763e747} 
+\index{Account@{Account}!getNbWithdrawals@{getNbWithdrawals}}
+\index{getNbWithdrawals@{getNbWithdrawals}!Account@{Account}}
+\doxysubsubsection{\texorpdfstring{getNbWithdrawals()}{getNbWithdrawals()}}
+{\footnotesize\ttfamily int Account\+::get\+Nb\+Withdrawals (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyReturn}{Returns}
+Total number of withdrawals across all accounts 
+\end{DoxyReturn}
+\Hypertarget{classAccount_a5496a922e5dabe673313f1e7b19b8810}\label{classAccount_a5496a922e5dabe673313f1e7b19b8810} 
+\index{Account@{Account}!getTotalAmount@{getTotalAmount}}
+\index{getTotalAmount@{getTotalAmount}!Account@{Account}}
+\doxysubsubsection{\texorpdfstring{getTotalAmount()}{getTotalAmount()}}
+{\footnotesize\ttfamily int Account\+::get\+Total\+Amount (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyReturn}{Returns}
+Total balance of all accounts 
+\end{DoxyReturn}
+\Hypertarget{classAccount_a7bcc312b756a3dc870727cc0cd405b30}\label{classAccount_a7bcc312b756a3dc870727cc0cd405b30} 
+\index{Account@{Account}!makeDeposit@{makeDeposit}}
+\index{makeDeposit@{makeDeposit}!Account@{Account}}
+\doxysubsubsection{\texorpdfstring{makeDeposit()}{makeDeposit()}}
+{\footnotesize\ttfamily void Account\+::make\+Deposit (\begin{DoxyParamCaption}\item[{int}]{deposit }\end{DoxyParamCaption})}
+
+
+
+Make a deposit to this account and update totals. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em deposit} & Amount to deposit \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classAccount_a62dc296bf2e7bdf590969dd25c3c6a4d}\label{classAccount_a62dc296bf2e7bdf590969dd25c3c6a4d} 
+\index{Account@{Account}!makeWithdrawal@{makeWithdrawal}}
+\index{makeWithdrawal@{makeWithdrawal}!Account@{Account}}
+\doxysubsubsection{\texorpdfstring{makeWithdrawal()}{makeWithdrawal()}}
+{\footnotesize\ttfamily bool Account\+::make\+Withdrawal (\begin{DoxyParamCaption}\item[{int}]{withdrawal }\end{DoxyParamCaption})}
+
+
+
+Attempt to withdraw from this account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em withdrawal} & Amount to withdraw \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successful, false if refused 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+cpp00/ex02/includes/Account.\+hpp\item 
+cpp00/ex02/src/Account.\+cpp\end{DoxyCompactItemize}

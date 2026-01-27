@@ -1,0 +1,160 @@
+\doxysection{Contact Class Reference}
+\hypertarget{classContact}{}\label{classContact}\index{Contact@{Contact}}
+
+
+Stores information for a single contact in the phonebook.  
+
+
+
+
+{\ttfamily \#include $<$contact.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classContact_ae39444f378e6de7fd6c3e60981949af5}{Contact}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{classContact}{Contact}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classContact_ab9f6c84f1c3a3224e86b91f67f9ee2a8}{set\+Contact}} (const std\+::string \&first, const std\+::string \&last, const std\+::string \&nick, const std\+::string \&phone, const std\+::string \&secret)
+\begin{DoxyCompactList}\small\item\em Set all fields of a contact at once. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classContact_a1acade648a288524c5c5586416fd3b54}{get\+First\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Get the first name of the contact. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classContact_a0cb5e1527632042310c4f75b74c2648a}{get\+Last\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Get the last name of the contact. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classContact_a8153814bb4bf5ecd27f919878abb1317}{get\+Nick\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Get the nickname of the contact. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classContact_a0e2bacd0d54223209c075dba090f8762}{get\+Phone\+Number}} () const
+\begin{DoxyCompactList}\small\item\em Get the phone number of the contact. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classContact_a53160c4aad8fcd6faaeb859fbd22906b}{get\+Darkest\+Secret}} () const
+\begin{DoxyCompactList}\small\item\em Get the darkest secret of the contact. \end{DoxyCompactList}\item 
+\Hypertarget{classContact_a6ba648dae08acf87772f86fde0123c13}\label{classContact_a6ba648dae08acf87772f86fde0123c13} 
+void {\bfseries set\+Contact} (const std\+::string \&first)
+\item 
+\Hypertarget{classContact_a450326b743eeba53af7f4b36983ae003}\label{classContact_a450326b743eeba53af7f4b36983ae003} 
+std\+::string {\bfseries prompt\+First\+Name} (const std\+::string \&prompt\+Msg)
+\item 
+\Hypertarget{classContact_a1acade648a288524c5c5586416fd3b54}\label{classContact_a1acade648a288524c5c5586416fd3b54} 
+const std\+::string \& {\bfseries get\+First\+Name} () const
+\item 
+\Hypertarget{classContact_a50f21cdbd2b707f4ba156c66aab616c7}\label{classContact_a50f21cdbd2b707f4ba156c66aab616c7} 
+std\+::string {\bfseries get\+By\+Value} () const
+\item 
+\Hypertarget{classContact_a4e6251cb0983e9fb3ccc233ddc4452c6}\label{classContact_a4e6251cb0983e9fb3ccc233ddc4452c6} 
+const std\+::string \& {\bfseries get\+By\+Reference} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Stores information for a single contact in the phonebook. 
+
+Contains first name, last name, nickname, phone number, and secret. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classContact_ae39444f378e6de7fd6c3e60981949af5}\label{classContact_ae39444f378e6de7fd6c3e60981949af5} 
+\index{Contact@{Contact}!Contact@{Contact}}
+\index{Contact@{Contact}!Contact@{Contact}}
+\doxysubsubsection{\texorpdfstring{Contact()}{Contact()}}
+{\footnotesize\ttfamily Contact\+::\+Contact (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor for \doxylink{classContact}{Contact}. 
+
+All std\+::string members are default-\/initialized to empty. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classContact_a53160c4aad8fcd6faaeb859fbd22906b}\label{classContact_a53160c4aad8fcd6faaeb859fbd22906b} 
+\index{Contact@{Contact}!getDarkestSecret@{getDarkestSecret}}
+\index{getDarkestSecret@{getDarkestSecret}!Contact@{Contact}}
+\doxysubsubsection{\texorpdfstring{getDarkestSecret()}{getDarkestSecret()}}
+{\footnotesize\ttfamily const std\+::string \& Contact\+::get\+Darkest\+Secret (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the darkest secret of the contact. 
+
+\begin{DoxyReturn}{Returns}
+const reference to the darkest secret 
+\end{DoxyReturn}
+\Hypertarget{classContact_a1acade648a288524c5c5586416fd3b54}\label{classContact_a1acade648a288524c5c5586416fd3b54} 
+\index{Contact@{Contact}!getFirstName@{getFirstName}}
+\index{getFirstName@{getFirstName}!Contact@{Contact}}
+\doxysubsubsection{\texorpdfstring{getFirstName()}{getFirstName()}}
+{\footnotesize\ttfamily const std\+::string \& Contact\+::get\+First\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the first name of the contact. 
+
+\begin{DoxyReturn}{Returns}
+const reference to the first name 
+\end{DoxyReturn}
+\Hypertarget{classContact_a0cb5e1527632042310c4f75b74c2648a}\label{classContact_a0cb5e1527632042310c4f75b74c2648a} 
+\index{Contact@{Contact}!getLastName@{getLastName}}
+\index{getLastName@{getLastName}!Contact@{Contact}}
+\doxysubsubsection{\texorpdfstring{getLastName()}{getLastName()}}
+{\footnotesize\ttfamily const std\+::string \& Contact\+::get\+Last\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the last name of the contact. 
+
+\begin{DoxyReturn}{Returns}
+const reference to the last name 
+\end{DoxyReturn}
+\Hypertarget{classContact_a8153814bb4bf5ecd27f919878abb1317}\label{classContact_a8153814bb4bf5ecd27f919878abb1317} 
+\index{Contact@{Contact}!getNickName@{getNickName}}
+\index{getNickName@{getNickName}!Contact@{Contact}}
+\doxysubsubsection{\texorpdfstring{getNickName()}{getNickName()}}
+{\footnotesize\ttfamily const std\+::string \& Contact\+::get\+Nick\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the nickname of the contact. 
+
+\begin{DoxyReturn}{Returns}
+const reference to the nickname 
+\end{DoxyReturn}
+\Hypertarget{classContact_a0e2bacd0d54223209c075dba090f8762}\label{classContact_a0e2bacd0d54223209c075dba090f8762} 
+\index{Contact@{Contact}!getPhoneNumber@{getPhoneNumber}}
+\index{getPhoneNumber@{getPhoneNumber}!Contact@{Contact}}
+\doxysubsubsection{\texorpdfstring{getPhoneNumber()}{getPhoneNumber()}}
+{\footnotesize\ttfamily const std\+::string \& Contact\+::get\+Phone\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the phone number of the contact. 
+
+\begin{DoxyReturn}{Returns}
+const reference to the phone number 
+\end{DoxyReturn}
+\Hypertarget{classContact_ab9f6c84f1c3a3224e86b91f67f9ee2a8}\label{classContact_ab9f6c84f1c3a3224e86b91f67f9ee2a8} 
+\index{Contact@{Contact}!setContact@{setContact}}
+\index{setContact@{setContact}!Contact@{Contact}}
+\doxysubsubsection{\texorpdfstring{setContact()}{setContact()}}
+{\footnotesize\ttfamily void Contact\+::set\+Contact (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{first,  }\item[{const std\+::string \&}]{last,  }\item[{const std\+::string \&}]{nick,  }\item[{const std\+::string \&}]{phone,  }\item[{const std\+::string \&}]{secret }\end{DoxyParamCaption})}
+
+
+
+Set all fields of a contact at once. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em first} & First name \\
+\hline
+{\em last} & Last name \\
+\hline
+{\em nick} & Nickname \\
+\hline
+{\em phone} & Phone number \\
+\hline
+{\em secret} & Darkest secret \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+cpp00/ex01/includes/contact.\+hpp\item 
+practice\+\_\+cpp/general.\+cpp\item 
+practice\+\_\+cpp/pass\+\_\+by\+\_\+reference.\+cpp\item 
+cpp00/ex01/src/contact/contact.\+cpp\end{DoxyCompactItemize}

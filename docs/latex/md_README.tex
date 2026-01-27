@@ -1,0 +1,149 @@
+\chapter{🖤 C++ Modules -\/ 42 School}
+\hypertarget{md_README}{}\label{md_README}\index{🖤 C++ Modules -\/ 42 School@{🖤 C++ Modules -\/ 42 School}}
+\label{md_README_autotoc_md0}%
+\Hypertarget{md_README_autotoc_md0}%
+ This repository contains my solutions for the C++ Modules at 42 School. The goal of these modules is to master C++ fundamentals, including\+:
+
+
+\begin{DoxyItemize}
+\item Object-\/oriented programming
+\item Memory management (stack vs heap)
+\item Proper use of the C++ standard library
+\item Good coding practices\+: const, references, constructors, destructors
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md1}{}\doxysection{\texorpdfstring{⚙️ General Rules}{⚙️ General Rules}}\label{md_README_autotoc_md1}
+{\bfseries{Compiler flags\+:}} {\ttfamily -\/Wall -\/Wextra -\/Werror -\/std=c++98} ~\newline
+ {\bfseries{Modules\+:}} cpp00 → cpp09
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md3}{}\doxysection{\texorpdfstring{📚 Module 00}{📚 Module 00}}\label{md_README_autotoc_md3}
+\hypertarget{md_README_autotoc_md4}{}\doxysubsection{\texorpdfstring{🔊 Exercise 00 -\/ Megaphone}{🔊 Exercise 00 - Megaphone}}\label{md_README_autotoc_md4}
+{\bfseries{Description\+:}} Convert input strings to uppercase.
+
+{\bfseries{Purpose\+:}} Learn basic C++ syntax, std library, and namespaces.
+
+{\bfseries{Key Learnings\+:}}
+\begin{DoxyItemize}
+\item Command-\/line arguments ({\ttfamily argc}, {\ttfamily argv})
+\item Using {\ttfamily std\+::cout}/{\ttfamily std\+::cin} and string manipulation
+\end{DoxyItemize}
+
+{\bfseries{Build \& Run\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make}
+\DoxyCodeLine{./megaphone}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md6}{}\doxysubsection{\texorpdfstring{📒 Exercise 01 -\/ My Awesome Phonebook}{📒 Exercise 01 - My Awesome Phonebook}}\label{md_README_autotoc_md6}
+{\bfseries{Description\+:}} A simple phonebook using {\ttfamily \doxylink{classContact}{Contact}} and {\ttfamily \doxylink{classPhoneBook}{Phone\+Book}} classes.
+
+{\bfseries{Purpose\+:}} Learn classes, constructors, and input/output handling.
+
+{\bfseries{Key Learnings\+:}}
+\begin{DoxyItemize}
+\item Const correctness \& constructor initializer lists
+\item Passing by reference vs by value
+\item Formatting output with {\ttfamily std\+::setw}
+\end{DoxyItemize}
+
+{\bfseries{Build \& Run\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make}
+\DoxyCodeLine{./phonebook}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md8}{}\doxysubsection{\texorpdfstring{💼 Exercise 02 (\+Optional) -\/ The Job of Your Dreams}{💼 Exercise 02 (Optional) - The Job of Your Dreams}}\label{md_README_autotoc_md8}
+{\bfseries{Description\+:}} Implement {\ttfamily Account.\+cpp} from a provided {\ttfamily \doxylink{Account_8hpp_source}{Account.\+hpp}} and tests.
+
+{\bfseries{Purpose\+:}} Learn class-\/wide static variables, logging, and time handling.
+
+{\bfseries{Key Learnings\+:}}
+\begin{DoxyItemize}
+\item Static class variables and functions
+\item Destructors for cleanup
+\item Using {\ttfamily std\+::time\+\_\+t} and iterators
+\end{DoxyItemize}
+
+{\bfseries{Build \& Run\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make}
+\DoxyCodeLine{./account}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md10}{}\doxysection{\texorpdfstring{📚 Module 01}{📚 Module 01}}\label{md_README_autotoc_md10}
+\hypertarget{md_README_autotoc_md11}{}\doxysubsection{\texorpdfstring{🧟‍♂️ Exercise 00 -\/ BraiiiiiiinnnzzzZ}{🧟‍♂️ Exercise 00 - BraiiiiiiinnnzzzZ}}\label{md_README_autotoc_md11}
+{\bfseries{Description\+:}} Implement a {\ttfamily \doxylink{classZombie}{Zombie}} class to practice dynamic allocation.
+
+{\bfseries{Purpose\+:}} Learn stack vs heap, pointers, and manual memory management.
+
+{\bfseries{Key Learnings\+:}}
+\begin{DoxyItemize}
+\item {\ttfamily new} / {\ttfamily delete} operators
+\item Stack vs heap memory differences
+\item Introduced debugging mode
+\end{DoxyItemize}
+
+{\bfseries{Build \& Run\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make}
+\DoxyCodeLine{./zombie}
+
+\end{DoxyCode}
+
+
+{\bfseries{Build with debug mode\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ debug}
+\DoxyCodeLine{./zombie}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md12}{}\doxysubsection{\texorpdfstring{🧠 Exercise 01 – Moar brainz!}{🧠 Exercise 01 – Moar brainz!}}\label{md_README_autotoc_md12}
+{\bfseries{Description\+:}} Create a horde of Zombies allocated dynamically using arrays.
+
+Purpose\+: Extend dynamic allocation concepts by managing multiple objects on the heap and handling edge cases safely.
+
+Key Learnings\+:
+\begin{DoxyItemize}
+\item Dynamic allocation of object arrays using new\mbox{[}\mbox{]}
+\item Proper deallocation with delete\mbox{[}\mbox{]}
+\item Validating user input before allocation
+\item Graceful handling of allocation failure (std\+::bad\+\_\+alloc)
+\item Use of compile-\/time debug mode (DEBUG macro)
+\item Tracking object lifecycle with static class members
+\item Writing structured test cases using a struct
+\item Automating tests with loops instead of manual calls
+\item Defensive programming with size limits (MAX\+\_\+\+HORDE\+\_\+\+SIZE)
+\end{DoxyItemize}
+
+{\bfseries{Build \& Run\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make}
+\DoxyCodeLine{./horde}
+
+\end{DoxyCode}
+
+
+{\bfseries{Build with debug mode\+:}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ debug}
+\DoxyCodeLine{./horde}
+
+\end{DoxyCode}
+ \DoxyHorRuler{0}
+\hypertarget{md_README_autotoc_md14}{}\doxysection{\texorpdfstring{📝 Notes}{📝 Notes}}\label{md_README_autotoc_md14}
+
+\begin{DoxyItemize}
+\item Each module builds upon the previous one, progressively introducing more advanced C++ concepts
+\item All code adheres to the 42 School norm and coding standards
+\item Extensive testing has been performed to ensure robust implementations
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md15}{}\doxysection{\texorpdfstring{🤝 Contributing}{🤝 Contributing}}\label{md_README_autotoc_md15}
+This is a personal learning project, but feedback and suggestions are always welcome!\hypertarget{md_README_autotoc_md16}{}\doxysection{\texorpdfstring{📄 License}{📄 License}}\label{md_README_autotoc_md16}
+This project is part of the 42 School curriculum. 

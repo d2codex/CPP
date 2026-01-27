@@ -1,0 +1,117 @@
+\doxysection{Zombie Class Reference}
+\hypertarget{classZombie}{}\label{classZombie}\index{Zombie@{Zombie}}
+
+
+Represents a simple zombie with a name and announce behavior.  
+
+
+
+
+{\ttfamily \#include $<$Zombie.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classZombie_a5b74e734b47631aeb00ff12b2568f762}{Zombie}} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classZombie}{Zombie} object with a name. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classZombie_a7d5e6a2470bafba194f9d929576c5e27}{\texorpdfstring{$\sim$}{\string~}\+Zombie}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \doxylink{classZombie}{Zombie} object and print self-\/destruct message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classZombie_a0666210aa4030d680b820d0b17ef138a}{announce}} (void)
+\begin{DoxyCompactList}\small\item\em Make the zombie announce itself. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classZombie_a08e20d5470a17eddfe757812e400f2e9}{Zombie}} ()
+\begin{DoxyCompactList}\small\item\em Default \doxylink{classZombie}{Zombie} constructor. \end{DoxyCompactList}\item 
+\Hypertarget{classZombie_a0666210aa4030d680b820d0b17ef138a}\label{classZombie_a0666210aa4030d680b820d0b17ef138a} 
+void {\bfseries announce} (void)
+\item 
+void \mbox{\hyperlink{classZombie_ae9599c2b2ccb2660b374be10a7d6cd79}{set\+Zombie\+Name}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Set the \doxylink{classZombie}{Zombie}\textquotesingle{}s name. \end{DoxyCompactList}\item 
+\Hypertarget{classZombie_ab609ffc5e456bab5cf08cad47864a70a}\label{classZombie_ab609ffc5e456bab5cf08cad47864a70a} 
+std\+::string {\bfseries get\+Name} (void) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a simple zombie with a name and announce behavior. 
+
+Represents a single zombie with a name.
+
+Can be allocated on the heap with new\+Zombie() or on the stack with random\+Chump(). Destructor prints a self-\/destruct message.
+
+The \doxylink{classZombie}{Zombie} class supports announcing itself and can be used as part of a dynamically allocated horde. In DEBUG mode, construction and destruction are tracked with static counters. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classZombie_a5b74e734b47631aeb00ff12b2568f762}\label{classZombie_a5b74e734b47631aeb00ff12b2568f762} 
+\index{Zombie@{Zombie}!Zombie@{Zombie}}
+\index{Zombie@{Zombie}!Zombie@{Zombie}}
+\doxysubsubsection{\texorpdfstring{Zombie()}{Zombie()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Zombie\+::\+Zombie (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})}
+
+
+
+Construct a new \doxylink{classZombie}{Zombie} object with a name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the zombie \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classZombie_a7d5e6a2470bafba194f9d929576c5e27}\label{classZombie_a7d5e6a2470bafba194f9d929576c5e27} 
+\index{Zombie@{Zombie}!````~Zombie@{\texorpdfstring{$\sim$}{\string~}Zombie}}
+\index{````~Zombie@{\texorpdfstring{$\sim$}{\string~}Zombie}!Zombie@{Zombie}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Zombie()}{\string~Zombie()}}
+{\footnotesize\ttfamily Zombie\+::\texorpdfstring{$\sim$}{\string~}\+Zombie (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destroy the \doxylink{classZombie}{Zombie} object and print self-\/destruct message. 
+
+\doxylink{classZombie}{Zombie} destructor.
+
+In DEBUG mode, increments the destruction counter, prints limited destruction output, and prints a summary once all Zombies are destroyed. \Hypertarget{classZombie_a08e20d5470a17eddfe757812e400f2e9}\label{classZombie_a08e20d5470a17eddfe757812e400f2e9} 
+\index{Zombie@{Zombie}!Zombie@{Zombie}}
+\index{Zombie@{Zombie}!Zombie@{Zombie}}
+\doxysubsubsection{\texorpdfstring{Zombie()}{Zombie()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Zombie\+::\+Zombie (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default \doxylink{classZombie}{Zombie} constructor. 
+
+Initializes a \doxylink{classZombie}{Zombie} with an empty name. In DEBUG mode, increments the construction counter and prints limited construction output. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classZombie_a0666210aa4030d680b820d0b17ef138a}\label{classZombie_a0666210aa4030d680b820d0b17ef138a} 
+\index{Zombie@{Zombie}!announce@{announce}}
+\index{announce@{announce}!Zombie@{Zombie}}
+\doxysubsubsection{\texorpdfstring{announce()}{announce()}}
+{\footnotesize\ttfamily void Zombie\+::announce (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Make the zombie announce itself. 
+
+Announce the \doxylink{classZombie}{Zombie}.
+
+Prints the \doxylink{classZombie}{Zombie}\textquotesingle{}s name followed by its signature message. \Hypertarget{classZombie_ae9599c2b2ccb2660b374be10a7d6cd79}\label{classZombie_ae9599c2b2ccb2660b374be10a7d6cd79} 
+\index{Zombie@{Zombie}!setZombieName@{setZombieName}}
+\index{setZombieName@{setZombieName}!Zombie@{Zombie}}
+\doxysubsubsection{\texorpdfstring{setZombieName()}{setZombieName()}}
+{\footnotesize\ttfamily void Zombie\+::set\+Zombie\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})}
+
+
+
+Set the \doxylink{classZombie}{Zombie}\textquotesingle{}s name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name assigned to the \doxylink{classZombie}{Zombie}. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+cpp01/ex00/includes/Zombie.\+hpp\item 
+cpp01/ex01/includes/Zombie.\+hpp\item 
+cpp01/ex00/src/Zombie.\+cpp\item 
+cpp01/ex01/src/Zombie.\+cpp\end{DoxyCompactItemize}
