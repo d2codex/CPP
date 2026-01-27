@@ -36,9 +36,11 @@ CORE_SRCS = src/Fixed.cpp \
 APP_SRCS = src/main.cpp
 
 TEST_SRCS = tests/main.cpp \
-			tests/testSetGetRawBits.cpp \
+			tests/testAssignmentOp.cpp \
 			tests/testCopyCtor.cpp \
-			tests/testAssignmentOp.cpp
+			tests/testIntConstructor.cpp \
+			tests/testSetGetRawBits.cpp \
+			tests/tests.cpp \
 
 # ============================================================
 # Object directories
