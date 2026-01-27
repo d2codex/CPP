@@ -15,6 +15,17 @@
 #include <cstdlib>
 #include <iostream>
 
+/**
+ * @brief Initialize the logger threshold from command line args.
+ *
+ * If no log level is provided, logging is disabled (NONE).
+ * If a valid log level is provided, the threshold is set.
+ * Otherwise, prints usage and returns false.
+ *
+ * @param argc Number of arguments.
+ * @param argv Argument values.
+ * @return true on success, false on error.
+ */
 static bool initLogger(int argc, char **argv)
 {
 	if (argc == 1)

@@ -18,7 +18,7 @@
 /**
  * @brief Initialize default log threshold.
  *
- * Default threshold allows all messages (DEBUG and above).
+ * Default threshold set to NONE.
  */
 Logger::logLevel Logger::_threshold = Logger::NONE;
 
