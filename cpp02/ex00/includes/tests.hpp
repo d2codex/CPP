@@ -1,7 +1,7 @@
 #ifndef TESTS_HPP
 #define TESTS_HPP
 
-int	testDefaultCtor();
+int	testSetGetRawBits();
 int	testCopyCtor();
 int testAssignmentOp();
 

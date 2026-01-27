@@ -53,7 +53,7 @@ int	testDefaultCtor(void)
 	int passed = 0;
 	int failed = 0;
 
-	std::cout << YEL("===== Running test for DefaultCtor ====\n");
+	std::cout << YEL("==== Running test for SetGetRawBits ===\n");
 	size_t	numTests = sizeof(test) / sizeof(test[0]);
 	for (size_t i = 0; i < numTests; i++)
 	{
@@ -80,7 +80,7 @@ int	testDefaultCtor(void)
 		std::cout << '\n';
 	}
 	
-	std::cout << BLU("========= DefaultCtor summary =========\n")
+	std::cout << BLU("======== SetGetRawbigs summary ========\n")
 			  << GRN("Tests passed: ") << passed << '\n'
 			  << RED("Tests failed: ") << failed << '\n'
 			  << "Total tests: " << numTests << '\n';	
