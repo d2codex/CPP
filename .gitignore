@@ -73,3 +73,6 @@ dkms.conf
 
 ## Backup / temporary files
 *~
+
+## Doxygen
+Doxyfile
