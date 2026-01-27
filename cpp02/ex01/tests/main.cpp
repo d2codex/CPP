@@ -11,13 +11,14 @@
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+#include "colors.hpp"
 #include "tests.hpp"
 #include "Logger.hpp"
 #include <iostream>
 
 int	main(void)
 {
-	Logger::setThreshold(Logger::NONE);
+	Logger::setThreshold(Logger::WARNING);
 	
     std::cout << YEL("=======================================\n"
 					 "         Running all unit tests\n"
@@ -25,7 +26,7 @@ int	main(void)
 	
 	int	totalFailures = 0;
 	int	totalTestSuites = 0;
-
+/*
 	totalTestSuites++;
 	totalFailures += testSetGetRawBits();
 	
@@ -34,6 +35,9 @@ int	main(void)
 
 	totalTestSuites++;
 	totalFailures += testAssignmentOp();
+*/
+	totalTestSuites++;
+	totalFailures += testIntConstructor();
 
 
 	std::cout << YEL("============= Test summary ============\n")

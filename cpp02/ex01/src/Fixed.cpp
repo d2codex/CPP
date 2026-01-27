@@ -12,6 +12,9 @@
 
 #include "Fixed.hpp"
 #include <iostream>
+#include <climits>
+#include <sstream>
+#include <stdexcept>
 #include <cmath>
 
 /**
@@ -34,8 +37,22 @@ Fixed::Fixed() : _fixedPoint(0)
  *
  * @param integer Value to convert to fixed-point.
  */
-Fixed::Fixed(const int integer) : _fixedPoint(integer << _fractionalBits)
+Fixed::Fixed(const int integer)
 {
+	if (integer > (INT_MAX >> _fractionalBits)
+		|| integer < (INT_MIN >> _fractionalBits))
+	{
+		std::ostringstream oss;
+        oss << "Int overflow: allowed range is "
+            << (INT_MIN >> _fractionalBits)
+            << " to "
+            << (INT_MAX >> _fractionalBits);
+		LOG_ERROR(oss.str());
+        throw std::out_of_range("Int overflow");
+	}
+
+	_fixedPoint = integer << _fractionalBits;
+
 	LOG_DEBUG("Int Constructor called");
 	DBG(std::cout << YEL("[DBG] ") << "Int fixedPoint initialized to "
 				  << _fixedPoint << '\n';)
