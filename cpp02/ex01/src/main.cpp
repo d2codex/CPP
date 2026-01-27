@@ -28,16 +28,16 @@ static bool initLogger(int argc, char **argv)
 		Logger::logLevel level = Logger::stringToLevel(argv[1]);
 		if (level == Logger::INVALID)
 		{
-			std::cout << RED("Error: Invalid log level\n");
-			std::cout << CYN("Usage: ./bin/fixed [log level]\n")
-					  << CYN("Log modes: debug info warning error none\n");
+			std::cout << red("Error: Invalid log level\n");
+			std::cout << cyn("Usage: ./bin/fixed [log level]\n")
+					  << cyn("Log modes: debug info warning error none\n");
 			return (false);
 		}
 		Logger::setThreshold(level);
 		return (true);
 	}
-	std::cout << CYN("Usage: ./bin/Fixed [log level]\n");
-	std::cout << CYN("Log modes: debug info warning error none\n");
+	std::cout << cyn("Usage: ./bin/Fixed [log level]\n");
+	std::cout << cyn("Log modes: debug info warning error none\n");
 	return (false);
 }
 

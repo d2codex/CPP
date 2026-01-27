@@ -6,9 +6,8 @@
 
 void printHeader(const std::string& testName)
 {
-    std::cout << YEL_ON()
-			  << "Testing " << testName
-			  << RESET() << '\n';
+    std::cout << YEL << "Testing " << testName
+			  << RESET << '\n';
 }
 
 void printSummary(const std::string& testName, int failed, int total)

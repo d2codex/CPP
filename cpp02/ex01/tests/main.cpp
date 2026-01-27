@@ -45,5 +45,5 @@ int	main(void)
 			  << red("total failures: ") << totalFailures << '\n'
 			  << yel("=======================================\n");
 	if (totalFailures == 0)
-		std::cout << GRN("ALL TESTS PASSED!\n");
+		std::cout << grn("ALL TESTS PASSED!\n");
 }

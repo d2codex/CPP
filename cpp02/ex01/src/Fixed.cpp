@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+#include "colors.hpp"
 #include <iostream>
 #include <climits>
 #include <sstream>

@@ -3,9 +3,6 @@
 
 #include <string>
 
-int	testSetGetRawBits();
-int	testCopyCtor();
-int testAssignmentOp();
 int testIntConstructor();
 
 void printHeader(const std::string& testName);

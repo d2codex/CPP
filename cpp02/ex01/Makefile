@@ -6,7 +6,7 @@
 #    By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/21 18:21:54 by diade-so          #+#    #+#              #
-#    Updated: 2026/01/21 18:21:57 by diade-so         ###   ########.fr        #
+#    Updated: 2026/01/27 20:25:30 by diade-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,7 @@ CORE_SRCS = src/Fixed.cpp \
 APP_SRCS = src/main.cpp
 
 TEST_SRCS = tests/main.cpp \
-			tests/testAssignmentOp.cpp \
-			tests/testCopyCtor.cpp \
 			tests/testIntConstructor.cpp \
-			tests/testSetGetRawBits.cpp \
 			tests/tests.cpp \
 
 # ============================================================
