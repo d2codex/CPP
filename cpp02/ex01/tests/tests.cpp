@@ -12,14 +12,16 @@ void printHeader(const std::string& testName)
 
 void printSummary(const std::string& testName, int failed, int total)
 {
-    std::cout << blu("=============== Summary ===============\n")
+    std::cout << blu("Summary\n")
 			  << "Test: " << testName << '\n'
               << red("Tests failed: ") << failed << '\n'
               << "Total tests: " << total << '\n';
 
     if (failed == 0)
-        std::cout << grn("All tests passed!\n")
-				  << blu("=============END UNIT TEST=============\n");
+	{
+        std::cout << grn("All tests passed!\n");
+	}
+	std::cout << yel("=======================================\n\n");
 }
 
 bool assertEqualInt(const std::string& name, int expected, int actual)
@@ -34,3 +36,4 @@ bool assertEqualInt(const std::string& name, int expected, int actual)
 			  << "actual  : " << actual << '\n';
 	return (false);
 }
+

@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:31:04 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/21 18:31:06 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/27 22:29:49 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ int main(int argc, char **argv)
 		std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 		std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 
-		Fixed max(INT_MAX);
-		Fixed min(INT_MIN);
+//		Fixed max(INT_MAX);
+//		Fixed min(INT_MIN);
+//		Fixed floatMax(static_cast<float>(INT_MAX));
+		Fixed floatMin(static_cast<float>(INT_MIN));
 	}
 	catch (std::exception& e)
 	{

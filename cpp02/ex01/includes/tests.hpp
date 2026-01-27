@@ -3,7 +3,8 @@
 
 #include <string>
 
-int testIntConstructor();
+int testIntConstructor(void);
+int testFloatConstructor(void);
 
 void printHeader(const std::string& testName);
 void printSummary(const std::string& testName, int failed, int total);
