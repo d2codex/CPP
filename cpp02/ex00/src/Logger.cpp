@@ -20,7 +20,7 @@
  *
  * Default threshold allows all messages (DEBUG and above).
  */
-Logger::logLevel Logger::_threshold = Logger::DEBUG;
+Logger::logLevel Logger::_threshold = Logger::NONE;
 
 
 /**
