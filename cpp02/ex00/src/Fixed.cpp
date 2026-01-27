@@ -20,10 +20,9 @@
  */
 Fixed::Fixed() : _fixedPoint(0)
 {
-	LOG_INFO("Default Constructor called");
-   // DBG(std::cout << YEL "[DBG] " RESET
-   DBG(std::cout << YEL("[DBG] ") << "Default fixedPoint initialized to "
-				 << _fixedPoint << '\n';)
+	LOG_DEBUG("Default Constructor called");
+	DBG(std::cout << YEL("[DBG] ") << "Default fixedPoint initialized to "
+				  << _fixedPoint << '\n';)
 }
 
 /**
@@ -35,7 +34,7 @@ Fixed::Fixed() : _fixedPoint(0)
  */
 Fixed::Fixed(const Fixed& other) //: _fixedPoint(other._fixedPoint)
 {
-	LOG_INFO("Copy constructor called");
+	LOG_DEBUG("Copy constructor called");
 	DBG(std::cout << YEL("[DBG] ") << "Copy fixedPoint initialized to "
 				  << other._fixedPoint << '\n';)
 	
@@ -54,7 +53,7 @@ Fixed& Fixed::operator=(const Fixed& other)
 {
 	if (this != &other)
 	{
-		LOG_INFO("Copy assignment operator called");
+		LOG_DEBUG("Copy assignment operator called");
 		_fixedPoint = other.getRawBits();
 	}
 	else
@@ -65,11 +64,11 @@ Fixed& Fixed::operator=(const Fixed& other)
 /**
  * @brief Destructor.
  *
- * Prints a log message if in INFO log mode when the object is destroyed.
+ * Prints a log message if in DEBUG log mode when the object is destroyed.
  */
 Fixed::~Fixed()
 {
-	LOG_INFO("Destructor Called");
+	LOG_DEBUG("Destructor Called");
 }
 
 /**
@@ -79,7 +78,7 @@ Fixed::~Fixed()
  */
 int	Fixed::getRawBits(void) const
 {
-	LOG_INFO("getRawBits member function called");
+	LOG_DEBUG("getRawBits member function called");
 	DBG(std::cout << YEL("[DBG] ") << "Raw bits: " << _fixedPoint << '\n';)
 
 	return (_fixedPoint);

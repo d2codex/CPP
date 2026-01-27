@@ -41,7 +41,7 @@ void Logger::setThreshold(logLevel level)
  * @param level   The message log level.
  */
 void	Logger::writeLog(const std::string& prefix,
-							 const std::string& message, logLevel level)
+						 const std::string& message, logLevel level)
 {
 	if (level >= _threshold)
 		std::cout << prefix << message << std::endl;

@@ -15,21 +15,35 @@
 #include <cstdlib>
 #include <iostream>
 
+static bool initLogger(int argc, char **argv)
+{
+	if (argc == 1)
+	{
+		Logger::setThreshold(Logger::NONE);
+		return (true);
+	}
+	if (argc == 2)
+	{
+		Logger::logLevel level = Logger::stringToLevel(argv[1]);
+		if (level == Logger::INVALID)
+		{
+			std::cout << RED("Error: Invalid log level\n");
+			std::cout << CYN("Usage: ./bin/fixed [log level]\n")
+					  << CYN("Log modes: debug info warning error none\n");
+			return (false);
+		}
+		Logger::setThreshold(level);
+		return (true);
+	}
+	std::cout << CYN("Usage: ./bin/Fixed [log level]\n");
+	std::cout << CYN("Log modes: debug info warning error none\n");
+	return (false);
+}
+
 int main(int argc, char **argv)
 {
-	if (argc != 2)
-	{
-		std::cout << CYN("Usage: ./bin/Fixed <log mode>\n")
-				  << "Log modes: <debug> <info> <warning> <error> <none>\n";
+	if (!initLogger(argc, argv))
 		return (1);
-	}
-	Logger::logLevel level = Logger::stringToLevel(argv[1]);
-	if (level == Logger::INVALID)
-	{
-		std::cout << RED("Error: Invalid log level\n");
-		return (1);
-	}
-	Logger::setThreshold(level);
 
 	Fixed a;
 	Fixed b( a );
@@ -40,4 +54,6 @@ int main(int argc, char **argv)
 	std::cout << a.getRawBits() << std::endl;
 	std::cout << b.getRawBits() << std::endl;
 	std::cout << c.getRawBits() << std::endl;
+
+	b = b;
 }

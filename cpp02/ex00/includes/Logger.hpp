@@ -51,6 +51,7 @@ public:
 
 	/* Set the current log threshold */
 	static void	setThreshold(logLevel level);
+
 	/* Log functions */
 	static void debug(const std::string& message);
 	static void info(const std::string& message);
