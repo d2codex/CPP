@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:30:53 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/21 18:30:55 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/27 22:56:46 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ Fixed::Fixed(const int integer)
 		|| integer < (INT_MIN >> _fractionalBits))
 	{
 		std::ostringstream oss;
-        oss << "Int overflow: allowed range is "
+        oss << RED "Int overflow: allowed range is "
             << (INT_MIN >> _fractionalBits)
             << " to "
-            << (INT_MAX >> _fractionalBits);
+            << (INT_MAX >> _fractionalBits)
+			<< RESET;
 		LOG_ERROR(oss.str());
         throw std::out_of_range("Int overflow");
 	}
@@ -71,8 +72,21 @@ Fixed::Fixed(const int integer)
  * @param floatPoint Value to convert to fixed-point.
  */
 Fixed::Fixed(const float floatPoint)
-	: _fixedPoint(roundf(floatPoint * (1 << _fractionalBits)))
 {
+	const float maxAllowed = (float)INT_MAX / (1 << _fractionalBits);
+	const float minAllowed = (float)INT_MIN / (1 << _fractionalBits);
+	if (floatPoint > maxAllowed || floatPoint < minAllowed)
+	{
+		std::ostringstream oss;
+		oss << RED "Int overflow: allowed range is "
+			<< maxAllowed << " to " << minAllowed
+			<< RESET;
+		LOG_ERROR(oss.str());
+		throw std::out_of_range("Int overflow");
+	}
+
+	_fixedPoint = roundf(floatPoint * (1 << _fractionalBits));
+
 	LOG_DEBUG("Float Constructor called");
 	DBG(std::cout << yel("[DBG] ") << "Float fixedPoint initialized to "
 				  << _fixedPoint << '\n';)
