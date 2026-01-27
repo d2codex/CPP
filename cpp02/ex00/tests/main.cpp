@@ -27,7 +27,7 @@ int	main(void)
 	int	totalTestSuites = 0;
 
 	totalTestSuites++;
-	totalFailures += testDefaultCtor();
+	totalFailures += testSetGetRawBits();
 	
 	totalTestSuites++;
 	totalFailures += testCopyCtor();

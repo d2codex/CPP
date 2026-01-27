@@ -40,7 +40,7 @@ struct FixedRawTests
  *
  * @return Number of failed tests (0 if all tests pass).
  */
-int	testDefaultCtor(void)
+int	testSetGetRawBits(void)
 {
 	FixedRawTests test[] = {
 		{"Default raw bits", 0},
@@ -80,7 +80,7 @@ int	testDefaultCtor(void)
 		std::cout << '\n';
 	}
 	
-	std::cout << BLU("======== SetGetRawbigs summary ========\n")
+	std::cout << BLU("======== SetGetRawBits summary ========\n")
 			  << GRN("Tests passed: ") << passed << '\n'
 			  << RED("Tests failed: ") << failed << '\n'
 			  << "Total tests: " << numTests << '\n';	

@@ -7,9 +7,9 @@
 /**
  * @brief Initialize default log threshold.
  *
- * Default threshold allows all messages (DEBUG and above).
+ * Default threshold set to NONE.
  */
-Logger::logLevel Logger::_threshold = Logger::DEBUG;
+Logger::logLevel Logger::_threshold = Logger::NONE;
 
 
 /**
@@ -30,7 +30,7 @@ void Logger::setThreshold(logLevel level)
  * @param level   The message log level.
  */
 void	Logger::writeLog(const std::string& prefix,
-							 const std::string& message, logLevel level)
+						 const std::string& message, logLevel level)
 {
 	if (level >= _threshold)
 		std::cout << prefix << message << std::endl;
@@ -43,7 +43,6 @@ void	Logger::debug(const std::string& message)
 {
 	writeLog(YEL("[DEBUG] "), message, DEBUG);
 }
-
 
 /**
  * @brief Log an INFO message.

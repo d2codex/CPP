@@ -40,7 +40,7 @@ struct FixedRawTests
  *
  * @return Number of failed tests (0 if all tests pass).
  */
-int	testDefaultCtor(void)
+int	testSetGetRawBits(void)
 {
 	FixedRawTests test[] = {
 		{"Default raw bits", 0},
@@ -53,7 +53,7 @@ int	testDefaultCtor(void)
 	int passed = 0;
 	int failed = 0;
 
-	std::cout << YEL("===== Running test for DefaultCtor ====\n");
+	std::cout << YEL("==== Running test for SetGetRawBits ===\n");
 	size_t	numTests = sizeof(test) / sizeof(test[0]);
 	for (size_t i = 0; i < numTests; i++)
 	{
@@ -80,7 +80,7 @@ int	testDefaultCtor(void)
 		std::cout << '\n';
 	}
 	
-	std::cout << BLU("========= DefaultCtor summary =========\n")
+	std::cout << BLU("======== SetGetRawBits summary ========\n")
 			  << GRN("Tests passed: ") << passed << '\n'
 			  << RED("Tests failed: ") << failed << '\n'
 			  << "Total tests: " << numTests << '\n';	

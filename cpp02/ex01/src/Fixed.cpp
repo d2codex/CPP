@@ -21,7 +21,7 @@
  */
 Fixed::Fixed() : _fixedPoint(0)
 {
-	LOG_INFO("Default Constructor called");
+	LOG_DEBUG("Default Constructor called");
 	DBG(std::cout << YEL("[DBG] ") << "Default fixedPoint initialized to "
 				  << _fixedPoint << '\n';)
 }
@@ -36,7 +36,7 @@ Fixed::Fixed() : _fixedPoint(0)
  */
 Fixed::Fixed(const int integer) : _fixedPoint(integer << _fractionalBits)
 {
-	LOG_INFO("Int Constructor called");
+	LOG_DEBUG("Int Constructor called");
 	DBG(std::cout << YEL("[DBG] ") << "Int fixedPoint initialized to "
 				  << _fixedPoint << '\n';)
 }
@@ -55,7 +55,7 @@ Fixed::Fixed(const int integer) : _fixedPoint(integer << _fractionalBits)
 Fixed::Fixed(const float floatPoint)
 	: _fixedPoint(roundf(floatPoint * (1 << _fractionalBits)))
 {
-	LOG_INFO("Float Constructor called");
+	LOG_DEBUG("Float Constructor called");
 	DBG(std::cout << YEL("[DBG] ") << "Float fixedPoint initialized to "
 				  << _fixedPoint << '\n';)
 }
@@ -69,7 +69,7 @@ Fixed::Fixed(const float floatPoint)
  */
 Fixed::Fixed(const Fixed& other) //: _fixedPoint(other._fixedPoint)
 {
-	LOG_INFO("Copy constructor called");
+	LOG_DEBUG("Copy constructor called");
 	DBG(std::cout << YEL("[DBG] ") << "Copy fixedPoint initialized to "
 				  << other._fixedPoint << '\n';)
 	
@@ -88,7 +88,7 @@ Fixed& Fixed::operator=(const Fixed& other)
 {
 	if (this != &other)
 	{
-		LOG_INFO("Copy assignment operator called");
+		LOG_DEBUG("Copy assignment operator called");
 		_fixedPoint = other.getRawBits();
 	}
 	else
@@ -99,11 +99,11 @@ Fixed& Fixed::operator=(const Fixed& other)
 /**
  * @brief Destructor.
  *
- * Prints a log message if in INFO log mode when the object is destroyed.
+ * Prints a log message if in DEBUG log mode when the object is destroyed.
  */
 Fixed::~Fixed()
 {
-	LOG_INFO("Destructor Called");
+	LOG_DEBUG("Destructor Called");
 }
 
 /**
