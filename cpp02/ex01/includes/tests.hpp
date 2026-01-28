@@ -6,6 +6,7 @@
 int testIntConstructor(void);
 int testFloatConstructor(void);
 int	testToFloat(void);
+int	testToInt(void);
 
 void printHeader(const std::string& testName);
 void printSummary(int failed, int total);

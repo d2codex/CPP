@@ -8,71 +8,93 @@ int	testToFloat(void)
 {
 	printHeader("To Float");
 	
-	int	failed = 0;
-	int total = 0;
-
-	// Case 1: normal integer
-	Fixed a(10);
-	total++;
-	if (!assertEqualFloat("normal",
-				static_cast<float>(10),
-				a.toFloat()))
-	{failed++;}
-
-	// Case 2: positive float
-	Fixed b(42.42f);
-	total++;
-	if (!assertEqualFloat("positive float",
-				static_cast<float>(42.42f),
-				b.toFloat()))
-	{failed++;}
-
-	// Case 3: negative float
-	Fixed c(-10.5f);
-	total++;
-	if (!assertEqualFloat("negative float",
-				static_cast<float>(-10.5f),
-				c.toFloat()))
-	{failed++;}
-
-	// Case 4: zero
-	Fixed d(0);
-	total++;
-	if (!assertEqualFloat("zero",
-				static_cast<float>(0),
-				d.toFloat()))
-	{failed++;}
-
-	// Case 5: smallest exact fraction (1 / 256 with 8 fractional bits)
-	Fixed e(1.0f / 256);
-	total++;
-	if (!assertEqualFloat("small fraction",
-				static_cast<float>(1.0f / 256),
-				e.toFloat()))
-	{failed++;}
-
+	int			failed = 0;
+	int			total = 0;
 	int			fractionalBits = 8;
-	const int scale = 1 << fractionalBits;
+	const int	scale = 1 << fractionalBits;
 	const int	safetyMargin = 1;
 	const int	approxMax = (INT_MAX / scale) - safetyMargin;
 	const int	approxMin = (INT_MIN / scale) + safetyMargin;
 
-	// Case 6: approximate max
-	Fixed f(approxMax);
-	total++;
-	if (!assertEqualFloat("approximate max",
-				static_cast<float>(approxMax),
-				f.toFloat()))
-	{failed++;}
+	/* ============================= */
+	/*   INT CONSTRUCTOR TESTS       */
+	/* ============================= */
 
-	// Case 7: min allowed
-	Fixed g(approxMin);
-	total++;
-	if (!assertEqualFloat("approximate min",
-				static_cast<float>(approxMin),
-				g.toFloat()))
-	{failed++;}
+	// Case 1: normal integer
+	{
+		Fixed a(10);
+		total++;
+		if (!assertEqualFloat("int: normal", 10.0f, a.toFloat()))
+			{ failed++; }
+	}
 
+	// Case 2: negative integer
+	{
+		Fixed a(-10);
+		total++;
+		if (!assertEqualFloat("int: negative", -10.0f, a.toFloat()))
+			{ failed++; }
+	}
+
+	// Case 3: zero
+	{
+		Fixed a(0);
+		total++;
+		if (!assertEqualFloat("int: zero", 0.0f, a.toFloat()))
+			{ failed++; }
+	}
+
+	// Case 4: negative zero
+	{
+		Fixed a(-0);
+		total++;
+		if (!assertEqualFloat("int: negative zero", 0.0f, a.toFloat()))
+			{ failed++; }
+	}
+
+	/* ============================= */
+	/*   FLOAT CONSTRUCTOR TESTS     */
+	/* ============================= */
+
+	// Case 5: positive float
+	{
+		Fixed b(42.42f);
+		total++;
+		if (!assertEqualFloat("float: positive", 42.42f, b.toFloat()))
+			{ failed++; }
+	}
+
+	// Case 6: negative float
+	{
+		Fixed b(-10.5f);
+		total++;
+		if (!assertEqualFloat("float: negative", -10.5f, b.toFloat()))
+			{ failed++; }
+	}
+
+	// Case 7: smallest exact fraction (1 / 256)
+	{
+		Fixed b(1.0f / 256);
+		total++;
+		if (!assertEqualFloat("float: small fraction", 1.0f / 256, b.toFloat()))
+			{ failed++; }
+	}
+
+	// Case 8: approximate max
+	{
+		Fixed b(static_cast<float>(approxMax));
+		total++;
+		if (!assertEqualFloat("float: approx max", static_cast<float>(approxMax), b.toFloat()))
+			{ failed++; }
+	}
+
+	// Case 9: approximate min
+	{
+		Fixed b(static_cast<float>(approxMin));
+		total++;
+		if (!assertEqualFloat("float: approx min", static_cast<float>(approxMin), b.toFloat()))
+			{ failed++; }
+	}
 	printSummary(failed, total);
 	return (failed);
 }

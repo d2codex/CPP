@@ -45,6 +45,8 @@ int	main(void)
 	totalTestSuites++;
 	totalFailures += testToFloat();
 
+	totalTestSuites++;
+	totalFailures += testToInt();
 
 	std::cout << blu("Test Suites Summary\n")
 			  << wht("Total test suits: ") << totalTestSuites << '\n'
