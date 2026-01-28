@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:30:53 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/27 22:56:46 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/28 16:55:08 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <sstream>
 #include <stdexcept>
 #include <cmath>
-#include <iomanip>
 
 /**
  * @brief Default constructor.
@@ -34,10 +33,11 @@ Fixed::Fixed() : _fixedPoint(0)
 /**
  * @brief Constructs a Fixed object from an integer.
  * 
- * Converts the integer to fixed-point by shifting it left by the fractional
- * bit count.
+ * Converts the integer to fixed-point by shifting left by `fractionalBits`.
+ * Checks for overflow before conversion.
  *
- * @param integer Value to convert to fixed-point.
+ * @param integer Value to convert.
+ * @throws std::out_of_range if the integer is outside the allowed range.
  */
 Fixed::Fixed(const int integer)
 {
@@ -65,12 +65,18 @@ Fixed::Fixed(const int integer)
  * @brief Constructs a Fixed object from a float.
  * 
  * Converts the float to fixed-point by multiplying by 2^fractionalBits and
- * rounding to the nearest integer.
+ * rounding to the nearest integer. Performs an overflow check to ensure the
+ * resulting fixed-point value fits within the limits of an int.
  *
  * @note Bit shifting cannot be done directly on a float, so the float must
  *       be multiplied first, then rounded to an integer.
+ * @note The constructor uses a safety margin to compute approximate maximum
+ *       and minimum float values that can safely be converted without 
+ *       overflowing the underlying integer storage.
  *
  * @param floatPoint Value to convert to fixed-point.
+ * @throws std::out_of_range if the float is outside the safe range and would
+ *         cause an integer overflow after conversion.
  */
 Fixed::Fixed(const float floatPoint)
 {

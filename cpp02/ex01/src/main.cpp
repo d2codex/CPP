@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:31:04 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/27 22:29:49 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/28 16:47:24 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 #include <iostream>
 #include <climits>
 
+/**
+ * @brief Initialize the logger threshold from command line args.
+ *
+ * If no log level is provided, logging is disabled (NONE).
+ * If a valid log level is provided, the threshold is set.
+ * Otherwise, prints usage and returns false.
+ *
+ * @param argc Number of arguments.
+ * @param argv Argument values.
+ * @return true on success, false on error.
+ */
 static bool initLogger(int argc, char **argv)
 {
 	if (argc == 1)

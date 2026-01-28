@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   testIntConstructor.cpp                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/28 16:55:59 by diade-so          #+#    #+#             */
+/*   Updated: 2026/01/28 16:56:15 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "tests.hpp"
 #include "colors.hpp"
 #include "Fixed.hpp"
 #include <iostream>
 #include <string>
 #include <climits>
-//#include <cmath>
 
 int testIntConstructor(void)
 {
