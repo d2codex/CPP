@@ -17,6 +17,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <cmath>
+#include <iomanip>
 
 /**
  * @brief Default constructor.
@@ -73,19 +74,23 @@ Fixed::Fixed(const int integer)
  */
 Fixed::Fixed(const float floatPoint)
 {
-	const float maxAllowed = (float)INT_MAX / (1 << _fractionalBits);
-	const float minAllowed = (float)INT_MIN / (1 << _fractionalBits);
-	if (floatPoint > maxAllowed || floatPoint < minAllowed)
+	const int scale = 1 << _fractionalBits;
+	const long tmp = roundf(floatPoint * scale);
+	
+	if (tmp > INT_MAX || tmp < INT_MIN)
 	{
+		const int safetyMargin = 1;
+        const int approxMax = (INT_MAX / scale) - safetyMargin;
+        const int approxMin = (INT_MIN / scale) + safetyMargin;
+
 		std::ostringstream oss;
-		oss << RED "Int overflow: allowed range is "
-			<< maxAllowed << " to " << minAllowed
-			<< RESET;
+		oss << RED "Int overflow: Approximate allowed range is "
+			<< approxMin << " to " << approxMax;
 		LOG_ERROR(oss.str());
 		throw std::out_of_range("Int overflow");
 	}
 
-	_fixedPoint = roundf(floatPoint * (1 << _fractionalBits));
+	_fixedPoint = static_cast<int>(tmp);
 
 	LOG_DEBUG("Float Constructor called");
 	DBG(std::cout << yel("[DBG] ") << "Float fixedPoint initialized to "
