@@ -6,12 +6,11 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:22:24 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/21 18:22:26 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/28 16:34:32 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LOGGER_HPP
-#define LOGGER_HPP
+#pragma once
 
 #include <string>
 #include <iostream>
@@ -70,5 +69,3 @@ private:
 						 const std::string& message,
 						 logLevel level);
 };
-
-#endif

@@ -6,12 +6,11 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:22:04 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/21 18:22:07 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/28 16:33:55 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-#define FIXED_HPP
+#pragma once
 
 #include "Logger.hpp"
 
@@ -43,5 +42,3 @@ private:
 };
 
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
-
-#endif
