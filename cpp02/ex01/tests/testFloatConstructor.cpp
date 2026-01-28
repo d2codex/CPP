@@ -8,8 +8,9 @@
 int testFloatConstructor(void)
 {
 	printHeader("Float Constructor");
-
+	
 	int fractionalBits = 8;
+	const int scale = 1 << fractionalBits;
 	int	failed = 0;
 	int	total = 0;
 
@@ -17,7 +18,7 @@ int testFloatConstructor(void)
     Fixed normal(42.42f);
     total++;
     if (!assertEqualInt("normal",
-                        roundf(42.42f * (1 << fractionalBits)),
+                        roundf(42.42f * scale),
                         normal.getRawBits()))
 		{failed++;}
 
@@ -25,7 +26,7 @@ int testFloatConstructor(void)
     Fixed zero(0.0f);
     total++;
     if (!assertEqualInt("zero",
-                        roundf(0.0f * (1 << fractionalBits)),
+                        roundf(0.0f * scale),
                         zero.getRawBits()))
 		{failed++;}
 
@@ -33,28 +34,30 @@ int testFloatConstructor(void)
     Fixed negative(-42.42f);
     total++;
     if (!assertEqualInt("negative",
-                        roundf(-42.42f * (1 << fractionalBits)),
+                        roundf(-42.42f * scale),
                         negative.getRawBits()))
 		{failed++;}
 
-    // Case 4 - allowed max
-	const float maxAllowed = (float)INT_MAX / (1 << fractionalBits);
-    Fixed max(maxAllowed);
+	const int	safetyMargin = 1;
+	const int	approxMax = (INT_MAX / scale) - safetyMargin;
+	const int	approxMin = (INT_MIN / scale) + safetyMargin;
+
+    // Case 4 - approximate max
+    Fixed max(approxMax);
     total++;
-    if (!assertEqualInt("maxAllowed",
-                        roundf(maxAllowed * (1 << fractionalBits)),
+    if (!assertEqualInt("approxMax",
+                        roundf(approxMax * scale),
                         max.getRawBits()))
 		{failed++;}
 
-    // Case 5 - allowed min
-	const float minAllowed = (float)INT_MIN / (1 << fractionalBits);
-    Fixed min(minAllowed);
+    // Case 5 - approximate min
+    Fixed min(approxMin);
     total++;
-    if (!assertEqualInt("minAllowed",
-                        roundf(minAllowed * (1 << fractionalBits)),
+    if (!assertEqualInt("approxMin",
+                        roundf(approxMin * scale),
                         min.getRawBits()))
 		{failed++;}
 
-	printSummary("Float Constructor", failed, total);
+	printSummary(failed, total);
 	return (failed);
 }

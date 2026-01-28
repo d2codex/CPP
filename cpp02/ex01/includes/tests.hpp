@@ -5,10 +5,12 @@
 
 int testIntConstructor(void);
 int testFloatConstructor(void);
+int	testToFloat(void);
 
 void printHeader(const std::string& testName);
-void printSummary(const std::string& testName, int failed, int total);
+void printSummary(int failed, int total);
 
 bool assertEqualInt(const std::string& name, int expected, int actual);
-
+bool assertEqualFloat(const std::string& testName,
+					   float expected, float actual);
 #endif

@@ -42,9 +42,11 @@ int	main(void)
 	totalTestSuites++;
 	totalFailures += testFloatConstructor();
 
+	totalTestSuites++;
+	totalFailures += testToFloat();
 
 
-	std::cout << yel("============= Test summary ============\n")
+	std::cout << blu("Test Suites Summary\n")
 			  << wht("Total test suits: ") << totalTestSuites << '\n'
 			  << red("total failures: ") << totalFailures << '\n'
 			  << yel("=======================================\n");

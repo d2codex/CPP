@@ -38,6 +38,7 @@ APP_SRCS = src/main.cpp
 TEST_SRCS = tests/main.cpp \
 			tests/testFloatConstructor.cpp \
 			tests/testIntConstructor.cpp \
+			tests/testToFloat.cpp \
 			tests/tests.cpp \
 
 # ============================================================

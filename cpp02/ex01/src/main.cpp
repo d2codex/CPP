@@ -64,10 +64,10 @@ int main(int argc, char **argv)
 		std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 		std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 
+//		Fixed allowedMax(8388607);
 //		Fixed max(INT_MAX);
+//		Fixed allowedMin(-8388608);
 //		Fixed min(INT_MIN);
-//		Fixed floatMax(static_cast<float>(INT_MAX));
-		Fixed floatMin(static_cast<float>(INT_MIN));
 	}
 	catch (std::exception& e)
 	{

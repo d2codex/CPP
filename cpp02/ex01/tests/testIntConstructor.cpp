@@ -46,6 +46,6 @@ int testIntConstructor(void)
     if (!assertEqualInt("minAllowed", minAllowed << fractionalBits, e.getRawBits()))
 		{failed++;}
 
-	printSummary("Int Constructor", failed, total);
+	printSummary(failed, total);
 	return (failed);
 }

@@ -10,10 +10,9 @@ void printHeader(const std::string& testName)
 			  << RESET << '\n';
 }
 
-void printSummary(const std::string& testName, int failed, int total)
+void printSummary(int failed, int total)
 {
-    std::cout << blu("Summary\n")
-			  << "Test: " << testName << '\n'
+    std::cout << blu("Unit Test Summary\n")
               << red("Tests failed: ") << failed << '\n'
               << "Total tests: " << total << '\n';
 
@@ -21,7 +20,7 @@ void printSummary(const std::string& testName, int failed, int total)
 	{
         std::cout << grn("All tests passed!\n");
 	}
-	std::cout << yel("=======================================\n\n");
+	std::cout << yel("=======================================\n");
 }
 
 bool assertEqualInt(const std::string& name, int expected, int actual)
@@ -37,3 +36,17 @@ bool assertEqualInt(const std::string& name, int expected, int actual)
 	return (false);
 }
 
+bool assertEqualFloat(const std::string& name,
+					  float expected, float actual)
+{
+	float epsilon = 1.0f / 256.0f;
+	if (std::fabs(expected - actual) <= epsilon)
+	{
+		std::cout << grn("PASS ") << name << '\n';
+		return (true);
+	}
+	std::cout << red("FAIL ") << name << '\n'
+			  << "expected: " << expected << '\n'
+			  << "actual  : " << actual << '\n';
+	return (false);
+}
