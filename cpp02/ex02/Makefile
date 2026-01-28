@@ -6,7 +6,7 @@
 #    By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/21 18:21:54 by diade-so          #+#    #+#              #
-#    Updated: 2026/01/27 23:12:33 by diade-so         ###   ########.fr        #
+#    Updated: 2026/01/28 22:29:58 by diade-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,13 @@ CORE_SRCS = src/Fixed.cpp \
 APP_SRCS = src/main.cpp
 
 TEST_SRCS = tests/main.cpp \
+			tests/testAddition.cpp \
+			tests/testDivision.cpp \
 			tests/testFloatConstructor.cpp \
 			tests/testIntConstructor.cpp \
+			tests/testMultiplication.cpp \
 			tests/testOutputOperator.cpp \
+			tests/testSubtraction.cpp \
 			tests/testToFloat.cpp \
 			tests/testToInt.cpp \
 			tests/tests.cpp \

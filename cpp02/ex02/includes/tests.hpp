@@ -7,6 +7,10 @@ int testFloatConstructor(void);
 int	testToFloat(void);
 int	testToInt(void);
 int testOutputOperator(void);
+int	testAddition(void);
+int testSubtraction(void);
+int	testMultiplication(void);
+int testDivision(void);
 
 void printHeader(const std::string& testName);
 void printSummary(int failed, int total);

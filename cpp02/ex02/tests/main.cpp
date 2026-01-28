@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 23:01:11 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/27 23:11:36 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/28 22:29:31 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(void)
 
 	totalTestSuites++;
 	totalFailures += testAssignmentOp();
-*/
+
 	totalTestSuites++;
 	totalFailures += testIntConstructor();
 
@@ -50,6 +50,18 @@ int	main(void)
 
 	totalTestSuites++;
 	totalFailures += testOutputOperator();
+*/
+	totalTestSuites++;
+	totalFailures += testAddition();
+
+	totalTestSuites++;
+	totalFailures += testSubtraction();
+
+	totalTestSuites++;
+	totalFailures += testMultiplication();
+
+	totalTestSuites++;
+	totalFailures += testDivision();
 
 	std::cout << blu("Test Suites Summary\n")
 			  << wht("Total test suits: ") << totalTestSuites << '\n'
