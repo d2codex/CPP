@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:22:04 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/28 16:33:55 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/28 21:27:34 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,30 @@ public:
 	Fixed& operator=(const Fixed& other);
 	~Fixed();
 
+	// getter / setter
 	int		getRawBits(void) const;
 	void	setRawBits(int const raw);
 
+	// conversion
 	float	toFloat(void) const;
 	int		toInt(void) const;
 
-
+	// arithmetic
+	Fixed operator+(const Fixed& rhs) const;
+    Fixed operator-(const Fixed& rhs) const;
+    Fixed operator*(const Fixed& rhs) const;
+    Fixed operator/(const Fixed& rhs) const;
+/*	
+	// increment / decrement
+	Fixed& operator++();    // prefix ++
+    Fixed operator++(int);  // postfix ++
+    Fixed& operator--();    // prefix --
+    Fixed operator--(int);  // postfix --
+*/
 private:
 	int					_fixedPoint;
 	static const int	_fractionalBits = 8;
 };
 
+// I/O Operators
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed);

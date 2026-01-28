@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:30:53 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/28 16:55:08 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/28 21:51:45 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,3 +216,76 @@ std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
 	os << fixed.toFloat();
 	return (os);
 }
+
+// arithmetic Operators
+
+Fixed Fixed::operator+(const Fixed& rhs) const
+{
+	long tmp = static_cast<long>(this->getRawBits())
+			 + static_cast<long>(rhs.getRawBits());
+
+	if (tmp > INT_MAX || tmp < INT_MIN)
+	{
+		LOG_ERROR("Fixed-point addition overflow");
+		throw std::overflow_error("addition overflow");
+	}
+
+	Fixed result;
+	result.setRawBits(static_cast<int>(tmp));
+	return (result);
+}
+
+Fixed Fixed::operator-(const Fixed& rhs) const
+{
+	long tmp = static_cast<long>(this->getRawBits())
+			 - static_cast<long>(rhs.getRawBits());
+
+	if (tmp > INT_MAX || tmp < INT_MIN)
+	{
+		LOG_ERROR("Fixed-point subtraction overflow");
+		throw std::overflow_error("subtraction overflow");
+	}
+
+	Fixed result;
+	result.setRawBits(tmp);
+	return (result);
+}
+
+Fixed Fixed::operator*(const Fixed& rhs) const
+{
+	long long tmp = static_cast<long long>(this->getRawBits())
+				  * static_cast<long long>(rhs.getRawBits());
+	
+	tmp = tmp >> _fractionalBits;
+
+	if (tmp > INT_MAX || tmp < INT_MIN)
+	{
+		LOG_ERROR(red("Fixed-point multiplication overflow"));
+		throw std::overflow_error("Multiplication overflow");
+	}
+
+	Fixed result;
+	result.setRawBits(static_cast<int>(tmp));
+	return (result);
+}
+
+Fixed Fixed::operator/(const Fixed& rhs) const
+{
+	if (rhs.getRawBits() == 0)
+	{
+		LOG_ERROR(red("Cannot divide by 0"));
+		throw std::domain_error("divison by 0");
+	}
+	long long tmp = static_cast<long long>(this->getRawBits()) << _fractionalBits;
+	tmp /= static_cast<long long>(rhs.getRawBits());
+
+	if (tmp > INT_MAX || tmp < INT_MIN)
+	{
+		LOG_ERROR(red("Division overflow"));
+		throw std::overflow_error("division overflow");
+	}
+	Fixed result;
+	result.setRawBits(tmp);
+	return (result);
+}
+
