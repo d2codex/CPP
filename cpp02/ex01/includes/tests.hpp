@@ -7,11 +7,12 @@ int testIntConstructor(void);
 int testFloatConstructor(void);
 int	testToFloat(void);
 int	testToInt(void);
+int testOutputOperator(void);
 
 void printHeader(const std::string& testName);
 void printSummary(int failed, int total);
 
 bool assertEqualInt(const std::string& name, int expected, int actual);
 bool assertEqualFloat(const std::string& testName,
-					   float expected, float actual);
+					  float expected, float actual);
 #endif
