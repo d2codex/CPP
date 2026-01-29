@@ -84,7 +84,7 @@ Fixed::Fixed(const float floatPoint)
 			<< MIN_SAFE << " to " << MAX_SAFE;
 
 		LOG_ERROR(oss.str());
-		throw std::out_of_range("Int overflow");
+		throw std::out_of_range("Float overflow");
 	}
 
 	const int scale = 1 << _fractionalBits;
