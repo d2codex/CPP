@@ -39,7 +39,7 @@ int	testMin(void)
 
 		Fixed& result = Fixed::min(a, b);
 		total++;
-		if (!assertEqualBool("min(equal) returns second", true, &result == &b))
+		if (!assertEqualBool("min(equal) returns first", true, &result == &a))
 			failed++;
 	}
 

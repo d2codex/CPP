@@ -39,7 +39,7 @@ int testMax(void)
 
 		Fixed& result = Fixed::max(a, b);
 		total++;
-		if (!assertEqualBool("max(equal) returns second", true, &result == &b))
+		if (!assertEqualBool("max(equal) returns first", true, &result == &a))
 			failed++;
 	}
 
