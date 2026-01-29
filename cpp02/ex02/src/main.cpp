@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:31:04 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/28 16:47:24 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/28 22:03:25 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <climits>
+#include <iomanip>
 
 /**
  * @brief Initialize the logger threshold from command line args.
@@ -58,27 +59,48 @@ int main(int argc, char **argv)
 		return (1);
 	try
 	{
-		Fixed a;
-		Fixed const b( 10 ); //int constructor
-		Fixed const c( 42.42f ); // float constructor
-		Fixed const d( b ); // copy constructor
+/*		Fixed		a;
+		Fixed const	b(Fixed(5.05f) * Fixed(2));
 
-		a = Fixed( 1234.4321f ); //float constructor
+		std::cout << a << std::endl;
+		std::cout << b << std::endl;
 
-		std::cout << "a is " << a << std::endl;
-		std::cout << "b is " << b << std::endl;
-		std::cout << "c is " << c << std::endl;
-		std::cout << "d is " << d << std::endl;
+		Fixed c = b * 2;
+		std::cout << c << std::endl;
 
-		std::cout << "a is " << a.toInt() << " as integer" << std::endl;
-		std::cout << "b is " << b.toInt() << " as integer" << std::endl;
-		std::cout << "c is " << c.toInt() << " as integer" << std::endl;
-		std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+		Fixed d = 5.05f * 2;
+		std::cout << d << std::endl;
 
-//		Fixed allowedMax(8388607);
-//		Fixed max(INT_MAX);
-//		Fixed allowedMin(-8388608);
-//		Fixed min(INT_MIN);
+		//Fixed e = d / a;
+		//std::cout << e << std::endl;
+
+		Fixed f = -8388607.0f / -1;
+		std::cout << f << std::endl;
+
+		Fixed g(8388607);
+		Fixed h(-8388607.0f);
+		std::cout << h << std::endl;
+		h = h / -1;
+		std::cout << h << std::endl;
+*/
+	{
+		Fixed i(8388606);
+		std::cout << std::fixed << std::setprecision(0) << i << std::endl;
+	}
+	{
+		Fixed i(-8388607);
+		std::cout << std::setprecision(0) << i << std::endl;
+	}
+	{
+		Fixed i(8388606.0f);
+		std::cout << std::fixed << std::setprecision(1) << i << std::endl;
+	}
+	{
+		Fixed i(-8388607.0f);
+		std::cout << std::fixed << i << std::endl;
+	}
+
+//		 ALLOWED RANGE: -8388607 to 8388606
 	}
 	catch (std::exception& e)
 	{

@@ -41,15 +41,12 @@ Fixed::Fixed() : _fixedPoint(0)
  */
 Fixed::Fixed(const int integer)
 {
-	if (integer > (INT_MAX >> _fractionalBits)
-		|| integer < (INT_MIN >> _fractionalBits))
+	if (integer > MAX_SAFE || integer < MIN_SAFE)
 	{
 		std::ostringstream oss;
         oss << RED "Int overflow: allowed range is "
-            << (INT_MIN >> _fractionalBits)
-            << " to "
-            << (INT_MAX >> _fractionalBits)
-			<< RESET;
+            << MIN_SAFE << " to " << MAX_SAFE << RESET;
+
 		LOG_ERROR(oss.str());
         throw std::out_of_range("Int overflow");
 	}
@@ -80,23 +77,18 @@ Fixed::Fixed(const int integer)
  */
 Fixed::Fixed(const float floatPoint)
 {
-	const int scale = 1 << _fractionalBits;
-	const long tmp = roundf(floatPoint * scale);
-	
-	if (tmp > INT_MAX || tmp < INT_MIN)
+	if (floatPoint > MAX_SAFE || floatPoint < MIN_SAFE)
 	{
-		const int safetyMargin = 1;
-        const int approxMax = (INT_MAX / scale) - safetyMargin;
-        const int approxMin = (INT_MIN / scale) + safetyMargin;
-
 		std::ostringstream oss;
-		oss << RED "Int overflow: Approximate allowed range is "
-			<< approxMin << " to " << approxMax;
+		oss << RED "Float overflow: allowed range is "
+			<< MIN_SAFE << " to " << MAX_SAFE;
+
 		LOG_ERROR(oss.str());
 		throw std::out_of_range("Int overflow");
 	}
 
-	_fixedPoint = static_cast<int>(tmp);
+	const int scale = 1 << _fractionalBits;
+	_fixedPoint = static_cast<int>(roundf(floatPoint * scale));
 
 	LOG_DEBUG("Float Constructor called");
 	DBG(std::cout << yel("[DBG] ") << "Float fixedPoint initialized to "

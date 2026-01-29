@@ -13,6 +13,7 @@
 #pragma once
 
 #include "Logger.hpp"
+#include <climits>
 
 /**
  * @brief Represents a fixed-point number.
@@ -52,6 +53,10 @@ public:
 private:
 	int					_fixedPoint;
 	static const int	_fractionalBits = 8;
+	static const int	SAFETY_MARGIN = 1;
+
+	static const int	MAX_SAFE = (INT_MAX >> _fractionalBits) - SAFETY_MARGIN;
+	static const int	MIN_SAFE = (INT_MIN >> _fractionalBits) + SAFETY_MARGIN;
 };
 
 // I/O Operators
