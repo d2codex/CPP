@@ -42,6 +42,8 @@ TEST_SRCS = tests/main.cpp \
 			tests/testFloatConstructor.cpp \
 			tests/testIncrDecr.cpp \
 			tests/testIntConstructor.cpp \
+			tests/testMax.cpp \
+			tests/testMin.cpp \
 			tests/testMultiplication.cpp \
 			tests/testOutputOperator.cpp \
 			tests/testSubtraction.cpp \

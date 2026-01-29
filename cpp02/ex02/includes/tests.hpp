@@ -13,6 +13,8 @@ int	testMultiplication(void);
 int testDivision(void);
 int testIncrDecr(void);
 int testComparisons(void);
+int testMin(void);
+int	testMax(void);
 
 void printHeader(const std::string& testName);
 void printSummary(int failed, int total);

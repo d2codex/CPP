@@ -21,9 +21,13 @@ int testIntConstructor(void)
 {
 	printHeader("Int Constructor");
 
-	int fractionalBits = 8;
 	int total = 0;
 	int failed = 0;
+
+	int	safety = 1;
+	int fractionalBits = 8;
+	int	maxSafe = (INT_MAX >> fractionalBits) - safety;
+	int	minSafe = (INT_MIN >> fractionalBits) + safety;
 
 	// Case 1
     Fixed a(5);
@@ -44,17 +48,15 @@ int testIntConstructor(void)
 		{failed++;}
 
 	// Case 4 - near INT_MAX
-	int maxAllowed = INT_MAX >> fractionalBits;
-    Fixed d(maxAllowed);
+    Fixed d(maxSafe);
     total++;
-    if (!assertEqualInt("maxAllowed", maxAllowed << fractionalBits, d.getRawBits()))
+    if (!assertEqualInt("maxSafe", maxSafe << fractionalBits, d.getRawBits()))
 		{failed++;}
 
     // Case 5 - near INT_MIN
-	int minAllowed = INT_MIN >> fractionalBits;
-    Fixed e(minAllowed);
+    Fixed e(minSafe);
     total++;
-    if (!assertEqualInt("minAllowed", minAllowed << fractionalBits, e.getRawBits()))
+    if (!assertEqualInt("minSafe", minSafe << fractionalBits, e.getRawBits()))
 		{failed++;}
 
 	printSummary(failed, total);

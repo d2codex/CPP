@@ -26,15 +26,6 @@ int	main(void)
 	
 	int	totalFailures = 0;
 	int	totalTestSuites = 0;
-/*
-	totalTestSuites++;
-	totalFailures += testSetGetRawBits();
-	
-	totalTestSuites++;
-	totalFailures += testCopyCtor();
-
-	totalTestSuites++;
-	totalFailures += testAssignmentOp();
 
 	totalTestSuites++;
 	totalFailures += testIntConstructor();
@@ -65,10 +56,15 @@ int	main(void)
 
 	totalTestSuites++;
 	totalFailures += testIncrDecr();
-*/
+
 	totalTestSuites++;
 	totalFailures += testComparisons();
 
+	totalTestSuites++;
+	totalFailures += testMin();
+
+	totalTestSuites++;
+	totalFailures += testMax();
 
 	std::cout << blu("Test Suites Summary\n")
 			  << wht("Total test suits: ") << totalTestSuites << '\n'
