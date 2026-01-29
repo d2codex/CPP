@@ -15,28 +15,35 @@ int	testComparisons(void)
 		Fixed a(3);
 		Fixed b(5);
 
-		
+		total++;	
 		if (!assertEqualBool("3 > 5", false, a > b))
 			{failed++;}
 		
+		total++;	
 		if (!assertEqualBool("3 < 5", true, a < b))
 			{failed++;}
 
+		total++;	
 		if (!assertEqualBool("5 == 5", true, Fixed(5) == Fixed(5)))
 			{failed++;}
 
+		total++;	
 		if (!assertEqualBool("5 != 5", false, Fixed(5) != Fixed(5)))
 			{failed++;}
 
+		total++;	
 		if (!assertEqualBool("5 >= 5", true, Fixed(5) >= Fixed(5)))
 			{failed++;}
 
+		total++;	
 		if (!assertEqualBool("7 != 5", true, Fixed(7) != Fixed(5)))
 			{failed++;}
 
+		total++;	
 		if (!assertEqualBool("-7.0f > 5", false, Fixed(-7.0f) > Fixed(5)))
 			{failed++;}
 
+		total++;	
 		if (!assertEqualBool("-7.0f < 5.23f", true, Fixed(-7.0f) < Fixed(5.23f)))
 			{failed++;}
 	}
