@@ -59,48 +59,35 @@ int main(int argc, char **argv)
 		return (1);
 	try
 	{
-/*		Fixed		a;
+		//ALLOWED RANGE: -8388607 to 8388606
+		Fixed		a;
 		Fixed const	b(Fixed(5.05f) * Fixed(2));
 
 		std::cout << a << std::endl;
+		std::cout << ++a << std::endl;
+		std::cout << a << std::endl;
+		std::cout << a++ << std::endl;
+		std::cout << a << std::endl;
+
 		std::cout << b << std::endl;
+/*
+		{
+			Fixed a(7.38f);
+			Fixed b(-29);
 
-		Fixed c = b * 2;
-		std::cout << c << std::endl;
+			int	result = a != b; //true
+			std::cout << a.toFloat() << " != " << b.toFloat() << '\n'
+				<< result << std::endl;
+		}
+		{
+			Fixed a(10);
+			Fixed b(5.02f);
 
-		Fixed d = 5.05f * 2;
-		std::cout << d << std::endl;
+			Fixed& result = Fixed::max(a, b);
 
-		//Fixed e = d / a;
-		//std::cout << e << std::endl;
-
-		Fixed f = -8388607.0f / -1;
-		std::cout << f << std::endl;
-
-		Fixed g(8388607);
-		Fixed h(-8388607.0f);
-		std::cout << h << std::endl;
-		h = h / -1;
-		std::cout << h << std::endl;
+			std::cout << "max is " << result << '\n';
+		}
 */
-	{
-		Fixed i(8388606);
-		std::cout << std::fixed << std::setprecision(0) << i << std::endl;
-	}
-	{
-		Fixed i(-8388607);
-		std::cout << std::setprecision(0) << i << std::endl;
-	}
-	{
-		Fixed i(8388606.0f);
-		std::cout << std::fixed << std::setprecision(1) << i << std::endl;
-	}
-	{
-		Fixed i(-8388607.0f);
-		std::cout << std::fixed << i << std::endl;
-	}
-
-//		 ALLOWED RANGE: -8388607 to 8388606
 	}
 	catch (std::exception& e)
 	{
