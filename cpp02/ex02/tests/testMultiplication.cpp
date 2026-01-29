@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 22:27:10 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/29 22:27:12 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/29 22:42:05 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,17 @@ int	testMultiplication(void)
 		try
 		{
 			a = Fixed(10000) * Fixed(10000);
-			std::cout << red("FAIL: multiplication overflow - no exception thrown");
+			std::cout << red("FAIL multiplication overflow - no exception thrown");
 			failed++;
 		}
 		catch (const std::overflow_error& e)
 		{
-			std::cout << grn("PASS: ")
+			std::cout << grn("PASS ")
 					  << "multiplication overflow - exception caught" << '\n';
 		}
 		catch (...)
 		{
-			std::cout << red("FAIL: multiplication overflow - wrong exception type");
+			std::cout << red("FAIL multiplication overflow - wrong exception type");
 			failed++;
 		}
 	}
@@ -104,17 +104,17 @@ int	testMultiplication(void)
 		try
 		{
 			a = Fixed(-10000) * Fixed(10000);
-			std::cout << red("FAIL: multiplication overflow (negative) - no exception thrown");
+			std::cout << red("FAIL multiplication overflow (negative) - no exception thrown");
 			failed++;
 		}
 		catch (const std::overflow_error& e)
 		{
-			std::cout << grn("PASS: ")
+			std::cout << grn("PASS ")
 					  << "multiplication overflow (negative) - exception caught" << '\n';
 		}
 		catch (...)
 		{
-			std::cout << red("FAIL: multiplication overflow (negative) - wrong exception type");
+			std::cout << red("FAIL multiplication overflow (negative) - wrong exception type");
 			failed++;
 		}
 	}
@@ -124,17 +124,17 @@ int	testMultiplication(void)
 		try
 		{
 			a = Fixed(-10000) * Fixed(-10000);
-			std::cout << red("FAIL: multiplication underflow - no exception thrown");
+			std::cout << red("FAIL multiplication underflow - no exception thrown");
 			failed++;
 		}
 		catch (const std::overflow_error& e)
 		{
-			std::cout << grn("PASS: ")
+			std::cout << grn("PASS ")
 					  << "multiplication underflow - exception caught" << '\n';
 		}
 		catch (...)
 		{
-			std::cout << red("FAIL: multiplication underflow - wrong exception type");
+			std::cout << red("FAIL multiplication underflow - wrong exception type");
 			failed++;
 		}
 	}
@@ -144,17 +144,17 @@ int	testMultiplication(void)
 		try
 		{
 			a = Fixed(8388606) * Fixed(2);
-			std::cout << red("FAIL: multiplication max boundary - no exception thrown");
+			std::cout << red("FAIL multiplication max boundary - no exception thrown");
 			failed++;
 		}
 		catch (const std::overflow_error& e)
 		{
-			std::cout << grn("PASS: ")
+			std::cout << grn("PASS ")
 					  << "multiplication max boundary - exception caught" << '\n';
 		}
 		catch (...)
 		{
-			std::cout << red("FAIL: multiplication max boundary - wrong exception type");
+			std::cout << red("FAIL multiplication max boundary - wrong exception type");
 			failed++;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 22:26:35 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/29 22:26:36 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/29 22:42:39 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,17 +125,17 @@ int	testDivision(void)
 		try
 		{
 			a = Fixed(10) / Fixed(0);
-			std::cout << red("FAIL: divide by zero - no exception thrown");
+			std::cout << red("FAIL divide by zero - no exception thrown");
 			failed++;
 		}
 		catch (const std::domain_error& e)
 		{
-			std::cout << grn("PASS: ")
+			std::cout << grn("PASS ")
 					  << "divide by zero - exception caught" << '\n';
 		}
 		catch (...)
 		{
-			std::cout << red("FAIL: divide by zero - wrong exception type");
+			std::cout << red("FAIL divide by zero - wrong exception type");
 			failed++;
 		}
 	}
@@ -145,17 +145,17 @@ int	testDivision(void)
 		try
 		{
 			a = Fixed(5.5f) / Fixed(0.0f);
-			std::cout << red("FAIL: divide by zero (float) - no exception thrown");
+			std::cout << red("FAIL divide by zero (float) - no exception thrown");
 			failed++;
 		}
 		catch (const std::domain_error& e)
 		{
-			std::cout << grn("PASS: ")
+			std::cout << grn("PASS ")
 					  << "divide by zero (float) - exception caught" << '\n';
 		}
 		catch (...)
 		{
-			std::cout << red("FAIL: divide by zero (float) - wrong exception type");
+			std::cout << red("FAIL divide by zero (float) - wrong exception type");
 			failed++;
 		}
 	}

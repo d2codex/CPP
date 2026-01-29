@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 22:27:19 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/29 22:27:21 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/29 22:41:24 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,17 +119,17 @@ int	testSubtraction(void)
 		try
 		{
 			a = Fixed(8388606) - Fixed(-8388607);
-			std::cout << red("FAIL: subtraction overflow - no exception throwni\n");
+			std::cout << red("FAIL subtraction overflow - no exception throwni\n");
 			failed++;
 		}
 		catch (const std::overflow_error& e)
 		{
-			std::cout << grn("PASS: ")
+			std::cout << grn("PASS ")
 				<< "subtraction overflow - exception caught" << '\n';
 		}
 		catch (...)
 		{
-			std::cout << red("FAIL: subtraction overflow - wrong exception type\n");
+			std::cout << red("FAIL subtraction overflow - wrong exception type\n");
 			failed++;
 		}
 	}
@@ -139,17 +139,17 @@ int	testSubtraction(void)
 		try
 		{
 			a = Fixed(-8388607) - Fixed(8388606);
-			std::cout << red("FAIL: subtraction underflow - no exception thrown\n");
+			std::cout << red("FAIL subtraction underflow - no exception thrown\n");
 			failed++;
 		}
 		catch (const std::overflow_error& e)
 		{
-			std::cout << grn("PASS: ")
+			std::cout << grn("PASS ")
 				<< "subtraction underflow - exception caught" << '\n';
 		}
 		catch (...)
 		{
-			std::cout << red("FAIL: subtraction underflow - wrong exception type\n");
+			std::cout << red("FAIL subtraction underflow - wrong exception type\n");
 			failed++;
 		}
 	}
@@ -159,17 +159,17 @@ int	testSubtraction(void)
 		try
 		{
 			a = Fixed(8388606.0f) - Fixed(-2);
-			std::cout << red("FAIL: subtraction max boundary - no exception thrown\n");
+			std::cout << red("FAIL subtraction max boundary - no exception thrown\n");
 			failed++;
 		}
 		catch (const std::overflow_error& e)
 		{
-			std::cout << grn("PASS: ")
+			std::cout << grn("PASS ")
 				<< "subtraction max boundary - exception caught" << '\n';
 		}
 		catch (...)
 		{
-			std::cout << red("FAIL: subtraction max boundary - wrong exception type\n");
+			std::cout << red("FAIL subtraction max boundary - wrong exception type\n");
 			failed++;
 		}
 	}
@@ -179,17 +179,17 @@ int	testSubtraction(void)
 		try
 		{
 			a = Fixed(-8388607) - Fixed(2);
-			std::cout << red("FAIL: subtraction min boundary - no exception thrown\n");
+			std::cout << red("FAIL subtraction min boundary - no exception thrown\n");
 			failed++;
 		}
 		catch (const std::overflow_error& e)
 		{
-			std::cout << grn("PASS: ")
+			std::cout << grn("PASS ")
 				<< "subtraction min boundary - exception caught" << '\n';
 		}
 		catch (...)
 		{
-			std::cout << red("FAIL: subtraction min boundary - wrong exception type\n");
+			std::cout << red("FAIL subtraction min boundary - wrong exception type\n");
 			failed++;
 		}
 	}
