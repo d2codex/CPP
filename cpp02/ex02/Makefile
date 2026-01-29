@@ -37,6 +37,7 @@ APP_SRCS = src/main.cpp
 
 TEST_SRCS = tests/main.cpp \
 			tests/testAddition.cpp \
+			tests/testComparisons.cpp \
 			tests/testDivision.cpp \
 			tests/testFloatConstructor.cpp \
 			tests/testIncrDecr.cpp \
