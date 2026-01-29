@@ -50,7 +50,7 @@ int	main(void)
 
 	totalTestSuites++;
 	totalFailures += testOutputOperator();
-*/
+
 	totalTestSuites++;
 	totalFailures += testAddition();
 
@@ -62,6 +62,10 @@ int	main(void)
 
 	totalTestSuites++;
 	totalFailures += testDivision();
+*/
+	totalTestSuites++;
+	totalFailures += testIncrDecr();
+
 
 	std::cout << blu("Test Suites Summary\n")
 			  << wht("Total test suits: ") << totalTestSuites << '\n'

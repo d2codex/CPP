@@ -62,3 +62,17 @@ bool assertEqualFloat(const std::string& name,
 			  << "actual  : " << actual << '\n';
 	return (false);
 }
+
+bool assertEqualFloatExact(const std::string& name, float expected, float actual)
+{
+	const float TOL = 1e-6f;  // tiny tolerance to account for float rounding
+    if (fabs(expected - actual) <= TOL)
+    {
+        std::cout << grn("PASS ") << name << '\n';
+        return true;
+    }
+    std::cout << red("FAIL ") << name << '\n'
+              << "expected: " << expected << '\n'
+              << "actual  : " << actual << '\n';
+    return false;
+}
