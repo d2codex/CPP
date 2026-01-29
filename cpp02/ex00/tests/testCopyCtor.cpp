@@ -34,7 +34,7 @@ int	testCopyCtor(void)
 	int failed = 0;
 	int numTests = 1;
 
-	std::cout << YEL("====== Running test for CopyCtor =====\n");
+	std::cout << yel("====== Running test for CopyCtor =====\n");
 	Fixed original;
 	original.setRawBits(21);
 
@@ -42,24 +42,24 @@ int	testCopyCtor(void)
 
 	if (copy.getRawBits() == 21)
 	{
-		std::cout << GRN("TEST PASSED\n");
+		std::cout << grn("TEST PASSED\n");
 		passed++;
 	}
 	else
 	{
-		std::cout << RED("TEST FAILED\n");
+		std::cout << red("TEST FAILED\n");
 		failed++;
 	}
 	std::cout << '\n';
 
-	std::cout << BLU("=========== CopyCtor summary ==========\n")
-			  << GRN("Tests passed: ") << passed << '\n'
-			  << RED("Tests failed: ") << failed << '\n'
+	std::cout << blu("=========== CopyCtor summary ==========\n")
+			  << grn("Tests passed: ") << passed << '\n'
+			  << red("Tests failed: ") << failed << '\n'
 			  << "Total tests: " << numTests << '\n';	
 	if (failed == 0)
-		std::cout << GRN("All tests passed!\n");
+		std::cout << grn("All tests passed!\n");
 
-	std::cout << BLU("=======================================\n")
-			  << YEL("=============END UNIT TEST=============\n");
+	std::cout << blu("=======================================\n")
+			  << yel("=============END UNIT TEST=============\n");
 	return (failed);
 }

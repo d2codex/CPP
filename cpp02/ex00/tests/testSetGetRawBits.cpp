@@ -53,12 +53,12 @@ int	testSetGetRawBits(void)
 	int passed = 0;
 	int failed = 0;
 
-	std::cout << YEL("==== Running test for SetGetRawBits ===\n");
+	std::cout << yel("==== Running test for SetGetRawBits ===\n");
 	size_t	numTests = sizeof(test) / sizeof(test[0]);
 	for (size_t i = 0; i < numTests; i++)
 	{
 		FixedRawTests& t = test[i];
-		std::cout << BLU_ON() << "Test[" << i << "] " << RESET() << t.desc << '\n';
+		std::cout << BLU << "Test[" << i << "] " << RESET << t.desc << '\n';
 		
 		Fixed a;
 		a.setRawBits(t.raw);
@@ -69,25 +69,25 @@ int	testSetGetRawBits(void)
 
 		if (result == t.raw)
 		{
-			std::cout << GRN("TEST PASSED\n");
+			std::cout << grn("TEST PASSED\n");
 			passed++;
 		}
 		else
 		{
-			std::cout << RED("TEST FAILED\n");
+			std::cout << red("TEST FAILED\n");
 			failed++;
 		}
 		std::cout << '\n';
 	}
 	
-	std::cout << BLU("======== SetGetRawBits summary ========\n")
-			  << GRN("Tests passed: ") << passed << '\n'
-			  << RED("Tests failed: ") << failed << '\n'
+	std::cout << blu("======== SetGetRawBits summary ========\n")
+			  << grn("Tests passed: ") << passed << '\n'
+			  << red("Tests failed: ") << failed << '\n'
 			  << "Total tests: " << numTests << '\n';	
 	if (failed == 0)
-		std::cout << GRN("All tests passed!\n");
+		std::cout << grn("All tests passed!\n");
 
-	std::cout << BLU("=======================================\n")
-			  << YEL("=============END UNIT TEST=============\n");
+	std::cout << blu("=======================================\n")
+			  << yel("=============END UNIT TEST=============\n");
 	return (failed);
 }

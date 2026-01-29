@@ -19,7 +19,7 @@ int	main(void)
 {
 	Logger::setThreshold(Logger::NONE);
 	
-    std::cout << YEL("=======================================\n"
+    std::cout << yel("=======================================\n"
 					 "         Running all unit tests\n"
 					 "=======================================\n");
 	
@@ -36,10 +36,10 @@ int	main(void)
 	totalFailures += testAssignmentOp();
 
 
-	std::cout << YEL("============= Test summary ============\n")
-			  << WHT("Total test suits: ") << totalTestSuites << '\n'
-			  << RED("total failures: ") << totalFailures << '\n'
-			  << YEL("=======================================\n");
+	std::cout << yel("============= Test summary ============\n")
+			  << wht("Total test suits: ") << totalTestSuites << '\n'
+			  << red("total failures: ") << totalFailures << '\n'
+			  << yel("=======================================\n");
 	if (totalFailures == 0)
-		std::cout << GRN("ALL TESTS PASSED!\n");
+		std::cout << grn("ALL TESTS PASSED!\n");
 }
