@@ -76,3 +76,16 @@ bool assertEqualFloatExact(const std::string& name, float expected, float actual
               << "actual  : " << actual << '\n';
     return false;
 }
+
+bool assertEqualBool(const std::string& name, bool expected, bool actual)
+{
+    if (expected == actual)
+    {
+        std::cout << grn("PASS ") << name << '\n';
+        return true;
+    }
+    std::cout << red("FAIL ") << name << '\n'
+              << "expected: " << expected << '\n'
+              << "actual  : " << actual << '\n';
+    return false;
+}

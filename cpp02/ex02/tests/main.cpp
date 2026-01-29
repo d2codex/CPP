@@ -62,9 +62,12 @@ int	main(void)
 
 	totalTestSuites++;
 	totalFailures += testDivision();
-*/
+
 	totalTestSuites++;
 	totalFailures += testIncrDecr();
+*/
+	totalTestSuites++;
+	totalFailures += testComparisons();
 
 
 	std::cout << blu("Test Suites Summary\n")

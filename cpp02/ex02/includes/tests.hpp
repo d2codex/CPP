@@ -12,6 +12,7 @@ int testSubtraction(void);
 int	testMultiplication(void);
 int testDivision(void);
 int testIncrDecr(void);
+int testComparisons(void);
 
 void printHeader(const std::string& testName);
 void printSummary(int failed, int total);
@@ -21,3 +22,4 @@ bool assertEqualFloat(const std::string& testName,
 					float expected, float actual);
 bool assertEqualFloatExact(const std::string& name,
 					float expected, float actual);
+bool assertEqualBool(const std::string& name, bool expected, bool actual);
