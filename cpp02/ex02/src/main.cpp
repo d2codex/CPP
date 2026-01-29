@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:31:04 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/28 22:03:25 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/29 23:39:09 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,16 @@ int main(int argc, char **argv)
 			Fixed& result = Fixed::max(a, b);
 
 			std::cout << "max is " << result << '\n';
+		}
+		{
+			Fixed a(10);
+			Fixed b(10);
+
+			Fixed& result = Fixed::min(a, b);
+			result = Fixed(5);
+			std::cout << "a: " << a.toFloat() << std::endl;
+			std::cout << "b: " << b.toFloat() << std::endl;
+			std::cout << "result: " << result << std::endl;
 		}
 */
 	}

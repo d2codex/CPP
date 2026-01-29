@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:30:53 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/29 22:25:43 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/29 23:36:02 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -344,7 +344,8 @@ Fixed Fixed::operator/(const Fixed& rhs) const
 		LOG_ERROR(red("Cannot divide by 0"));
 		throw std::domain_error("divison by 0");
 	}
-	long long tmp = static_cast<long long>(this->getRawBits()) << _fractionalBits;
+	long long tmp = static_cast<long long>(this->getRawBits())
+				  << _fractionalBits;
 	tmp /= static_cast<long long>(rhs.getRawBits());
 
 	if (tmp > INT_MAX || tmp < INT_MIN)
@@ -431,6 +432,7 @@ Fixed Fixed::operator--(int)
  */
 Fixed& Fixed::min(Fixed& n1, Fixed& n2)
 {
+	LOG_INFO("first argument is returned if equal");
 	return (n2 < n1 ? n2 : n1);
 }
 
@@ -442,6 +444,7 @@ Fixed& Fixed::min(Fixed& n1, Fixed& n2)
  */
 Fixed& Fixed::max(Fixed& n1, Fixed& n2)
 {
+	LOG_INFO("first argument is returned if equal");
 	return (n2 > n1 ? n2 : n1);
 }
 
@@ -453,6 +456,7 @@ Fixed& Fixed::max(Fixed& n1, Fixed& n2)
  */
 const Fixed& Fixed::min(const Fixed& n1, const Fixed& n2)
 {
+	LOG_INFO("first argument is returned if equal");
 	return (n2 < n1 ? n2 : n1);
 }
 
@@ -464,6 +468,7 @@ const Fixed& Fixed::min(const Fixed& n1, const Fixed& n2)
  */
 const Fixed& Fixed::max(const Fixed& n1, const Fixed& n2)
 {
+	LOG_INFO("first argument is returned if equal");
 	return (n2 > n1 ? n2 : n1);
 }
 
