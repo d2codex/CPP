@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 18:30:53 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/28 21:51:45 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/29 22:25:43 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 #include <stdexcept>
 #include <cmath>
 
-/********************************************************************************
- *                                  CONSTRUCTORS                                *
- ********************************************************************************/
+/*****************************************************************************
+ *                               CONSTRUCTORS                                *
+ *****************************************************************************/
 
 /**
  * @brief Default constructor.
@@ -137,9 +137,9 @@ Fixed::~Fixed()
 	LOG_DEBUG("Destructor Called");
 }
 
-/********************************************************************************
- *                                GETTER / SETTER                               *
- ********************************************************************************/
+/*****************************************************************************
+ *                             GETTER / SETTER                               *
+ *****************************************************************************/
 
 /**
  * @brief Get the raw fixed-point value.
@@ -164,9 +164,9 @@ void	Fixed::setRawBits(int const raw)
 	_fixedPoint = raw;
 }
 
-/********************************************************************************
- *                                 CONVERSIONS                                  *
- ********************************************************************************/
+/*****************************************************************************
+ *                                CONVERSIONS                                *
+ *****************************************************************************/
 
 /**
  * @brief Converts the fixed-point value to a float.
@@ -194,44 +194,80 @@ int	Fixed::toInt(void) const
 	return (_fixedPoint >> _fractionalBits);
 }
 
-/********************************************************************************
- *                              COMPARISON OPERATORS                            *
- ********************************************************************************/
+/*****************************************************************************
+ *                            COMPARISON OPERATORS                           *
+ *****************************************************************************/
 
+/**
+ * @brief Checks if this Fixed is greater than rhs.
+ * @param rhs The Fixed to compare against.
+ * @return True if this > rhs, false otherwise.
+ */
 bool Fixed::operator>(const Fixed& rhs) const
 {
 	return (_fixedPoint > rhs._fixedPoint);
 }
 
+/**
+ * @brief Checks if this Fixed is less than rhs.
+ * @param rhs The Fixed to compare against.
+ * @return True if this < rhs, false otherwise.
+ */
 bool Fixed::operator<(const Fixed& rhs) const
 {
 	return (_fixedPoint < rhs._fixedPoint);
 }
 
+/**
+ * @brief Checks if this Fixed is greater than or equal to rhs.
+ * @param rhs The Fixed to compare against.
+ * @return True if this >= rhs, false otherwise.
+ */
 bool Fixed::operator>=(const Fixed& rhs) const
 {
 	return (_fixedPoint >= rhs._fixedPoint);
 }
 
+/**
+ * @brief Checks if this Fixed is less than or equal to rhs.
+ * @param rhs The Fixed to compare against.
+ * @return True if this <= rhs, false otherwise.
+ */
 bool Fixed::operator<=(const Fixed& rhs) const
 {
 	return (_fixedPoint <= rhs._fixedPoint);
 }
 
+/**
+ * @brief Checks if this Fixed is equal to rhs.
+ * @param rhs The Fixed to compare against.
+ * @return True if this == rhs, false otherwise.
+ */
 bool Fixed::operator==(const Fixed& rhs) const
 {
 	return (_fixedPoint == rhs._fixedPoint);
 }
 
+/**
+ * @brief Checks if this Fixed is not equal to rhs.
+ * @param rhs The Fixed to compare against.
+ * @return True if this != rhs, false otherwise.
+ */
 bool Fixed::operator!=(const Fixed& rhs) const
 {
 	return (_fixedPoint != rhs._fixedPoint);
 }
 
-/********************************************************************************
- *                              ARITHMETIC OPERATORS                            *
- ********************************************************************************/
+/*****************************************************************************
+ *                            ARITHMETIC OPERATORS                           *
+ *****************************************************************************/
 
+/**
+ * @brief Adds two Fixed-point numbers with overflow check.
+ * @param rhs The Fixed to add.
+ * @return A new Fixed representing the sum.
+ * @throws std::overflow_error if the addition exceeds INT_MAX/INT_MIN.
+ */
 Fixed Fixed::operator+(const Fixed& rhs) const
 {
 	long tmp = static_cast<long>(this->getRawBits())
@@ -248,6 +284,12 @@ Fixed Fixed::operator+(const Fixed& rhs) const
 	return (result);
 }
 
+/**
+ * @brief Subtracts rhs from this Fixed-point number with overflow check.
+ * @param rhs The Fixed to subtract.
+ * @return A new Fixed representing the difference.
+ * @throws std::overflow_error if the subtraction exceeds INT_MAX/INT_MIN.
+ */
 Fixed Fixed::operator-(const Fixed& rhs) const
 {
 	long tmp = static_cast<long>(this->getRawBits())
@@ -264,6 +306,12 @@ Fixed Fixed::operator-(const Fixed& rhs) const
 	return (result);
 }
 
+/**
+ * @brief Multiplies two Fixed-point numbers with overflow check.
+ * @param rhs The Fixed to multiply with.
+ * @return A new Fixed representing the product.
+ * @throws std::overflow_error if the multiplication exceeds INT_MAX/INT_MIN.
+ */
 Fixed Fixed::operator*(const Fixed& rhs) const
 {
 	long long tmp = static_cast<long long>(this->getRawBits())
@@ -282,6 +330,13 @@ Fixed Fixed::operator*(const Fixed& rhs) const
 	return (result);
 }
 
+/**
+ * @brief Divides this Fixed-point number by rhs with overflow and zero check.
+ * @param rhs The Fixed divisor.
+ * @return A new Fixed representing the quotient.
+ * @throws std::domain_error if rhs is zero.
+ * @throws std::overflow_error if the division exceeds INT_MAX/INT_MIN.
+ */
 Fixed Fixed::operator/(const Fixed& rhs) const
 {
 	if (rhs.getRawBits() == 0)
@@ -302,11 +357,15 @@ Fixed Fixed::operator/(const Fixed& rhs) const
 	return (result);
 }
 
-/********************************************************************************
- *                       INCREMENT / DECREMENT OPERATORS                        *
- ********************************************************************************/
+/*****************************************************************************
+ *                      INCREMENT / DECREMENT OPERATORS                      *
+ *****************************************************************************/
 
-// increment first then return stored value
+/**
+ * @brief Pre-increment: increases Fixed by one fractional bit, returns *this.
+ * @return Reference to the incremented Fixed object.
+ * @throws std::overflow_error if increment would exceed MAX_SAFE.
+ */
 Fixed& Fixed::operator++()
 {
 	if (_fixedPoint >= MAX_SAFE << _fractionalBits)
@@ -318,7 +377,11 @@ Fixed& Fixed::operator++()
 	return (*this);
 }
 
-// save old value increment then return old value
+/**
+ * @brief Post-increment: increases Fixed by one fractional bit, returns old
+ * value.
+ * @return A Fixed object containing the original value before increment.
+ */
 Fixed Fixed::operator++(int)
 {
 	Fixed oldValue(*this);
@@ -327,6 +390,11 @@ Fixed Fixed::operator++(int)
 	return (oldValue);
 }
 
+/**
+ * @brief Pre-decrement: decreases Fixed by one fractional bit, returns *this.
+ * @return Reference to the decremented Fixed object.
+ * @throws std::overflow_error if decrement would go below MIN_SAFE.
+ */
 Fixed& Fixed::operator--()
 {
 	if(_fixedPoint < MIN_SAFE >> _fractionalBits)
@@ -338,6 +406,11 @@ Fixed& Fixed::operator--()
 	return (*this);
 }
 
+/**
+ * @brief Post-decrement: decreases Fixed by one fractional bit, returns old
+ * value.
+ * @return A Fixed object containing the original value before decrement.
+ */
 Fixed Fixed::operator--(int)
 {
 	Fixed oldValue(*this);
@@ -346,34 +419,57 @@ Fixed Fixed::operator--(int)
 	return (oldValue);
 }
 
-/********************************************************************************
- *                                 MIN / MAX                                   *
- ********************************************************************************/
+/*****************************************************************************
+ *                                 MIN / MAX                                 *
+ *****************************************************************************/
 
+/**
+ * @brief Returns the smaller of two Fixed numbers (non-const).
+ * @param n1 First Fixed object.
+ * @param n2 Second Fixed object.
+ * @return Reference to the smaller Fixed. First wins if equal.
+ */
 Fixed& Fixed::min(Fixed& n1, Fixed& n2)
 {
 	return (n2 < n1 ? n2 : n1);
 }
 
+/**
+ * @brief Returns the larger of two Fixed numbers (non-const).
+ * @param n1 First Fixed object.
+ * @param n2 Second Fixed object.
+ * @return Reference to the larger Fixed. First wins if equal.
+ */
 Fixed& Fixed::max(Fixed& n1, Fixed& n2)
 {
 	return (n2 > n1 ? n2 : n1);
 }
 
+/**
+ * @brief Returns the smaller of two Fixed numbers (const).
+ * @param n1 First Fixed object.
+ * @param n2 Second Fixed object.
+ * @return Const reference to the smaller Fixed. First wins if equal.
+ */
 const Fixed& Fixed::min(const Fixed& n1, const Fixed& n2)
 {
 	return (n2 < n1 ? n2 : n1);
 }
 
+/**
+ * @brief Returns the larger of two Fixed numbers (const).
+ * @param n1 First Fixed object.
+ * @param n2 Second Fixed object.
+ * @return Const reference to the larger Fixed. First wins if equal.
+ */
 const Fixed& Fixed::max(const Fixed& n1, const Fixed& n2)
 {
 	return (n2 > n1 ? n2 : n1);
 }
 
-
-/********************************************************************************
- *                          INPUT / OUTPUT OPERATORS                            *
- ********************************************************************************/
+/*****************************************************************************
+ *                          INPUT / OUTPUT OPERATORS						 *
+ *****************************************************************************/
 
 /**
  * @brief Outputs the floating-point representation of a Fixed object.
