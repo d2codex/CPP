@@ -18,6 +18,10 @@
 #include <stdexcept>
 #include <cmath>
 
+/********************************************************************************
+ *                                  CONSTRUCTORS                                *
+ ********************************************************************************/
+
 /**
  * @brief Default constructor.
  *
@@ -31,13 +35,13 @@ Fixed::Fixed() : _fixedPoint(0)
 }
 
 /**
- * @brief Constructs a Fixed object from an integer.
- * 
- * Converts the integer to fixed-point by shifting left by `fractionalBits`.
- * Checks for overflow before conversion.
+ * @brief Construct a Fixed from an int, with overflow protection.
  *
- * @param integer Value to convert.
- * @throws std::out_of_range if the integer is outside the allowed range.
+ * Converts an integer to fixed-point representation. Throws std::out_of_range
+ * if integer is outside the allowed range [MIN_SAFE, MAX_SAFE].
+ *
+ * @param integer The integer value to convert
+ * @throws std::out_of_range if integer exceeds safe limits
  */
 Fixed::Fixed(const int integer)
 {
@@ -59,21 +63,13 @@ Fixed::Fixed(const int integer)
 }
 
 /**
- * @brief Constructs a Fixed object from a float.
- * 
- * Converts the float to fixed-point by multiplying by 2^fractionalBits and
- * rounding to the nearest integer. Performs an overflow check to ensure the
- * resulting fixed-point value fits within the limits of an int.
+ * @brief Construct a Fixed from a float, with overflow protection.
  *
- * @note Bit shifting cannot be done directly on a float, so the float must
- *       be multiplied first, then rounded to an integer.
- * @note The constructor uses a safety margin to compute approximate maximum
- *       and minimum float values that can safely be converted without 
- *       overflowing the underlying integer storage.
+ * Converts a float to fixed-point representation. Throws std::out_of_range
+ * if floatPoint is outside the allowed range [MIN_SAFE, MAX_SAFE].
  *
- * @param floatPoint Value to convert to fixed-point.
- * @throws std::out_of_range if the float is outside the safe range and would
- *         cause an integer overflow after conversion.
+ * @param floatPoint The float value to convert
+ * @throws std::out_of_range if floatPoint exceeds safe limits
  */
 Fixed::Fixed(const float floatPoint)
 {
@@ -141,6 +137,10 @@ Fixed::~Fixed()
 	LOG_DEBUG("Destructor Called");
 }
 
+/********************************************************************************
+ *                                GETTER / SETTER                               *
+ ********************************************************************************/
+
 /**
  * @brief Get the raw fixed-point value.
  *
@@ -163,6 +163,10 @@ void	Fixed::setRawBits(int const raw)
 {
 	_fixedPoint = raw;
 }
+
+/********************************************************************************
+ *                                 CONVERSIONS                                  *
+ ********************************************************************************/
 
 /**
  * @brief Converts the fixed-point value to a float.
@@ -190,26 +194,14 @@ int	Fixed::toInt(void) const
 	return (_fixedPoint >> _fractionalBits);
 }
 
-/**
- * @brief Outputs the floating-point representation of a Fixed object.
- *
- * Overloads the insertion operator to print the fixed-point value as a
- * float.
- *
- * @note This overload is called when a Fixed object is on the right side
- *       of the `<<` operator.
- *
- * @param os Output stream to write to.
- * @param fixed Fixed object to output.
- * @return Reference to the output stream.
- */
-std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
-{
-	os << fixed.toFloat();
-	return (os);
-}
+/********************************************************************************
+ *                              COMPARISON OPERATORS                            *
+ ********************************************************************************/
 
-// arithmetic Operators
+
+/********************************************************************************
+ *                              ARITHMETIC OPERATORS                            *
+ ********************************************************************************/
 
 Fixed Fixed::operator+(const Fixed& rhs) const
 {
@@ -281,3 +273,69 @@ Fixed Fixed::operator/(const Fixed& rhs) const
 	return (result);
 }
 
+/********************************************************************************
+ *                       INCREMENT / DECREMENT OPERATORS                        *
+ ********************************************************************************/
+
+// increment first then return stored value
+Fixed& Fixed::operator++()
+{
+	if (_fixedPoint >= MAX_SAFE << _fractionalBits)
+	{
+		LOG_ERROR(red("Incrementing this value would overflow"));
+		throw std::overflow_error("Increment overflow");
+	}
+	++_fixedPoint;
+	return (*this);
+}
+
+// save old value increment then return old value
+Fixed Fixed::operator++(int)
+{
+	Fixed oldValue(*this);
+	_fixedPoint++;
+
+	return (oldValue);
+}
+
+Fixed& Fixed::operator--()
+{
+	if(_fixedPoint < MIN_SAFE >> _fractionalBits)
+	{
+		LOG_ERROR("decrementing this value would overflow");
+		throw std::overflow_error("decrement overflow");
+	}
+	--_fixedPoint;
+	return (*this);
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed oldValue(*this);
+	_fixedPoint--;
+
+	return (oldValue);
+}
+
+/********************************************************************************
+ *                          INPUT / OUTPUT OPERATORS                            *
+ ********************************************************************************/
+
+/**
+ * @brief Outputs the floating-point representation of a Fixed object.
+ *
+ * Overloads the insertion operator to print the fixed-point value as a
+ * float.
+ *
+ * @note This overload is called when a Fixed object is on the right side
+ *       of the `<<` operator.
+ *
+ * @param os Output stream to write to.
+ * @param fixed Fixed object to output.
+ * @return Reference to the output stream.
+ */
+std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
+{
+	os << fixed.toFloat();
+	return (os);
+}

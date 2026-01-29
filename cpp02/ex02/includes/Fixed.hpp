@@ -23,6 +23,7 @@
 class Fixed
 {
 public:
+	// constructors
 	Fixed();
 	Fixed(const int integer);
 	Fixed(const float floatPoint);
@@ -43,13 +44,13 @@ public:
     Fixed operator-(const Fixed& rhs) const;
     Fixed operator*(const Fixed& rhs) const;
     Fixed operator/(const Fixed& rhs) const;
-/*	
+
 	// increment / decrement
-	Fixed& operator++();    // prefix ++
-    Fixed operator++(int);  // postfix ++
-    Fixed& operator--();    // prefix --
+	Fixed& operator++();    // ++prefix //modifies the object &
+    Fixed operator++(int);  // postfix++
+    Fixed& operator--();    // --prefix
     Fixed operator--(int);  // postfix --
-*/
+
 private:
 	int					_fixedPoint;
 	static const int	_fractionalBits = 8;
@@ -57,6 +58,7 @@ private:
 
 	static const int	MAX_SAFE = (INT_MAX >> _fractionalBits) - SAFETY_MARGIN;
 	static const int	MIN_SAFE = (INT_MIN >> _fractionalBits) + SAFETY_MARGIN;
+
 };
 
 // I/O Operators
