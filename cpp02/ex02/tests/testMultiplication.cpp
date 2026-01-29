@@ -131,7 +131,7 @@ int	testMultiplication(void)
 		total++;
 		try
 		{
-			a = Fixed(8388607) * Fixed(2);
+			a = Fixed(8388606) * Fixed(2);
 			std::cout << red("FAIL: multiplication max boundary - no exception thrown");
 			failed++;
 		}

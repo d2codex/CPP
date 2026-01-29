@@ -106,8 +106,8 @@ int	testSubtraction(void)
 		total++;
 		try
 		{
-			a = Fixed(8388607) - Fixed(-8388607);
-			std::cout << red("FAIL: subtraction overflow - no exception thrown");
+			a = Fixed(8388606) - Fixed(-8388607);
+			std::cout << red("FAIL: subtraction overflow - no exception throwni\n");
 			failed++;
 		}
 		catch (const std::overflow_error& e)
@@ -117,7 +117,7 @@ int	testSubtraction(void)
 		}
 		catch (...)
 		{
-			std::cout << red("FAIL: subtraction overflow - wrong exception type");
+			std::cout << red("FAIL: subtraction overflow - wrong exception type\n");
 			failed++;
 		}
 	}
@@ -126,8 +126,8 @@ int	testSubtraction(void)
 		total++;
 		try
 		{
-			a = Fixed(-8388607) - Fixed(8388607);
-			std::cout << red("FAIL: subtraction underflow - no exception thrown");
+			a = Fixed(-8388607) - Fixed(8388606);
+			std::cout << red("FAIL: subtraction underflow - no exception thrown\n");
 			failed++;
 		}
 		catch (const std::overflow_error& e)
@@ -137,7 +137,7 @@ int	testSubtraction(void)
 		}
 		catch (...)
 		{
-			std::cout << red("FAIL: subtraction underflow - wrong exception type");
+			std::cout << red("FAIL: subtraction underflow - wrong exception type\n");
 			failed++;
 		}
 	}
@@ -146,8 +146,8 @@ int	testSubtraction(void)
 		total++;
 		try
 		{
-			a = Fixed(8388607) - Fixed(-1);
-			std::cout << red("FAIL: subtraction max boundary - no exception thrown");
+			a = Fixed(8388606.0f) - Fixed(-2);
+			std::cout << red("FAIL: subtraction max boundary - no exception thrown\n");
 			failed++;
 		}
 		catch (const std::overflow_error& e)
@@ -157,7 +157,7 @@ int	testSubtraction(void)
 		}
 		catch (...)
 		{
-			std::cout << red("FAIL: subtraction max boundary - wrong exception type");
+			std::cout << red("FAIL: subtraction max boundary - wrong exception type\n");
 			failed++;
 		}
 	}
@@ -166,8 +166,8 @@ int	testSubtraction(void)
 		total++;
 		try
 		{
-			a = Fixed(-8388608) - Fixed(1);
-			std::cout << red("FAIL: subtraction min boundary - no exception thrown");
+			a = Fixed(-8388607) - Fixed(2);
+			std::cout << red("FAIL: subtraction min boundary - no exception thrown\n");
 			failed++;
 		}
 		catch (const std::overflow_error& e)
@@ -177,7 +177,7 @@ int	testSubtraction(void)
 		}
 		catch (...)
 		{
-			std::cout << red("FAIL: subtraction min boundary - wrong exception type");
+			std::cout << red("FAIL: subtraction min boundary - wrong exception type\n");
 			failed++;
 		}
 	}

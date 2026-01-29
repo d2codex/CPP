@@ -76,83 +76,83 @@ int	testAddition(void)
 	// addition overflow (positive)
 	{
 		total++;
-		try
-		{
-			a = Fixed(8388607) + Fixed(8388607);
-			std::cout << red("FAIL: addition overflow - no exception thrown");
-			failed++;
-		}
-		catch (const std::overflow_error& e)
-		{
-			std::cout << grn("PASS: ")
-				<< "addition overflow - exception caught" << '\n';
-		}
-		catch (...)
-		{
-			std::cout << red("FAIL: addition overflow - wrong exception type");
-			failed++;
-		}
-	}
-	// addition underflow (negative)
+	try
 	{
-		total++;
-		try
-		{
-			a = Fixed(-8388608) + Fixed(-8388608);
-			std::cout << red("FAIL: addition underflow - no exception thrown");
-			failed++;
-		}
-		catch (const std::overflow_error& e)
-		{
-			std::cout << grn("PASS: ")
-				<< "addition underflow - exception caught" << '\n';
-		}
-		catch (...)
-		{
-			std::cout << red("FAIL: addition underflow - wrong exception type");
-			failed++;
-		}
+		a = Fixed(8388606) + Fixed(8388606);
+		std::cout << red("FAIL: addition overflow - no exception thrown\n");
+		failed++;
 	}
-	// addition at max boundary
+	catch (const std::overflow_error& e)
 	{
-		total++;
-		try
-		{
-			a = Fixed(8388607) + Fixed(1);
-			std::cout << red("FAIL: addition max boundary - no exception thrown");
-			failed++;
-		}
-		catch (const std::overflow_error& e)
-		{
-			std::cout << grn("PASS: ")
-				<< "addition max boundary - exception caught" << '\n';
-		}
-		catch (...)
-		{
-			std::cout << red("FAIL: addition max boundary - wrong exception type");
-			failed++;
-		}
+		std::cout << grn("PASS: ")
+				  << "addition overflow - exception caught" << '\n';
 	}
-	// addition at min boundary
+	catch (...)
 	{
-		total++;
-		try
-		{
-			a = Fixed(-8388608) + Fixed(-1);
-			std::cout << red("FAIL: addition min boundary - no exception thrown");
-			failed++;
-		}
-		catch (const std::overflow_error& e)
-		{
-			std::cout << grn("PASS: ")
-				<< "addition min boundary - exception caught" << '\n';
-		}
-		catch (...)
-		{
-			std::cout << red("FAIL: addition min boundary - wrong exception type");
-			failed++;
-		}
+		std::cout << red("FAIL: addition overflow - wrong exception type'\n");
+		failed++;
 	}
+}
+// addition underflow (negative)
+{
+	total++;
+	try
+	{
+		a = Fixed(-8388607) + Fixed(-8388607);
+		std::cout << red("FAIL: addition underflow - no exception thrown");
+		failed++;
+	}
+	catch (const std::overflow_error& e)
+	{
+		std::cout << grn("PASS: ")
+				  << "addition underflow - exception caught" << '\n';
+	}
+	catch (...)
+	{
+		std::cout << red("FAIL: addition underflow - wrong exception type'\n");
+		failed++;
+	}
+}
+// addition at max boundary
+{
+	total++;
+	try
+	{
+		a = Fixed(8388606) + Fixed(2);
+		std::cout << red("FAIL: addition max boundary - no exception thrown\n");
+		failed++;
+	}
+	catch (const std::overflow_error& e)
+	{
+		std::cout << grn("PASS: ")
+				  << "addition max boundary - exception caught" << '\n';
+	}
+	catch (...)
+	{
+		std::cout << red("FAIL: addition max boundary - wrong exception type\n");
+		failed++;
+	}
+}
+// addition at min boundary
+{
+	total++;
+	try
+	{
+		a = Fixed(-8388607) + Fixed(-2);
+		std::cout << red("FAIL: addition min boundary - no exception thrown\n");
+		failed++;
+	}
+	catch (const std::overflow_error& e)
+	{
+		std::cout << grn("PASS: ")
+				  << "addition min boundary - exception caught" << '\n';
+	}
+	catch (...)
+	{
+		std::cout << red("FAIL: addition min boundary - wrong exception type\n");
+		failed++;
+	}
+}
 	printSummary(failed, total);
 	return (failed);
 }
