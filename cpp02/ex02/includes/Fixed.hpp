@@ -39,6 +39,14 @@ public:
 	float	toFloat(void) const;
 	int		toInt(void) const;
 
+	// comparison
+	bool operator>(const Fixed& rhs) const;
+	bool operator<(const Fixed& rhs) const;
+	bool operator>=(const Fixed& rhs) const;
+	bool operator<=(const Fixed& rhs) const;
+	bool operator==(const Fixed& rhs) const;
+	bool operator!=(const Fixed& rhs) const;
+
 	// arithmetic
 	Fixed operator+(const Fixed& rhs) const;
     Fixed operator-(const Fixed& rhs) const;

@@ -198,6 +198,35 @@ int	Fixed::toInt(void) const
  *                              COMPARISON OPERATORS                            *
  ********************************************************************************/
 
+bool Fixed::operator>(const Fixed& rhs) const
+{
+	return (_fixedPoint > rhs._fixedPoint);
+}
+
+bool Fixed::operator<(const Fixed& rhs) const
+{
+	return (_fixedPoint < rhs._fixedPoint);
+}
+
+bool Fixed::operator>=(const Fixed& rhs) const
+{
+	return (_fixedPoint >= rhs._fixedPoint);
+}
+
+bool Fixed::operator<=(const Fixed& rhs) const
+{
+	return (_fixedPoint <= rhs._fixedPoint);
+}
+
+bool Fixed::operator==(const Fixed& rhs) const
+{
+	return (_fixedPoint == rhs._fixedPoint);
+}
+
+bool Fixed::operator!=(const Fixed& rhs) const
+{
+	return (_fixedPoint != rhs._fixedPoint);
+}
 
 /********************************************************************************
  *                              ARITHMETIC OPERATORS                            *
