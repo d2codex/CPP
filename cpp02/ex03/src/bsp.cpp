@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 22:31:51 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/30 23:17:11 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/01/30 23:45:07 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 #include "colors.hpp"
 #include <iostream>
 
+/**
+ * @brief Computes the 2D cross product of vectors start->end and start->p.
+ *
+ * The sign of the result indicates whether p lies to the left or right
+ * of the directed edge (start -> end). A zero value means collinear.
+ *
+ * @param start Origin of both vectors.
+ * @param end   End point of the edge vector.
+ * @param p     End point of the test vector.
+ * @return Signed cross product as Fixed.
+ */
 static Fixed crossProduct(Point const& start, 
                           Point const& end, 
                           Point const& p)
@@ -22,6 +33,19 @@ static Fixed crossProduct(Point const& start,
           - (end.getY() - start.getY()) * (p.getX() - start.getX()));
 }
 
+/**
+ * @brief Determines if a point lies strictly inside a triangle.
+ *
+ * Uses cross products to test whether the point lies on the same side
+ * of all triangle edges. Points on edges are considered outside.
+ * Degenerate triangles always return false.
+ *
+ * @param a First triangle vertex.
+ * @param b Second triangle vertex.
+ * @param c Third triangle vertex.
+ * @param point Point to test.
+ * @return true if point is strictly inside, false otherwise.
+ */
 bool bsp(Point const a, Point const b, Point const c, Point const point)
 {
 	// degenerate triangle detection
