@@ -19,3 +19,13 @@ Point::~Point()
 {
 	LOG_DEBUG("Destructor called");
 }
+
+Point::getX() const
+{
+	return (_x.x);
+}
+
+Point::getY() const
+{
+	return (_y.y);
+}
