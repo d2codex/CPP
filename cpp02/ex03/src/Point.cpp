@@ -20,12 +20,12 @@ Point::~Point()
 	LOG_DEBUG("Destructor called");
 }
 
-Point::getX() const
+const Fixed& Point::getX() const
 {
-	return (_x.x);
+	return (_x);
 }
 
-Point::getY() const
+const Fixed& Point::getY() const
 {
-	return (_y.y);
+	return (_y);
 }
