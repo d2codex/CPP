@@ -60,8 +60,11 @@ public:
 	static logLevel stringToLevel(const std::string& levelStr);
 
 private:
-	Logger (); // prevent instantiation
-	
+	Logger();
+	Logger(const Logger& other);
+	Logger& operator=(const Logger&);
+	~Logger();
+
 	static	logLevel _threshold;
 
 /* Print the log if level >= threshold */
