@@ -6,7 +6,7 @@
 #    By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/21 18:21:54 by diade-so          #+#    #+#              #
-#    Updated: 2026/01/28 22:29:58 by diade-so         ###   ########.fr        #
+#    Updated: 2026/01/30 19:41:10 by diade-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,9 @@ TEST_NAME = $(BIN_DIR)/test_runner
 CORE_SRCS = src/Fixed.cpp \
 			src/Logger.cpp \
 			src/Point.cpp \
+			src/bsp.cpp
 
-APP_SRCS = src/bpp.cpp
+APP_SRCS = src/main.cpp
 
 TEST_SRCS = tests/main.cpp \
 
