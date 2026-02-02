@@ -48,7 +48,7 @@ static bool initLogger(int argc, char **argv)
 		Logger::setThreshold(level);
 		return (true);
 	}
-	std::cout << cyn("Usage: ./bin/Fixed [log level]\n");
+	std::cout << cyn("Usage: ./bin/fixed [log level]\n");
 	std::cout << cyn("Log modes: debug info warning error none\n");
 	return (false);
 }

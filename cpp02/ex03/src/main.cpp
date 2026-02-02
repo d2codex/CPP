@@ -42,14 +42,14 @@ static bool initLogger(int argc, char **argv)
 		if (level == Logger::INVALID)
 		{
 			std::cout << red("Error: Invalid log level\n");
-			std::cout << cyn("Usage: ./bin/fixed [log level]\n")
+			std::cout << cyn("Usage: ./bin/bsp [log level]\n")
 					  << cyn("Log modes: debug info warning error none\n");
 			return (false);
 		}
 		Logger::setThreshold(level);
 		return (true);
 	}
-	std::cout << cyn("Usage: ./bin/Fixed [log level]\n");
+	std::cout << cyn("Usage: ./bin/bsp [log level]\n");
 	std::cout << cyn("Log modes: debug info warning error none\n");
 	return (false);
 }
@@ -103,6 +103,28 @@ int main(int argc, char **argv)
 			Point c(0,3);
 			Point point(0,2);
 
+			if (bsp(a, b, c, point))
+				std::cout << yel("point is inside the triangle\n");
+			else
+				std::cout << mag("point is outside the triangle\n");
+		}
+		//slightly outside
+		{
+			Point a(0.0f, 0.0f);
+			Point b(10.0f, 0.0f);
+			Point c(5.0f, 10.0f);
+			Point point(5.0f, 10.00001f);
+			if (bsp(a, b, c, point))
+				std::cout << yel("point is inside the triangle\n");
+			else
+				std::cout << mag("point is outside the triangle\n");
+		}
+		//slightly inside
+		{
+			Point a(0.0f, 0.0f);
+		    Point b(0.0f, 3.0f);
+			Point c(3.0f, 0.0f);
+			Point point(0.002f, 1.41);
 			if (bsp(a, b, c, point))
 				std::cout << yel("point is inside the triangle\n");
 			else

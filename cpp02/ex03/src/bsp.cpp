@@ -56,8 +56,11 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
 		return (false);
 	}
     Fixed ab_ap = crossProduct(a, b, point);
+	DBG(std::cout << YEL << "ab_ap: " << ab_ap.toFloat() << RESET << '\n';)
     Fixed bc_bp = crossProduct(b, c, point);
+	DBG(std::cout << YEL << "bc_bp: " << bc_bp.toFloat() << RESET << '\n';)
     Fixed ca_cp = crossProduct(c, a, point);
+	DBG(std::cout << YEL << "ca_cp: " << ca_cp.toFloat() << RESET << '\n';)
 
 	if (ab_ap == 0 || bc_bp == 0 || ca_cp == 0)
 	{
