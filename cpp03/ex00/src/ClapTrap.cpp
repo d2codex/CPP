@@ -177,7 +177,8 @@ void ClapTrap::takeDamage(unsigned int amount)
  * @param amount Amount of HP to restore.
  *
  * Healing is capped at max HP. Energy is consumed even at full HP.
- */oid ClapTrap::beRepaired(unsigned int amount)
+ */
+void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (_hitPoints == 0)
 	{
