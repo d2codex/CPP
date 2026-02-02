@@ -16,9 +16,15 @@ public:
 	unsigned int	getEnergyPoints() const;
 	unsigned int	getAttackDamage() const;
 
+	// actions
+	void attack(const std::string& target);
+	void takeDamage(unsigned int amount);
+	void beRepaired(unsigned int amount);
+
 private:
 	std::string		_name;
 	unsigned int	_hitPoints;
 	unsigned int	_energyPoints;
 	unsigned int	_attackDamage;
+	static const unsigned int	_maxHP;
 };
