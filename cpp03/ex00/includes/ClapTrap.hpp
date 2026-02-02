@@ -2,6 +2,10 @@
 
 #include <string>
 
+/**
+ * @class ClapTrap
+ * @brief Simple combat entity with HP, energy, and attack damage.
+ */
 class ClapTrap
 {
 public:
