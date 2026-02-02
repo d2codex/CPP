@@ -79,25 +79,6 @@ ClapTrap::~ClapTrap()
 }
 
 /*****************************************************************************
- *                             GETTER / SETTER                               *
- *****************************************************************************/
-
-unsigned int ClapTrap::getHitPoints() const
-{
-	return (_hitPoints);
-}
-
-unsigned int ClapTrap::getEnergyPoints() const
-{
-	return (_energyPoints);
-}
-
-unsigned int ClapTrap::getAttackDamage() const
-{
-	return (_attackDamage);
-}
-
-/*****************************************************************************
  *                                  ACTIONS								     *
  *****************************************************************************/
 

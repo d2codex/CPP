@@ -11,11 +11,6 @@ public:
 	ClapTrap& operator=(const ClapTrap& other);
 	~ClapTrap();
 
-	// getters
-	unsigned int	getHitPoints() const;
-	unsigned int	getEnergyPoints() const;
-	unsigned int	getAttackDamage() const;
-
 	// actions
 	void attack(const std::string& target);
 	void takeDamage(unsigned int amount);
