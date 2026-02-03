@@ -3,6 +3,12 @@
 #include "ClapTrap.hpp"
 #include <string>
 
+/**
+ * @class FragTrap
+ * @brief Specialized ClapTrap with high-five ability.
+ *
+ * Inherits from ClapTrap and adds a positive interaction action.
+ */
 class FragTrap : public ClapTrap
 {
 public:
