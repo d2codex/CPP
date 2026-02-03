@@ -2,6 +2,13 @@
 
 #include "ClapTrap.hpp"
 
+/**
+ * @class ScavTrap
+ * @brief Derived class of ClapTrap with custom abilities.
+ *
+ * ScavTrap inherits from ClapTrap and can perform attacks with
+ * custom messages and enter Gate Keeper Mode using guardGate().
+ */
 class ScavTrap : public ClapTrap
 {
 public:

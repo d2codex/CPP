@@ -8,6 +8,9 @@
  *                               CONSTRUCTORS                                *
  *****************************************************************************/
 
+/**
+ * @brief Default constructor. Initializes a ScavTrap with default stats.
+ */
 ScavTrap::ScavTrap() : ClapTrap()
 {
 	_name = "ScavTrap";
@@ -25,6 +28,11 @@ ScavTrap::ScavTrap() : ClapTrap()
 	LOG_DEBUG(oss.str());
 }
 
+
+/**
+ * @brief String constructor. Sets name and initializes ScavTrap stats.
+ * @param name Name of the ScavTrap instance
+ */
 ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 {
 	_name = name;
@@ -42,11 +50,20 @@ ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 	LOG_DEBUG(oss.str());
 }
 
+/**
+ * @brief Copy constructor. Creates a copy of another ScavTrap.
+ * @param other ScavTrap instance to copy
+ */
 ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)
 {
 	LOG_INFO("ScavTrap Copy Constructor called");
 }
 
+/**
+ * @brief Assignment operator. Copies stats from another ScavTrap.
+ * @param other ScavTrap instance to assign from
+ * @return Reference to *this
+ */
 ScavTrap& ScavTrap::operator=(ScavTrap& other)
 {
 	if (this != &other)
@@ -67,6 +84,9 @@ ScavTrap& ScavTrap::operator=(ScavTrap& other)
 	return (*this);
 }
 
+/**
+ * @brief Destructor. Logs destruction of the ScavTrap instance.
+ */
 ScavTrap::~ScavTrap()
 {
 	LOG_INFO("ScavTrap Deconstructor Called");
@@ -76,6 +96,10 @@ ScavTrap::~ScavTrap()
  *                                  ACTIONS                                  *
  *****************************************************************************/
 
+/**
+ * @brief Attack a target. Prints a custom message and consumes energy.
+ * @param target Name of the target to attack
+ */
 void ScavTrap::attack(const std::string& target)
 {
 	if (_hitPoints == 0)
@@ -107,6 +131,9 @@ void ScavTrap::attack(const std::string& target)
 	LOG_DEBUG(oss.str());
 }
 
+/**
+ * @brief Enter Guard Gate mode. Prints a message.
+ */
 void ScavTrap::guardGate()
 {
 	std::cout << mag("ScavTrap is now in Gate Keeper Mode\n");
