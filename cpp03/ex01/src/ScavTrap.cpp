@@ -19,7 +19,7 @@ ScavTrap::ScavTrap() : ClapTrap()
 	_attackDamage = 30;
 
 	LOG_INFO("ScavTrap Default Constructor called");
-
+	// debug logging
 	std::ostringstream oss;
 	oss << _name << '\n'
 		<< yel("HP: ") << _hitPoints << '\n'
@@ -41,7 +41,7 @@ ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 	_attackDamage = 30;
 
 	LOG_INFO("ScavTrap String Constructor called");
-
+	// debug logging
 	std::ostringstream oss;
 	oss << _name << '\n'
 		<< yel("HP: ") << _hitPoints << '\n'
