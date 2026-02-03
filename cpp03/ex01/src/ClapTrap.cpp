@@ -15,18 +15,18 @@ const unsigned int ClapTrap::_maxHP = 10;
  * Initializes ClapTrap with default stats.
  */
 ClapTrap::ClapTrap() : 
-	_name("Default"),
-	_hitPoints(10),
+	_name("ClapTrap"),
+	_hitPoints(_maxHP),
 	_energyPoints(10),
 	_attackDamage(0)
 {
-	LOG_INFO("Default Constructor called");
+	LOG_INFO("ClapTrap Default Constructor called");
 	// debug logging	
 	std::ostringstream oss;
 	oss << _name << '\n' 
-		<< yel("Hit Points:    ") << _hitPoints << '\n'
-		<< yel("Energy Points: ") << _energyPoints << '\n'
-		<< yel("Attack Damage: ") << _attackDamage;
+		<< yel("HP: ") << _hitPoints << '\n'
+		<< yel("EP: ") << _energyPoints << '\n'
+		<< yel("AD: ") << _attackDamage;
 	LOG_DEBUG(oss.str());
 }
 
@@ -36,17 +36,17 @@ ClapTrap::ClapTrap() :
  */
 ClapTrap::ClapTrap(const std::string& name) :
 	_name(name),
-	_hitPoints(10),
+	_hitPoints(_maxHP),
 	_energyPoints(10),
 	_attackDamage(0)
 {
-	LOG_INFO("Constructor called");
+	LOG_INFO("ClapTrap String Constructor called");
 	// debug logging
 	std::ostringstream oss;
 	oss << _name << '\n'
-		<< yel("Hit Points:    ") << _hitPoints << '\n'
-		<< yel("Energy Points: ") << _energyPoints << '\n'
-		<< yel("Attack Damage: ") << _attackDamage;
+		<< yel("HP: ") << _hitPoints << '\n'
+		<< yel("EP: ") << _energyPoints << '\n'
+		<< yel("AD: ") << _attackDamage;
 	LOG_DEBUG(oss.str());
 }
 
@@ -56,15 +56,8 @@ ClapTrap::ClapTrap(const std::string& name) :
  */
 ClapTrap::ClapTrap(const ClapTrap& other)
 {
-	LOG_INFO("Copy constructor called");
+	LOG_INFO("ClapTrap Copy constructor called");
 	*this = other;
-	//debug logging
-	std::ostringstream oss;
-	oss << _name << '\n'
-		<< yel("Hit Points:    ") << _hitPoints << '\n'
-		<< yel("Energy Points: ") << _energyPoints << '\n'
-		<< yel("Attack Damage: ") << _attackDamage;
-	LOG_DEBUG(oss.str());
 }
 
 /**
@@ -82,7 +75,15 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 		this->_attackDamage = other._attackDamage;
 	}
 	else
-		LOG_WARNING("Self-Assignment ignored");
+		LOG_WARNING("ClapTrap Self-Assignment ignored");
+	LOG_INFO("ClapTrap Assignment Operator Called");
+	// debug logging
+	std::ostringstream oss;
+	oss << _name << '\n'
+		<< yel("HP: ") << _hitPoints << '\n'
+		<< yel("EP: ") << _energyPoints << '\n'
+		<< yel("AD: ") << _attackDamage;
+	LOG_DEBUG(oss.str());
 	return (*this);
 }
 
@@ -91,7 +92,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
  */
 ClapTrap::~ClapTrap()
 {
-	LOG_INFO("Destructor Called");
+	LOG_INFO("ClapTrap Destructor Called");
 }
 
 /*****************************************************************************
@@ -125,9 +126,9 @@ void ClapTrap::attack(const std::string& target)
 	// debug logging	
 	std::ostringstream oss;
 	oss << _name << '\n'
-		<< yel("Hit Points:    ") << _hitPoints << '\n'
-		<< yel("Energy Points: ") << _energyPoints << '\n'
-		<< yel("Attack Damage: ") << _attackDamage;
+		<< yel("HP:    ") << _hitPoints << '\n'
+		<< yel("EP: ") << _energyPoints << '\n'
+		<< yel("AD: ") << _attackDamage;
 	LOG_DEBUG(oss.str());
 }
 
@@ -153,9 +154,9 @@ void ClapTrap::takeDamage(unsigned int amount)
 		// debug logging
 		std::ostringstream oss;
 		oss << _name << '\n'
-		<< yel("Hit Points:    ") << _hitPoints << '\n'
-		<< yel("Energy Points: ") << _energyPoints << '\n'
-		<< yel("Attack Damage: ") << _attackDamage;
+		<< yel("HP: ") << _hitPoints << '\n'
+		<< yel("EP: ") << _energyPoints << '\n'
+		<< yel("AD: ") << _attackDamage;
 		LOG_DEBUG(oss.str());
 		return ;
 	}
@@ -166,9 +167,9 @@ void ClapTrap::takeDamage(unsigned int amount)
 	// debug logging	
 	std::ostringstream oss;
 	oss << _name << '\n'
-		<< yel("Hit Points:    ") << _hitPoints << '\n'
-		<< yel("Energy Points: ") << _energyPoints << '\n'
-		<< yel("Attack Damage: ") << _attackDamage;
+		<< yel("HP: ") << _hitPoints << '\n'
+		<< yel("EP: ") << _energyPoints << '\n'
+		<< yel("AD: ") << _attackDamage;
 	LOG_DEBUG(oss.str());
 }
 
@@ -202,8 +203,8 @@ void ClapTrap::beRepaired(unsigned int amount)
 	// debug logging
 	std::ostringstream oss;
 	oss << _name << '\n'
-		<< yel("Hit Points:    ") << _hitPoints << '\n'
-		<< yel("Energy Points: ") << _energyPoints << '\n'
-		<< yel("Attack Damage: ") << _attackDamage;
+		<< yel("HP: ") << _hitPoints << '\n'
+		<< yel("EP: ") << _energyPoints << '\n'
+		<< yel("AD: ") << _attackDamage;
 	LOG_DEBUG(oss.str());
 }
