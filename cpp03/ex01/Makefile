@@ -23,7 +23,7 @@ DEBUGFLAGS = -DDBUG -g
 # ============================================================
 
 BIN_DIR = bin
-NAME = $(BIN_DIR)/claptrap
+NAME = $(BIN_DIR)/scavtrap
 TEST_NAME = $(BIN_DIR)/test_runner
 
 # ============================================================
@@ -32,6 +32,7 @@ TEST_NAME = $(BIN_DIR)/test_runner
 
 CORE_SRCS = src/ClapTrap.cpp \
 			src/Logger.cpp \
+			src/ScavTrap.cpp \
 
 APP_SRCS = src/main.cpp
 
