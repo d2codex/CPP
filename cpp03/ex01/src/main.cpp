@@ -1,6 +1,7 @@
 #include "Logger.hpp"
 #include "colors.hpp"
-#include "ClapTrap.hpp"
+//#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 #include <iostream>
 #include <climits>
 
@@ -34,28 +35,32 @@ int	main(int argc, char **argv)
 {
 	if (!initLogger(argc, argv))
 		return (1);
-/*
+
+	// default constructors show parent and child initialized values
+	// destructors called in reverse order (parent first - unless virtual)
 	{
-		ClapTrap a("Patrik");
-		a = a;
-		ClapTrap b(a);
-		a.beRepaired(1);
-		a.attack("Plankton");
-		a.attack("Plankton");
-		a.attack("Plankton");
-		a.attack("Plankton");
-		a.attack("Plankton");
-		a.attack("Plankton");
-		a.attack("Plankton");
-		a.attack("Plankton");
-		a.beRepaired(UINT_MAX);
-		a.beRepaired(100);
+		std::cout << cyn("====== Test[1]: default ctor / dtor ======\n");
+		ClapTrap();
+		ScavTrap();
 	}
-*/
+	// String constructor
 	{
-		ClapTrap a("Sandy");
-		a.takeDamage(9);
-		a.beRepaired(UINT_MAX);
-		a.takeDamage(UINT_MAX);
+		std::cout << cyn("====== Test[2]: string constructor ======\n");
+		ScavTrap("Squidward");
 	}
+	// Copy Constructor
+	{
+		std::cout << cyn("======= Test[3]: copy constructor =======\n");
+		ScavTrap a("SpongeBob");
+		ScavTrap b(a);
+	}
+	// Assignment Constructor
+	{
+		std::cout << cyn("==== Test[3]: assignment constructor ====\n");
+		ScavTrap gary("Gary");
+		ScavTrap mrKrabs("Mr. Krabs");
+
+		mrKrabs = gary;
+	}
+
 }
