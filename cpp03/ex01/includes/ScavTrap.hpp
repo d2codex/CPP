@@ -10,8 +10,8 @@ public:
 	ScavTrap(const ScavTrap& other);
 	ScavTrap& operator=(ScavTrap& other);
 	~ScavTrap();
-
-
-private:
-	static const unsigned int	_maxHP;
+	
+	// actions
+	void attack(const std::string& target);
+	void guardGate();
 };
