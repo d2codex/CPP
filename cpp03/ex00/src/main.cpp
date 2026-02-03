@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/04 00:33:46 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/04 00:33:54 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Logger.hpp"
 #include "colors.hpp"
 #include "ClapTrap.hpp"
@@ -34,8 +46,9 @@ int	main(int argc, char **argv)
 {
 	if (!initLogger(argc, argv))
 		return (1);
-/*
+
 	{
+		std::cout << cyn("====== Test[1]: attack / beRepaired ======\n");
 		ClapTrap a("Patrik");
 		a = a;
 		ClapTrap b(a);
@@ -51,8 +64,9 @@ int	main(int argc, char **argv)
 		a.beRepaired(UINT_MAX);
 		a.beRepaired(100);
 	}
-*/
+
 	{
+		std::cout << cyn("========= Test[2]: takeDamage =========\n");
 		ClapTrap a("Sandy");
 		a.takeDamage(9);
 		a.beRepaired(UINT_MAX);
