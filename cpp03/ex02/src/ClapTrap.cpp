@@ -40,7 +40,7 @@ ClapTrap::ClapTrap(const std::string& name) :
 	_energyPoints(10),
 	_attackDamage(0)
 {
-	LOG_INFO("ClapTrap String Constructor called");
+	LOG_INFO("ClapTrap name constructor called");
 	// debug logging
 	std::ostringstream oss;
 	oss << _name << '\n'
@@ -56,7 +56,7 @@ ClapTrap::ClapTrap(const std::string& name) :
  */
 ClapTrap::ClapTrap(const ClapTrap& other)
 {
-	LOG_INFO("ClapTrap Copy constructor called");
+	LOG_INFO("ClapTrap copy constructor called");
 	*this = other;
 }
 
@@ -75,7 +75,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 		this->_attackDamage = other._attackDamage;
 	}
 	else
-		LOG_WARNING("ClapTrap Self-Assignment ignored");
+		LOG_WARNING("ClapTrap self-assignment ignored");
 	LOG_INFO("ClapTrap Assignment Operator Called");
 	// debug logging
 	std::ostringstream oss;
@@ -92,7 +92,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
  */
 ClapTrap::~ClapTrap()
 {
-	LOG_INFO("ClapTrap Destructor Called");
+	LOG_INFO("ClapTrap destructor called");
 }
 
 /*****************************************************************************

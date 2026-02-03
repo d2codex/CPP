@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 	}
 	// String constructor
 	{
-		std::cout << cyn("====== Test[2]: string constructor =======\n");
+		std::cout << cyn("======= Test[2]: name constructor ========\n");
 		FragTrap("Squidward");
 	}
 	// Copy Constructor

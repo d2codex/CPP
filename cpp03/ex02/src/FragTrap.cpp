@@ -42,7 +42,7 @@ FragTrap::FragTrap(const std::string& name) : ClapTrap(name)
 	_energyPoints = 100;
 	_attackDamage = 30;
 
-	LOG_INFO("FragTrap string constructor called");
+	LOG_INFO("FragTrap name constructor called");
 	// debug logging
 	std::ostringstream oss;
 	oss << _name << '\n' 
@@ -63,12 +63,13 @@ FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other)
 	LOG_INFO("FragTrap copy constructor called");
 }
 
-F/**
+/**
  * @brief Copy assignment operator.
  * Assigns the state of another FragTrap to this one.
  * @param other FragTrap to assign from.
  * @return Reference to this FragTrap.
- */ragTrap& FragTrap::operator=(const FragTrap& other)
+ */
+FragTrap& FragTrap::operator=(const FragTrap& other)
 {
 	if (this != &other)
 	{
