@@ -45,22 +45,37 @@ int	main(int argc, char **argv)
 	}
 	// String constructor
 	{
-		std::cout << cyn("====== Test[2]: string constructor ======\n");
+		std::cout << cyn("====== Test[2]: string constructor =======\n");
 		ScavTrap("Squidward");
 	}
 	// Copy Constructor
 	{
-		std::cout << cyn("======= Test[3]: copy constructor =======\n");
+		std::cout << cyn("======= Test[3]: copy constructor ========\n");
 		ScavTrap a("SpongeBob");
 		ScavTrap b(a);
 	}
 	// Assignment Constructor
 	{
-		std::cout << cyn("==== Test[3]: assignment constructor ====\n");
+		std::cout << cyn("===== Test[4]: assignment constructor ====\n");
 		ScavTrap gary("Gary");
 		ScavTrap mrKrabs("Mr. Krabs");
 
 		mrKrabs = gary;
 	}
-
+	// Guard Keeper Mode
+	{
+		std::cout << cyn("======= Test[5]: Gate Keeper Mode ========\n");
+		ScavTrap plankton("Plankton");
+		plankton.guardGate();
+	}
+	// Attack
+	{
+		std::cout << cyn("=========== Test[6]: Atack Mode ===========\n");
+		ScavTrap kamazi("Kamikaze Claptrap");
+		kamazi.attack("Stabby Claptrap");
+		kamazi.takeDamage(50);
+		kamazi.takeDamage(100);
+		kamazi.beRepaired(100);
+		kamazi.attack("FL4k");
+	}
 }
