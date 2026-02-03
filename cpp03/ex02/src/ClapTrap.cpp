@@ -20,7 +20,7 @@ ClapTrap::ClapTrap() :
 	_energyPoints(10),
 	_attackDamage(0)
 {
-	LOG_INFO("ClapTrap Default Constructor called");
+	LOG_INFO("ClapTrap default constructor called");
 	// debug logging	
 	std::ostringstream oss;
 	oss << _name << '\n' 
@@ -76,7 +76,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 	}
 	else
 		LOG_WARNING("ClapTrap self-assignment ignored");
-	LOG_INFO("ClapTrap Assignment Operator Called");
+	LOG_INFO("ClapTrap assignment operator Called");
 	// debug logging
 	std::ostringstream oss;
 	oss << _name << '\n'
