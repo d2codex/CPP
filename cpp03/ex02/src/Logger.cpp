@@ -1,0 +1,105 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Logger.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/28 16:45:57 by diade-so          #+#    #+#             */
+/*   Updated: 2026/01/29 22:25:54 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "Logger.hpp"
+#include "colors.hpp"
+#include <string>
+#include <iostream>
+
+/**
+ * @brief Initialize default log threshold.
+ *
+ * Default threshold set to NONE.
+ */
+Logger::logLevel Logger::_threshold = Logger::NONE;
+
+
+/**
+ * @brief Set the minimum log level to print.
+ *
+ * Messages below this level are ignored.
+ */
+void Logger::setThreshold(logLevel level)
+{
+	_threshold = level;
+}
+
+/**
+ * @brief Print a log message if allowed by threshold.
+ *
+ * @param prefix  Colored level prefix (e.g. "[INFO] ").
+ * @param message The message to print.
+ * @param level   The message log level.
+ */
+void	Logger::writeLog(const std::string& prefix,
+						 const std::string& message, logLevel level)
+{
+	if (level >= _threshold)
+		std::cout << prefix << message << std::endl;
+}
+
+/**
+ * @brief Log a DEBUG message.
+ */
+void	Logger::debug(const std::string& message)
+{
+	writeLog(yel("[DEBUG] "), message, DEBUG);
+}
+
+/**
+ * @brief Log an INFO message.
+ */
+void	Logger::info(const std::string& message)
+{
+	writeLog(blu("[INFO] "), message, INFO);
+}
+
+/**
+ * @brief Log a WARNING message.
+ */
+void	Logger::warning(const std::string& message)
+{
+	writeLog(mag("[WARNING] "), message, WARNING);
+}
+
+
+/**
+ * @brief Log an ERROR message.
+ */
+void	Logger::error(const std::string& message)
+{
+	writeLog(red("[ERROR] "), message, ERROR);
+}
+
+/**
+ * @brief Convert a string to a logLevel enum.
+ *
+ * Case-insensitive conversion. Returns INVALID if unknown.
+ */
+Logger::logLevel	Logger::stringToLevel(const std::string& levelStr)
+{
+	std::string level = levelStr;
+	for (std::string::size_type i = 0; i < level.size(); i++)
+			level[i] = std::toupper(static_cast<unsigned char>(level[i]));
+	
+	if (level == "DEBUG")
+		return (DEBUG);
+	if (level == "INFO")
+		return (INFO);
+	if (level == "WARNING")
+		return (WARNING);
+	if (level == "ERROR")
+		return (ERROR);
+	if (level == "NONE")
+		return (NONE);
+	return (INVALID);
+}
