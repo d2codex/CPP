@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   FragTrap.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/04 00:45:47 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/04 00:46:08 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "FragTrap.hpp"
 #include "Logger.hpp"
 #include "colors.hpp"
@@ -52,7 +64,6 @@ FragTrap::FragTrap(const std::string& name) : ClapTrap(name)
 	LOG_DEBUG(oss.str());
 }
 
-
 /**
  * @brief Copy constructor.
  * Creates a FragTrap as a copy of another one.
@@ -88,7 +99,6 @@ FragTrap& FragTrap::operator=(const FragTrap& other)
 	LOG_DEBUG(oss.str());
 	return (*this);
 }
-
 
 /**
  * @brief Destructor.

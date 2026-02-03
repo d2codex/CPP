@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/04 00:46:39 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/04 00:46:40 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Logger.hpp"
 #include "colors.hpp"
 #include "DiamondTrap.hpp"
@@ -35,6 +47,7 @@ int	main(int argc, char **argv)
 	if (!initLogger(argc, argv))
 		return (1);
 
+
 	// default constructors show parent and child initialized values
 	// destructors called in reverse order (parent first - unless virtual)
 	{
@@ -70,7 +83,7 @@ int	main(int argc, char **argv)
 	{
 		std::cout << cyn("=========== Test[6]: Atack Mode ===========\n");
 		DiamondTrap patrick("Patrick");
-		patrick.attack("Stabby Claptrap");
+		patrick.attack("Sandy Cheeks");
 		ClapTrap spongebob("SpongeBobSquarePants");
 		ScavTrap gary("Gary");
 		FragTrap plankton("Plankton");

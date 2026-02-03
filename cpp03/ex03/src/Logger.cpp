@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 16:45:57 by diade-so          #+#    #+#             */
-/*   Updated: 2026/01/29 22:25:54 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/02/04 00:46:17 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	Logger::warning(const std::string& message)
 {
 	writeLog(mag("[WARNING] "), message, WARNING);
 }
-
 
 /**
  * @brief Log an ERROR message.
