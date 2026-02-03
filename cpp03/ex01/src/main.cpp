@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/04 00:37:25 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/04 00:37:27 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Logger.hpp"
 #include "colors.hpp"
-//#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include <iostream>
 #include <climits>

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/04 00:36:46 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/04 00:37:02 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ScavTrap.hpp"
 #include "Logger.hpp"
 #include "colors.hpp"
@@ -27,7 +39,6 @@ ScavTrap::ScavTrap() : ClapTrap()
 		<< yel("AD: ") << _attackDamage;
 	LOG_DEBUG(oss.str());
 }
-
 
 /**
  * @brief String constructor. Sets name and initializes ScavTrap stats.
