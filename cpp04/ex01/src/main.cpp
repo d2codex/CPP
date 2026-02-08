@@ -55,115 +55,79 @@ int	main(int argc, char **argv)
 	}
 	// Assignment Constructor
 	{
-		std::cout << cyn("===== Test[4]: assignment constructor ====\n");
+		std::cout << cyn("===== Test[3]: assignment constructor ====\n");
 		Brain a;
 		Brain b;
 
 		b = a;
 	}
-
-/*	// default animal ctor / dtor
+	// default cat ctor / dtor
 	{
-		std::cout << cyn("====== Test[1]: default ctor / dtor ======\n");
-		Animal animal;
-	}
-	// Type constructor
-	{
-		std::cout << cyn("======= Test[2]: type constructor ========\n");
-		Animal animal("any thing you want here");
+		std::cout << cyn("====== Test[4]: default ctor / dtor ======\n");
+		Cat felix;
 	}
 	// Copy Constructor
 	{
-		std::cout << cyn("======= Test[3]: copy constructor ========\n");
-		Animal a;
-		Animal b(a);
+		std::cout << cyn("======= Test[5]: copy constructor ========\n");
+		Cat felix;
+		Cat garfield(felix);
 	}
 	// Assignment Constructor
 	{
-		std::cout << cyn("===== Test[4]: assignment constructor ====\n");
-		Animal a("type a");
-		Animal b("type b");
+		std::cout << cyn("===== Test[6]: assignment constructor ====\n");
+		Cat felix;
+		Cat garfield;
 
-		b = a;
+		felix = garfield;
 	}
 	// cat: Declaring pointer to animal forces us to test polymorphism
-	// shows that the makeSound is being called from cat and not the parent
-	// and why we need to declare virtual in parent - the virtual part
-	// calls the most derived member function
 	{
-		std::cout << cyn("== Test[5]: Animal(base) / Cat(derived) ==\n");
+		std::cout << cyn("== Test[7]: Animal(base) / Cat(derived) ==\n");
 		const Animal* garfield = new Cat();
 		garfield->makeSound();
 		delete garfield;
 	}
-	// cat copy
-	{
-		std::cout << cyn("============== Test[5]: Copy ============\n");
-		Cat felix;
-		Cat garfield(felix);
-	}
-	// cat assignment
-	{
-		std::cout << cyn("=========== Test[6]: Assignment ==========\n");
-		Cat felix;
-		Cat garfield;
-
-		garfield = felix;
-		garfield.makeSound();
-		// compiler at schoool does not allow this
-		// garfield = garfield;
-	}
 	// dog tests
 	{
-		std::cout << cyn("== Test[5]: Animal(base) / Dog(derived) ==\n");
+		std::cout << cyn("== Test[8]: Animal(base) / Dog(derived) ==\n");
 		const Animal* snoopy = new Dog();
 		snoopy->makeSound();
 		delete snoopy;
 	}
 	// dog copy
 	{
-		std::cout << cyn("============== Test[7]: Copy ============\n");
+		std::cout << cyn("============== Test[9]: Copy ============\n");
 		Dog spot;
 		Dog snoopy(spot);
 	}
 	// dog assignment
 	{
-		std::cout << cyn("=========== Test[8]: Assignment ==========\n");
+		std::cout << cyn("=========== Test[10]: Assignment ==========\n");
 		Dog spot;
 		Dog snoopy;
 
 		snoopy = spot;
 		snoopy.makeSound();
 	}
-
-	// WrongCat
+	// the farm
 	{
-		std::cout << cyn("======= Test[9]: (base) /(derived) =======\n");
-		const WrongAnimal* garfield = new WrongCat();
-		garfield->makeSound();
-		delete garfield;
-	}
-	// cat copy
-	{
-		std::cout << cyn("============== Test[10]: Copy ============\n");
-		WrongCat felix;
-		WrongCat garfield(felix);
-		garfield.makeSound();
-	}
-	// cat assignment
-	// Direct call on WrongCat object → static binding.
-	// Non-virtual only affects calls through base-class pointers,
-	// so WrongCat::makeSound() is used here.
-	{
-		std::cout << cyn("=========== Test[11]: Assignment ==========\n");
-		WrongCat felix;
-		WrongCat garfield;
+		std::cout << cyn("========== Test[11]: Animal Farm =========\n");
+		size_t size = 10;
+		Animal** farm = new Animal*[size];
+		for(size_t i = 0; i < size / 2; i++)
+		{
+			farm[i] = new Cat();
+		}
+		for(size_t i = size / 2 ; i < size; i++)
+		{
+			farm[i] = new Dog();
+		}
 
-		garfield = felix;
-		garfield.makeSound();
-
-		WrongAnimal dog;
-		dog.makeSound();
+		for(size_t i = 0; i < size; i++)
+		{
+			delete farm[i];
+		}
+		
+		delete[] farm;
 	}
-*/
 }
