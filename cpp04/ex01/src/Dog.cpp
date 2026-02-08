@@ -40,6 +40,7 @@ void Dog::makeSound() const
 
 Dog::~Dog()
 {
+	LOG_DEBUG() << "Deleting brain at " << _brain;
 	delete _brain;
 	LOG_INFO() << "Dog destructor called";
 }

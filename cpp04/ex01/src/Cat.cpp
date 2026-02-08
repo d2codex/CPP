@@ -40,6 +40,7 @@ void Cat::makeSound() const
 
 Cat::~Cat()
 {
+	LOG_DEBUG() << "Deleting brain at " << _brain;
 	delete _brain;
 	LOG_INFO() << "Cat destructor called";
 }
