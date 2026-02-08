@@ -1,7 +1,9 @@
 #include "Logger.hpp"
-#include "Animal.hpp"
+//#include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
+//#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 #include "colors.hpp"
 #include <iostream>
 
@@ -42,15 +44,39 @@ int	main(int argc, char **argv)
 {
 	if (!initLogger(argc, argv))
 		return (1);
-/*
-	const Animal* meta = new Animal();
-	meta->makeSound();
+	// subject test
+	{
+		std::cout << cyn("========= Subject Animal Test =========\n");
+		const Animal* meta = new Animal();
+		const Animal* j = new Dog();
+		const Animal* i = new Cat();
 
-	const Animal* j = new Dog();
-	std::cout << j->getType() << " " << std::endl;
-	j->makeSound();
-	delete meta;
-*/
+		std::cout << j->getType() << " " << std::endl;
+		std::cout << i->getType() << " " << std::endl;
+
+		i->makeSound();
+		j->makeSound();
+		meta->makeSound();
+
+		delete meta;
+		delete j;
+		delete i;
+	}
+
+	// WrongAnimal subject test	
+	{
+		std::cout << cyn("======= Subject Wrong Animal Test =======\n");
+		const WrongAnimal* meta = new WrongAnimal();
+		const WrongAnimal* i = new WrongCat();
+
+		std::cout << i->getType() << " " << std::endl;
+
+		i->makeSound();
+		meta->makeSound();
+
+		delete meta;
+		delete i;
+	}
 	// default animal ctor / dtor
 	{
 		std::cout << cyn("====== Test[1]: default ctor / dtor ======\n");
@@ -87,7 +113,7 @@ int	main(int argc, char **argv)
 	}
 	// cat copy
 	{
-		std::cout << cyn("============== Test[6]: Copy ============\n");
+		std::cout << cyn("============== Test[5]: Copy ============\n");
 		Cat felix;
 		Cat garfield(felix);
 	}
@@ -99,6 +125,8 @@ int	main(int argc, char **argv)
 
 		garfield = felix;
 		garfield.makeSound();
+		// compiler at schoool does not allow this
+		// garfield = garfield;
 	}
 	// dog tests
 	{
@@ -109,18 +137,48 @@ int	main(int argc, char **argv)
 	}
 	// dog copy
 	{
-		std::cout << cyn("============== Test[6]: Copy ============\n");
+		std::cout << cyn("============== Test[7]: Copy ============\n");
 		Dog spot;
 		Dog snoopy(spot);
 	}
 	// dog assignment
 	{
-		std::cout << cyn("=========== Test[6]: Assignment ==========\n");
+		std::cout << cyn("=========== Test[8]: Assignment ==========\n");
 		Dog spot;
 		Dog snoopy;
 
 		snoopy = spot;
 		snoopy.makeSound();
+	}
+
+	// WrongCat
+	{
+		std::cout << cyn("======= Test[9]: (base) /(derived) =======\n");
+		const WrongAnimal* garfield = new WrongCat();
+		garfield->makeSound();
+		delete garfield;
+	}
+	// cat copy
+	{
+		std::cout << cyn("============== Test[10]: Copy ============\n");
+		WrongCat felix;
+		WrongCat garfield(felix);
+		garfield.makeSound();
+	}
+	// cat assignment
+	// Direct call on WrongCat object → static binding.
+	// Non-virtual only affects calls through base-class pointers,
+	// so WrongCat::makeSound() is used here.
+	{
+		std::cout << cyn("=========== Test[11]: Assignment ==========\n");
+		WrongCat felix;
+		WrongCat garfield;
+
+		garfield = felix;
+		garfield.makeSound();
+
+		WrongAnimal dog;
+		dog.makeSound();
 	}
 
 }
