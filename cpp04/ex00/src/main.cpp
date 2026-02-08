@@ -85,7 +85,7 @@ int	main(int argc, char **argv)
 		garfield->makeSound();
 		delete garfield;
 	}
-		// cat copy
+	// cat copy
 	{
 		std::cout << cyn("============== Test[6]: Copy ============\n");
 		Cat felix;
@@ -99,6 +99,28 @@ int	main(int argc, char **argv)
 
 		garfield = felix;
 		garfield.makeSound();
+	}
+	// dog tests
+	{
+		std::cout << cyn("== Test[5]: Animal(base) / Dog(derived) ==\n");
+		const Animal* snoopy = new Dog();
+		snoopy->makeSound();
+		delete snoopy;
+	}
+	// dog copy
+	{
+		std::cout << cyn("============== Test[6]: Copy ============\n");
+		Dog spot;
+		Dog snoopy(spot);
+	}
+	// dog assignment
+	{
+		std::cout << cyn("=========== Test[6]: Assignment ==========\n");
+		Dog spot;
+		Dog snoopy;
+
+		snoopy = spot;
+		snoopy.makeSound();
 	}
 
 }
