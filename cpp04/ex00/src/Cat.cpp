@@ -38,5 +38,3 @@ Cat::~Cat()
 {
 	LOG_INFO() << "Cat destructor called";
 }
-
-

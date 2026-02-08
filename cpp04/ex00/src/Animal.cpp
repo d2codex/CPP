@@ -2,7 +2,7 @@
 #include "Logger.hpp"
 #include "colors.hpp"
 
-Animal::Animal() : _type("unspecified")
+Animal::Animal() : _type("Animal")
 {
 	LOG_INFO() << "Animal default constructor called";
 	LOG_DEBUG() << "Animal type: " << _type;
@@ -46,4 +46,5 @@ const std::string Animal::getType() const
 void Animal::makeSound() const
 {
 	std::cout << "!#$akd\n";
+	LOG_DEBUG() << "Animal type: " << _type;
 }
