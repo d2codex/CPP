@@ -1,5 +1,4 @@
 #include "Cat.hpp"
-#include "Brain.hpp"
 #include "Logger.hpp"
 #include "colors.hpp"
 #include <iostream>
@@ -7,7 +6,6 @@
 Cat::Cat() : Animal("cat"), _brain(new Brain())
 {
 	LOG_INFO() << "Cat default constructor called";
-
 	LOG_DEBUG() << "Animal type: " << _type;
 	LOG_DEBUG() << "Address: " << _brain;
 }
