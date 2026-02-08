@@ -91,11 +91,11 @@ private:
 
 /* log macros */
 #ifdef DBUG
-#define LOG_DEBUG() Logger::get().makeLine(yel("[DEBUG] "), DEBUG)
+#define LOG_DEBUG()		Logger::get().makeLine(yel("[DEBUG] "), DEBUG)
 #else
-#define LOG_DEBUG() Logger::get().makeLine(yel(""), NONE)
+#define LOG_DEBUG()		Logger::get().makeLine(yel(""), NONE)
 #endif
 
-#define LOG_INFO() Logger::get().makeLine(blu("[INFO] "), INFO)
-#define LOG_WARNING() Logger::get().makeLine(mag("[WARNING] "), WARNING)
-#define LOG_ERROR() Logger::get().makeLine(red("[ERROR] "), ERROR)
+#define LOG_INFO()		Logger::get().makeLine(blu("[INFO] "), INFO)
+#define LOG_WARNING()	Logger::get().makeLine(mag("[WARNING] "), WARNING)
+#define LOG_ERROR()		Logger::get().makeLine(red("[ERROR] "), ERROR)
