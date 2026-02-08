@@ -130,4 +130,29 @@ int	main(int argc, char **argv)
 		
 		delete[] farm;
 	}
+	// test deep copy (just for extra added assurance)
+	{
+		std::cout << cyn("=========== Test[12]: Deep Copy ==========\n");
+		Dog spot;
+		spot.setIdeaAtIndex("kibbles and bits", 0);
+		spot.setIdeaAtIndex("belly rub", 99);
+		Dog snoopy(spot);
+		std::cout << "snoopy[0]: " << snoopy.getIdeaAtIndex(0) << std::endl;
+		std::cout << "snoopy[50]: " << snoopy.getIdeaAtIndex(50) << std::endl;
+		std::cout << "snoopy[99]: " << snoopy.getIdeaAtIndex(99) << std::endl;
+	}
+	{
+		std::cout << cyn("===== Test[13]: Deep Copy Assignment =====\n");
+
+		Cat felix;
+		felix.setIdeaAtIndex("catch the lazer!", 5);
+		felix.setIdeaAtIndex("I want fish", 77);
+
+		Cat kittens;  // default brain
+		kittens = felix; // assignment operator
+
+		std::cout << "kittens[5]: " << kittens.getIdeaAtIndex(5) << std::endl;
+		std::cout << "kittens[50]: " << kittens.getIdeaAtIndex(50) << std::endl;
+		std::cout << "kittens[77]: " << kittens.getIdeaAtIndex(77) << std::endl;
+	}
 }

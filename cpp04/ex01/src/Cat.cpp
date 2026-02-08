@@ -32,6 +32,16 @@ Cat& Cat::operator=(const Cat& other)
 	return (*this);
 }
 
+std::string Cat::getIdeaAtIndex(size_t index) const
+{
+	return (_brain->getIdeaAtIndex(index));
+}
+
+void Cat::setIdeaAtIndex(const std::string& idea, size_t index)
+{
+	_brain->setIdeaAtIndex(idea, index);
+}
+
 void Cat::makeSound() const
 {
 	std::cout << "meow meow purr purr\n";

@@ -32,6 +32,16 @@ Dog& Dog::operator=(const Dog& other)
 	return (*this);
 }
 
+std::string Dog::getIdeaAtIndex(size_t index) const
+{
+	return (_brain->getIdeaAtIndex(index));
+}
+
+void Dog::setIdeaAtIndex(const std::string& idea, size_t index)
+{
+	_brain->setIdeaAtIndex(idea, index);
+}
+
 void Dog::makeSound() const
 {
 	std::cout << "woof woof bark bark\n";

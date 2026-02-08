@@ -38,3 +38,13 @@ Brain::~Brain()
 {
 	LOG_INFO() << "Brain destructor called";
 }
+
+std::string Brain::getIdeaAtIndex(size_t index) const
+{
+	return (_ideas[index]);
+}
+
+void Brain::setIdeaAtIndex(const std::string& idea, size_t index)
+{
+	_ideas[index] = idea;
+}
