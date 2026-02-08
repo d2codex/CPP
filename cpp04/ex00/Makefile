@@ -19,10 +19,10 @@ TEST_NAME = $(BIN_DIR)/test_runner
 # Sources
 # ============================================================
 
-CORE_SRCS = src/animal.cpp \
+CORE_SRCS = src/Animal.cpp \
+			src/Cat.cpp \
+			src/Dog.cpp \
 			src/Logger.cpp
-#			src/cat.cpp \
-#			src/dog.cpp
 
 APP_SRCS = src/main.cpp
 
