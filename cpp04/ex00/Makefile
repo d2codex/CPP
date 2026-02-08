@@ -22,7 +22,9 @@ TEST_NAME = $(BIN_DIR)/test_runner
 CORE_SRCS = src/Animal.cpp \
 			src/Cat.cpp \
 			src/Dog.cpp \
-			src/Logger.cpp
+			src/Logger.cpp \
+			src/WrongAnimal.cpp \
+			src/WrongCat.cpp
 
 APP_SRCS = src/main.cpp
 
