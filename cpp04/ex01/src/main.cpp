@@ -133,26 +133,49 @@ int	main(int argc, char **argv)
 	// test deep copy (just for extra added assurance)
 	{
 		std::cout << cyn("=========== Test[12]: Deep Copy ==========\n");
+		int	index = 5;
 		Dog spot;
-		spot.setIdeaAtIndex("kibbles and bits", 0);
-		spot.setIdeaAtIndex("belly rub", 99);
+		spot.setIdeaAtIndex("kibbles and bits", index);
 		Dog snoopy(spot);
-		std::cout << "snoopy[0]: " << snoopy.getIdeaAtIndex(0) << std::endl;
-		std::cout << "snoopy[50]: " << snoopy.getIdeaAtIndex(50) << std::endl;
-		std::cout << "snoopy[99]: " << snoopy.getIdeaAtIndex(99) << std::endl;
+
+		std::cout << "Before mutation:\n";
+		std::cout << "spot[" << index << "]: "
+				  << spot.getIdeaAtIndex(index) << std::endl;
+		std::cout << "snoopy[" << index << "]: "
+				  << snoopy.getIdeaAtIndex(index) << std::endl;
+
+		//mutate original
+		spot.setIdeaAtIndex("belly rub", index);
+
+		std::cout << "After mutation:\n";
+		std::cout << "spot[" << index << "]: "
+				  << spot.getIdeaAtIndex(index) << std::endl;
+		std::cout << "snoopy[" << index<< "]: "
+				  << snoopy.getIdeaAtIndex(index) << std::endl;
 	}
+	// deep copy assignment
 	{
 		std::cout << cyn("===== Test[13]: Deep Copy Assignment =====\n");
-
+		int index = 77;
 		Cat felix;
-		felix.setIdeaAtIndex("catch the lazer!", 5);
-		felix.setIdeaAtIndex("I want fish", 77);
+		felix.setIdeaAtIndex("ball of yarn", index);
 
-		Cat kittens;  // default brain
-		kittens = felix; // assignment operator
+		Cat kittens;
+		kittens = felix;
 
-		std::cout << "kittens[5]: " << kittens.getIdeaAtIndex(5) << std::endl;
-		std::cout << "kittens[50]: " << kittens.getIdeaAtIndex(50) << std::endl;
-		std::cout << "kittens[77]: " << kittens.getIdeaAtIndex(77) << std::endl;
+		std::cout << "Before mutation:\n";
+		std::cout << "kittens[" << index << "]: "
+				  << kittens.getIdeaAtIndex(index) << std::endl;
+		std::cout << "felix[" << index<< "]: "
+				  << felix.getIdeaAtIndex(index) << std::endl;
+
+		// mutate original
+		felix.setIdeaAtIndex("I love fishes cause they're so delicious", index);
+
+		std::cout << "After mutation:\n";
+		std::cout << "kittens[" << index<< "]: "
+				  << kittens.getIdeaAtIndex(index) << std::endl;
+		std::cout << "felix[" << index << "]: "
+				  << felix.getIdeaAtIndex(index) << std::endl;
 	}
 }
