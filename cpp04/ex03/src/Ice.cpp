@@ -1,13 +1,13 @@
 #include "Ice.hpp"
 #include "Logger.hpp"
 #include "colors.hpp"
+#include <iostream>
 
 Ice::Ice() : AMateria("ice")
 {
 	LOG_INFO() << "Ice default constructor called";
 	LOG_DEBUG() << "Materia type: " << _type;
 	LOG_DEBUG() << "Address: " << this;
-
 }
 
 Ice::Ice(const Ice& other) : AMateria(other)
@@ -41,4 +41,9 @@ AMateria* Ice::clone() const
 {
 	Ice* clone = new Ice(*this);
 	return (clone);
+}
+
+void	Ice::use(ICharacter& target)
+{
+	std::cout << "* shoots an ice bolt at " << target << '\n';
 }
