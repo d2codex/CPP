@@ -1,4 +1,5 @@
 #include "Ice.hpp"
+#include "Cure.hpp"
 #include "Logger.hpp"
 #include "colors.hpp"
 #include <iostream>
@@ -67,28 +68,34 @@ int	main(int argc, char **argv)
 
 		delete b;
 	}
-/*	// Copy Constructor
+	// Cure
 	{
-		std::cout << cyn("======= Test[5]: copy constructor ========\n");
-		Cat felix;
-		Cat garfield(felix);
+		std::cout << cyn("======= Test[5]: Cure ctor / dtor ========\n");
+		Cure a;
+	}
+	// copy ctor
+	{
+		std::cout << cyn("======= Test[6]: copy constructor ========\n");
+		Cure a;
+		Cure b(a);
 	}
 	// Assignment Constructor
 	{
-		std::cout << cyn("===== Test[6]: assignment constructor ====\n");
-		Cat felix;
-		Cat garfield;
+		std::cout << cyn("===== Test[7]: assignment constructor ====\n");
+		Cure a;
+		Cure b;
 
-		felix = garfield;
+		b = a;
 	}
-	// cat: Declaring pointer to animal forces us to test polymorphism
+	// clone
 	{
-		std::cout << cyn("== Test[7]: AAnimal(base) / Cat(derived) ==\n");
-		const AAnimal* garfield = new Cat();
-		garfield->makeSound();
-		delete garfield;
+		std::cout << cyn("============= Test[8]: Clone =============\n");
+		Cure a;
+		AMateria* b = a.clone();
+
+		delete b;
 	}
-	// dog tests
+/*	// dog tests
 	{
 		std::cout << cyn("== Test[8]: AAnimal(base) / Dog(derived) ==\n");
 		const AAnimal* snoopy = new Dog();
