@@ -16,11 +16,11 @@ int	main(void)
 
 	totalTestSuites++;
 	totalFailures += iceTest();
-/*	
+	
 	totalTestSuites++;
-	totalFailures += testCopyCtor();
+	totalFailures += cureTest();
 
-	totalTestSuites++;
+/*	totalTestSuites++;
 	totalFailures += testAssignmentOp();
 
 	totalTestSuites++;

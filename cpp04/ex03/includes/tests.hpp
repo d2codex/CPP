@@ -10,4 +10,5 @@ bool	assertEqual(const std::string& name, const std::string& expected,
 bool	assertNotEqPtr(const std::string& name, const void* ptr1, const void* ptr2);
 
 int		iceTest();
+int		cureTest();
 
