@@ -1,0 +1,149 @@
+#include "Ice.hpp"
+#include "Logger.hpp"
+#include "colors.hpp"
+#include <iostream>
+
+bool initLogger(int argc, char **argv)
+{
+	if (argc == 1)
+	{
+		Logger::get().setThreshold(NONE);
+		return (true);
+	}
+	if (argc == 2)
+	{
+		logLevel level = Logger::stringToLevel(argv[1]);
+		if (level == INVALID)
+		{
+			std::cout << red("Error. invalid log level\n");
+			std::cout << cyn("usage: ./bin/<program_name> [log level]\n");
+			std::cout << cyn("log levels: info warning error\n");
+			return (false);
+		}
+		#ifndef DBUG
+		if (level == DEBUG)
+		{
+			std::cout << mag("Warning: DEBUG messages are not enabled in this build.\n");
+			Logger::get().setThreshold(INFO); // fallback threshold
+			return (true);
+		}
+		#endif
+		Logger::get().setThreshold(level);
+		return (true);
+	}
+	std::cout << cyn("usage: ./bin/<program_name> [log level]\n");
+	std::cout << cyn("log levels: info warning error\n");
+	return (false);
+}
+
+int	main(int argc, char **argv)
+{
+	if (!initLogger(argc, argv))
+		return (1);
+	// Ice
+	{
+		std::cout << cyn("======== Test[1]: Ice ctor / dtor ========\n");
+		Ice a;
+	}
+	// copy ctor
+	{
+		std::cout << cyn("======= Test[2]: copy constructor ========\n");
+		Ice a;
+		Ice b(a);
+	}
+	// Assignment Constructor
+	{
+		std::cout << cyn("===== Test[3]: assignment constructor ====\n");
+		Ice a;
+		Ice b;
+
+		b = a;
+	}
+	// clone
+	{
+		std::cout << cyn("============= Test[4]: Clone =============\n");
+		Ice a;
+		AMateria* b = a.clone();
+
+		delete b;
+	}
+/*	// Copy Constructor
+	{
+		std::cout << cyn("======= Test[5]: copy constructor ========\n");
+		Cat felix;
+		Cat garfield(felix);
+	}
+	// Assignment Constructor
+	{
+		std::cout << cyn("===== Test[6]: assignment constructor ====\n");
+		Cat felix;
+		Cat garfield;
+
+		felix = garfield;
+	}
+	// cat: Declaring pointer to animal forces us to test polymorphism
+	{
+		std::cout << cyn("== Test[7]: AAnimal(base) / Cat(derived) ==\n");
+		const AAnimal* garfield = new Cat();
+		garfield->makeSound();
+		delete garfield;
+	}
+	// dog tests
+	{
+		std::cout << cyn("== Test[8]: AAnimal(base) / Dog(derived) ==\n");
+		const AAnimal* snoopy = new Dog();
+		snoopy->makeSound();
+		delete snoopy;
+	}
+	// dog copy
+	{
+		std::cout << cyn("============== Test[9]: Copy ============\n");
+		Dog spot;
+		Dog snoopy(spot);
+	}
+	// dog assignment
+	{
+		std::cout << cyn("=========== Test[10]: Assignment ==========\n");
+		Dog spot;
+		Dog snoopy;
+
+		snoopy = spot;
+		snoopy.makeSound();
+	}
+	// the farm
+	{
+		std::cout << cyn("========== Test[11]: AAnimal Farm =========\n");
+		size_t size = 10;
+		AAnimal** farm = new AAnimal*[size];
+		for(size_t i = 0; i < size / 2; i++)
+		{
+			farm[i] = new Cat();
+		}
+		for(size_t i = size / 2 ; i < size; i++)
+		{
+			farm[i] = new Dog();
+		}
+
+		for(size_t i = 0; i < size; i++)
+		{
+			delete farm[i];
+		}
+		
+		delete[] farm;
+	}
+	// testing abstract class
+	{
+		std::cout << cyn("========= Test[12]: AAnimal Class =========\n");
+		// AAnimal camel; // should fail to compile
+		LOG_INFO() << "To test, uncomment and recompile.";
+		LOG_WARNING() << "You will get a compiling error";
+	}
+	// testing abstract with references
+	{
+		std::cout << cyn("======= Test[13]: AAnimal reference =======\n");
+		Cat chester;
+		AAnimal& ref = chester;
+		ref.makeSound();
+	}
+*/
+}
