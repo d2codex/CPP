@@ -67,7 +67,7 @@ void MateriaSource::learnMateria(AMateria* m)
 {
 	if (!m)
 	{
-		LOG_WARNING() << "[learnMateria] Materia not found";
+		LOG_WARNING() << mag("[learnMateria] Materia not found");
 		return ;
 	}
 	for (size_t i = 0; i < MAX_SLOTS; i++)
@@ -75,11 +75,12 @@ void MateriaSource::learnMateria(AMateria* m)
 		if (_spellbook[i] == NULL)
 		{
 			_spellbook[i] = m;
-			LOG_INFO() << m->getType() << " materia learned!";
+			LOG_INFO() << BLU << m->getType() << " materia learned!" << RESET;
 			return ;
 		}
 	}
-	LOG_WARNING() << "Spellbook full. You cannot learn anymore spells.";
+	LOG_WARNING() << mag("Spellbook full. You cannot learn anymore spells.");
+	delete m;
 }
 
 AMateria* MateriaSource::createMateria(const std::string& type)
@@ -89,10 +90,11 @@ AMateria* MateriaSource::createMateria(const std::string& type)
 		if (_spellbook[i] && _spellbook[i]->getType() == type)
 		{
 			AMateria* materia = _spellbook[i]->clone();
-			LOG_INFO() << "Materia acquired!";
+			LOG_INFO() << blu("A Materia has magically appeared!");
 			return (materia);
 		}
 	}
-	LOG_WARNING() << "[createMateria] Materia of type " << type << " not learned!";
+	LOG_WARNING() << MAG << "[createMateria] Materia of type "
+				  << type << " not learned!" << RESET;
 	return (NULL);
 }
