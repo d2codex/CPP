@@ -5,16 +5,16 @@
 
 Ice::Ice() : AMateria("ice")
 {
-	LOG_INFO() << "Ice default constructor called";
-	LOG_DEBUG() << "Materia type: " << _type;
-	LOG_DEBUG() << "Address: " << this;
+	LOG_INFO()  << "Ice default constructor called";
+	LOG_DEBUG() << "Materia type: " << _type << '\n'
+			    << "Address: " << this;
 }
 
 Ice::Ice(const Ice& other) : AMateria(other)
 {
-	LOG_INFO() << "Ice copy constructor called";
-	LOG_DEBUG() << "Materia type: " << _type;
-	LOG_DEBUG() << "Address: " << this;
+	LOG_INFO()  << "Ice copy constructor called";
+	LOG_DEBUG() << "Materia type: " << _type << '\n'
+			    << "Address: " << this;
 }
 
 Ice& Ice::operator=(const Ice& other)
@@ -26,9 +26,9 @@ Ice& Ice::operator=(const Ice& other)
 	}
 	else
 		LOG_WARNING() << "Ice self-assignment ignored";		
-	LOG_INFO() << "Ice assignment operator called";
-	LOG_DEBUG() << "Materia Type: " << _type;
-	LOG_DEBUG() << "Address: " << this;
+	LOG_INFO()  << "Ice assignment operator called";
+	LOG_DEBUG() << "Materia Type: " << _type << '\n'
+				<< "Address: " << this;
 	return (*this);	
 }
 

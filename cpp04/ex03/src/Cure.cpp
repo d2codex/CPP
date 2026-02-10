@@ -4,16 +4,16 @@
 
 Cure::Cure() : AMateria("cure")
 {
-	LOG_INFO() << "Cure default constructor called";
-	LOG_DEBUG() << "Materia type: " << _type;
-	LOG_DEBUG() << "Address: " << this;
+	LOG_INFO()  << "Cure default constructor called";
+	LOG_DEBUG() << "Materia type: " << _type << '\n'
+				<< "Address: " << this;
 }
 
 Cure::Cure(const Cure& other) : AMateria(other)
 {
-	LOG_INFO() << "Cure copy constructor called";
-	LOG_DEBUG() << "Materia type: " << _type;
-	LOG_DEBUG() << "Address: " << this;
+	LOG_INFO()  << "Cure copy constructor called";
+	LOG_DEBUG() << "Materia type: " << _type << '\n'
+				<< "Address: " << this;
 }
 
 Cure& Cure::operator=(const Cure& other)
@@ -25,9 +25,9 @@ Cure& Cure::operator=(const Cure& other)
 	}
 	else
 		LOG_WARNING() << "Cure self-assignment ignored";
-	LOG_INFO() << "Cure assignment operator called";
-	LOG_DEBUG() << "Materia Type: " << _type;
-	LOG_DEBUG() << "Address: " << this;
+	LOG_INFO()  << "Cure assignment operator called";
+	LOG_DEBUG() << "Materia Type: " << _type << '\n'
+				<< "Address: " << this;
 	return (*this);	
 }
 
