@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AMateria.hpp"
+#include "Character.hpp"
 
 class Ice : public AMateria
 {
@@ -10,7 +11,6 @@ public:
 	Ice& operator=(const Ice& other);
 	~Ice();
 
-	AMateria* clone() const;
-
-private:
+	AMateria*	clone() const;
+	void		use(ICharacter& target);
 };
