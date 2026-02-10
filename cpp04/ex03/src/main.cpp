@@ -1,5 +1,7 @@
 #include "Ice.hpp"
 #include "Cure.hpp"
+#include "Character.hpp"
+#include "MateriaSource.hpp"
 #include "Logger.hpp"
 #include "colors.hpp"
 #include <iostream>
@@ -41,7 +43,7 @@ int	main(int argc, char **argv)
 {
 	if (!initLogger(argc, argv))
 		return (1);
-	// Ice
+/*	// Ice
 	{
 		std::cout << cyn("======== Test[1]: Ice ctor / dtor ========\n");
 		Ice a;
@@ -95,62 +97,92 @@ int	main(int argc, char **argv)
 
 		delete b;
 	}
-/*	// dog tests
+	// Ice::use needs AMateria/ICharacter
 	{
-		std::cout << cyn("== Test[8]: AAnimal(base) / Dog(derived) ==\n");
-		const AAnimal* snoopy = new Dog();
-		snoopy->makeSound();
-		delete snoopy;
+		std::cout << cyn("============ Test[9]: Ice use ============\n");
+		ICharacter *bob = new Character("bob");
+		Ice ice;
+		ice.use(*bob);
+		delete  bob;
 	}
-	// dog copy
+	// Ice::use needs AMateria/ICharacter
 	{
-		std::cout << cyn("============== Test[9]: Copy ============\n");
-		Dog spot;
-		Dog snoopy(spot);
+		std::cout << cyn("============ Test[10]: Ice use ===========\n");
+		ICharacter *bob = new Character("bob");
+		Cure cure;
+		cure.use(*bob);
+		delete  bob;
 	}
-	// dog assignment
+*/	// MateriaSource
 	{
-		std::cout << cyn("=========== Test[10]: Assignment ==========\n");
-		Dog spot;
-		Dog snoopy;
+		std::cout << cyn("=== Test[11]: MateriaSourc ctor / dtor ===\n");
+		MateriaSource a;
+	}
+	// MateriaSource copy
+	{
+		std::cout << cyn("============== Test[12]: Copy ============\n");
+		MateriaSource a;
+		MateriaSource b(a);
+	}
+	// MateriaSource assignment
+	{
+		std::cout << cyn("=========== Test[13]: Assignment ==========\n");
+		MateriaSource a;
+		MateriaSource b;
 
-		snoopy = spot;
-		snoopy.makeSound();
+		b = a;
 	}
-	// the farm
+	// learn materia
 	{
-		std::cout << cyn("========== Test[11]: AAnimal Farm =========\n");
-		size_t size = 10;
-		AAnimal** farm = new AAnimal*[size];
-		for(size_t i = 0; i < size / 2; i++)
-		{
-			farm[i] = new Cat();
-		}
-		for(size_t i = size / 2 ; i < size; i++)
-		{
-			farm[i] = new Dog();
-		}
+		std::cout << cyn("========== Test[14]: learnMateria =========\n");
+		MateriaSource a;
+		a.learnMateria(new Ice());
+		a.learnMateria(NULL);
+		a.learnMateria(new Ice());
+		a.learnMateria(new Ice());
+		a.learnMateria(new Ice());
+		a.learnMateria(new Ice());
+	}
+	// createMateria
+	{
+		std::cout << cyn("========= Test[15]: createMateria =========\n");
+		MateriaSource a;
 
-		for(size_t i = 0; i < size; i++)
-		{
-			delete farm[i];
-		}
-		
-		delete[] farm;
+		AMateria* m1 = a.createMateria("fire");
+		AMateria* m2 = a.createMateria("ice");
+		(void)m1;
+		(void)m2;
+		a.learnMateria(new Ice());
+		a.learnMateria(new Cure());
+		AMateria* m3 = a.createMateria("ice");
+		AMateria* m4 = a.createMateria("ice");
+		AMateria* m5 = a.createMateria("cure");
+
+		delete m3;
+		delete m4;
+		delete m5;
 	}
-	// testing abstract class
+	// SourceMateria integration
 	{
-		std::cout << cyn("========= Test[12]: AAnimal Class =========\n");
-		// AAnimal camel; // should fail to compile
-		LOG_INFO() << "To test, uncomment and recompile.";
-		LOG_WARNING() << "You will get a compiling error";
+		std::cout << cyn("======= Test[16]: AAnimal reference =======\n");
 	}
-	// testing abstract with references
+/*	// subject test
 	{
-		std::cout << cyn("======= Test[13]: AAnimal reference =======\n");
-		Cat chester;
-		AAnimal& ref = chester;
-		ref.makeSound();
+		IMateriaSource* src = new MateriaSource();
+		src->learnMateria(new Ice());
+		src->learnMateria(new Cure());
+		ICharacter* me = new Character("me");
+		AMateria* tmp;
+		tmp = src->createMateria("ice");
+		me->equip(tmp);
+		tmp = src->createMateria("cure");
+		me->equip(tmp);
+		ICharacter* bob = new Character("bob");
+		me->use(0, *bob);
+		me->use(1, *bob);
+		delete bob;
+		delete me;
+		delete src;
 	}
 */
 }
