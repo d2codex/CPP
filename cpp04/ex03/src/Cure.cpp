@@ -24,7 +24,7 @@ Cure& Cure::operator=(const Cure& other)
 		_type = other._type;
 	}
 	else
-		LOG_WARNING() << "Cure self-assignment ignored";		
+		LOG_WARNING() << "Cure self-assignment ignored";
 	LOG_INFO() << "Cure assignment operator called";
 	LOG_DEBUG() << "Materia Type: " << _type;
 	LOG_DEBUG() << "Address: " << this;
@@ -44,5 +44,5 @@ AMateria* Cure::clone() const
 
 void	Cure::use(ICharacter& target)
 {
-	std::cout << "* heals " << target << "'s wounds *\n";
+	std::cout << "* heals " << target.getName() << "'s wounds *\n";
 }
