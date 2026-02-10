@@ -20,9 +20,11 @@ TEST_NAME = $(BIN_DIR)/test_runner
 # ============================================================
 
 CORE_SRCS = src/AMateria.cpp \
+			src/Character.cpp \
 			src/Cure.cpp \
 			src/Ice.cpp \
-			src/Logger.cpp
+			src/Logger.cpp \
+			src/MateriaSource.cpp
 
 APP_SRCS = src/main.cpp
 
