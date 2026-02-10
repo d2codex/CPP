@@ -41,6 +41,25 @@ int	cureTest()
 		total++;
 		if (!assertNotEqPtr("Cure clone deep copy", &a, b))
 			failed++;
+
+		delete b;
+	}
+	{
+		ICharacter *bob = new Character("bob");
+		Cure cure;
+		
+		std::string expected = "* heals bob's wounds *\n";
+		std::ostringstream oss;
+		
+		std::streambuf* oldCout = std::cout.rdbuf(oss.rdbuf()); // redirect cout
+		cure.use(*bob); // prints into oss
+		std::cout.rdbuf(oldCout); // restore cout
+
+		total++;
+		if (!assertEqual("Ice::use", expected, oss.str()))
+			failed++;
+		
+		delete  bob;
 	}
 
 	printSummary(failed, total);
