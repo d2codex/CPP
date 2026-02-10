@@ -58,7 +58,6 @@ Character::~Character()
 {
 	for(size_t i = 0; i < MAX_SLOTS; i++)
 	{
-		// make sure theres nothing in this inventory first
 		if (_inventory[i] != NULL)
 		{
 			LOG_DEBUG() << "Deleting materia at " << _inventory[i];
@@ -89,8 +88,8 @@ void	Character::equip(AMateria* m)
 			LOG_INFO() << "Materia equipped in slot " << i;
 			return ;
 		}
-		LOG_WARNING() << "[equip] Inventory full";
 	}
+	LOG_WARNING() << "[equip] Inventory full";
 }
 
 void	Character::unequip(int idx)
@@ -118,9 +117,7 @@ void	Character::use(int idx, ICharacter& target)
 		return ;
 	}
 	if (_inventory[idx] != NULL)
-	{
 		_inventory[idx]->use(target);
-		_inventory[idx] = NULL;
-	}
-	LOG_WARNING() << "[use] No materia equipped";
+	else
+		LOG_WARNING() << "[use] No materia equipped";
 }
