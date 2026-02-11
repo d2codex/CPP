@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Brain.cpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/11 11:01:41 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/11 11:02:16 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Brain.hpp"
 #include "Logger.hpp"
 #include "colors.hpp"
 #include <iostream>
 
+/** @brief Constructs a Brain with empty ideas. */
 Brain::Brain()
 {
 	// strings are automatically initialized to empty
@@ -10,6 +23,10 @@ Brain::Brain()
 	LOG_DEBUG() << "Address: " << _ideas;
 }
 
+/**
+ * @brief Copy constructs a Brain.
+ * @param other The Brain to copy from.
+ */
 Brain::Brain(const Brain& other)
 {
 	for (size_t i = 0; i < ARRAY_SIZE; i++)
@@ -19,6 +36,11 @@ Brain::Brain(const Brain& other)
 
 }
 
+/**
+ * @brief Assigns another Brain to this one.
+ * @param other The Brain to assign from.
+ * @return Reference to this Brain.
+ */
 Brain& Brain::operator=(const Brain& other)
 {
 	if (this != &other)
@@ -29,7 +51,7 @@ Brain& Brain::operator=(const Brain& other)
 	else
 		LOG_WARNING() << "Brain self-assignment ignored";
 	
-	LOG_INFO() << "Brain assignment constructor called";
+	LOG_INFO() << "Brain assignment operator called";
 	LOG_DEBUG() << "Address: " << _ideas;
 	return (*this);
 }

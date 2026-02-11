@@ -1,7 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/11 10:58:54 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/11 10:59:05 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 
 #include <string>
 
+/**
+ * @class Brain
+ * @brief Represents a collection of ideas for an Animal.
+ *
+ * Provides access and modification of ideas stored in a fixed-size array.
+ */
 class Brain
 {
 public:
