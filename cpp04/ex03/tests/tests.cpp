@@ -35,6 +35,19 @@ bool	assertEqual(const std::string& name, const std::string& expected,
 	return (false);
 }
 
+bool assertEqualInt(const char* name, int expected, int actual)
+{
+	if (expected == actual)
+	{
+		std::cout << grn("PASS ") << name << '\n';
+		return (true);
+	}
+	std::cout << red("FAIL ") << name << '\n'
+			  << "expected: " << expected << '\n'
+			  << "actual:   " << actual << '\n';
+	return (false);
+}
+
 bool	assertNotEqPtr(const std::string& name, const void* ptr1, const void* ptr2)
 {
 	if (ptr1 != ptr2)
