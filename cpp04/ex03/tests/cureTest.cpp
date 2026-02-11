@@ -48,7 +48,7 @@ int	cureTest()
 		ICharacter *bob = new Character("bob");
 		Cure cure;
 		
-		std::string expected = "* heals bob's wounds *\n";
+		std::string expected = grn("* heals bob's wounds *\n");
 		std::ostringstream oss;
 		
 		std::streambuf* oldCout = std::cout.rdbuf(oss.rdbuf()); // redirect cout

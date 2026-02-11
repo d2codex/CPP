@@ -49,11 +49,13 @@ int	iceTest()
 	{
 		ICharacter *bob = new Character("bob");
 		Ice ice;
-		std::string expected = "* shoots an ice bolt at bob *\n";
-		std::ostringstream oss;
+		std::string expected = red("* shoots an ice bolt at bob *\n");
 		
+		std::ostringstream oss;
 		std::streambuf* oldCout = std::cout.rdbuf(oss.rdbuf()); // redirect cout
+		
 		ice.use(*bob); // prints into oss
+		
 		std::cout.rdbuf(oldCout); // restore cout
 
 		total++;
