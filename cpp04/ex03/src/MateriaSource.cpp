@@ -80,7 +80,6 @@ void MateriaSource::learnMateria(AMateria* m)
 		}
 	}
 	LOG_WARNING() << mag("Spellbook full. You cannot learn anymore spells.");
-	delete m;
 }
 
 AMateria* MateriaSource::createMateria(const std::string& type)
