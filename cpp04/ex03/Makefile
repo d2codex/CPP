@@ -29,6 +29,7 @@ CORE_SRCS = src/AMateria.cpp \
 APP_SRCS = src/main.cpp
 
 TEST_SRCS = tests/mainTest.cpp \
+			tests/characterTest.cpp \
 			tests/cureTest.cpp \
 			tests/iceTest.cpp \
 			tests/tests.cpp \
