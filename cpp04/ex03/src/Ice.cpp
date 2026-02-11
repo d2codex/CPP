@@ -3,6 +3,9 @@
 #include "colors.hpp"
 #include <iostream>
 
+/**
+ * @brief Default constructor; initializes as an "ice" AMateria.
+ */
 Ice::Ice() : AMateria("ice")
 {
 	LOG_INFO()  << "Ice default constructor called";
@@ -10,6 +13,9 @@ Ice::Ice() : AMateria("ice")
 			    << "Address: " << this;
 }
 
+/**
+ * @brief Copy constructor; copies another Ice object.
+ */
 Ice::Ice(const Ice& other) : AMateria(other)
 {
 	LOG_INFO()  << "Ice copy constructor called";
@@ -17,6 +23,10 @@ Ice::Ice(const Ice& other) : AMateria(other)
 			    << "Address: " << this;
 }
 
+/**
+ * @brief Assignment operator; copies another Ice object.
+ * @return Reference to this Ice.
+ */
 Ice& Ice::operator=(const Ice& other)
 {
 	if (this != &other)
@@ -32,17 +42,28 @@ Ice& Ice::operator=(const Ice& other)
 	return (*this);	
 }
 
+/**
+ * @brief Destructor; cleans up the Ice object.
+ */
 Ice::~Ice()
 {
 	LOG_INFO() << "Ice destructor called";
 }
 
+/**
+ * @brief Creates a new Ice object as a clone of this one.
+ * @return Pointer to the cloned Ice.
+ */
 AMateria* Ice::clone() const
 {
 	Ice* clone = new Ice(*this);
 	return (clone);
 }
 
+/**
+ * @brief Uses the Ice on a target Character.
+ * @param target Reference to target Character.
+ */
 void	Ice::use(ICharacter& target)
 {
 	std::cout << RED << "* shoots an ice bolt at "

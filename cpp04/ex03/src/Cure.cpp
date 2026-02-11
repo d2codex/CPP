@@ -2,6 +2,9 @@
 #include "Logger.hpp"
 #include "colors.hpp"
 
+/**
+ * @brief Default constructor; initializes as a "cure" AMateria.
+ */
 Cure::Cure() : AMateria("cure")
 {
 	LOG_INFO()  << "Cure default constructor called";
@@ -9,6 +12,9 @@ Cure::Cure() : AMateria("cure")
 				<< "Address: " << this;
 }
 
+/**
+ * @brief Copy constructor; copies another Cure object.
+ */
 Cure::Cure(const Cure& other) : AMateria(other)
 {
 	LOG_INFO()  << "Cure copy constructor called";
@@ -16,6 +22,10 @@ Cure::Cure(const Cure& other) : AMateria(other)
 				<< "Address: " << this;
 }
 
+/**
+ * @brief Assignment operator; copies another Cure object.
+ * @return Reference to this Cure.
+ */
 Cure& Cure::operator=(const Cure& other)
 {
 	if (this != &other)
@@ -31,17 +41,28 @@ Cure& Cure::operator=(const Cure& other)
 	return (*this);	
 }
 
+/**
+ * @brief Destructor; cleans up the Cure object.
+ */
 Cure::~Cure()
 {
 	LOG_INFO() << "Cure destructor called";
 }
 
+/**
+ * @brief Creates a new Cure object as a clone of this one.
+ * @return Pointer to the cloned Cure.
+ */
 AMateria* Cure::clone() const
 {
 	Cure* clone = new Cure(*this);
 	return (clone);
 }
 
+/**
+ * @brief Uses the Cure on a target Character.
+ * @param target Reference to target Character.
+ */
 void	Cure::use(ICharacter& target)
 {
 	std::cout << GRN << "* heals " << target.getName()

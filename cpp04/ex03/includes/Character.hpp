@@ -4,6 +4,13 @@
 #include "AMateria.hpp"
 #include <string>
 
+/**
+ * @class Character
+ * @brief Concrete implementation of ICharacter representing a player.
+ *
+ * Manages a fixed-size inventory of Materia and allows equipping, unequipping,
+ * and using them on targets.
+ */
 class Character : public ICharacter
 {
 public:

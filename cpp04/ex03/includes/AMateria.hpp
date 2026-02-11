@@ -4,6 +4,12 @@
 
 class ICharacter;
 
+/**
+ * @class AMateria
+ * @brief Abstract base class representing a magical materia.
+ *
+ * Stores a type and provides interface for cloning and usage on a character.
+ */
 class AMateria
 {
 public:

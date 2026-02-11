@@ -2,6 +2,9 @@
 #include "Logger.hpp"
 #include "colors.hpp"
 
+/**
+ * @brief Constructs a Character with a given name and empty inventory.
+ */
 Character::Character(const std::string& name) :
 	_name(name)
 {
@@ -14,6 +17,9 @@ Character::Character(const std::string& name) :
 				<< "Address:" << this;
 }
 
+/**
+ * @brief Copy constructor; deep copies equipped Materia.
+ */
 Character::Character(const Character& other) : _name(other._name)
 {
 	for (size_t i = 0; i < MAX_SLOTS; i++)
@@ -29,6 +35,10 @@ Character::Character(const Character& other) : _name(other._name)
 				<< "Address:" << this;
 }
 
+/**
+ * @brief Assignment operator; deep copies inventory from other Character.
+ * @return Reference to this Character.
+ */
 Character& Character::operator=(const Character& other)
 {
 	if (this != &other)
@@ -54,6 +64,9 @@ Character& Character::operator=(const Character& other)
 	return (*this);
 }
 
+/**
+ * @brief Destructor; deletes all equipped Materia.
+ */
 Character::~Character()
 {
 	for(size_t i = 0; i < MAX_SLOTS; i++)
@@ -68,11 +81,20 @@ Character::~Character()
 	LOG_INFO() << "Character destructor called";
 }
 
+/**
+ * @brief Returns the name of the Character.
+ * @return Reference to name string.
+ */
 const std::string& Character::getName() const
 {
 	return (_name);
 }
 
+/**
+ * @brief Returns the inventory index of a given Materia.
+ * @param m Pointer to Materia.
+ * @return Index if found, -1 otherwise.
+ */
 int	Character::getIndex(AMateria* m) const
 {
 	for (size_t i = 0; i < MAX_SLOTS; i++)
@@ -83,6 +105,10 @@ int	Character::getIndex(AMateria* m) const
 	return (-1);
 }
 
+/**
+ * @brief Equips a Materia in the first available slot.
+ * @param m Pointer to Materia to equip.
+ */
 void	Character::equip(AMateria* m)
 {
 	if (!m)
@@ -102,6 +128,10 @@ void	Character::equip(AMateria* m)
 	LOG_WARNING() << mag("[equip] Inventory full");
 }
 
+/**
+ * @brief Unequips a Materia at a given inventory index.
+ * @param idx Index to unequip.
+ */
 void	Character::unequip(int idx)
 {
 	if (idx < 0 || idx >= MAX_SLOTS)
@@ -118,6 +148,11 @@ void	Character::unequip(int idx)
 		LOG_WARNING() << mag("[unequip] No materia to unequip");
 }
 
+/**
+ * @brief Uses the Materia at a given inventory slot on a target.
+ * @param idx Index of Materia to use.
+ * @param target Reference to target Character.
+ */
 void	Character::use(int idx, ICharacter& target)
 {
 	if (idx < 0 || idx >= MAX_SLOTS)

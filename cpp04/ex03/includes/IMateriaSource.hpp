@@ -4,6 +4,12 @@
 
 class AMateria;
 
+/**
+ * @class IMateriaSource
+ * @brief Interface for a Materia source that can learn and create Materia.
+ *
+ * Provides virtual functions to learn new Materia and create copies by type.
+ */
 class IMateriaSource
 {
 public:

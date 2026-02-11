@@ -5,6 +5,12 @@
 
 class AMateria;
 
+/**
+ * @class MateriaSource
+ * @brief Stores learned AMateria and can create copies on demand.
+ *
+ * Implements learning new Materia and creating them by type.
+ */
 class MateriaSource : public IMateriaSource
 {
 public:

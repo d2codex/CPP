@@ -4,6 +4,13 @@
 
 class AMateria;
 
+/**
+ * @class ICharacter
+ * @brief Interface for a character that can equip, unequip, and use Materia.
+ *
+ * Provides virtual functions for inventory management and interaction with
+ * AMateria objects.
+ */
 class ICharacter
 {
 public:
