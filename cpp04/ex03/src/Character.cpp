@@ -73,11 +73,21 @@ const std::string& Character::getName() const
 	return (_name);
 }
 
+int	Character::getIndex(AMateria* m) const
+{
+	for (size_t i = 0; i < MAX_SLOTS; i++)
+	{
+		if (_inventory[i] == m)
+			return (i);
+	}
+	return (-1);
+}
+
 void	Character::equip(AMateria* m)
 {
 	if (!m)
 	{
-		LOG_WARNING() << "[equip] Materia not found";
+		LOG_WARNING() << mag("[equip] Materia not found");
 		return ;
 	}
 	for (size_t i = 0; i < MAX_SLOTS; i++)
@@ -85,39 +95,38 @@ void	Character::equip(AMateria* m)
 		if (_inventory[i] == NULL)
 		{
 			_inventory[i] = m;
-			LOG_INFO() << "Materia equipped in slot " << i;
+			LOG_INFO() << BLU << "Materia equipped in slot " << i << RESET;
 			return ;
 		}
 	}
-	LOG_WARNING() << "[equip] Inventory full";
+	LOG_WARNING() << mag("[equip] Inventory full");
 }
 
 void	Character::unequip(int idx)
 {
 	if (idx < 0 || idx >= MAX_SLOTS)
 	{
-		LOG_WARNING() << "[unequip] Invalid index. Cannot unequip";
+		LOG_WARNING() << mag("[unequip] Invalid index. Cannot unequip");
 		return ;
 	}
-	// unequip must not delete materia.. so should i put it in a temp?
 	if (_inventory[idx] != NULL)
 	{
-		LOG_INFO() << "Unequipping materia from slot " << idx;
+		LOG_INFO() << BLU << "Unequipping materia from slot " << idx << RESET;
 		_inventory[idx] = NULL;
 	}
 	else
-		LOG_WARNING() << "[unequip] No materia to unequip";
+		LOG_WARNING() << mag("[unequip] No materia to unequip");
 }
 
 void	Character::use(int idx, ICharacter& target)
 {
 	if (idx < 0 || idx >= MAX_SLOTS)
 	{
-		LOG_WARNING() << "[use] Invalid inventory slot!";
+		LOG_WARNING() << mag("[use] Invalid inventory slot!");
 		return ;
 	}
 	if (_inventory[idx] != NULL)
 		_inventory[idx]->use(target);
 	else
-		LOG_WARNING() << "[use] No materia equipped";
+		LOG_WARNING() << mag("[use] No materia equipped");
 }
