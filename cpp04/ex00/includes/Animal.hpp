@@ -1,7 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/11 10:36:35 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/11 10:41:30 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 
 #include <string>
 
+/**
+ * @class Animal
+ * @brief Base class representing a generic animal.
+ * Provides a common interface for derived animal types,
+ * including type handling and polymorphic sound behavior.
+ */
 class Animal
 {
 public:
