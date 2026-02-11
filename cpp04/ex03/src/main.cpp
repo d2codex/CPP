@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/11 01:07:05 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/11 01:46:55 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Ice.hpp"
 #include "Cure.hpp"
 #include "Character.hpp"
@@ -43,7 +55,7 @@ int	main(int argc, char **argv)
 {
 	if (!initLogger(argc, argv))
 		return (1);
-/*	// Ice
+	// Ice
 	{
 		std::cout << cyn("======== Test[1]: Ice ctor / dtor ========\n");
 		Ice a;
@@ -113,7 +125,7 @@ int	main(int argc, char **argv)
 		cure.use(*bob);
 		delete  bob;
 	}
-*/	// MateriaSource
+	// MateriaSource
 	{
 		std::cout << cyn("=== Test[11]: MateriaSourc ctor / dtor ===\n");
 		MateriaSource a;
@@ -141,7 +153,10 @@ int	main(int argc, char **argv)
 		a.learnMateria(new Ice());
 		a.learnMateria(new Ice());
 		a.learnMateria(new Ice());
-		a.learnMateria(new Ice());
+		AMateria* extra = new Ice();
+		a.learnMateria(extra);
+
+		delete extra;
 	}
 	// createMateria
 	{
@@ -162,9 +177,83 @@ int	main(int argc, char **argv)
 		delete m4;
 		delete m5;
 	}
-	// SourceMateria integration
+	// Character equip
 	{
-		std::cout << cyn("======= Test[16]: AAnimal reference =======\n");
+		std::cout << cyn("======== Test[16]: Character Equip ========\n");
+		ICharacter* hero = new Character("Hero");
+
+		// Test 1: Equipping NULL
+		hero->equip(NULL); // Should log: [equip] Materia not found
+
+		// Test 2: Filling inventory
+		AMateria* ice1 = new Ice();
+		AMateria* ice2 = new Ice();
+		AMateria* cure1 = new Cure();
+
+		hero->equip(ice1);
+		hero->equip(ice2);
+		hero->equip(cure1);
+
+		// Fill remaining slots with dummy materias
+		hero->equip(new Ice());
+		AMateria* extra = new Cure();
+		hero->equip(extra); // Should log: [equip] Inventory full
+
+		delete extra;
+		delete hero; // Destructor deletes all equipped materias
+	}
+	// Character unequip
+	{
+		std::cout << cyn("======= Test[17]: Character unequip =======\n");
+		ICharacter* link = new Character("Link");
+	
+		AMateria* ice = new Ice();
+		AMateria* cure = new Cure();
+
+		link->equip(ice);  // slot 0
+		link->equip(cure); // slot 1
+
+		link->unequip(0);
+		link->unequip(0);
+		link->unequip(-1);
+		link->unequip(4);
+		link->unequip(1);
+
+		delete ice;
+		delete cure;
+		delete link;
+	}
+	// Character use
+	{
+		std::cout << cyn("========= Test[17]: Character use =========\n");
+		ICharacter* zelda = new Character("Zelda");
+		ICharacter* target = new Character("target");
+
+		IMateriaSource* spellbook = new MateriaSource();
+		spellbook->learnMateria(NULL);
+		spellbook->learnMateria(new Ice());
+		spellbook->learnMateria(new Cure());
+
+		AMateria* m1 = spellbook->createMateria("ice");
+		AMateria* m2 = spellbook->createMateria("cure");
+		AMateria* m3 = spellbook->createMateria("fire");
+		(void)m1;
+		(void)m2;
+		(void)m3;
+
+		zelda->equip(m1);  // slot 0
+		zelda->equip(m2); // slot 1
+
+		zelda->use(2, *target); // no materia equipped
+		zelda->use(0, *target);
+		zelda->use(1, *target);
+		zelda->use(-1, *target); // invalid inventory slot
+		zelda->use(4, *target);
+
+		delete m3;
+		delete target;
+		delete spellbook;
+		delete zelda;
 	}
 /*	// subject test
 	{
