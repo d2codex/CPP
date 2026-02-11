@@ -20,24 +20,9 @@ int	main(void)
 	totalTestSuites++;
 	totalFailures += cureTest();
 
-/*	totalTestSuites++;
-	totalFailures += testAssignmentOp();
-
 	totalTestSuites++;
-	totalFailures += testIntConstructor();
+	totalFailures += characterTest();
 
-	totalTestSuites++;
-	totalFailures += testFloatConstructor();
-
-	totalTestSuites++;
-	totalFailures += testToFloat();
-
-	totalTestSuites++;
-	totalFailures += testToInt();
-
-	totalTestSuites++;
-	totalFailures += testOutputOperator();
-*/
 	std::cout << blu("Test Suites Summary\n")
 			  << wht("Total test suits: ") << totalTestSuites << '\n'
 			  << red("total failures: ") << totalFailures << '\n'
