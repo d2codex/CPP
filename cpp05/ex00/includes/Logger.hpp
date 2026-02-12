@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Logger.hpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/11 02:19:51 by diade-so          #+#    #+#             */
-/*   Updated: 2026/02/12 10:29:14 by diade-so         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #pragma once
 
 #include "colors.hpp"
@@ -21,11 +9,10 @@
 enum logLevel
 {
 	INVALID = -1,
-	NONE = 0,
-	DEBUG = 1,
-	INFO = 2,
-	WARNING = 3,
-	ERROR = 4,
+	DEBUG = 0,
+	INFO = 1,
+	WARNING = 2,
+	ERROR = 3,
 };
 
 class LogLine;
@@ -104,7 +91,7 @@ private:
 #ifdef DBUG
 #define LOG_DEBUG()		LogLine(Logger::get(), yel("[DEBUG] "), DEBUG)
 #else
-#define LOG_DEBUG()		LogLine(Logger::get(), yel(""), NONE)
+#define LOG_DEBUG()		LogLine(Logger::get(), yel(""), DEBUG)
 #endif
 
 #define LOG_INFO()		LogLine(Logger::get(), blu("[INFO] "), INFO)

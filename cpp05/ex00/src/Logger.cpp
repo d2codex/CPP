@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 02:20:39 by diade-so          #+#    #+#             */
-/*   Updated: 2026/02/12 17:39:40 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/02/12 18:00:38 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	Logger::flush(const std::string& prefix,
 					  const std::string& message,
 					  logLevel level)
 {
+/*
 #ifdef DBUG
 	bool isDebug = (level == DEBUG);
 #else
@@ -60,13 +61,35 @@ void	Logger::flush(const std::string& prefix,
 		return ;
 
 	// >= threshold filtering
-	if (level >= _threshold || isDebug)
+	if (level == ERROR || level >= _threshold || isDebug)
 	{
 		if (level == ERROR)
 			std::cerr << prefix << message << std::endl;
 		else
 			std::cout << prefix << message << std::endl;
 	}
+*/
+	   // Debug messages
+#ifdef DBUG
+    if (level == DEBUG)
+    {
+        // DEBUG only prints if threshold is DEBUG or lower
+        if (_threshold <= DEBUG)
+            std::cout << prefix << message << std::endl;
+        return;
+    }
+#endif
+
+    // ERROR messages always go to cerr
+    if (level == ERROR)
+    {
+        std::cerr << prefix << message << std::endl;
+        return;
+    }
+
+    // INFO/WARNING filtered by threshold
+    if (level >= _threshold)
+        std::cout << prefix << message << std::endl;
 }
 
 /**
@@ -98,8 +121,6 @@ logLevel	Logger::stringToLevel(const std::string& levelStr)
 	for (std::string::size_type i = 0; i < level.size(); i++)
 			level[i] = std::toupper(static_cast<unsigned char>(level[i]));
 	
-	if (level == "NONE")
-		return (NONE);
 	if (level == "DEBUG")
 		return (DEBUG);
 	if (level == "INFO")

@@ -7,7 +7,7 @@ bool initLogger(int argc, char **argv)
 {
 	if (argc == 1)
 	{
-		Logger::get().setThreshold(NONE);
+		Logger::get().setThreshold(ERROR);
 		return (true);
 	}
 	if (argc == 2)
@@ -17,7 +17,7 @@ bool initLogger(int argc, char **argv)
 		{
 			std::cout << red("Error. invalid log level\n");
 			std::cout << cyn("usage: ./bin/<program_name> [log level]\n");
-			std::cout << cyn("log levels: info warning error\n");
+			std::cout << cyn("log levels: debug(debug build only) info warning\n");
 			return (false);
 		}
 		#ifndef DBUG
@@ -32,7 +32,7 @@ bool initLogger(int argc, char **argv)
 		return (true);
 	}
 	std::cout << cyn("usage: ./bin/<program_name> [log level]\n");
-	std::cout << cyn("log levels: info warning error\n");
+	std::cout << cyn("log levels: debug(debug build only) info warning\n");
 	return (false);
 }
 
@@ -75,6 +75,6 @@ try
     }
 catch (const std::exception& e)
     {
-        std::cerr << RED << "Exception caught: " << e.what() << '\n' << RESET;
+        LOG_ERROR() << RED << "Exception caught: " << e.what() << RESET;
     }
 }
