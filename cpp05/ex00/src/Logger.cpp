@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 02:20:39 by diade-so          #+#    #+#             */
-/*   Updated: 2026/02/12 10:28:41 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/02/12 17:39:40 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,12 @@ void	Logger::flush(const std::string& prefix,
 
 	// >= threshold filtering
 	if (level >= _threshold || isDebug)
-		std::cout << prefix << message << std::endl;
+	{
+		if (level == ERROR)
+			std::cerr << prefix << message << std::endl;
+		else
+			std::cout << prefix << message << std::endl;
+	}
 }
 
 /**
