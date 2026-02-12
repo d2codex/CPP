@@ -150,6 +150,36 @@ int	testBureaucrat()
 						 expected, oss.str()))
 			failed++;
 	}
+	// Copy constructor
+	{
+		Bureaucrat original("Sandy", 42);
+		Bureaucrat copy(original);
+
+		total++;
+		if (!assertEqual("copy constructor copies grade", original.getGrade(),
+					copy.getGrade()))
+			failed++;
+		total++;
+		if (!assertEqual("copy constructor copies name", original.getName(),
+					copy.getName()))
+			failed++;
+	}
+	// Copy assignment
+	{
+		Bureaucrat a("Patrick", 100);
+		Bureaucrat b("Squidward", 50);
+
+		b = a; // assign Patrick to Squidward
+
+		total++;
+		if (!assertEqual("copy assignment copies grade", a.getGrade(),
+					b.getGrade()))
+			failed++;
+		total++;
+		if (!assertEqual("copy assignment keeps original name",
+					std::string("Squidward"), b.getName()))
+			failed++;
+	}
 
 	printSummary(failed, total);
 	return (failed);
