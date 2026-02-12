@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 02:20:39 by diade-so          #+#    #+#             */
-/*   Updated: 2026/02/12 18:00:38 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/02/12 18:15:21 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,6 @@ void	Logger::flush(const std::string& prefix,
 					  const std::string& message,
 					  logLevel level)
 {
-/*
-#ifdef DBUG
-	bool isDebug = (level == DEBUG);
-#else
-	bool isDebug = false;
-#endif
-
-	// NONE threshold: only DEBUG prints
-	if (_threshold == NONE && !isDebug)
-		return ;
-
-	// >= threshold filtering
-	if (level == ERROR || level >= _threshold || isDebug)
-	{
-		if (level == ERROR)
-			std::cerr << prefix << message << std::endl;
-		else
-			std::cout << prefix << message << std::endl;
-	}
-*/
 	   // Debug messages
 #ifdef DBUG
     if (level == DEBUG)
