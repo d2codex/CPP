@@ -6,7 +6,7 @@
 #    By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/11 02:21:22 by diade-so          #+#    #+#              #
-#    Updated: 2026/02/12 10:43:40 by diade-so         ###   ########.fr        #
+#    Updated: 2026/02/12 12:01:41 by diade-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,14 @@ TEST_NAME = $(BIN_DIR)/test_runner
 # Sources
 # ============================================================
 
-CORE_SRCS = src/Logger.cpp \
+CORE_SRCS = src/Bureaucrat.cpp \
+			src/Logger.cpp \
 
 APP_SRCS = src/main.cpp
 
 TEST_SRCS = tests/mainTest.cpp \
+			tests/testBureaucrat.cpp \
+			tests/tests.cpp
 
 # ============================================================
 # Object directories
