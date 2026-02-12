@@ -5,7 +5,8 @@
 
 int	main(void)
 {
-	logLevel level = NONE;
+	logLevel level = ERROR;
+
 	Logger::get().setThreshold(level);
     std::cout << yel("=======================================\n"
 					 "         Running all unit tests\n"
