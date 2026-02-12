@@ -1,3 +1,4 @@
+#include "Bureaucrat.hpp"
 #include "Logger.hpp"
 #include "colors.hpp"
 #include <iostream>
@@ -35,16 +36,45 @@ bool initLogger(int argc, char **argv)
 	return (false);
 }
 
+void printTestName(const std::string& testName)
+{
+	std::cout << yel("======================================================\n");
+	std::cout << YEL << "Testing " << testName << RESET << '\n';
+}
+
+
 int	main(int argc, char **argv)
 {
 	if (!initLogger(argc, argv))
 		return (1);
+try
+    {
+        // create Bureaucrats
+        Bureaucrat bob("SpongeBob", 45);
+        Bureaucrat gary("Gary", 1);
+        Bureaucrat plankton("Plankton", 148);
 
-	std::cout << "test logger\n";
+        // test overload << 
+        std::cout << bob << '\n';
+        std::cout << gary << '\n';
+        std::cout << plankton << '\n';
 
-	LOG_DEBUG() << "debug works";
-	LOG_INFO() << "info works";
-	LOG_WARNING() << "warning works";
-	LOG_ERROR() << "error works";
+        // test increment/decrement
+        bob.incrementGrade();
+        bob.incrementGrade();
+        bob.incrementGrade();
+        std::cout << "After incrementing Spongebob: " << bob << '\n';
 
+        plankton.decrementGrade();
+        plankton.decrementGrade();
+        std::cout << "After decrementing Plankton: " << plankton << '\n';
+
+        // throw exceptions
+        gary.incrementGrade();     // Already at max (1)
+        plankton.decrementGrade();  // Already at min (150)
+    }
+catch (const std::exception& e)
+    {
+        std::cerr << RED << "Exception caught: " << e.what() << '\n' << RESET;
+    }
 }
