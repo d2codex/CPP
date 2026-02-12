@@ -3,6 +3,15 @@
 #include <string>
 #include <stdexcept>
 
+/**
+ * @class Bureaucrat
+ * @brief Represents a bureaucrat with a name and a grade.
+ *
+ * A Bureaucrat has a constant name and a grade in the range 1-150.
+ * The grade can be incremented or decremented. Out-of-range grades
+ * throw GradeTooHighException or GradeTooLowException. Provides getters
+ * for name and grade, and nested exception classes for invalid grades.
+ */
 class Bureaucrat
 {
 public:
