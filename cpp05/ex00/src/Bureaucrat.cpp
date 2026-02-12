@@ -14,8 +14,8 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) :
 		throw std::invalid_argument("Bureaucrat name cannot be empty");
 
 	LOG_INFO() << "Bureaucrat constructor called";
-	LOG_DEBUG() << "name: " << _name << '\n'
-				<< "grade: " << _grade;
+	LOG_DEBUG() << "name: " << _name
+				<< " grade: " << _grade;
 }
 
 Bureaucrat::~Bureaucrat()
@@ -51,6 +51,8 @@ void	Bureaucrat::incrementGrade()
 	if (_grade <= 1)
 		throw GradeTooHighException();
 	_grade -= 1;
+	LOG_DEBUG() << "name: " << _name
+				<< " grade: " << _grade;
 }
 
 void	Bureaucrat::decrementGrade()
@@ -58,6 +60,8 @@ void	Bureaucrat::decrementGrade()
 	if (_grade >= 150)
 		throw GradeTooLowException();
 	_grade += 1;
+	LOG_DEBUG() << "name: " << _name
+				<< " grade: " << _grade;
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& b)
