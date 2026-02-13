@@ -4,6 +4,13 @@
 
 class Bureaucrat;
 
+/**
+ * @class Form
+ * @brief Represents a form with signing and execution grade requirements.
+ *
+ * Can be signed by a Bureaucrat if their grade is sufficient.
+ * Throws exceptions if grades are out of bounds or already signed.
+ */
 class Form
 {
 public:
