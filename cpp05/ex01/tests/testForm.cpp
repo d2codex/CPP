@@ -60,7 +60,7 @@ int	testForm()
 
 			total++;
 			if (!assertEqual("sign grade too high - out of range", expected, e.what()))
-failed++;
+				failed++;
 		}
 	}
 	// object: execute too high - out of range
@@ -115,8 +115,6 @@ failed++;
 		if (!assertEqual("getIsSigned false", false, a.getIsSigned()))
 			failed++;
 	}
-
-	// getName invalid empty name
 	// getGradeToSign
 	{
 		Form a("plankton", 70, 71);
