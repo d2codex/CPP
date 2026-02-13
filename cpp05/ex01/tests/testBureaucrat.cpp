@@ -178,7 +178,7 @@ int	testBureaucrat()
 					copy.getName()))
 			failed++;
 	}
-	// Copy assignment
+	// assignment opeartor
 	{
 		Bureaucrat a("Patrick", 100);
 		Bureaucrat b("Squidward", 50);
@@ -194,6 +194,7 @@ int	testBureaucrat()
 					std::string("Squidward"), b.getName()))
 			failed++;
 	}
+
 	// test SignForm
 	{
 		Form tax("W-2", 30, 120);
