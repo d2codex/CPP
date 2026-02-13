@@ -40,7 +40,7 @@ int	testForm()
 
 			total++;
 			if (!assertEqual("sign grade too high - out of range", expected, e.what()))
-				failed++;
+failed++;
 		}
 	}
 	// object: execute too high - out of range
@@ -123,7 +123,7 @@ int	testForm()
 		if (!assertEqual("isSigned true", true, a.getIsSigned()))
 			failed++;
 	}
-	// beSigned
+	// beSigned - grade too low
 	{
 		try
 		{
@@ -135,9 +135,28 @@ int	testForm()
 		{
 			const char* expected = "Form grade too low";
 			total++;
-			if (!assertEqual("beSigned throws exception", expected, e.what()))
+			if (!assertEqual("beSigned - grade too low", expected, e.what()))
 				failed++;
 		}
+	}
+	// beSigned - form already signed
+	{
+		Form a("W-4", 70, 71);
+		Bureaucrat bob("Bob", 60);
+		bob.signForm(a);
+		std::ostringstream oss;
+		std::streambuf* oldCout = std::cout.rdbuf(oss.rdbuf());
+		try
+		{
+			bob.signForm(a);
+		}
+		catch (std::exception& e) {}
+		std::cout.rdbuf(oldCout);
+		const std::string expected =
+			"Bob couldn't sign W-4 because Form already signed\n";
+		total++;
+		if (!assertEqual("beSigned - form already signed", expected, oss.str()))
+			failed++;
 	}
 	printSummary(failed, total);
 	return (failed);
