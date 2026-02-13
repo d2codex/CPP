@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include "tests.hpp"
 #include "Logger.hpp"
 
@@ -138,4 +139,18 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& b)
 {
 	os << b.getName() << ", bureaucrat grade " << b.getGrade();
 	return (os);
+}
+
+void	Bureaucrat::signForm(Form& f) const
+{
+	try
+	{
+		f.beSigned(*this);
+			std::cout << _name << " signed " << f.getName() << '\n';
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << _name << " couldn't sign " << f.getName()
+				  << " because " << e.what() << '\n';
+	}
 }
