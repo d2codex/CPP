@@ -210,16 +210,19 @@ int	testBureaucrat()
 	}
 	// test SignForm fail
 	{
-		Form tax("W-2", 30, 120);
-		Bureaucrat bob("Bob", 45);
-
-		total++;
-
-		const std::string expected = "Bob couldn't sign W-2 because Form grade too low\n";
 		std::ostringstream oss;
 		std::streambuf* oldCout = std::cout.rdbuf(oss.rdbuf()); // redirect cout
-		bob.signForm(tax);
+		Form tax("W-2", 30, 120);
+		Bureaucrat bob("Bob", 45);
+		try
+		{
+			bob.signForm(tax);
+		}
+		catch (std::exception& e) {}
 		std::cout.rdbuf(oldCout); // restore cout
+		const std::string expected =
+			"Bob couldn't sign W-2 because Form grade too low\n";
+		total++;
 		if (!assertEqual("signForm fail", expected, oss.str()))
 			failed++;
 	}
