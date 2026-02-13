@@ -23,6 +23,10 @@ public:
 	public:
 		virtual const char* what() const throw();
 	};
+	class FormAlreadySigned : public std::exception
+	{
+		virtual const char* what() const throw();
+	};
 
 	const std::string	getName() const;
 	bool				getIsSigned() const;

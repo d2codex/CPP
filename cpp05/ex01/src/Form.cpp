@@ -36,6 +36,12 @@ const char* Form::GradeTooLowException::what() const throw()
 	return ("Form grade too low");
 }
 
+const char* Form::FormAlreadySigned::what() const throw()
+{
+	return ("Form already signed");
+}
+
+// getters
 const std::string	Form::getName() const
 {
 	return (_formName);
@@ -58,6 +64,8 @@ int	Form::getGradeToExecute() const
 
 void	Form::beSigned(const Bureaucrat& b)
 {
+	if (_isSigned == true)
+		throw FormAlreadySigned();
 	if (b.getGrade() <= _gradeToSign)
 		_isSigned = true;
 	else
