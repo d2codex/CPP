@@ -48,16 +48,43 @@ int	main(int argc, char **argv)
 {
 	if (!initLogger(argc, argv))
 		return (1);
-	{
-		Form tax("W-2", 30, 120);
-		Bureaucrat bob("Bob", 45);
-		bob.signForm(tax);
-	}
-	{
-		Form tax("W-2", 30, 120);
-		Bureaucrat bob("Bob", 25);
-		bob.signForm(tax);
-	}
+	
+	// Successful signing
+    try
+    {
+        Form tax1("W-2", 30, 120);
+        Bureaucrat bob1("Bob", 25); // high enough grade
+        bob1.signForm(tax1);
+    }
+    catch (std::exception& e)
+    {
+        LOG_ERROR() << e.what();
+    }
 
+    // Signing fails: grade too low
+    try
+    {
+        Form tax2("W-2", 30, 120);
+        Bureaucrat bob2("Bob", 45); // grade too low
+        bob2.signForm(tax2);
+    }
+    catch (std::exception& e)
+    {
+        LOG_ERROR() << e.what();
+    }
 
+    // Signing fails: form already signed
+    try
+    {
+        Form tax3("W-2", 30, 120);
+        Bureaucrat alice("Alice", 20); // can sign
+        Bureaucrat charlie("Charlie", 10); // also can sign
+
+        alice.signForm(tax3);  // first signs successfully
+        charlie.signForm(tax3); // should throw FormAlreadySigned
+    }
+    catch (std::exception& e)
+    {
+        LOG_ERROR() << e.what();
+    }
 }
