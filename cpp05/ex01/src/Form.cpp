@@ -7,7 +7,7 @@ Form::Form() :
 	_formName("default"),
 	_isSigned(false),
 	_gradeToSign(150),
-	_gradeToSign(150)
+	_gradeToExecute(150)
 {
 	LOG_INFO() << "Form constructor called";
 	LOG_DEBUG() << "Form name: " << _formName << '\n'
