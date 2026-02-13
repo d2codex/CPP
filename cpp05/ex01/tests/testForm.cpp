@@ -31,6 +31,26 @@ int	testForm()
 			failed++;
 		delete e;
 	}
+	// test default constructor formName, isSigned, gradeToSign, gradeToExecute
+	{
+		Form a;
+
+		total++;
+		if (!assertEqual("default ctor formName matches", "default", a.getName()))
+			failed++;
+
+		total++;
+		if (!assertEqual("default ctor isSigned matches", false, a.getIsSigned()))
+			failed++;
+
+		total++;
+		if (!assertEqual("default ctor gradeToSign matches", 150, a.getGradeToSign()))
+			failed++;
+
+		total++;
+		if (!assertEqual("default ctor gradeToExecute matches", 150, a.getGradeToExecute()))
+			failed++;
+	}
 	// object: sign too high - out of range
 	{
 		try { Form("plankton", 0, 5); }
