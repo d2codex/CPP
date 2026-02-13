@@ -25,16 +25,10 @@ public:
 
 	// nested exception classes
 	class GradeTooHighException : public std::exception
-	{
-	public:
-		virtual const char* what() const throw();
-	};
+	{ public: virtual const char* what() const throw(); };
 	
 	class GradeTooLowException : public std::exception
-	{
-	public:
-		virtual const char* what() const throw();
-	};
+	{ public: virtual const char* what() const throw(); };
 
 	// getters
 	const std::string&	getName() const;
@@ -44,6 +38,7 @@ public:
 	void	incrementGrade();
 	void	decrementGrade();
 
+	// methods
 	void	signForm(Form& f) const;
 	
 private:

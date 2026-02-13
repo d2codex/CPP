@@ -15,25 +15,21 @@ public:
 
 	// nested exceptions
 	class GradeTooHighException : public std::exception
-	{
-	public:
-		virtual const char* what() const throw();
-	};
-	class GradeTooLowException : public std::exception
-	{
-	public:
-		virtual const char* what() const throw();
-	};
-	class FormAlreadySigned : public std::exception
-	{
-		virtual const char* what() const throw();
-	};
+	{ public: virtual const char* what() const throw(); };
 
+	class GradeTooLowException : public std::exception
+	{ public: virtual const char* what() const throw(); };
+
+	class FormAlreadySigned : public std::exception
+	{ public: virtual const char* what() const throw(); };
+
+	// getters
 	const std::string	getName() const;
 	bool				getIsSigned() const;
 	int					getGradeToSign() const;
 	int					getGradeToExecute() const;
 
+	// methods
 	void	beSigned(const Bureaucrat& b);
 	
 private:
@@ -43,4 +39,5 @@ private:
 	const int			_gradeToExecute;
 };
 
+// free functions
 std::ostream& operator<<(std::ostream os, const Form& f);
