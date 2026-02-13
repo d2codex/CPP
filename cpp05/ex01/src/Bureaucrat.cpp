@@ -3,6 +3,14 @@
 #include "tests.hpp"
 #include "Logger.hpp"
 
+/*****************************************************************************
+ *                               CONSTRUCTORS                                *
+ *****************************************************************************/
+
+/**
+ * @brief Default constructor for Bureaucrat.
+ * Initializes _name to "default" and _grade to 150.
+ */
 Bureaucrat::Bureaucrat() : _name("default"), _grade(150)
 {
 	LOG_INFO() << "Bureaucrat defaul constructor called";
@@ -35,7 +43,6 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) :
 /**
  * @brief Copy constructor.
  * @param other The Bureaucrat to copy.
- *
  * Copies the grade. The name is const and initialized once.
  */
 Bureaucrat::Bureaucrat(const Bureaucrat& other) :
@@ -50,7 +57,6 @@ Bureaucrat::Bureaucrat(const Bureaucrat& other) :
  * @brief Copy assignment operator.
  * @param other The Bureaucrat to assign from.
  * @return Reference to this Bureaucrat.
- *
  * Only the grade is assigned. The name is const and cannot change.
  */
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
@@ -68,45 +74,44 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
  * @brief Destructor for Bureaucrat.
  */
 Bureaucrat::~Bureaucrat()
-{
-	LOG_INFO() << "Bureaucrat destructor called";
-}
+{ LOG_INFO() << "Bureaucrat destructor called"; }
 
-//nested class memeber function implementations
+/*****************************************************************************
+ *                            NESTED EXCEPTIONS                              *
+ *****************************************************************************/
 
 /**
  * @brief Returns the exception message for GradeTooHighException.
  */
 const char* Bureaucrat::GradeTooHighException::what() const throw()
-{
-	return ("Bureaucrat grade too high");
-}
+{ return ("Bureaucrat grade too high"); }
 
 /**
  * @brief Returns the exception message for GradeTooLowException.
  */
 const char* Bureaucrat::GradeTooLowException::what() const throw()
-{
-	return ("Bureaucrat grade too low");
-}
+{ return ("Bureaucrat grade too low"); }
 
-// getters
+/*****************************************************************************
+ *                                 GETTERS                                   *
+ *****************************************************************************/
 
 /**
  * @brief Returns the bureaucrat's name.
  */
 const std::string& Bureaucrat::getName() const
-{
-	return (_name);
-}
+{ return (_name); }
 
 /**
  * @brief Returns the bureaucrat's grade.
  */
 int	Bureaucrat::getGrade() const
-{
-	return (_grade);
-}
+{ return (_grade); }
+
+
+/*****************************************************************************
+ *                      INCREMENT / DECREMENT OPERATORS                      *
+ *****************************************************************************/
 
 /**
  * @brief Increments the bureaucrat's grade by 1.
@@ -132,6 +137,10 @@ void	Bureaucrat::decrementGrade()
 	LOG_DEBUG() << _name << " grade: " << _grade;
 }
 
+/*****************************************************************************
+ *                               OVERLOADS                                   *
+ *****************************************************************************/
+
 /**
  * @brief Stream insertion operator for Bureaucrat.
  * @param os The output stream.
@@ -144,6 +153,18 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& b)
 	return (os);
 }
 
+/*****************************************************************************
+ *                                 METHODS                                   *
+ *****************************************************************************/
+
+/**
+ * @brief Attempts to sign the given Form.
+ * Calls Form::beSigned. Prints success or failure message. 
+ * Propagates any exceptions thrown by the form.
+ * @param f The Form to be signed.
+ * @throws GradeTooLowException if this Bureaucrat's grade is too low.
+ * @throws FormAlreadySigned if the Form is already signed.
+ */
 void	Bureaucrat::signForm(Form& f) const
 {
 	try
@@ -155,6 +176,6 @@ void	Bureaucrat::signForm(Form& f) const
 	{
 		std::cout << _name << " couldn't sign " << f.getName()
 				  << " because " << e.what() << '\n';
-		throw ;
+		throw ; // rethrow the same exception to the caller of signForm
 	}
 }
