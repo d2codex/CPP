@@ -7,6 +7,7 @@ class Bureaucrat;
 class Form
 {
 public:
+	Form();
 	Form(const std::string name, int sign, int execute);
 	Form(const Form& other);
 	Form& operator=(const Form& other);

@@ -3,6 +3,19 @@
 #include "Logger.hpp"
 #include <iomanip>
 
+Form::Form() :
+	_formName("default"),
+	_isSigned(false),
+	_gradeToSign(150),
+	_gradeToSign(150)
+{
+	LOG_INFO() << "Form constructor called";
+	LOG_DEBUG() << "Form name: " << _formName << '\n'
+			    << "        Is signed: " << _isSigned << '\n'
+				<< "        Grade to sign: " << _gradeToSign << '\n'
+				<< "        Grade to execute: " << _gradeToExecute;
+}
+
 Form::Form(const std::string formName, int sign, int execute) :
 	_formName(formName),
 	_isSigned(false),
