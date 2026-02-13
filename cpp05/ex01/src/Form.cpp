@@ -22,7 +22,7 @@ Form::Form(const std::string formName, int sign, int execute) :
 
 Form::~Form()
 {
-	LOG_INFO() << "For destructor called";
+	LOG_INFO() << "Form destructor called";
 }
 
 // nested exceptions
