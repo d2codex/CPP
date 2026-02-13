@@ -6,6 +6,7 @@
 Bureaucrat::Bureaucrat() : _name("default"), _grade(150)
 {
 	LOG_INFO() << "Bureaucrat defaul constructor called";
+	LOG_DEBUG() << _name << " grade: " << _grade;
 }
 
 /**
