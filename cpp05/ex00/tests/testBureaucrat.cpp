@@ -30,6 +30,18 @@ int	testBureaucrat()
 			failed++;
 		delete e;
 	}
+	// test default constructor name and grade
+	{
+		Bureaucrat a;
+
+		total++;
+		if (!assertEqual("default ctor name matches", "default", a.getName()))
+			failed++;
+
+		total++;
+		if (!assertEqual("default ctor grade matches", 150, a.getGrade()))
+			failed++;
+	}
 	// object: grade too high - out of range
 	{
 		try
