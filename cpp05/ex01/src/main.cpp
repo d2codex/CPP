@@ -1,4 +1,5 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 #include "Logger.hpp"
 #include "colors.hpp"
 #include <iostream>
@@ -47,7 +48,16 @@ int	main(int argc, char **argv)
 {
 	if (!initLogger(argc, argv))
 		return (1);
+	{
+		Form tax("W-2", 30, 120);
+		Bureaucrat bob("Bob", 45);
+		bob.signForm(tax);
+	}
+	{
+		Form tax("W-2", 30, 120);
+		Bureaucrat bob("Bob", 25);
+		bob.signForm(tax);
+	}
 
-	Form a("W-2", 75, 88);
 
 }

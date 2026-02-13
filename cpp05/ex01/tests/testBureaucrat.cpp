@@ -1,6 +1,8 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include "tests.hpp"
 #include "Logger.hpp"
+#include <sstream>
 
 int	testBureaucrat()
 {
@@ -180,7 +182,35 @@ int	testBureaucrat()
 					std::string("Squidward"), b.getName()))
 			failed++;
 	}
+	// test SignForm
+	{
+		Form tax("W-2", 30, 120);
+		Bureaucrat bob("Bob", 25);
 
+		total++;
+
+		std::ostringstream oss;
+		std::streambuf* oldCout = std::cout.rdbuf(oss.rdbuf()); // redirect cout
+		bob.signForm(tax);
+		std::cout.rdbuf(oldCout); // restore cout
+		if (!assertEqual("signForm success", "Bob signed W-2\n", oss.str()))
+			failed++;
+	}
+	// test SignForm fail
+	{
+		Form tax("W-2", 30, 120);
+		Bureaucrat bob("Bob", 45);
+
+		total++;
+
+		const std::string expected = "Bob couldn't sign W-2 because Form grade too low\n";
+		std::ostringstream oss;
+		std::streambuf* oldCout = std::cout.rdbuf(oss.rdbuf()); // redirect cout
+		bob.signForm(tax);
+		std::cout.rdbuf(oldCout); // restore cout
+		if (!assertEqual("signForm fail", expected, oss.str()))
+			failed++;
+	}
 	printSummary(failed, total);
 	return (failed);
 }
