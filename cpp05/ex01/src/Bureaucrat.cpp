@@ -3,6 +3,11 @@
 #include "tests.hpp"
 #include "Logger.hpp"
 
+Bureaucrat::Bureaucrat() : _name("default"), _grade(150)
+{
+	LOG_INFO() << "Bureaucrat defaul constructor called";
+}
+
 /**
  * @brief Constructs a Bureaucrat with the given name and grade.
  * @param name The bureaucrat's name (cannot be empty).
@@ -23,8 +28,7 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) :
 		throw std::invalid_argument("Bureaucrat name cannot be empty");
 
 	LOG_INFO() << "Bureaucrat constructor called";
-	LOG_DEBUG() << "name: " << _name
-				<< " grade: " << _grade;
+	LOG_DEBUG() << _name << " grade: " << _grade;
 }
 
 /**
@@ -37,8 +41,8 @@ Bureaucrat::Bureaucrat(const Bureaucrat& other) :
     _name(other._name),
     _grade(other._grade)
 {
-    LOG_DEBUG() << "Bureaucrat copy constructor called: "
-                << _name << ", grade " << _grade;
+    LOG_INFO() << "Bureaucrat copy constructor called";
+    LOG_DEBUG() << _name << ", grade " << _grade;
 }
 
 /**
@@ -53,8 +57,8 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
     if (this != &other)
     {
         _grade = other._grade;  // only grade can be assigned
-        LOG_DEBUG() << "Bureaucrat copy assignment: "
-                    << _name << " new grade " << _grade;
+        LOG_INFO() << "Bureaucrat copy assignment";
+        LOG_DEBUG() << _name << " new grade " << _grade;
     }
     return *this;
 }
@@ -112,8 +116,7 @@ void	Bureaucrat::incrementGrade()
 	if (_grade <= 1)
 		throw GradeTooHighException();
 	_grade -= 1;
-	LOG_DEBUG() << "name: " << _name
-				<< " grade: " << _grade;
+	LOG_DEBUG() << _name << " grade: " << _grade;
 }
 
 /**
@@ -125,8 +128,7 @@ void	Bureaucrat::decrementGrade()
 	if (_grade >= 150)
 		throw GradeTooLowException();
 	_grade += 1;
-	LOG_DEBUG() << "name: " << _name
-				<< " grade: " << _grade;
+	LOG_DEBUG() << _name << " grade: " << _grade;
 }
 
 /**
