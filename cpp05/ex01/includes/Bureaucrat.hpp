@@ -3,6 +3,8 @@
 #include <string>
 #include <stdexcept>
 
+class Form;
+
 /**
  * @class Bureaucrat
  * @brief Represents a bureaucrat with a name and a grade.
@@ -15,7 +17,7 @@
 class Bureaucrat
 {
 public:
-	Bureaucrat(const std::string& formName, int grade);
+	Bureaucrat(const std::string& name, int grade);
 	Bureaucrat(const Bureaucrat& other);
 	Bureaucrat& operator=(const Bureaucrat& other);
 	~Bureaucrat();
@@ -40,9 +42,11 @@ public:
 	// increment / decrement
 	void	incrementGrade();
 	void	decrementGrade();
+
+	void	signForm(Form& f) const;
 	
 private:
-	const std::string	_formName;
+	const std::string	_name;
 	int					_grade;
 };
 
