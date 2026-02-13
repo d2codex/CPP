@@ -176,6 +176,61 @@ int	testForm()
 		if (!assertEqual("beSigned - form already signed", expected, oss.str()))
 			failed++;
 	}
+	// copy constructor
+	{
+		Form original("Sandy", 42, 150);
+		Form copy(original);
+
+		total++;
+		if (!assertEqual("copy constructor copies formName",
+					original.getName(), copy.getName()))
+			failed++;
+
+		total++;
+		if (!assertEqual("copy constructor copies isSigned",
+					original.getIsSigned(), copy.getIsSigned()))
+			failed++;
+
+		total++;
+		if (!assertEqual("copy constructor copies gradeToSign",
+					original.getGradeToSign(), copy.getGradeToSign()))
+			failed++;
+
+		total++;
+		if (!assertEqual("copy constructor copies gradeToExecute",
+					original.getGradeToExecute(), copy.getGradeToExecute()))
+			failed++;
+	}
+	// assignment operator
+	{
+		Bureaucrat bob("Bob", 25);
+
+		Form a("1040", 100, 138);
+		bob.signForm(a); // isSigned form a should be set to true now
+		Form b("W-2", 50, 78); // issigned set to false
+
+		b = a; // copy to original
+
+		total++;
+		if (!assertEqual("copy assignment copies isSigned", a.getIsSigned(),
+					b.getIsSigned()))
+			failed++;
+
+		total++;
+		if (!assertEqual("copy assignment keeps original formName",
+					std::string("W-2"), b.getName()))
+			failed++;
+
+		total++;
+		if (!assertEqual("copy assignment keeps original gradeToSign ",
+					50, b.getGradeToSign()))
+			failed++;
+
+		total++;
+		if (!assertEqual("copy assignment keeps original name",
+					78, b.getGradeToExecute()))
+			failed++;
+	}
 	printSummary(failed, total);
 	return (failed);
 }
