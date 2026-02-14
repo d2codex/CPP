@@ -7,16 +7,14 @@
 class TestForm : public AForm
 {
 public:
-	TestForm(const std::string& name = "TestForm", int sign = 50, int exec = 50) :
-		AForm(name, sign, exec) {}
-
-	virtual void execute(const Bureaucrat& executor) const
-	{
-		std::cout << getName() << " executed by "
-				  << executor.getName() << '\n';
-	}
+	TestForm(): AForm("TestForm", 50, 25) {}
 	virtual ~TestForm() {}
+
+protected:
+	void executeAction() const 
+	{ std::cout << "TestForm action executed\n"; }
 };
+
 
 int	testBureaucrat()
 {
