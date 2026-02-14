@@ -98,6 +98,8 @@ AForm::~AForm()
 AForm::GradeTooHighException::GradeTooHighException(const std::string& formName)
 	: _msg(formName + " grade too high") {}
 
+AForm::GradeTooHighException::~GradeTooHighException() throw() {}
+
 /**
  * @brief Returns the exception message for GradeTooHighException.
  */
@@ -106,6 +108,8 @@ const char* AForm::GradeTooHighException::what() const throw()
 
 AForm::GradeTooLowException::GradeTooLowException(const std::string& formName)
 	: _msg(formName + " grade too low") {}
+
+AForm::GradeTooLowException::~GradeTooLowException() throw() {}
 
 /**
  * @brief Returns the exception message for GradeTooLowException.
@@ -121,6 +125,8 @@ const char* AForm::GradeTooLowToSignException::what() const throw()
 
 AForm::AlreadySignedException::AlreadySignedException(const std::string& formName)
 	: _msg(formName + " already signed") {}
+
+AForm::AlreadySignedException::~AlreadySignedException() throw() {}
 
 /**
  * @brief Returns the exception message for AFormAlreadySigned.
