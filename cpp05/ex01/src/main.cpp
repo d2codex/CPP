@@ -50,10 +50,14 @@ int	main(int argc, char **argv)
 		return (1);
 	
 	// Successful signing
-    try
+    printTestName("Successful signing");
+	try
     {
         Form tax1("W-2", 30, 120);
+		std::cout << tax1 << '\n';
         Bureaucrat bob1("Bob", 25); // high enough grade
+		std::cout << bob1 << '\n';
+
         bob1.signForm(tax1);
     }
     catch (std::exception& e)
@@ -62,10 +66,13 @@ int	main(int argc, char **argv)
     }
 
     // Signing fails: grade too low
+    printTestName("Signing fails: grade too low");
     try
     {
         Form tax2("W-2", 30, 120);
+		std::cout << tax2 << '\n';
         Bureaucrat bob2("Bob", 45); // grade too low
+		std::cout << bob2 << '\n';
         bob2.signForm(tax2);
     }
     catch (std::exception& e)
@@ -73,7 +80,20 @@ int	main(int argc, char **argv)
         LOG_ERROR() << e.what();
     }
 
+	 // Form instantiation fails: grade too high
+    printTestName("Form Instantiation fails: form grade too high");
+    try
+    {
+        Form tax2("W-2", 0, 120);
+        Bureaucrat bob2("Bob", 2); // grade too low
+        bob2.signForm(tax2);
+    }
+    catch (std::exception& e)
+    {
+        LOG_ERROR() << e.what();
+    }
     // Signing fails: form already signed
+    printTestName("Signing fails: form already signed");
     try
     {
         Form tax3("W-2", 30, 120);

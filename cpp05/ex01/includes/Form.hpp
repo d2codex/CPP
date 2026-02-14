@@ -27,6 +27,9 @@ public:
 	class GradeTooLowException : public std::exception
 	{ public: virtual const char* what() const throw(); };
 
+	class GradeTooLowToSign : public std::exception
+	{ public: virtual const char* what() const throw(); };
+
 	class FormAlreadySigned : public std::exception
 	{ public: virtual const char* what() const throw(); };
 
@@ -47,4 +50,4 @@ private:
 };
 
 // free functions
-std::ostream& operator<<(std::ostream os, const Form& f);
+std::ostream& operator<<(std::ostream& os, const Form& f);
