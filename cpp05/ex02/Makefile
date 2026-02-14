@@ -31,14 +31,13 @@ TEST_NAME = $(BIN_DIR)/test_runner
 # ============================================================
 
 CORE_SRCS = src/Bureaucrat.cpp \
-			src/Form.cpp \
+			src/AForm.cpp \
 			src/Logger.cpp \
 
 APP_SRCS = src/main.cpp
 
 TEST_SRCS = tests/mainTest.cpp \
 			tests/testBureaucrat.cpp \
-			tests/testForm.cpp \
 			tests/tests.cpp
 
 # ============================================================

@@ -1,8 +1,22 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "tests.hpp"
 #include "Logger.hpp"
 #include <sstream>
+
+class TestForm : public AForm
+{
+public:
+	TestForm(const std::string& name = "TestForm", int sign = 50, int exec = 50) :
+		AForm(name, sign, exec) {}
+
+	virtual void execute(const Bureaucrat& executor) const
+	{
+		std::cout << getName() << " executed by "
+				  << executor.getName() << '\n';
+	}
+	virtual ~TestForm() {}
+};
 
 int	testBureaucrat()
 {
@@ -197,32 +211,33 @@ int	testBureaucrat()
 
 	// test SignForm
 	{
-		Form tax("W-2", 30, 120);
+		//Form tax("W-2", 30, 120);
+		TestForm tf;
 		Bureaucrat bob("Bob", 25);
 
 		total++;
 
 		std::ostringstream oss;
 		std::streambuf* oldCout = std::cout.rdbuf(oss.rdbuf()); // redirect cout
-		bob.signForm(tax);
+		bob.signForm(tf);
 		std::cout.rdbuf(oldCout); // restore cout
-		if (!assertEqual("signForm success", "Bob signed W-2\n", oss.str()))
+		if (!assertEqual("signForm success", "Bob signed TestForm\n", oss.str()))
 			failed++;
 	}
 	// test SignForm fail
 	{
 		std::ostringstream oss;
 		std::streambuf* oldCout = std::cout.rdbuf(oss.rdbuf()); // redirect cout
-		Form tax("W-2", 30, 120);
-		Bureaucrat bob("Bob", 45);
+		TestForm tf;
+		Bureaucrat bob("Bob", 55);
 		try
 		{
-			bob.signForm(tax);
+			bob.signForm(tf);
 		}
 		catch (std::exception& e) {}
 		std::cout.rdbuf(oldCout); // restore cout
 		const std::string expected =
-			"Bob couldn't sign W-2 because Bureaucrat grade too low to sign\n";
+			"Bob couldn't sign TestForm because Bureaucrat grade too low to sign\n";
 		total++;
 		if (!assertEqual("signForm fail", expected, oss.str()))
 			failed++;
