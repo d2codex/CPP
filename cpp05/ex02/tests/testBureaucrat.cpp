@@ -222,7 +222,7 @@ int	testBureaucrat()
 		catch (std::exception& e) {}
 		std::cout.rdbuf(oldCout); // restore cout
 		const std::string expected =
-			"Bob couldn't sign W-2 because Form grade too low\n";
+			"Bob couldn't sign W-2 because Bureaucrat grade too low to sign\n";
 		total++;
 		if (!assertEqual("signForm fail", expected, oss.str()))
 			failed++;

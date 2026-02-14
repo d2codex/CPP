@@ -1,6 +1,7 @@
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 #include "Logger.hpp"
+#include <sstream>
 
 /*****************************************************************************
  *                               CONSTRUCTORS                                *
@@ -104,6 +105,9 @@ const char* Form::GradeTooHighException::what() const throw()
 const char* Form::GradeTooLowException::what() const throw()
 { return ("Form grade too low"); }
 
+const char* Form::GradeTooLowToSign::what() const throw()
+{ return ("Bureaucrat grade too low to sign"); }
+
 /**
  * @brief Returns the exception message for FormAlreadySigned.
  */
@@ -154,5 +158,22 @@ void	Form::beSigned(const Bureaucrat& b)
 	if (b.getGrade() <= _gradeToSign)
 		_isSigned = true;
 	else
-		throw GradeTooLowException();
+		throw GradeTooLowToSign();
+}
+
+/*****************************************************************************
+ *                                OVERLOAD                                   *
+ *****************************************************************************/
+
+std::ostream& operator<<(std::ostream& os, const Form& f)
+{
+	os << "Form: " << f.getName() << '\n';
+
+	if (f.getIsSigned() == true)
+		os << "Signed: yes" << '\n';
+	else
+		os << "Signed: no" << '\n';
+	os << "Grade required to sign: " << f.getGradeToSign() << '\n';
+	os << "Grade required to execute: " << f.getGradeToExecute();
+	return (os);
 }
