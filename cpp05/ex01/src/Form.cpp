@@ -105,7 +105,10 @@ const char* Form::GradeTooHighException::what() const throw()
 const char* Form::GradeTooLowException::what() const throw()
 { return ("Form grade too low"); }
 
-const char* Form::GradeTooLowToSign::what() const throw()
+/**
+ * @brief Returns the exception message for GradeTooLowToSignException.
+ */
+const char* Form::GradeTooLowToSignException::what() const throw()
 { return ("Bureaucrat grade too low to sign"); }
 
 /**
@@ -158,13 +161,22 @@ void	Form::beSigned(const Bureaucrat& b)
 	if (b.getGrade() <= _gradeToSign)
 		_isSigned = true;
 	else
-		throw GradeTooLowToSign();
+		throw GradeTooLowToSignException();
 }
 
 /*****************************************************************************
  *                                OVERLOAD                                   *
  *****************************************************************************/
 
+/**
+ * @brief Outputs the Form state to an output stream.
+ *
+ * Prints the form name, signed status, and required grades.
+ *
+ * @param os Output stream.
+ * @param f Form to display.
+ * @return Reference to the output stream.
+ */
 std::ostream& operator<<(std::ostream& os, const Form& f)
 {
 	os << "Form: " << f.getName() << '\n';
