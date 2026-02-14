@@ -15,7 +15,7 @@ int	testForm()
 		const char* expected = "Form grade too high";
 
 		total++;
-		if (!assertEqual("exception too high returns correct message",
+		if (!assertEqual("exception GradeTooHighException returns correct message",
 						 expected, e->what()))
 			failed++;
 		delete e;
@@ -26,7 +26,18 @@ int	testForm()
 		const char* expected = "Form grade too low";
 
 		total++;
-		if (!assertEqual("exception too low returns correct message",
+		if (!assertEqual("exception GradeTooLowException returns correct message",
+						 expected, e->what()))
+			failed++;
+		delete e;
+	}
+	// Class test: Exception form already signed returns correct message
+	{
+		std::exception* e = new Form::FormAlreadySigned();
+		const char* expected = "Form already signed";
+
+		total++;
+		if (!assertEqual("exception FormAlreadySigned returns correct message",
 						 expected, e->what()))
 			failed++;
 		delete e;
@@ -71,7 +82,7 @@ int	testForm()
 			const char* expected = "Form grade too high";
 
 			total++;
-			if (!assertEqual("expect grade too high - out of range", expected, e.what()))
+			if (!assertEqual("execute grade too high - out of range", expected, e.what()))
 				failed++;
 		}
 	}
