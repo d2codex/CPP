@@ -33,22 +33,22 @@ int	testForm()
 	}
 	// Class test: Exception form already signed returns correct message
 	{
-		std::exception* e = new Form::FormAlreadySigned();
+		std::exception* e = new Form::FormAlreadySignedException();
 		const char* expected = "Form already signed";
 
 		total++;
-		if (!assertEqual("exception FormAlreadySigned returns correct message",
+		if (!assertEqual("exception FormAlreadySignedException returns correct message",
 						 expected, e->what()))
 			failed++;
 		delete e;
 	}
 	// Class test: Exception GradeTooLowToSign returns correct message
 	{
-		std::exception* e = new Form::GradeTooLowToSign();
+		std::exception* e = new Form::GradeTooLowToSignException();
 		const char* expected = "Bureaucrat grade too low to sign";
 
 		total++;
-		if (!assertEqual("exception GradeTooLowToSign returns correct message",
+		if (!assertEqual("exception GradeTooLowToSignException returns correct message",
 						 expected, e->what()))
 			failed++;
 		delete e;
@@ -121,13 +121,27 @@ int	testForm()
 				failed++;
 		}
 	}
-	// getName
+	// getName valid name
 	{
 		Form a("plankton", 70, 71);
 
 		total++;
 		if (!assertEqual("getName", "plankton", a.getName()))
 			failed++;
+	}
+	// getName invalid empty name
+	{
+		try
+		{
+			Form a("", 70, 71);
+		}
+		catch (std::exception& e)
+		{
+			const char* expected = "Form name cannot be empty";
+			total++;
+			if (!assertEqual("getName invalid empty name", expected, e.what()))
+				failed++;
+		}
 	}
 	// getIsSigned false
 	{
@@ -171,7 +185,7 @@ int	testForm()
 			Bureaucrat bob("Bob", 75);
 			a.beSigned(bob);
 		}
-		catch (Form::GradeTooLowToSign& e)
+		catch (Form::GradeTooLowToSignException& e)
 		{
 			const char* expected = "Bureaucrat grade too low to sign";
 			total++;

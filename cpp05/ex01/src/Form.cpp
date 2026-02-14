@@ -35,6 +35,8 @@ Form::Form(const std::string formName, int sign, int execute) :
 	_gradeToSign(sign),
 	_gradeToExecute(execute)
 {
+	if (formName.empty())
+		throw std::invalid_argument("Form name cannot be empty");
 	if (_gradeToSign < 1 || _gradeToExecute < 1)
 		throw GradeTooHighException();
 	if (_gradeToSign > 150 || _gradeToExecute > 150)
@@ -114,7 +116,7 @@ const char* Form::GradeTooLowToSignException::what() const throw()
 /**
  * @brief Returns the exception message for FormAlreadySigned.
  */
-const char* Form::FormAlreadySigned::what() const throw()
+const char* Form::FormAlreadySignedException::what() const throw()
 { return ("Form already signed"); }
 
 /*****************************************************************************
@@ -157,7 +159,7 @@ int	Form::getGradeToExecute() const
 void	Form::beSigned(const Bureaucrat& b)
 {
 	if (_isSigned == true)
-		throw FormAlreadySigned();
+		throw FormAlreadySignedException();
 	if (b.getGrade() <= _gradeToSign)
 		_isSigned = true;
 	else

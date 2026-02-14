@@ -30,7 +30,7 @@ public:
 	class GradeTooLowToSignException : public std::exception
 	{ public: virtual const char* what() const throw(); };
 
-	class FormAlreadySigned : public std::exception
+	class FormAlreadySignedException : public std::exception
 	{ public: virtual const char* what() const throw(); };
 
 	// getters
