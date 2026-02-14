@@ -64,7 +64,6 @@ private:
 	bool				_isSigned;
 	const int			_gradeToSign;
 	const int			_gradeToExecute;
-	const std::string	_msg;
 };
 
 // free functions
