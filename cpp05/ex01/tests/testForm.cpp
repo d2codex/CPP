@@ -42,6 +42,17 @@ int	testForm()
 			failed++;
 		delete e;
 	}
+	// Class test: Exception GradeTooLowToSign returns correct message
+	{
+		std::exception* e = new Form::GradeTooLowToSign();
+		const char* expected = "Bureaucrat grade too low to sign";
+
+		total++;
+		if (!assertEqual("exception GradeTooLowToSign returns correct message",
+						 expected, e->what()))
+			failed++;
+		delete e;
+	}
 	// test default constructor formName, isSigned, gradeToSign, gradeToExecute
 	{
 		Form a;
@@ -240,6 +251,23 @@ int	testForm()
 		total++;
 		if (!assertEqual("copy assignment keeps original name",
 					78, b.getGradeToExecute()))
+			failed++;
+	}
+	// operator overload
+	{
+		Form tax("W-2", 32, 99);
+
+		std::ostringstream oss;
+		oss << tax;
+		std::string expected =
+			"Form: W-2\n"
+			"Signed: no\n"
+			"Grade required to sign: 32\n"
+			"Grade required to execute: 99";
+		
+		total++;
+		if (!assertEqual("operator overload prints correct message",
+						 expected, oss.str()))
 			failed++;
 	}
 	printSummary(failed, total);
