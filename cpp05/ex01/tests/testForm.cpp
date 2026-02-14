@@ -160,9 +160,9 @@ int	testForm()
 			Bureaucrat bob("Bob", 75);
 			a.beSigned(bob);
 		}
-		catch (Form::GradeTooLowException& e)
+		catch (Form::GradeTooLowToSign& e)
 		{
-			const char* expected = "Form grade too low";
+			const char* expected = "Bureaucrat grade too low to sign";
 			total++;
 			if (!assertEqual("beSigned - grade too low", expected, e.what()))
 				failed++;
