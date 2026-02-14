@@ -163,25 +163,6 @@ int	AForm::getGradeToExecute() const
 { return (_gradeToExecute); }
 
 /*****************************************************************************
- *                                 METHODS                                   *
- *****************************************************************************/
-
-/**
- * @brief Signs the form if the Bureaucrat has sufficient grade.
- * Throws AFormAlreadySigned if already signed, or GradeTooLowException
- * if Bureaucrat grade is insufficient.
- */
-void	AForm::beSigned(const Bureaucrat& b)
-{
-	if (_isSigned == true)
-		throw AlreadySignedException(_formName);
-	if (b.getGrade() <= _gradeToSign)
-		_isSigned = true;
-	else
-		throw GradeTooLowToSignException();
-}
-
-/*****************************************************************************
  *                                OVERLOAD                                   *
  *****************************************************************************/
 
@@ -205,4 +186,31 @@ std::ostream& operator<<(std::ostream& os, const AForm& f)
 	os << "Grade required to sign: " << f.getGradeToSign() << '\n';
 	os << "Grade required to execute: " << f.getGradeToExecute();
 	return (os);
+}
+
+/*****************************************************************************
+ *                                 METHODS                                   *
+ *****************************************************************************/
+
+/**
+ * @brief Signs the form if the Bureaucrat has sufficient grade.
+ * Throws AFormAlreadySigned if already signed, or GradeTooLowException
+ * if Bureaucrat grade is insufficient.
+ */
+void	AForm::beSigned(const Bureaucrat& b)
+{
+	if (_isSigned == true)
+		throw AlreadySignedException(_formName);
+	if (b.getGrade() <= _gradeToSign)
+		_isSigned = true;
+	else
+		throw GradeTooLowToSignException();
+}
+
+void	AForm::execute(const Bureaucrat& executor) const
+{
+	if (executor.getGrade() <= _gradeToExecute)
+	{
+		executeAction();
+	}
 }

@@ -57,8 +57,11 @@ public:
 	void	beSigned(const Bureaucrat& b);
 
 	// make form abstract
-	virtual void	execute(const Bureaucrat& executor) const = 0;
-	
+	virtual void	execute(const Bureaucrat& executor) const;
+
+protected:
+	virtual void	executeAction() const = 0;
+
 private:
 	const std::string	_formName;
 	bool				_isSigned;
