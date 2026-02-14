@@ -95,7 +95,7 @@ AForm::~AForm()
  *                            NESTED EXCEPTIONS                              *
  *****************************************************************************/
 
-GradeTooHighException::GradeTooHighException(const std::string& formName)
+AForm::GradeTooHighException::GradeTooHighException(const std::string& formName)
 	: _msg(formName + " grade too high") {}
 
 /**
@@ -104,7 +104,7 @@ GradeTooHighException::GradeTooHighException(const std::string& formName)
 const char* AForm::GradeTooHighException::what() const throw()
 { return (_msg.c_str()); }
 
-GradeTooLowException::GradeTooLowException(const std::string& formName)
+AForm::GradeTooLowException::GradeTooLowException(const std::string& formName)
 	: _msg(formName + " grade too low") {}
 
 /**
@@ -119,13 +119,13 @@ const char* AForm::GradeTooLowException::what() const throw()
 const char* AForm::GradeTooLowToSignException::what() const throw()
 { return ("Bureaucrat grade too low to sign"); }
 
-AFormAlreadySignedException::AFormAlreadySignedException(const std::string& formName)
+AForm::AlreadySignedException::AlreadySignedException(const std::string& formName)
 	: _msg(formName + " already signed") {}
 
 /**
  * @brief Returns the exception message for AFormAlreadySigned.
  */
-const char* AForm::AFormAlreadySignedException::what() const throw()
+const char* AForm::AlreadySignedException::what() const throw()
 { return (_msg.c_str()); }
 
 /*****************************************************************************
@@ -168,7 +168,7 @@ int	AForm::getGradeToExecute() const
 void	AForm::beSigned(const Bureaucrat& b)
 {
 	if (_isSigned == true)
-		throw AFormAlreadySignedException(_formName);
+		throw AlreadySignedException(_formName);
 	if (b.getGrade() <= _gradeToSign)
 		_isSigned = true;
 	else

@@ -3,7 +3,7 @@
 #include <string>
 #include <stdexcept>
 
-class Form;
+class AForm;
 
 /**
  * @class Bureaucrat
@@ -39,7 +39,7 @@ public:
 	void	decrementGrade();
 
 	// methods
-	void	signForm(Form& f) const;
+	void	signForm(AForm& f) const;
 	
 private:
 	const std::string	_name;

@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "tests.hpp"
 #include "Logger.hpp"
 
@@ -158,14 +158,14 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& b)
  *****************************************************************************/
 
 /**
- * @brief Attempts to sign the given Form.
- * Calls Form::beSigned. Prints success or failure message. 
+ * @brief Attempts to sign the given AForm.
+ * Calls AForm::beSigned. Prints success or failure message. 
  * Propagates any exceptions thrown by the form.
- * @param f The Form to be signed.
+ * @param f The AForm to be signed.
  * @throws GradeTooLowException if this Bureaucrat's grade is too low.
- * @throws FormAlreadySigned if the Form is already signed.
+ * @throws AFormAlreadySigned if the AForm is already signed.
  */
-void	Bureaucrat::signForm(Form& f) const
+void	Bureaucrat::signForm(AForm& f) const
 {
 	try
 	{
@@ -176,6 +176,6 @@ void	Bureaucrat::signForm(Form& f) const
 	{
 		std::cout << _name << " couldn't sign " << f.getName()
 				  << " because " << e.what() << '\n';
-		throw ; // rethrow the same exception to the caller of signForm
+		throw ; // rethrow the same exception to the caller of signAForm
 	}
 }

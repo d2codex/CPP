@@ -4,20 +4,21 @@
 
 class Bureaucrat;
 
-class Aform
+class AForm
 {
 public:
-	Aform();
-	Aform(const std::string name, int sign, int execute);
-	Aform(const Aform& other);
-	Aform& operator=(const Aform& other);
-	virtual ~Aform();
+	AForm();
+	AForm(const std::string name, int sign, int execute);
+	AForm(const AForm& other);
+	AForm& operator=(const AForm& other);
+	virtual ~AForm();
 
 	// nested exceptions
 	class GradeTooHighException : public std::exception
 	{
 		public:
 			GradeTooHighException(const std::string& formName);
+			~GradeTooHighException() throw();
 			virtual const char* what() const throw();
 		private:
 			const std::string	_msg;
@@ -27,6 +28,7 @@ public:
 	{
 		public:
 			GradeTooLowException(const std::string& formName);
+			~GradeTooLowException() throw();
 			virtual const char* what() const throw();
 		private:
 			const std::string	_msg;
@@ -35,10 +37,11 @@ public:
 	class GradeTooLowToSignException : public std::exception
 	{ public: virtual const char* what() const throw(); };
 
-	class FormAlreadySignedException : public std::exception
+	class AlreadySignedException : public std::exception
 	{
 		public:
-			FormAlreadySignedException(const std::string& formName);
+			AlreadySignedException(const std::string& formName);
+			~AlreadySignedException() throw();
 			virtual const char* what() const throw();
 		private:
 			const std::string	_msg;
@@ -61,8 +64,8 @@ private:
 	bool				_isSigned;
 	const int			_gradeToSign;
 	const int			_gradeToExecute;
-	cosnt std::string	_msg;
+	const std::string	_msg;
 };
 
 // free functions
-std::ostream& operator<<(std::ostream& os, const Aform& f);
+std::ostream& operator<<(std::ostream& os, const AForm& f);
