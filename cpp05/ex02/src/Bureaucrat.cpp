@@ -13,7 +13,7 @@
  */
 Bureaucrat::Bureaucrat() : _name("default"), _grade(150)
 {
-	LOG_INFO() << "Bureaucrat defaul constructor called";
+	LOG_DEBUG() << "Bureaucrat defaul constructor called";
 	LOG_DEBUG() << _name << " grade: " << _grade;
 }
 
@@ -36,7 +36,7 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) :
 	if (_grade > 150)
 		throw GradeTooLowException();
 
-	LOG_INFO() << "Bureaucrat constructor called";
+	LOG_DEBUG() << "Bureaucrat constructor called";
 	LOG_DEBUG() << _name << " grade: " << _grade;
 }
 
@@ -49,7 +49,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat& other) :
     _name(other._name),
     _grade(other._grade)
 {
-    LOG_INFO() << "Bureaucrat copy constructor called";
+    LOG_DEBUG() << "Bureaucrat copy constructor called";
     LOG_DEBUG() << _name << ", grade " << _grade;
 }
 
@@ -64,7 +64,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
     if (this != &other)
     {
         _grade = other._grade;  // only grade can be assigned
-        LOG_INFO() << "Bureaucrat copy assignment";
+        LOG_DEBUG() << "Bureaucrat copy assignment";
         LOG_DEBUG() << _name << " new grade " << _grade;
     }
     return *this;
@@ -74,7 +74,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
  * @brief Destructor for Bureaucrat.
  */
 Bureaucrat::~Bureaucrat()
-{ LOG_INFO() << "Bureaucrat destructor called"; }
+{ LOG_DEBUG() << "Bureaucrat destructor called"; }
 
 /*****************************************************************************
  *                            NESTED EXCEPTIONS                              *
@@ -167,15 +167,10 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& b)
  */
 void	Bureaucrat::signForm(AForm& f) const
 {
-	try
-	{
-		f.beSigned(*this);
-			std::cout << _name << " signed " << f.getName() << '\n';
-	}
-	catch (const std::exception& e)
-	{
-		std::cout << _name << " couldn't sign " << f.getName()
-				  << " because " << e.what() << '\n';
-		throw ; // rethrow the same exception to the caller of signAForm
-	}
+	f.beSigned(*this);
+}
+
+void	Bureaucrat::executeForm(const AForm& form) const
+{
+	form.execute(*this);
 }

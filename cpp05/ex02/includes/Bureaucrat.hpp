@@ -40,6 +40,7 @@ public:
 
 	// methods
 	void	signForm(AForm& f) const;
+	void	executeForm(const AForm& form) const;
 	
 private:
 	const std::string	_name;
