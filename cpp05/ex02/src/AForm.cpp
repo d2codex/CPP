@@ -191,7 +191,10 @@ void	AForm::beSigned(const Bureaucrat& b)
 		throw AlreadySignedException(msgSigned);
 	}
 	if (b.getGrade() <= _gradeToSign)
+	{
 		_isSigned = true;
+		LOG_INFO() << b.getName() << " signed " << _formName << " form";
+	}
 	else
 	{
 		const std::string	msgGrade =
