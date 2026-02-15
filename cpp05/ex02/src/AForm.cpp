@@ -17,11 +17,8 @@ AForm::AForm() :
 	_gradeToSign(150),
 	_gradeToExecute(150)
 {
-	LOG_INFO() << "AForm constructor called";
-	LOG_DEBUG() << _formName << '\n'
-			    << "Is signed: " << _isSigned << '\n'
-				<< "Grade to sign: " << _gradeToSign << '\n'
-				<< "Grade to execute: " << _gradeToExecute;
+	LOG_DEBUG() << "AForm default constructor called";
+	LOG_DEBUG() << *this;
 }
 
 /**
@@ -38,14 +35,11 @@ AForm::AForm(const std::string formName, int sign, int execute) :
 	if (formName.empty())
 		throw std::invalid_argument("AForm name cannot be empty");
 	if (_gradeToSign < 1 || _gradeToExecute < 1)
-		throw GradeTooHighException(_formName);
+		throw GradeTooHighException();
 	if (_gradeToSign > 150 || _gradeToExecute > 150)
-		throw GradeTooLowException(_formName);
-	LOG_INFO() << "AForm constructor called";
-	LOG_DEBUG() << _formName << '\n'
-			    << "Is signed: " << _isSigned << '\n'
-				<< "Grade to sign: " << _gradeToSign << '\n'
-				<< "Grade to execute: " << _gradeToExecute;
+		throw GradeTooLowException();
+	LOG_DEBUG() << "AForm constructor called";
+	LOG_DEBUG() << *this;
 }
 
 /**
@@ -58,11 +52,8 @@ AForm::AForm(const AForm& other) :
 	_gradeToSign(other._gradeToSign),
 	_gradeToExecute(other._gradeToExecute)
 {
-	LOG_INFO() << "AForm copy constructor called";
-	LOG_DEBUG() << _formName << '\n'
-			    << "Is signed: " << _isSigned << '\n'
-				<< "Grade to sign: " << _gradeToSign << '\n'
-				<< "Grade to execute: " << _gradeToExecute;
+	LOG_DEBUG() << "AForm copy constructor called";
+	LOG_DEBUG() << *this;
 }
 
 /**
@@ -77,10 +68,7 @@ AForm& AForm::operator=(const AForm& other)
 	}
 	else
 		LOG_WARNING() << "AForm self-assignment ignored";
-	LOG_DEBUG() << _formName << '\n'
-			    << "Is signed: " << _isSigned << '\n'
-				<< "Grade to sign: " << _gradeToSign << '\n'
-				<< "Grade to execute: " << _gradeToExecute;
+	LOG_DEBUG() << *this;
 	
 	return (*this);
 }
@@ -89,42 +77,37 @@ AForm& AForm::operator=(const AForm& other)
  * @brief Destructor for AForm.
  */
 AForm::~AForm()
-{ LOG_INFO() << "AForm destructor called"; }
+{ LOG_DEBUG() << "AForm destructor called"; }
 
 /*****************************************************************************
  *                            NESTED EXCEPTIONS                              *
  *****************************************************************************/
 
-AForm::GradeTooHighException::GradeTooHighException(const std::string& formName)
-	: _msg(formName + " grade too high") {}
-
-AForm::GradeTooHighException::~GradeTooHighException() throw() {}
-
 /**
  * @brief Returns the exception message for GradeTooHighException.
  */
 const char* AForm::GradeTooHighException::what() const throw()
-{ return (_msg.c_str()); }
-
-AForm::GradeTooLowException::GradeTooLowException(const std::string& formName)
-	: _msg(formName + " grade too low") {}
-
-AForm::GradeTooLowException::~GradeTooLowException() throw() {}
+{ return ("form grade too high"); }
 
 /**
  * @brief Returns the exception message for GradeTooLowException.
  */
 const char* AForm::GradeTooLowException::what() const throw()
-{ return (_msg.c_str()); }
+{ return ("form grade too low"); }
+
+AForm::GradeTooLowToSignException::GradeTooLowToSignException(const std::string& msg)
+	: _msg(msg) {}
 
 /**
  * @brief Returns the exception message for GradeTooLowToSignException.
  */
 const char* AForm::GradeTooLowToSignException::what() const throw()
-{ return ("Bureaucrat grade too low to sign"); }
+{ return (_msg.c_str()); }
 
-AForm::AlreadySignedException::AlreadySignedException(const std::string& formName)
-	: _msg(formName + " already signed") {}
+AForm::GradeTooLowToSignException::~GradeTooLowToSignException() throw() {}
+
+AForm::AlreadySignedException::AlreadySignedException(const std::string& msg)
+	: _msg(msg) {}
 
 AForm::AlreadySignedException::~AlreadySignedException() throw() {}
 
@@ -199,18 +182,45 @@ std::ostream& operator<<(std::ostream& os, const AForm& f)
  */
 void	AForm::beSigned(const Bureaucrat& b)
 {
+
 	if (_isSigned == true)
-		throw AlreadySignedException(_formName);
+	{
+		const std::string	msgSigned =
+			b.getName() + " could not sign " + _formName +
+			" form (already signed)";
+		throw AlreadySignedException(msgSigned);
+	}
 	if (b.getGrade() <= _gradeToSign)
 		_isSigned = true;
 	else
-		throw GradeTooLowToSignException();
+	{
+		const std::string	msgGrade =
+			b.getName() + " could not sign " + _formName +
+			" because grade too low";
+		throw GradeTooLowToSignException(msgGrade);
+	}
 }
 
 void	AForm::execute(const Bureaucrat& executor) const
 {
-	if (executor.getGrade() <= _gradeToExecute)
-	{
-		executeAction();
-	}
+		if (_isSigned == true)
+		{
+			const std::string msgSigned =
+				executor.getName() + " could not execute " +  _formName +
+				" form (already signed)";
+			throw AForm::AlreadySignedException(msgSigned);
+		}
+		if (executor.getGrade() <= _gradeToExecute)
+		{
+			executeAction();
+			LOG_INFO() << executor.getName() << " executed form "
+					  << _formName;
+		}
+		else
+		{
+			const std::string msgExecute =
+				executor.getName() + " could not execute " + _formName +
+				"because grade too low";
+			throw AForm::GradeTooLowToSignException(msgExecute);
+		}
 }
