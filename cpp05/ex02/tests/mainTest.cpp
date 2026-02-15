@@ -5,7 +5,7 @@
 
 int	main(void)
 {
-	logLevel level = ERROR;
+	logLevel level = INFO;
 
 	Logger::get().setThreshold(level);
     std::cout << yel("=======================================\n"

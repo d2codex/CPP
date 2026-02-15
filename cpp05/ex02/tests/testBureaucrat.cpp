@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   testBureaucrat.cpp                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/15 22:14:23 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/15 22:36:12 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "tests.hpp"
@@ -7,12 +19,17 @@
 class TestForm : public AForm
 {
 public:
-	TestForm(): AForm("TestForm", 50, 25) {}
+	TestForm(const std::string& target) :
+		AForm("TestForm", 145, 137),
+		_target(target) {}
 	virtual ~TestForm() {}
 
 protected:
 	void executeAction() const 
 	{ std::cout << "TestForm action executed\n"; }
+
+private:
+	std::string	_target;
 };
 
 
@@ -210,32 +227,31 @@ int	testBureaucrat()
 	// test SignForm
 	{
 		//Form tax("W-2", 30, 120);
-		TestForm tf;
+		TestForm tf("TestForm");
 		Bureaucrat bob("Bob", 25);
-
 		total++;
 
-		std::ostringstream oss;
-		std::streambuf* oldCout = std::cout.rdbuf(oss.rdbuf()); // redirect cout
 		bob.signForm(tf);
-		std::cout.rdbuf(oldCout); // restore cout
-		if (!assertEqual("signForm success", "Bob signed TestForm\n", oss.str()))
+		if (!assertEqual("signForm success", true, tf.getIsSigned()))
 			failed++;
 	}
 	// test SignForm fail
 	{
 		std::ostringstream oss;
-		std::streambuf* oldCout = std::cout.rdbuf(oss.rdbuf()); // redirect cout
-		TestForm tf;
-		Bureaucrat bob("Bob", 55);
+		std::streambuf* oldCerr = std::cerr.rdbuf(oss.rdbuf()); // redirect cout
+		TestForm tf("TestForm");
+		Bureaucrat bob("Bob", 150);
 		try
 		{
 			bob.signForm(tf);
 		}
-		catch (std::exception& e) {}
-		std::cout.rdbuf(oldCout); // restore cout
+		catch (std::exception& e) {
+			LOG_ERROR() << e.what();
+		}
+		
+		std::cerr.rdbuf(oldCerr); // restore cout
 		const std::string expected =
-			"Bob couldn't sign TestForm because Bureaucrat grade too low to sign\n";
+			red("[ERROR] ") + "Bob could not sign TestForm because grade too low\n";
 		total++;
 		if (!assertEqual("signForm fail", expected, oss.str()))
 			failed++;
