@@ -1,17 +1,52 @@
 #include "ShrubberyCreationForm.hpp"
 #include "Logger.hpp"
+#include <fstream>
+#include <iostream>
+#include <stdexcept>
 
-ShrubberyCreationForm::ShrubberyCreationForm() :
-	AForm("Shrubbery", 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) :
+	AForm("Shrubbery", 145, 137),
+	_shrubbery(target)
 {
-	LOG_INFO() << "ShrubberyCreationForm constructor called";
-	LOG_DEBUG() << this;
+	LOG_DEBUG() << "ShrubberyCreationForm constructor called";
+	LOG_DEBUG() << *this;
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) :
+	AForm(other),
+	_shrubbery(other._shrubbery)
+{
+	LOG_DEBUG() << "ShrubberyCreationForm copy constructor called";
+	LOG_DEBUG() << *this;
+}
+
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other)
+{
+	if (this != &other)
+	{
+		AForm::operator=(other);
+		_shrubbery = other._shrubbery;
+	}
+	else
+		LOG_WARNING() << "ShrubberyCreationForm self-assignment ignored";
+	LOG_DEBUG() << *this;
+	return (*this);
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
-{ LOG_INFO() << "ShrubberyCreationForm destructor called"; }
+{ LOG_DEBUG() << "ShrubberyCreationForm destructor called"; }
+
+static void printTree(std::ofstream& file)
+{
+	file << "ASCII TREE HERE\n";
+}
 
 void ShrubberyCreationForm::executeAction() const
 {
-	// actual shrubbery logic here
+	std::ofstream file((_shrubbery + "Shrubbery.txt").c_str());
+	//file.setstate(std::ios::failbit);
+	if (!file)
+		throw std::runtime_error("File open error");
+	printTree(file);
+	file.close();
 }
