@@ -160,7 +160,7 @@ int	AForm::getGradeToExecute() const
  */
 std::ostream& operator<<(std::ostream& os, const AForm& f)
 {
-	os << "AForm: " << f.getName() << '\n';
+	os << "Form: " << f.getName() << '\n';
 
 	if (f.getIsSigned() == true)
 		os << "Signed: yes" << '\n';

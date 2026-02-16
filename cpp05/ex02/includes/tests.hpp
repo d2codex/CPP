@@ -57,5 +57,8 @@ bool	assertNotEqual(const char* testName, const T1& expected,
 	return (false);
 }
 
+bool fileExists(const std::string& testName, const std::string& filename);
+bool fileDoesNotExist(const std::string& testName, const std::string& filename);
+
 int		testBureaucrat();
 int		testShrubberyCreationForm();

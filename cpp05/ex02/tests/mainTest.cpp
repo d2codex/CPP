@@ -5,7 +5,7 @@
 
 int	main(void)
 {
-	logLevel level = INFO;
+	logLevel level = ERROR;
 
 	Logger::get().setThreshold(level);
     std::cout << yel("=======================================\n"
@@ -18,9 +18,9 @@ int	main(void)
 	totalTestSuites++;
 	totalFailures += testBureaucrat();
 
-/*	totalTestSuites++;
+	totalTestSuites++;
 	totalFailures += testShrubberyCreationForm();
-*/
+
 	std::cout << blu("Test Suites Summary\n")
 			  << wht("Total test suits: ") << totalTestSuites << '\n'
 			  << red("total failures: ") << totalFailures << '\n'
