@@ -165,35 +165,35 @@ int	testShrubberyCreationForm()
 		std::string target = "tests/output/home";
 		ShrubberyCreationForm a(target);
 		Bureaucrat bob("bob", 10);
+		bob.signForm(a);
 		bob.executeForm(a);
 		// Check file exists
 		const std::string filename = target + "Shrubbery.txt";
-		std::cout << filename << '\n';
 		total++;
 		if (!fileExists("executeAction pass", filename))
 			failed++;
 		else
 		{
-			std::remove(filename.c_str()); // cleanup
+			//std::remove(filename.c_str()); // cleanup
 		}
 	}
-	// test executeAction fail
+	// test executeAction fail - open error
 	{
-		mkdir("tests/output/fail", 0777); // ignore errors if it exists
 		std::string target = "/invalid_path/";
 		ShrubberyCreationForm a(target);
 		Bureaucrat bob("bob", 10);
 		try
 		{
+			bob.signForm(a);
 			bob.executeForm(a);
 		}
-		catch (...) {}
-		// Check file exists
-		const std::string filename = target + "Shrubbery.txt";
+		catch (std::exception& e)
+		{
+			total++;
+			if (!assertEqual("executeAction fail - open error", "File open error", e.what()))
 
-		total++;
-		if (fileDoesNotExist("executeAction fail", filename))
-			failed++;
+				failed++;
+		}
 	}
 	printSummary(failed, total);
 	return (failed);

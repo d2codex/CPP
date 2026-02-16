@@ -26,7 +26,7 @@ public:
 
 protected:
 	void executeAction() const 
-	{ std::cout << "TestForm action executed\n"; }
+	{ LOG_INFO() << "TestForm action executed\n"; }
 
 private:
 	std::string	_target;
@@ -233,7 +233,7 @@ int	testBureaucrat()
 		if (!assertEqual("signForm success", true, tf.getIsSigned()))
 			failed++;
 	}
-	// test SignForm fail
+	// test SignForm fail - grade too low
 	{
 		try
 		{
@@ -247,7 +247,55 @@ int	testBureaucrat()
 				"Bob could not sign TestForm because grade too low";
 
 			total++;
-			if (!assertEqual("signForm fail", expected, e.what()))
+			if (!assertEqual("signForm fail - grade too low", expected, e.what()))
+				failed++;
+		}
+	}
+	// test SignForm fail - already signed
+	{
+		try
+		{
+			TestForm tf("TestForm");
+			Bureaucrat bob("Bob", 23);
+			bob.signForm(tf);
+			bob.signForm(tf);
+		}
+		catch (std::exception& e)
+		{
+			const std::string expected =
+				"Bob could not sign TestForm form (already signed)";
+
+			total++;
+			if (!assertEqual("signForm fail - form already signed", expected, e.what()))
+				failed++;
+		}
+	}
+	// test execute pass
+	{
+		TestForm tf("TestForm");
+		Bureaucrat bob("Bob", 2);
+		bob.signForm(tf);
+		bob.executeForm(tf);
+
+		total++;
+		if (!assertEqual("execute Form pass", true, tf.getIsSigned()))
+			failed++;
+	}
+	// test execute fail - form not signed
+	{
+		try
+		{
+			TestForm tf("TestForm");
+			Bureaucrat bob("Bob", 150);
+			bob.executeForm(tf);
+		}
+		catch (std::exception& e)
+		{
+			const std::string expected =
+				"Bob could not execute TestForm because form not signed";
+
+			total++;
+			if (!assertEqual("execute Form fail", expected, e.what()))
 				failed++;
 		}
 	}
