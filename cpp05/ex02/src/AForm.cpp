@@ -147,7 +147,7 @@ AForm::FormNotSignedException::FormNotSignedException(const std::string& msg)
 
 AForm::FormNotSignedException::~FormNotSignedException() throw()
 {
-	LOG_DEBUG() "FormNotSignedException destructor called";
+	LOG_DEBUG() << "FormNotSignedException destructor called";
 }
 
 const char* AForm::FormNotSignedException::what() const throw()

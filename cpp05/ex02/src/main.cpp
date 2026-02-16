@@ -51,54 +51,127 @@ int	main(int argc, char **argv)
 	if (!initLogger(argc, argv))
 		return (1);
 
-	// Test Shrubbery success
+	// Test Shrubbery fail form not signed
 	{
-		printTestName("Shrubbery");
+		printTestName("Shrubbery - form not signed");
 		try
 		{
-		ShrubberyCreationForm test("home");
-		std::cout << test << '\n';
+		ShrubberyCreationForm bonsai("home");
+		std::cout << bonsai << '\n';
 
 		Bureaucrat squidward("Squidward", 11);
 		std::cout << squidward << '\n';
 
-		squidward.signForm(test);
-		//squidward.signForm(test);
-		squidward.executeForm(test);
+		squidward.executeForm(bonsai);
 		}
 		catch (std::exception& e)
 		{
 			LOG_ERROR() << e.what();
 		}
 	}
-
-	// Drill 50/50
+	// Test Shrubbery success
 	{
-		printTestName("Robotomy");
-		int i = 0;
-		while (i < 3)
+		printTestName("Shrubbery - success");
+
+		ShrubberyCreationForm bonsai("home");
+		std::cout << bonsai << '\n';
+
+		Bureaucrat squidward("Squidward", 11);
+		std::cout << squidward << '\n';
+
+		squidward.signForm(bonsai);
+		squidward.executeForm(bonsai);
+	}
+	// Test Shrubbery fail - bureaucrat grade too low
+	{
+		printTestName("Shrubbery - instantiation of bureaucrat fail");
+		try
 		{
-			try
-			{
-				RobotomyRequestForm drill("drill");
-				std::cout << drill << '\n';
+			ShrubberyCreationForm bonsai("home");
+			std::cout << bonsai << '\n';
 
-				Bureaucrat bob("bob", 35);
-				std::cout << bob << '\n';
+			Bureaucrat squidward("Squidward", 151);
+			std::cout << squidward << '\n';
 
-				bob.signForm(drill);
-				bob.executeForm(drill);
-			}
-			catch (std::exception& e)
-			{
-				LOG_ERROR() << e.what();
-			}
+			squidward.signForm(bonsai);
+			squidward.executeForm(bonsai);
+		}
+		catch (std::exception& e)
+		{
+			LOG_ERROR() << e.what();
+		}
+	}
+	// Test Shrubbery fail - bureaaucrat grade too low to sign
+	{
+		printTestName("Shrubbery - fail");
+		try
+		{
+			ShrubberyCreationForm bonsai("home");
+			std::cout << bonsai << '\n';
+
+			Bureaucrat squidward("Squidward", 149);
+			std::cout << squidward << '\n';
+
+			squidward.signForm(bonsai);
+			squidward.executeForm(bonsai);
+		}
+		catch (std::exception& e)
+		{
+			LOG_ERROR() << e.what();
+		}
+	}
+	// Drill 50/50 - success
+	{
+		printTestName("Robotomy 50/50");
+		int i = 0;
+		while (i < 4)
+		{
+			RobotomyRequestForm drill("Mr. Krabs");
+			std::cout << drill << '\n';
+
+			Bureaucrat bob("bob", 35);
+			std::cout << bob << '\n';
+
+			bob.signForm(drill);
+			bob.executeForm(drill);
 			i++;
+		}
+	}
+	// Drill fail
+	{
+		printTestName("Robotomy - bureaucrat grade too low to sign");
+		try
+		{
+			RobotomyRequestForm drill("Mr Krabs");
+			std::cout << drill << '\n';
+
+			Bureaucrat bob("bob", 90);
+			std::cout << bob << '\n';
+
+			bob.signForm(drill);
+			bob.executeForm(drill);
+		}
+		catch (std::exception& e)
+		{
+			LOG_ERROR() << e.what();
 		}
 	}
 	// presidential pardon request
 	{
-		printTestName("Pardon");
+		printTestName("Pardon request - success");
+
+		PresidentialPardonForm form("SpongeBob");
+		std::cout << form << '\n';
+
+		Bureaucrat bob("bob", 2);
+		std::cout << bob << '\n';
+
+		bob.signForm(form);
+		bob.executeForm(form);
+	}
+	// presidential pardon request - fail form not signed
+	{
+		printTestName("Pardon request - fail from not signed");
 		try
 		{
 			PresidentialPardonForm form("SpongeBob");
@@ -107,7 +180,6 @@ int	main(int argc, char **argv)
 			Bureaucrat bob("bob", 2);
 			std::cout << bob << '\n';
 
-			bob.signForm(form);
 			bob.executeForm(form);
 		}
 		catch (std::exception& e)
@@ -115,5 +187,4 @@ int	main(int argc, char **argv)
 			LOG_ERROR() << e.what();
 		}
 	}
-
 }
