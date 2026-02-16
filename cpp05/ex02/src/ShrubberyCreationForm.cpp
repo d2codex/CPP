@@ -99,5 +99,4 @@ void ShrubberyCreationForm::executeAction() const
 	
 	if (file.fail())
 	    throw std::runtime_error("File write error");
-	file.close();
 }
