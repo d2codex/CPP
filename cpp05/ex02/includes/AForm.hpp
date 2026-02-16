@@ -33,8 +33,18 @@ public:
 	class AlreadySignedException : public std::exception
 	{
 		public:
-			AlreadySignedException(const std::string& formName);
+			AlreadySignedException(const std::string& msg);
 			~AlreadySignedException() throw();
+			virtual const char* what() const throw();
+		private:
+			const std::string	_msg;
+	};
+
+	class FormNotSignedException : public std::exception
+	{
+		public:
+			FormNotSignedException(const std::string& msg);
+			~FormNotSignedException() throw();
 			virtual const char* what() const throw();
 		private:
 			const std::string	_msg;

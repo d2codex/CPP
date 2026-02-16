@@ -117,6 +117,14 @@ AForm::AlreadySignedException::~AlreadySignedException() throw() {}
 const char* AForm::AlreadySignedException::what() const throw()
 { return (_msg.c_str()); }
 
+AForm::FormNotSignedException::FormNotSignedException(const std::string& msg)
+	: _msg(msg) {}
+
+AForm::FormNotSignedException::~FormNotSignedException() throw() {}
+
+const char* AForm::FormNotSignedException::what() const throw()
+{ return (_msg.c_str()); }
+
 /*****************************************************************************
  *                                 GETTERS                                   *
  *****************************************************************************/
@@ -206,12 +214,12 @@ void	AForm::beSigned(const Bureaucrat& b)
 
 void	AForm::execute(const Bureaucrat& executor) const
 {
-		if (_isSigned == true)
+		if (_isSigned == false)
 		{
-			const std::string msgSigned =
-				executor.getName() + " could not execute " +  _formName +
-				" form (already signed)";
-			throw AForm::AlreadySignedException(msgSigned);
+			const std::string msgNotSigned =
+				executor.getName() + " could not execute " + _formName +
+				" because form not signed";
+			throw AForm::FormNotSignedException(msgNotSigned);
 		}
 		if (executor.getGrade() <= _gradeToExecute)
 		{
