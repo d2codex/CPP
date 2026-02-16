@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 22:14:23 by diade-so          #+#    #+#             */
-/*   Updated: 2026/02/15 22:36:12 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/02/15 23:32:57 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,10 +223,8 @@ int	testBureaucrat()
 					std::string("Squidward"), b.getName()))
 			failed++;
 	}
-
 	// test SignForm
 	{
-		//Form tax("W-2", 30, 120);
 		TestForm tf("TestForm");
 		Bureaucrat bob("Bob", 25);
 		total++;
@@ -237,24 +235,21 @@ int	testBureaucrat()
 	}
 	// test SignForm fail
 	{
-		std::ostringstream oss;
-		std::streambuf* oldCerr = std::cerr.rdbuf(oss.rdbuf()); // redirect cout
-		TestForm tf("TestForm");
-		Bureaucrat bob("Bob", 150);
 		try
 		{
+			TestForm tf("TestForm");
+			Bureaucrat bob("Bob", 150);
 			bob.signForm(tf);
 		}
-		catch (std::exception& e) {
-			LOG_ERROR() << e.what();
+		catch (std::exception& e)
+		{
+			const std::string expected =
+				"Bob could not sign TestForm because grade too low";
+
+			total++;
+			if (!assertEqual("signForm fail", expected, e.what()))
+				failed++;
 		}
-		
-		std::cerr.rdbuf(oldCerr); // restore cout
-		const std::string expected =
-			red("[ERROR] ") + "Bob could not sign TestForm because grade too low\n";
-		total++;
-		if (!assertEqual("signForm fail", expected, oss.str()))
-			failed++;
 	}
 	printSummary(failed, total);
 	return (failed);
