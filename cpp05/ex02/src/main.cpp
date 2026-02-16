@@ -1,4 +1,5 @@
-#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 #include "Bureaucrat.hpp"
 #include "Logger.hpp"
 #include "colors.hpp"
@@ -48,63 +49,51 @@ int	main(int argc, char **argv)
 {
 	if (!initLogger(argc, argv))
 		return (1);
-	
-	// Successful signing
-    printTestName("Successful signing");
-	try
-    {
-        Form tax1("W-2", 30, 120);
-		std::cout << tax1 << '\n';
-        Bureaucrat bob1("Bob", 25); // high enough grade
-		std::cout << bob1 << '\n';
 
-        bob1.signForm(tax1);
-    }
-    catch (std::exception& e)
-    {
-        LOG_ERROR() << e.what();
-    }
+	// Test Shrubbery success
+	{
+		printTestName("Shrubbery");
+		try
+		{
+		ShrubberyCreationForm test("home");
+		std::cout << test << '\n';
 
-    // Signing fails: grade too low
-    printTestName("Signing fails: grade too low");
-    try
-    {
-        Form tax2("W-2", 30, 120);
-		std::cout << tax2 << '\n';
-        Bureaucrat bob2("Bob", 45); // grade too low
-		std::cout << bob2 << '\n';
-        bob2.signForm(tax2);
-    }
-    catch (std::exception& e)
-    {
-        LOG_ERROR() << e.what();
-    }
+		Bureaucrat squidward("Squidward", 11);
+		std::cout << squidward << '\n';
 
-	 // Form instantiation fails: grade too high
-    printTestName("Form Instantiation fails: form grade too high");
-    try
-    {
-        Form tax2("W-2", 0, 120);
-        Bureaucrat bob2("Bob", 2); // grade too low
-        bob2.signForm(tax2);
-    }
-    catch (std::exception& e)
-    {
-        LOG_ERROR() << e.what();
-    }
-    // Signing fails: form already signed
-    printTestName("Signing fails: form already signed");
-    try
-    {
-        Form tax3("W-2", 30, 120);
-        Bureaucrat alice("Alice", 20); // can sign
-        Bureaucrat charlie("Charlie", 10); // also can sign
+		squidward.signForm(test);
+		//squidward.signForm(test);
+		squidward.executeForm(test);
+		}
+		catch (std::exception& e)
+		{
+			LOG_ERROR() << e.what();
+		}
+	}
 
-        alice.signForm(tax3);  // first signs successfully
-        charlie.signForm(tax3); // should throw FormAlreadySigned
-    }
-    catch (std::exception& e)
-    {
-        LOG_ERROR() << e.what();
-    }
+	// Drill 50/50
+	{
+		printTestName("Robotomy");
+		int i = 0;
+		while (i < 3)
+		{
+			try
+			{
+				RobotomyRequestForm drill("drill");
+				std::cout << drill << '\n';
+
+				Bureaucrat bob("bob", 35);
+				std::cout << bob << '\n';
+
+				bob.signForm(drill);
+				bob.executeForm(drill);
+			}
+			catch (std::exception& e)
+			{
+				LOG_ERROR() << e.what();
+			}
+			i++;
+		}
+	}
+
 }

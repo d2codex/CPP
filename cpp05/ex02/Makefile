@@ -40,6 +40,7 @@ APP_SRCS = src/main.cpp
 
 TEST_SRCS = tests/mainTest.cpp \
 			tests/testBureaucrat.cpp \
+			tests/testRobotomyRequestForm.cpp \
 			tests/testShrubberyCreationForm.cpp \
 			tests/tests.cpp
 
