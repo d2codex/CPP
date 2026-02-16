@@ -1,5 +1,6 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include "Bureaucrat.hpp"
 #include "Logger.hpp"
 #include "colors.hpp"
@@ -93,6 +94,25 @@ int	main(int argc, char **argv)
 				LOG_ERROR() << e.what();
 			}
 			i++;
+		}
+	}
+	// presidential pardon request
+	{
+		printTestName("Pardon");
+		try
+		{
+			PresidentialPardonForm form("SpongeBob");
+			std::cout << form << '\n';
+
+			Bureaucrat bob("bob", 2);
+			std::cout << bob << '\n';
+
+			bob.signForm(form);
+			bob.executeForm(form);
+		}
+		catch (std::exception& e)
+		{
+			LOG_ERROR() << e.what();
 		}
 	}
 
