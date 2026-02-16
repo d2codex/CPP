@@ -8,6 +8,8 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) :
 	AForm("Shrubbery", 145, 137),
 	_shrubbery(target)
 {
+	if (_shrubbery.empty())
+		throw std::invalid_argument("Target cannot be empty");
 	LOG_DEBUG() << "ShrubberyCreationForm constructor called";
 	LOG_DEBUG() << *this;
 }
@@ -35,6 +37,9 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 { LOG_DEBUG() << "ShrubberyCreationForm destructor called"; }
+
+const std::string ShrubberyCreationForm::getTarget() const
+{ return (_shrubbery); }
 
 static void printTree(std::ofstream& file)
 {
