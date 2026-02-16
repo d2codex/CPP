@@ -161,7 +161,7 @@ int	testShrubberyCreationForm()
 	}
 	// test executeAction success
 	{
-		mkdir("tests/output", 0777); // ignore errors if it exists
+		mkdir("tests/output", 0777);
 		std::string target = "tests/output/home";
 		ShrubberyCreationForm a(target);
 		Bureaucrat bob("bob", 10);
@@ -174,7 +174,7 @@ int	testShrubberyCreationForm()
 			failed++;
 		else
 		{
-			//std::remove(filename.c_str()); // cleanup
+			std::remove(filename.c_str()); // cleanup
 		}
 	}
 	// test executeAction fail - open error
@@ -191,7 +191,6 @@ int	testShrubberyCreationForm()
 		{
 			total++;
 			if (!assertEqual("executeAction fail - open error", "File open error", e.what()))
-
 				failed++;
 		}
 	}

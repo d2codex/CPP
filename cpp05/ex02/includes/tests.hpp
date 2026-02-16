@@ -63,3 +63,4 @@ bool fileDoesNotExist(const std::string& testName, const std::string& filename);
 int		testBureaucrat();
 int		testShrubberyCreationForm();
 int		testRobotomyRequestForm();
+int		testPresidentialPardonForm();

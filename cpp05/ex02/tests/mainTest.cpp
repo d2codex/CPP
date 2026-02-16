@@ -24,6 +24,9 @@ int	main(void)
 	totalTestSuites++;
 	totalFailures += testRobotomyRequestForm();
 
+	totalTestSuites++;
+	totalFailures += testPresidentialPardonForm();
+
 	std::cout << blu("Test Suites Summary\n")
 			  << wht("Total test suits: ") << totalTestSuites << '\n'
 			  << red("total failures: ") << totalFailures << '\n'
