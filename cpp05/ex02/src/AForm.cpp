@@ -101,6 +101,9 @@ const char* AForm::GradeTooLowException::what() const throw()
 	return ("form grade too low");
 }
 
+/**
+ * @brief Constructs a GradeTooLowToSignException with a message.
+ */
 AForm::GradeTooLowToSignException::GradeTooLowToSignException(const std::string& msg) :
 	_msg(msg)
 {
@@ -115,17 +118,26 @@ const char* AForm::GradeTooLowToSignException::what() const throw()
 	return (_msg.c_str());
 }
 
+/**
+ * @brief Destroys the GradeTooLowToSignException.
+ */
 AForm::GradeTooLowToSignException::~GradeTooLowToSignException() throw()
 {
 	LOG_DEBUG() << "GradeTooLowToSignException destructor called";
 }
 
+/**
+ * @brief Constructs an AlreadySignedException with a message.
+ */
 AForm::AlreadySignedException::AlreadySignedException(const std::string& msg) :
 	_msg(msg)
 {
 	LOG_DEBUG() << "AlreadySignedException constructor called";
 }
 
+/**
+ * @brief Destroys the AlreadySignedException.
+ */
 AForm::AlreadySignedException::~AlreadySignedException() throw()
 {
 	LOG_DEBUG() << "AlreadySignedException destructor called";
@@ -139,17 +151,26 @@ const char* AForm::AlreadySignedException::what() const throw()
 	return (_msg.c_str());
 }
 
+/**
+ * @brief Constructs a FormNotSignedException with a message.
+ */
 AForm::FormNotSignedException::FormNotSignedException(const std::string& msg)
 	: _msg(msg)
 {
 	LOG_DEBUG() << "FormNotSignedException constructor called";
 }
 
+/**
+ * @brief Destroys the FormNotSignedException.
+ */
 AForm::FormNotSignedException::~FormNotSignedException() throw()
 {
 	LOG_DEBUG() << "FormNotSignedException destructor called";
 }
 
+/**
+ * @brief Returns the exception message for FormNotSignedException.
+ */
 const char* AForm::FormNotSignedException::what() const throw()
 {
 	return (_msg.c_str());
@@ -197,9 +218,7 @@ int	AForm::getGradeToExecute() const
 
 /**
  * @brief Outputs the AForm state to an output stream.
- *
  * Prints the form name, signed status, and required grades.
- *
  * @param os Output stream.
  * @param f AForm to display.
  * @return Reference to the output stream.
@@ -250,6 +269,10 @@ void	AForm::beSigned(const Bureaucrat& b)
 	}
 }
 
+/**
+ * @brief Executes the form if signed and executor grade is sufficient.
+ * Throws if the form is not signed or if the executor grade is too low.
+ */
 void	AForm::execute(const Bureaucrat& executor) const
 {
 		if (_isSigned == false)

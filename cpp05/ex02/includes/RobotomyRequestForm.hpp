@@ -2,6 +2,12 @@
 
 #include "AForm.hpp"
 
+/**
+ * @class RobotomyRequestForm
+ * @brief Attempts to robotomize a target.
+ *
+ * Produces drilling noises and reports success or failure when executed.
+ */
 class RobotomyRequestForm : public AForm
 {
 public:

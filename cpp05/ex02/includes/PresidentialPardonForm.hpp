@@ -2,6 +2,12 @@
 
 #include "AForm.hpp"
 
+/**
+ * @class PresidentialPardonForm
+ * @brief Grants a presidential pardon to a target.
+ *
+ * Informs that the target has been pardoned when executed successfully.
+ */
 class PresidentialPardonForm : public AForm
 {
 public:

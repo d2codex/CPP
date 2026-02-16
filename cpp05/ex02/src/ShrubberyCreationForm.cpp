@@ -3,6 +3,10 @@
 #include <fstream>
 #include <stdexcept>
 
+/**
+ * @brief Constructs a ShrubberyCreationForm with a target.
+ * Initializes required grades and validates the target string.
+ */
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) :
 	AForm("Shrubbery", 145, 137),
 	_shrubbery(target)
@@ -13,6 +17,9 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) :
 	LOG_DEBUG() << *this;
 }
 
+/**
+ * @brief Constructs a copy of another ShrubberyCreationForm.
+ */
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) :
 	AForm(other),
 	_shrubbery(other._shrubbery)
@@ -21,6 +28,9 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
 	LOG_DEBUG() << *this;
 }
 
+/**
+ * @brief Assigns another ShrubberyCreationForm to this instance.
+ */
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other)
 {
 	if (this != &other)
@@ -34,16 +44,25 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	return (*this);
 }
 
+/**
+ * @brief Destroys the ShrubberyCreationForm.
+ */
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
 	LOG_DEBUG() << "ShrubberyCreationForm destructor called";
 }
 
+/**
+ * @brief Returns the target of the shrubbery form.
+ */
 const std::string ShrubberyCreationForm::getTarget() const
 {
 	return (_shrubbery);
 }
 
+/**
+ * @brief Writes an ASCII shrubbery tree to the given file stream.
+ */
 static void printTree(std::ofstream& file)
 {
 	file << "                                       ..-%+:.:.\n";
@@ -88,6 +107,10 @@ static void printTree(std::ofstream& file)
 
 }
 
+/**
+ * @brief Creates a shrubbery file and writes ASCII trees into it.
+ * Throws if the file cannot be opened or written to.
+ */
 void ShrubberyCreationForm::executeAction() const
 {
 	std::ofstream file((_shrubbery + "Shrubbery.txt").c_str());

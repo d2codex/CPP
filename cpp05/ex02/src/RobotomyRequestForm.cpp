@@ -4,6 +4,10 @@
 #include <ctime>
 #include <cstdlib>
 
+/**
+ * @brief Constructs a RobotomyRequestForm with a target.
+ * Initializes required grades and validates the target string.
+ */
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target) :
 	AForm("Robotomy", 72, 45),
 	_robotomy(target)
@@ -14,6 +18,9 @@ RobotomyRequestForm::RobotomyRequestForm(const std::string& target) :
 	LOG_DEBUG() << *this;
 }
 
+/**
+ * @brief Constructs a copy of another RobotomyRequestForm.
+ */
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) :
 	AForm(other),
 	_robotomy(other._robotomy)
@@ -22,6 +29,9 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) :
 	LOG_DEBUG() << *this;
 }
 
+/**
+ * @brief Assigns another RobotomyRequestForm to this instance.
+ */
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& other)
 {
 	if (this != &other)
@@ -35,16 +45,27 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& o
 	return (*this);
 }
 
+/**
+ * @brief Destroys the RobotomyRequestForm.
+ */
 RobotomyRequestForm::~RobotomyRequestForm()
 {
 	LOG_DEBUG() << "RobotomyRequestForm destructor called";
 }
 
+/**
+ * @brief Returns the target of the robotomy form.
+ */
 const std::string	RobotomyRequestForm::getTarget() const
 {
 	return (_robotomy);
 }
 
+/**
+ * @brief Attempts to robotomize the target.
+ *
+ * Outputs drilling noises and reports success or failure.
+ */
 void RobotomyRequestForm::executeAction() const
 {
 	static bool flip = std::time(NULL) & 1; // start with even/odd seconds

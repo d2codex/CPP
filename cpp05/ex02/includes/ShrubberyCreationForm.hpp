@@ -2,6 +2,12 @@
 
 #include "AForm.hpp"
 
+/**
+ * @class ShrubberyCreationForm
+ * @brief Creates a shrubbery file for a target.
+ *
+ * Writes ASCII trees to a file when executed successfully.
+ */
 class ShrubberyCreationForm : public AForm
 {
 public:

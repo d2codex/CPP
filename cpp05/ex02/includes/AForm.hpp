@@ -4,6 +4,13 @@
 
 class Bureaucrat;
 
+/**
+ * @class AForm
+ * @brief Abstract base class representing a bureaucratic form.
+ *
+ * Defines signing and execution requirements with grade validation.
+ * Provides common logic, state, and exceptions for all derived forms.
+ */
 class AForm
 {
 public:
