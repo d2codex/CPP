@@ -91,10 +91,12 @@ static void printTree(std::ofstream& file)
 void ShrubberyCreationForm::executeAction() const
 {
 	std::ofstream file((_shrubbery + "Shrubbery.txt").c_str());
-	//file.setstate(std::ios::failbit);
+
 	if (!file)
 		throw std::runtime_error("File open error");
+
 	printTree(file);
+	
 	if (file.fail())
 	    throw std::runtime_error("File write error");
 	file.close();

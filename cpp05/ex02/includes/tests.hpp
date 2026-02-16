@@ -10,19 +10,27 @@ void	printSummary(int failed, int total);
 
 /* helper for C-strings */
 inline bool equalHelper(const char* a, const char* b)
-{ return (std::strcmp(a, b) == 0); }
+{
+	return (std::strcmp(a, b) == 0);
+}
 
 /* mixed string types */
 inline bool equalHelper(const char* a, const std::string& b)
-{ return b == a; }
+{
+	return b == a;
+}
 
 inline bool equalHelper(const std::string& a, const char* b)
-{ return a == b; }
+{
+	return a == b;
+}
 
 /* generic helper for all other types */
 template<typename T>
 bool equalHelper(const T& a, const T& b)
-{ return (a == b); }
+{
+	return (a == b);
+}
 
 /* template assertEqual using equalHelper */
 template<typename T1, typename T2>

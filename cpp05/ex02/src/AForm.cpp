@@ -77,7 +77,9 @@ AForm& AForm::operator=(const AForm& other)
  * @brief Destructor for AForm.
  */
 AForm::~AForm()
-{ LOG_DEBUG() << "AForm destructor called"; }
+{
+	LOG_DEBUG() << "AForm destructor called";
+}
 
 /*****************************************************************************
  *                            NESTED EXCEPTIONS                              *
@@ -87,43 +89,71 @@ AForm::~AForm()
  * @brief Returns the exception message for GradeTooHighException.
  */
 const char* AForm::GradeTooHighException::what() const throw()
-{ return ("form grade too high"); }
+{
+	return ("form grade too high");
+}
 
 /**
  * @brief Returns the exception message for GradeTooLowException.
  */
 const char* AForm::GradeTooLowException::what() const throw()
-{ return ("form grade too low"); }
+{
+	return ("form grade too low");
+}
 
-AForm::GradeTooLowToSignException::GradeTooLowToSignException(const std::string& msg)
-	: _msg(msg) {}
+AForm::GradeTooLowToSignException::GradeTooLowToSignException(const std::string& msg) :
+	_msg(msg)
+{
+	LOG_DEBUG() << "GradeTooLowToSignException constructor called";
+}
 
 /**
  * @brief Returns the exception message for GradeTooLowToSignException.
  */
 const char* AForm::GradeTooLowToSignException::what() const throw()
-{ return (_msg.c_str()); }
+{
+	return (_msg.c_str());
+}
 
-AForm::GradeTooLowToSignException::~GradeTooLowToSignException() throw() {}
+AForm::GradeTooLowToSignException::~GradeTooLowToSignException() throw()
+{
+	LOG_DEBUG() << "GradeTooLowToSignException destructor called";
+}
 
-AForm::AlreadySignedException::AlreadySignedException(const std::string& msg)
-	: _msg(msg) {}
+AForm::AlreadySignedException::AlreadySignedException(const std::string& msg) :
+	_msg(msg)
+{
+	LOG_DEBUG() << "AlreadySignedException constructor called";
+}
 
-AForm::AlreadySignedException::~AlreadySignedException() throw() {}
+AForm::AlreadySignedException::~AlreadySignedException() throw()
+{
+	LOG_DEBUG() << "AlreadySignedException destructor called";
+}
 
 /**
  * @brief Returns the exception message for AFormAlreadySigned.
  */
 const char* AForm::AlreadySignedException::what() const throw()
-{ return (_msg.c_str()); }
+{
+	return (_msg.c_str());
+}
 
 AForm::FormNotSignedException::FormNotSignedException(const std::string& msg)
-	: _msg(msg) {}
+	: _msg(msg)
+{
+	LOG_DEBUG() << "FormNotSignedException constructor called";
+}
 
-AForm::FormNotSignedException::~FormNotSignedException() throw() {}
+AForm::FormNotSignedException::~FormNotSignedException() throw()
+{
+	LOG_DEBUG() "FormNotSignedException destructor called";
+}
 
 const char* AForm::FormNotSignedException::what() const throw()
-{ return (_msg.c_str()); }
+{
+	return (_msg.c_str());
+}
 
 /*****************************************************************************
  *                                 GETTERS                                   *
@@ -133,25 +163,33 @@ const char* AForm::FormNotSignedException::what() const throw()
  * @brief Returns the form's name.
  */
 const std::string	AForm::getName() const
-{ return (_formName); }
+{
+	return (_formName);
+}
 
 /**
  * @brief Returns whether the form is signed.
  */
 bool	AForm::getIsSigned() const
-{ return (_isSigned); }
+{
+	return (_isSigned);
+}
 
 /**
  * @brief Returns the grade required to sign the form.
  */
 int	AForm::getGradeToSign() const
-{ return (_gradeToSign); }
+{
+	return (_gradeToSign);
+}
 
 /**
  * @brief Returns the grade required to execute the form.
  */
 int	AForm::getGradeToExecute() const
-{ return (_gradeToExecute); }
+{
+	return (_gradeToExecute);
+}
 
 /*****************************************************************************
  *                                OVERLOAD                                   *
