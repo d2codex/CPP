@@ -33,6 +33,7 @@ TEST_NAME = $(BIN_DIR)/test_runner
 CORE_SRCS = src/Bureaucrat.cpp \
 			src/AForm.cpp \
 			src/Logger.cpp \
+			src/RobotomyRequestForm.cpp \
 			src/ShrubberyCreationForm.cpp \
 
 APP_SRCS = src/main.cpp
