@@ -1,7 +1,6 @@
 #include "ShrubberyCreationForm.hpp"
 #include "Logger.hpp"
 #include <fstream>
-#include <iostream>
 #include <stdexcept>
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) :
@@ -36,10 +35,14 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
-{ LOG_DEBUG() << "ShrubberyCreationForm destructor called"; }
+{
+	LOG_DEBUG() << "ShrubberyCreationForm destructor called";
+}
 
 const std::string ShrubberyCreationForm::getTarget() const
-{ return (_shrubbery); }
+{
+	return (_shrubbery);
+}
 
 static void printTree(std::ofstream& file)
 {

@@ -15,6 +15,5 @@ public:
 	
 private:
 	virtual void executeAction() const; 
-	
 	std::string	_shrubbery;
 };
