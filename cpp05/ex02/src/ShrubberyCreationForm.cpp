@@ -46,7 +46,46 @@ const std::string ShrubberyCreationForm::getTarget() const
 
 static void printTree(std::ofstream& file)
 {
-	file << "ASCII TREE HERE\n";
+	file << "                                       ..-%+:.:.\n";
+	file << "                                   ...-%+:.:..%+:.\n";
+	file << "                                   ....-%+:.-%+:.\n";
+	file << "                                  ...-%.-%+:.:.+:.:.\n";
+	file << "                                  .-%+:..-%+:.%.-%+:.\n";
+	file << "                                      ||.-%+:.-%+:.\n";
+	file << "                                      ||%+:.:.+:.\n";
+	file << "                                      ||.-.-%+:.\n";
+	file << "                                      .||+:.-%+:.\n";
+	file << "                                      |/~\n";
+	file << "                                      ||\n";
+	file << "                                      ||\n";
+	file << "                                      |/~\n";
+	file << "                          .-%+:..-%+:./~|\n";
+	file << "                          .-..-%+:.-%+|/\n";
+	file << "                          .-%+:.%+:.+:/||\n";
+	file << "                      .-%+:.%+:.-%+:.  ||\n";
+	file << "                      .-%+:.+:.      _||\n";
+	file << "                      .-%+:.+:.      /||\n";
+	file << "                                      |/\n";
+	file << "                                      /||\n";
+	file << "                                      /||\n";
+	file << "                                      /||\n";
+	file << "                                      ||            _/\n";
+	file << "                                      ||   _/_/_/  /_/_/\n";
+	file << "                                      |/__/    / _/   / ..-%+.-%+:.\n";
+	file << "                                      /~                /  .-%.-%+:..:.\n";
+	file << "                                      |/                 /...%.-%+:..:.%+:.\n";
+	file << "                                      /||                 /|.-.-%+:.-%+:.\n";
+	file << "        .-%+:.-%+:.                  /~                   _/ .-.-%+:.\n";
+	file << "       .-%.-..-%+:.:.                /~\n";
+	file << "        .-.-%+:...:.                  /~|\n";
+	file << "         .-%+:...%+:._|           ``____`/~/\n";
+	file << "         .-%+:..%+:. /       ``___``     `/~\n";
+	file << "        .-%+:.       ``__``__``_  ``__       /~/~\n";
+	file << "                           :___________./~~~`.__________:\n";
+	file << "                           ``                           /\n";
+	file << "                            ``_________________________/\n";
+	file << "                             (_)                     (_)\n";
+
 }
 
 void ShrubberyCreationForm::executeAction() const
@@ -56,5 +95,7 @@ void ShrubberyCreationForm::executeAction() const
 	if (!file)
 		throw std::runtime_error("File open error");
 	printTree(file);
+	if (file.fail())
+	    throw std::runtime_error("File write error");
 	file.close();
 }
