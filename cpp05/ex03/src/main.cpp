@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/18 10:12:04 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/18 10:31:29 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Intern.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
@@ -190,11 +202,75 @@ int	main(int argc, char **argv)
 	}
 	// test intern
 	{
-		printTestName("intern creates shrubbery");
+		printTestName("intern creates robotomy - subject test");
 		Intern someRandomIntern;
 		AForm* rrf;
 		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
 		std::cout << *rrf << std::endl;
 		delete rrf;
+	}
+	// test shrubbery
+	{
+		printTestName("intern creates shrubbery request success");
+		Intern intern;
+		AForm* form;
+
+		form = intern.makeForm("shrubbery request", "Spongebob");
+		std::cout << *form << std::endl;
+		delete form;
+	}
+	// intern full flow - sign and execute success
+	{
+		printTestName("Intern full flow - success");
+
+		Intern intern;
+		AForm* form = intern.makeForm("robotomy request", "Bender");
+
+		Bureaucrat boss("Boss", 1);
+
+		boss.signForm(*form);
+		boss.executeForm(*form);
+
+		delete form;
+	}
+	// inter flow - fail no signing
+	{
+		AForm* form = NULL;
+		printTestName("Intern flow -fail - execute without sign");
+
+		try
+		{
+			Intern intern;
+			form = intern.makeForm("shrubbery request", "home");
+
+			Bureaucrat bob("Bob", 1);
+			bob.executeForm(*form);
+		}
+		catch (std::exception& e)
+		{
+			LOG_ERROR() << e.what();
+		}
+		delete form;
+	}
+	// intern flow - fail grade too low
+	{
+		AForm* form = NULL;
+		printTestName("Intern flow - fail - grade too low");
+
+		try
+		{
+			Intern intern;
+			form = intern.makeForm("presidential request", "SpongeBob");
+
+			Bureaucrat mrKrabs("Mr Krabs", 150);
+
+			mrKrabs.signForm(*form);
+			mrKrabs.executeForm(*form);
+		}
+		catch (std::exception& e)
+		{
+			LOG_ERROR() << e.what();
+		}
+		delete form;
 	}
 }

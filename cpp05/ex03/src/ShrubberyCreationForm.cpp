@@ -1,7 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/18 10:05:12 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/18 10:11:16 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ShrubberyCreationForm.hpp"
 #include "Logger.hpp"
 #include <fstream>
 #include <stdexcept>
+
+/*****************************************************************************
+ *                               CONSTRUCTORS                                *
+ *****************************************************************************/
 
 /**
  * @brief Constructs a ShrubberyCreationForm with a target.
@@ -52,6 +68,10 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 	LOG_DEBUG() << "ShrubberyCreationForm destructor called";
 }
 
+/*****************************************************************************
+ *                                 GETTERS                                   *
+ *****************************************************************************/
+
 /**
  * @brief Returns the target of the shrubbery form.
  */
@@ -59,6 +79,10 @@ const std::string ShrubberyCreationForm::getTarget() const
 {
 	return (_shrubbery);
 }
+
+/*****************************************************************************
+ *                                 METHODS                                   *
+ *****************************************************************************/
 
 /**
  * @brief Writes an ASCII shrubbery tree to the given file stream.

@@ -6,7 +6,7 @@
 #    By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/11 02:21:22 by diade-so          #+#    #+#              #
-#    Updated: 2026/02/12 23:24:25 by diade-so         ###   ########.fr        #
+#    Updated: 2026/02/18 10:06:20 by diade-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ APP_SRCS = src/main.cpp
 
 TEST_SRCS = tests/mainTest.cpp \
 			tests/testBureaucrat.cpp \
+			tests/testIntern.cpp \
 			tests/testPresidentialPardonForm.cpp \
 			tests/testRobotomyRequestForm.cpp \
 			tests/testShrubberyCreationForm.cpp \

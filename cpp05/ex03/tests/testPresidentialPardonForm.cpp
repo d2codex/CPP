@@ -30,7 +30,7 @@ int	testPresidentialPardonForm()
 			failed++;
 
 		total++;
-		if (!assertEqual("default ctor - gradeToExecute set to 25", 5,
+		if (!assertEqual("default ctor - gradeToExecute set to 5", 5,
 						 a.getGradeToExecute()))
 			failed++;
 

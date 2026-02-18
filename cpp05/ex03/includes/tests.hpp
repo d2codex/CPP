@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tests.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/18 10:05:41 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/18 10:05:42 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 
 #include <iostream>
@@ -68,7 +80,8 @@ bool	assertNotEqual(const char* testName, const T1& expected,
 bool fileExists(const std::string& testName, const std::string& filename);
 bool fileDoesNotExist(const std::string& testName, const std::string& filename);
 
-int		testBureaucrat();
-int		testShrubberyCreationForm();
-int		testRobotomyRequestForm();
-int		testPresidentialPardonForm();
+int	testBureaucrat();
+int	testShrubberyCreationForm();
+int	testRobotomyRequestForm();
+int	testPresidentialPardonForm();
+int	testIntern();

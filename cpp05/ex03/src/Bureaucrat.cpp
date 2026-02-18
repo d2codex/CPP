@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/18 09:59:45 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/18 10:03:55 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "tests.hpp"
@@ -166,18 +178,21 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& b)
  *****************************************************************************/
 
 /**
- * @brief Attempts to sign the given AForm.
- * Calls AForm::beSigned. Prints success or failure message. 
- * Propagates any exceptions thrown by the form.
- * @param f The AForm to be signed.
- * @throws GradeTooLowException if this Bureaucrat's grade is too low.
- * @throws AFormAlreadySigned if the AForm is already signed.
+ * @brief Sign a form.
+ * Calls the form's beSigned method using this Bureaucrat.
+ * @param f Form to sign.
  */
 void	Bureaucrat::signForm(AForm& f) const
 {
 	f.beSigned(*this);
 }
 
+
+/**
+ * @brief Execute a form.
+ * Calls the form's execute method using this Bureaucrat.
+ * @param form Form to execute.
+ */
 void	Bureaucrat::executeForm(const AForm& form) const
 {
 	form.execute(*this);

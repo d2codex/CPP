@@ -1,8 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/18 10:04:54 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/18 10:09:51 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "RobotomyRequestForm.hpp"
 #include "Logger.hpp"
 #include <stdexcept>
 #include <ctime>
 #include <cstdlib>
+
+/*****************************************************************************
+ *                               CONSTRUCTORS                                *
+ *****************************************************************************/
 
 /**
  * @brief Constructs a RobotomyRequestForm with a target.
@@ -53,6 +69,10 @@ RobotomyRequestForm::~RobotomyRequestForm()
 	LOG_DEBUG() << "RobotomyRequestForm destructor called";
 }
 
+/*****************************************************************************
+ *                                 GETTERS                                   *
+ *****************************************************************************/
+
 /**
  * @brief Returns the target of the robotomy form.
  */
@@ -61,9 +81,12 @@ const std::string	RobotomyRequestForm::getTarget() const
 	return (_robotomy);
 }
 
+/*****************************************************************************
+ *                                 METHODS                                   *
+ *****************************************************************************/
+
 /**
  * @brief Attempts to robotomize the target.
- *
  * Outputs drilling noises and reports success or failure.
  */
 void RobotomyRequestForm::executeAction() const
