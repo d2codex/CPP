@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/18 10:49:22 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/18 10:49:50 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "tests.hpp"
@@ -74,7 +86,9 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
  * @brief Destructor for Bureaucrat.
  */
 Bureaucrat::~Bureaucrat()
-{ LOG_DEBUG() << "Bureaucrat destructor called"; }
+{
+	LOG_DEBUG() << "Bureaucrat destructor called";
+}
 
 /*****************************************************************************
  *                            NESTED EXCEPTIONS                              *
@@ -115,7 +129,6 @@ int	Bureaucrat::getGrade() const
 {
 	return (_grade);
 }
-
 
 /*****************************************************************************
  *                      INCREMENT / DECREMENT OPERATORS                      *

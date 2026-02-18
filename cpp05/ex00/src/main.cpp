@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/18 10:36:45 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/18 10:36:53 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include "Logger.hpp"
 #include "colors.hpp"
@@ -73,7 +85,7 @@ try
         gary.incrementGrade();     // Already at max (1)
         plankton.decrementGrade();  // Already at min (150)
     }
-catch (const std::exception& e)
+	catch (const std::exception& e)
     {
         LOG_ERROR() << RED << "Exception caught: " << e.what() << RESET;
     }

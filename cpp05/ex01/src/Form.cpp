@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Form.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/18 10:40:49 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/18 10:41:54 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 #include "Logger.hpp"
@@ -99,25 +111,33 @@ Form::~Form()
  * @brief Returns the exception message for GradeTooHighException.
  */
 const char* Form::GradeTooHighException::what() const throw()
-{ return ("Form grade too high"); }
+{
+	return ("Form grade too high");
+}
 
 /**
  * @brief Returns the exception message for GradeTooLowException.
  */
 const char* Form::GradeTooLowException::what() const throw()
-{ return ("Form grade too low"); }
+{
+	return ("Form grade too low");
+}
 
 /**
  * @brief Returns the exception message for GradeTooLowToSignException.
  */
 const char* Form::GradeTooLowToSignException::what() const throw()
-{ return ("Bureaucrat grade too low to sign"); }
+{
+	return ("Bureaucrat grade too low to sign");
+}
 
 /**
  * @brief Returns the exception message for FormAlreadySigned.
  */
 const char* Form::FormAlreadySignedException::what() const throw()
-{ return ("Form already signed"); }
+{
+	return ("Form already signed");
+}
 
 /*****************************************************************************
  *                                 GETTERS                                   *
@@ -127,25 +147,33 @@ const char* Form::FormAlreadySignedException::what() const throw()
  * @brief Returns the form's name.
  */
 const std::string	Form::getName() const
-{ return (_formName); }
+{
+	return (_formName);
+}
 
 /**
  * @brief Returns whether the form is signed.
  */
 bool	Form::getIsSigned() const
-{ return (_isSigned); }
+{
+	return (_isSigned);
+}
 
 /**
  * @brief Returns the grade required to sign the form.
  */
 int	Form::getGradeToSign() const
-{ return (_gradeToSign); }
+{
+	return (_gradeToSign);
+}
 
 /**
  * @brief Returns the grade required to execute the form.
  */
 int	Form::getGradeToExecute() const
-{ return (_gradeToExecute); }
+{
+	return (_gradeToExecute);
+}
 
 /*****************************************************************************
  *                                 METHODS                                   *

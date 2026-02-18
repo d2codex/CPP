@@ -1,8 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/18 10:51:54 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/18 10:53:40 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "RobotomyRequestForm.hpp"
 #include "Logger.hpp"
 #include <stdexcept>
 #include <ctime>
 #include <cstdlib>
+
+/*****************************************************************************
+ *                               CONSTRUCTORS                                *
+ *****************************************************************************/
 
 /**
  * @brief Constructs a RobotomyRequestForm with a target.
@@ -53,6 +69,11 @@ RobotomyRequestForm::~RobotomyRequestForm()
 	LOG_DEBUG() << "RobotomyRequestForm destructor called";
 }
 
+
+/*****************************************************************************
+ *                                 GETTERS                                   *
+ *****************************************************************************/
+
 /**
  * @brief Returns the target of the robotomy form.
  */
@@ -60,6 +81,10 @@ const std::string	RobotomyRequestForm::getTarget() const
 {
 	return (_robotomy);
 }
+
+/*****************************************************************************
+ *                                  METHODS                                  *
+ *****************************************************************************/
 
 /**
  * @brief Attempts to robotomize the target.

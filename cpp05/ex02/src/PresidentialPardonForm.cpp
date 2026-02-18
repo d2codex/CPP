@@ -1,6 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PresidentialPardonForm.cpp                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/18 10:50:19 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/18 10:52:13 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "PresidentialPardonForm.hpp"
 #include "Logger.hpp"
 #include <stdexcept>
+
+/*****************************************************************************
+ *                               CONSTRUCTORS                                *
+ *****************************************************************************/
 
 /**
  * @brief Constructs a PresidentialPardonForm with a target.
@@ -51,6 +67,10 @@ PresidentialPardonForm::~PresidentialPardonForm()
 	LOG_DEBUG() << "PresidentialPardonForm destructor called";
 }
 
+/*****************************************************************************
+ *                                 GETTERS                                   *
+ *****************************************************************************/
+
 /**
  * @brief Returns the target of the pardon form.
  */
@@ -58,6 +78,10 @@ const std::string	PresidentialPardonForm::getTarget() const
 {
 	return (_presidential);
 }
+
+/*****************************************************************************
+ *                                 METHODS                                   *
+ *****************************************************************************/
 
 /**
  * @brief Announces the presidential pardon of the target.

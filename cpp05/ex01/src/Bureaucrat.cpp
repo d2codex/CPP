@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/18 10:39:49 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/18 10:40:38 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 #include "tests.hpp"
@@ -84,13 +96,17 @@ Bureaucrat::~Bureaucrat()
  * @brief Returns the exception message for GradeTooHighException.
  */
 const char* Bureaucrat::GradeTooHighException::what() const throw()
-{ return ("Bureaucrat grade too high"); }
+{
+	return ("Bureaucrat grade too high");
+}
 
 /**
  * @brief Returns the exception message for GradeTooLowException.
  */
 const char* Bureaucrat::GradeTooLowException::what() const throw()
-{ return ("Bureaucrat grade too low"); }
+{
+	return ("Bureaucrat grade too low");
+}
 
 /*****************************************************************************
  *                                 GETTERS                                   *
@@ -100,13 +116,17 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
  * @brief Returns the bureaucrat's name.
  */
 const std::string& Bureaucrat::getName() const
-{ return (_name); }
+{
+	return (_name);
+}
 
 /**
  * @brief Returns the bureaucrat's grade.
  */
 int	Bureaucrat::getGrade() const
-{ return (_grade); }
+{
+	return (_grade);
+}
 
 
 /*****************************************************************************
