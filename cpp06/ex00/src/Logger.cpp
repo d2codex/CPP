@@ -83,7 +83,7 @@ void	Logger::setThreshold(logLevel level)
  * @brief Get the current logging threshold.
  * @return Current threshold level.
  */
-logLevel	Logger::threshold() const
+Logger::logLevel	Logger::threshold() const
 {
 	return (_threshold);
 }
@@ -104,7 +104,7 @@ LogLine Logger::makeLine(const std::string& prefix, logLevel level)
  * @param levelStr String representation of the log level.
  * @return Corresponding logLevel enum, or INVALID if unknown.
  */
-logLevel	Logger::stringToLevel(const std::string& levelStr)
+Logger::logLevel	Logger::stringToLevel(const std::string& levelStr)
 {
 	std::string level = levelStr;
 	for (std::string::size_type i = 0; i < level.size(); i++)
@@ -133,7 +133,7 @@ logLevel	Logger::stringToLevel(const std::string& levelStr)
  * @param prefix Prefix string for this line.
  * @param level Log level of this line.
  */
-LogLine::LogLine(Logger& logger, const std::string& prefix, logLevel level) :
+LogLine::LogLine(Logger& logger, const std::string& prefix, Logger::logLevel level) :
 	_logger(logger), _prefix(prefix), _level(level)
 {}
 

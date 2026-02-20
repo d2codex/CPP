@@ -5,17 +5,6 @@
 #include <sstream>
 #include <iostream>
 
-/* Supported log levels */
-enum logLevel
-{
-	INVALID = -1,
-	NONE = 0,
-	DEBUG = 1,
-	INFO = 2,
-	WARNING = 3,
-	ERROR = 4,
-};
-
 class LogLine;
 
 /**
@@ -30,6 +19,17 @@ class LogLine;
 class Logger
 {
 public:
+	/* Supported log levels */
+	enum logLevel
+	{
+		INVALID = -1,
+		NONE = 0,
+		DEBUG = 1,
+		INFO = 2,
+		WARNING = 3,
+		ERROR = 4,
+	};
+
 	Logger();
 	Logger(const Logger& other);
 	Logger& operator=(const Logger&);
@@ -69,7 +69,7 @@ private:
 class LogLine
 {
 public:
-	LogLine(Logger& logger, const std::string& prefix, logLevel level);
+	LogLine(Logger& logger, const std::string& prefix, Logger::logLevel level);
 	LogLine(const LogLine& other);
 	LogLine& operator=(const LogLine& other);
 	~LogLine();
@@ -86,16 +86,16 @@ private:
 	Logger&				_logger;
 	std::ostringstream	_stream;
 	std::string			_prefix;
-	logLevel			_level;
+	Logger::logLevel			_level;
 };
 
 /* log macros */
 #ifdef DBUG
-#define LOG_DEBUG()		Logger::get().makeLine(yel("[DEBUG] "), DEBUG)
+#define LOG_DEBUG()		Logger::get().makeLine(yel("[DEBUG] "), Logger::DEBUG)
 #else
-#define LOG_DEBUG()		Logger::get().makeLine(yel(""), NONE)
+#define LOG_DEBUG()		Logger::get().makeLine(yel(""), Logger::NONE)
 #endif
 
-#define LOG_INFO()		Logger::get().makeLine(blu("[INFO] "), INFO)
-#define LOG_WARNING()	Logger::get().makeLine(mag("[WARNING] "), WARNING)
-#define LOG_ERROR()		Logger::get().makeLine(red("[ERROR] "), ERROR)
+#define LOG_INFO()		Logger::get().makeLine(blu("[INFO] "), Logger::INFO)
+#define LOG_WARNING()	Logger::get().makeLine(mag("[WARNING] "), Logger::WARNING)
+#define LOG_ERROR()		Logger::get().makeLine(red("[ERROR] "), Logger::ERROR)

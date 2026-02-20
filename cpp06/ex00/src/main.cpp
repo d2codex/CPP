@@ -7,13 +7,13 @@ bool initLogger(int argc, char **argv)
 {
 	if (argc == 2)
 	{
-		Logger::get().setThreshold(NONE);
+		Logger::get().setThreshold(Logger::NONE);
 		return (true);
 	}
 	if (argc == 3)
 	{
-		logLevel level = Logger::stringToLevel(argv[2]);
-		if (level == INVALID)
+		Logger::logLevel level = Logger::stringToLevel(argv[2]);
+		if (level == Logger::INVALID)
 		{
 			std::cout << red("Error. invalid log level\n");
 			std::cout << cyn("usage: ./bin/<program_name> [argument] [log level]\n");
@@ -21,10 +21,10 @@ bool initLogger(int argc, char **argv)
 			return (false);
 		}
 		#ifndef DBUG
-		if (level == DEBUG)
+		if (level == Logger::DEBUG)
 		{
 			std::cout << mag("Warning: DEBUG messages are not enabled in this build.\n");
-			Logger::get().setThreshold(INFO); // fallback threshold
+			Logger::get().setThreshold(Logger::INFO); // fallback threshold
 			return (true);
 		}
 		#endif
@@ -47,11 +47,6 @@ int	main(int argc, char **argv)
 {
 	if (!initLogger(argc, argv))
 		return (1);
-
-	LOG_DEBUG() << "test debug";
-	LOG_INFO() << "test info";
-	LOG_WARNING() << "test warning";
-	LOG_ERROR() << "test error";
 
 	const std::string input = argv[1];
 
