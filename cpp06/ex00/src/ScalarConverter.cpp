@@ -7,6 +7,9 @@
 #include <iomanip>
 #include <cstdlib>
 #include <cerrno>
+#include <cfloat>
+#include <cmath>
+#include <limits>
 
 ScalarConverter::ScalarConverter() {}
 ScalarConverter::ScalarConverter(const ScalarConverter&) {}
@@ -49,32 +52,52 @@ static bool isCharType(const std::string& input)
 static bool isIntType(const std::string& input)
 {
 	size_t len = input.length();
+	size_t i = 0;
 
-	for (size_t i = 0; i < len; i++)
+	if (input[0] == '-')
+		i++;
+	for (; i < len; i++)
 	{
-		if (input[0] == '-')
-			i++;
-		if (input[i] >= '0' && input[i] <= '9')
-			return (true);
+		if (!(input[i] >= '0' && input[i] <= '9'))
+			return (false);
 	}
-	return (false);
+	return (true);
 }
-/*
+
 static bool isFloatType(const std::string& input)
 {
 	if (input == "-inff" || input == "+inff" || input == "nanf")
 		return (true);
-	if (input.back() != 'f')
+	if (!input.empty() && input[input.size() - 1] != 'f')
 		return (false);
 	char* end;
 	errno = 0;
+	//this only makes sure that double is within range
 	std::strtod(input.c_str(), &end);
 	if (errno == ERANGE)
 		return (false);
 	return (end == input.c_str() + input.size() - 1);
 }
-*/
-//static bool isDoubleType(const std::string& input)
+
+static bool isDoubleType(const std::string& input)
+{
+	if (input == "-inf" || input == "+inf" || input == "nan")
+		return (true);
+	char* end;
+	errno = 0;
+	std::strtod(input.c_str(), &end);
+	if (errno == ERANGE)
+		return (false);
+
+	if (end != input.c_str() + input.size())
+		return (false);
+
+	if (input.find('.') == std::string::npos &&
+		input.find('e') == std::string::npos &&
+		input.find('E') == std::string::npos)
+		return (false);
+	return (true);
+}
 
 static bool	safeAtoi(const std::string& input, int* out)
 {
@@ -94,10 +117,10 @@ static bool	safeAtoi(const std::string& input, int* out)
 			i++;
 	for(; i < len; i++)
 		result = result * 10 + (input[i] - '0');
-
+	result = result * sign;
 	if (result < INT_MIN || result > INT_MAX)
 		return (false);
-	*out = result * sign;
+	*out = result;
 	return (true);
 }
 
@@ -115,14 +138,14 @@ static void convertFromInt(const std::string& input, Scalar& scalar)
 	int i;
 	if (!safeAtoi(input, &i))
 	{
-		// marke as impossible
+		// mark as impossible
 		scalar.impossible |= CHAR_IMPOSSIBLE
 						   | INT_IMPOSSIBLE
 						   | FLOAT_IMPOSSIBLE
 						   | DOUBLE_IMPOSSIBLE;
 		return ;
 	}
-	if( i < 0 && i > 127)
+	if( i < 0 || i > 127)
 		scalar.impossible |= CHAR_IMPOSSIBLE;
 	else
 		scalar.c = static_cast<char>(i);
@@ -130,24 +153,56 @@ static void convertFromInt(const std::string& input, Scalar& scalar)
 	scalar.f = static_cast<float>(i);
 	scalar.d = static_cast<double>(i);
 }
-/*
+
 static void convertFromFloat(const std::string& input, Scalar& scalar)
 {
-	//check range of float
+	std::string s = input;
+	if (!s.empty() && s[s.size() - 1] == 'f')
+		s.resize(s.size() - 1);
+
 	char *end;
-	double f = strtod(input.c_str(), &end);
-	if (f < -FLT_MAX || f > FLT_MAX)
+	double d = strtod(s.c_str(), &end);
+
+	if (input == "-inff" || input == "+inff" || input == "nanf")
 	{
-		
+		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE;
+		scalar.f = static_cast<float>(d);
+		scalar.d = d;
 	}
 
+	//float overflow
+	if (d < -FLT_MAX || d > FLT_MAX)
+		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE | FLOAT_IMPOSSIBLE;
+	scalar.i = static_cast<int>(d);
+	if (scalar.i < 0 || scalar.i > 127)
+		scalar.impossible |= CHAR_IMPOSSIBLE;
+	else
+		scalar.c = static_cast<char>(scalar.i);
+	scalar.f = static_cast<float>(d);
+	scalar.d = d;
 }
-*/
+
 static void convertFromDouble(const std::string& input, Scalar& scalar)
 {
-	(void)input;
-	(void)scalar;
-	LOG_INFO() << "print stuff here";
+	char* end;
+	double d = strtod(input.c_str(), &end);
+	if (input == "-inf" || input == "+inf" || input == "nan")
+	{
+		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE;
+		scalar.f = static_cast<float>(d);
+		scalar.d = d;
+	}
+	if (d < -FLT_MAX || d > FLT_MAX)
+		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE | FLOAT_IMPOSSIBLE;
+	scalar.f = static_cast<float>(d);
+	if (d < INT_MIN || d > INT_MAX)
+		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE;
+	scalar.i = static_cast<int>(d);
+	if (scalar.i < 0 || scalar.i > 127)
+		scalar.impossible |= CHAR_IMPOSSIBLE;
+	else
+		scalar.c = static_cast<char>(scalar.i);
+	scalar.d = d;
 }
 
 ScalarConverter::InputType ScalarConverter::getType(const std::string& input)
@@ -156,11 +211,10 @@ ScalarConverter::InputType ScalarConverter::getType(const std::string& input)
 		return (ScalarConverter::CHAR);
 	if (isIntType(input))
 		return (ScalarConverter::INT);
-/*	if (isFloatType(input))
+	if (isFloatType(input))
 		return (FLOAT);
 	if (isDoubleType(input))
-		return (DOUBLE;)
-*/
+		return (DOUBLE);
 	return (ScalarConverter::NONE);
 }
 
@@ -170,6 +224,7 @@ ConvertFunction strategies[] =
 {
 	convertFromChar,
 	convertFromInt,
+	convertFromFloat,
 	convertFromDouble
 };
 
@@ -183,9 +238,21 @@ static void printScalar(const Scalar& scalar)
 			std::cout << "Char: '" << scalar.c << "'\n";
 
 	std::cout << std::fixed << std::setprecision(1);
-	std::cout << "Int: " << scalar.i << '\n';
-	std::cout << "Float: " << scalar.f << "f\n";
-	std::cout << "Double: " << scalar.d << '\n';
+
+	if (scalar.impossible & INT_IMPOSSIBLE)
+		std::cout << "Int: impossible\n";
+	else
+		std::cout << "Int: " << scalar.i << '\n';
+
+	if (scalar.impossible & FLOAT_IMPOSSIBLE)
+		std::cout << "Float: impossible\n";
+	else
+		std::cout << "Float: " << scalar.f << "f\n";
+	
+	if (scalar.impossible & DOUBLE_IMPOSSIBLE)
+		std::cout << "Double: impossible\n";
+	else
+		std::cout << "Double: " << scalar.d << '\n';
 }
 
 void ScalarConverter::convert(const std::string& input)
@@ -201,6 +268,7 @@ void ScalarConverter::convert(const std::string& input)
 	LOG_DEBUG() << "raw input: " << input;
 
 	ScalarConverter::InputType type = getType(input);
+	LOG_DEBUG() << "type: " << type;
 	if (type == ScalarConverter::NONE)
 	{
 		std::cerr << red("Error: unrecognized type\n");
