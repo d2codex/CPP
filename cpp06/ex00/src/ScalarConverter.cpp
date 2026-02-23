@@ -11,11 +11,19 @@
 #include <cmath>
 #include <limits>
 
+/*****************************************************************************
+ *                               CONSTRUCTORS                                *
+ *****************************************************************************/
+
 ScalarConverter::ScalarConverter() {}
 ScalarConverter::ScalarConverter(const ScalarConverter&) {}
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter&)
 { return (*this); }
 ScalarConverter::~ScalarConverter() {}
+
+/*****************************************************************************
+ *                              INTERNAL TYPES                               *
+ *****************************************************************************/
 
 struct Scalar
 {
@@ -42,6 +50,10 @@ enum ImpossibleFlags
 	FLOAT_IMPOSSIBLE = 1 << 2,
 	DOUBLE_IMPOSSIBLE = 1 << 3
 };
+
+/*****************************************************************************
+ *                              TYPE DETECTION                               *
+ *****************************************************************************/
 
 static bool isCharType(const std::string& input)
 {
@@ -107,6 +119,10 @@ static bool isDoubleType(const std::string& input)
 		return (false);
 	return (true);
 }
+
+/*****************************************************************************
+ *                            CONVERSION HELPERS                             *
+ *****************************************************************************/
 
 static bool	safeAtoi(const std::string& input, int* out)
 {
@@ -180,14 +196,18 @@ static void convertFromFloat(const std::string& input, Scalar& scalar)
 	}
 
 	if (d < -FLT_MAX || d > FLT_MAX)
-		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE | FLOAT_IMPOSSIBLE;
+	{
+		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE | FLOAT_IMPOSSIBLE
+			| DOUBLE_IMPOSSIBLE;
+		return ;
+	}
+	scalar.f = static_cast<float>(d);
+	scalar.d = d;
 	scalar.i = static_cast<int>(d);
 	if (scalar.i < 0 || scalar.i > 127)
 		scalar.impossible |= CHAR_IMPOSSIBLE;
 	else
 		scalar.c = static_cast<char>(scalar.i);
-	scalar.f = static_cast<float>(d);
-	scalar.d = d;
 }
 
 static void convertFromDouble(const std::string& input, Scalar& scalar)
@@ -213,6 +233,19 @@ static void convertFromDouble(const std::string& input, Scalar& scalar)
 		scalar.c = static_cast<char>(scalar.i);
 	scalar.d = d;
 }
+/*****************************************************************************
+ *                             DISPATCH HELPERS                              *
+ *****************************************************************************/
+
+typedef void (*ConvertFunction)(const std::string&, Scalar&);
+
+ConvertFunction strategies[] =
+{
+	convertFromChar,
+	convertFromInt,
+	convertFromFloat,
+	convertFromDouble
+};
 
 InputType getType(const std::string& input)
 {
@@ -227,15 +260,9 @@ InputType getType(const std::string& input)
 	return (NONE);
 }
 
-typedef void (*ConvertFunction)(const std::string&, Scalar&);
-
-ConvertFunction strategies[] =
-{
-	convertFromChar,
-	convertFromInt,
-	convertFromFloat,
-	convertFromDouble
-};
+/*****************************************************************************
+ *                                   OUTPUT                                  *
+ *****************************************************************************/
 
 static void printScalar(const Scalar& scalar)
 {
@@ -263,6 +290,10 @@ static void printScalar(const Scalar& scalar)
 	else
 		std::cout << "Double: " << scalar.d << '\n';
 }
+
+/*****************************************************************************
+ *                              PUBLIC INTERFACE                             *
+ *****************************************************************************/
 
 void ScalarConverter::convert(const std::string& input)
 {
