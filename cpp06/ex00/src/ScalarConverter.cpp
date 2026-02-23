@@ -67,7 +67,7 @@ static bool isIntType(const std::string& input)
 	size_t len = input.length();
 	size_t i = 0;
 
-	if (input[0] == '-')
+	if (input[0] == '-' || input[0] == '+')
 		i++;
 	for (; i < len; i++)
 	{
@@ -150,20 +150,32 @@ static void convertFromInt(const std::string& input, ScalarConverter::Scalar& sc
 
 static void convertFromFloat(const std::string& input, ScalarConverter::Scalar& scalar)
 {
+	if (input == "-inff" || input == "+inff" || input == "nanf")
+	{
+		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE;
+		if (input == "nanf")
+		{
+			scalar.f = std::numeric_limits<float>::quiet_NaN();
+			scalar.d = std::numeric_limits<double>::quiet_NaN();
+		}
+		else if (input == "+inff")
+		{
+			scalar.f = std::numeric_limits<float>::infinity();
+			scalar.d = std::numeric_limits<double>::infinity();
+		}
+		else
+		{
+			scalar.f = -std::numeric_limits<float>::infinity();
+			scalar.d = -std::numeric_limits<double>::infinity();
+		}
+		return ;
+	}
 	std::string s = input;
 	if (!s.empty() && s[s.size() - 1] == 'f')
 		s.resize(s.size() - 1);
 
 	char *end;
 	double d = strtod(s.c_str(), &end);
-
-	if (input == "-inff" || input == "+inff" || input == "nanf")
-	{
-		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE;
-		scalar.f = static_cast<float>(d);
-		scalar.d = d;
-		return ;
-	}
 
 	if (d < -FLT_MAX || d > FLT_MAX)
 	{
@@ -182,15 +194,28 @@ static void convertFromFloat(const std::string& input, ScalarConverter::Scalar& 
 
 static void convertFromDouble(const std::string& input, ScalarConverter::Scalar& scalar)
 {
-	char* end;
-	double d = strtod(input.c_str(), &end);
 	if (input == "-inf" || input == "+inf" || input == "nan")
 	{
 		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE;
-		scalar.f = static_cast<float>(d);
-		scalar.d = d;
+		if (input == "nan")
+		{
+			scalar.f = std::numeric_limits<float>::quiet_NaN();
+			scalar.d = std::numeric_limits<double>::quiet_NaN();
+		}
+		else if (input == "+inf")
+		{
+			scalar.f = std::numeric_limits<float>::infinity();
+			scalar.d = std::numeric_limits<double>::infinity();
+		}
+		else
+		{
+			scalar.f = -std::numeric_limits<float>::infinity();
+			scalar.d = -std::numeric_limits<double>::infinity();
+		}
 		return ;
 	}
+	char* end;
+	double d = strtod(input.c_str(), &end);
 	if (d < -FLT_MAX || d > FLT_MAX)
 	{
 		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE | FLOAT_IMPOSSIBLE;
