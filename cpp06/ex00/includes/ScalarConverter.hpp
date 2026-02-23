@@ -4,8 +4,17 @@
 
 class ScalarConverter
 {
-public:
-	static void	convert(const std::string& input);
+public:	
+	struct Scalar
+	{
+		char	c;
+		int		i;
+		float	f;
+		double	d;
+		int		impossible;
+	};
+
+	static Scalar	convert(const std::string& input);
 
 private:
 	ScalarConverter();  // should not be instantiable

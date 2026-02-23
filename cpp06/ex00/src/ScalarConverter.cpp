@@ -10,6 +10,7 @@
 #include <cfloat>
 #include <cmath>
 #include <limits>
+#include <stdexcept>
 
 /*****************************************************************************
  *                               CONSTRUCTORS                                *
@@ -24,15 +25,6 @@ ScalarConverter::~ScalarConverter() {}
 /*****************************************************************************
  *                              INTERNAL TYPES                               *
  *****************************************************************************/
-
-struct Scalar
-{
-	char	c;
-	int		i;
-	float	f;
-	double	d;
-	int		impossible;
-};
 
 enum InputType
 {
@@ -149,7 +141,7 @@ static bool	safeAtoi(const std::string& input, int* out)
 	return (true);
 }
 
-static void	convertFromChar(const std::string& input, Scalar& scalar)
+static void	convertFromChar(const std::string& input, ScalarConverter::Scalar& scalar)
 {
 	char c = (input.length() == 1) ? input[0] : input[1];
 	scalar.c = c;
@@ -158,7 +150,7 @@ static void	convertFromChar(const std::string& input, Scalar& scalar)
 	scalar.d = static_cast<double>(c);
 }
 
-static void convertFromInt(const std::string& input, Scalar& scalar)
+static void convertFromInt(const std::string& input, ScalarConverter::Scalar& scalar)
 {
 	int i;
 	if (!safeAtoi(input, &i))
@@ -178,7 +170,7 @@ static void convertFromInt(const std::string& input, Scalar& scalar)
 	scalar.d = static_cast<double>(i);
 }
 
-static void convertFromFloat(const std::string& input, Scalar& scalar)
+static void convertFromFloat(const std::string& input, ScalarConverter::Scalar& scalar)
 {
 	std::string s = input;
 	if (!s.empty() && s[s.size() - 1] == 'f')
@@ -210,7 +202,7 @@ static void convertFromFloat(const std::string& input, Scalar& scalar)
 		scalar.c = static_cast<char>(scalar.i);
 }
 
-static void convertFromDouble(const std::string& input, Scalar& scalar)
+static void convertFromDouble(const std::string& input, ScalarConverter::Scalar& scalar)
 {
 	char* end;
 	double d = strtod(input.c_str(), &end);
@@ -243,7 +235,7 @@ static void convertFromDouble(const std::string& input, Scalar& scalar)
  *                             DISPATCH HELPERS                              *
  *****************************************************************************/
 
-typedef void (*ConvertFunction)(const std::string&, Scalar&);
+typedef void (*ConvertFunction)(const std::string&, ScalarConverter::Scalar&);
 
 ConvertFunction strategies[] =
 {
@@ -270,7 +262,7 @@ InputType getType(const std::string& input)
  *                                   OUTPUT                                  *
  *****************************************************************************/
 
-static void printScalar(const Scalar& scalar)
+static void printScalar(const ScalarConverter::Scalar& scalar)
 {
 	if (scalar.impossible & CHAR_IMPOSSIBLE)
 		std::cout << "Char: impossible\n";
@@ -301,9 +293,12 @@ static void printScalar(const Scalar& scalar)
  *                              PUBLIC INTERFACE                             *
  *****************************************************************************/
 
-void ScalarConverter::convert(const std::string& input)
+ScalarConverter::Scalar ScalarConverter::convert(const std::string& input)
 {
-	Scalar scalar = {}; //sets all to 0 (possible)
+	if (input.empty())
+		throw std::invalid_argument("Error: input cannot be empty");
+
+	ScalarConverter::Scalar scalar = {}; //sets all to 0 (possible)
 
 	if (scalar.c == '\0')
 		LOG_DEBUG() << "scalar.c: null character";
@@ -316,10 +311,8 @@ void ScalarConverter::convert(const std::string& input)
 	InputType type = getType(input);
 	LOG_DEBUG() << "type: " << type;
 	if (type == NONE)
-	{
-		std::cerr << red("Error: unrecognized type\n");
-		return ;
-	}
+		throw std::invalid_argument("Error: unrecognized type\n");
 	strategies[type](input, scalar);
 	printScalar(scalar);
+	return (scalar);
 }

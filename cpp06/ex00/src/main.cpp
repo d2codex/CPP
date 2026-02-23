@@ -2,6 +2,7 @@
 #include "Logger.hpp"
 #include "colors.hpp"
 #include <iostream>
+#include <stdexcept>
 
 bool initLogger(int argc, char **argv)
 {
@@ -49,11 +50,12 @@ int	main(int argc, char **argv)
 		return (1);
 
 	const std::string input = argv[1];
-	if (input.empty())
+	try
 	{
-		std::cerr << red("Error. Input cannot be empty\n");
-		return (1);
+		ScalarConverter::convert(input);
 	}
-
-	ScalarConverter::convert(input);
+	catch (std::invalid_argument& e)
+	{
+		LOG_ERROR() << e.what();
+	}
 }
