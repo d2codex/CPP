@@ -116,31 +116,6 @@ static bool isDoubleType(const std::string& input)
  *                            CONVERSION HELPERS                             *
  *****************************************************************************/
 
-static bool	safeAtoi(const std::string& input, int* out)
-{
-	size_t	len = input.length();
-	size_t	i = 0;
-	long	result = 0;
-	int		sign = 1;
-	
-	if (len > 11)
-		return (false);
-	if (input[0] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	else if (input[0] == '+')
-			i++;
-	for(; i < len; i++)
-		result = result * 10 + (input[i] - '0');
-	result = result * sign;
-	if (result < INT_MIN || result > INT_MAX)
-		return (false);
-	*out = result;
-	return (true);
-}
-
 static void	convertFromChar(const std::string& input, ScalarConverter::Scalar& scalar)
 {
 	char c = (input.length() == 1) ? input[0] : input[1];
@@ -152,8 +127,10 @@ static void	convertFromChar(const std::string& input, ScalarConverter::Scalar& s
 
 static void convertFromInt(const std::string& input, ScalarConverter::Scalar& scalar)
 {
-	int i;
-	if (!safeAtoi(input, &i))
+	char *end;
+	errno = 0;
+	long result = strtol(input.c_str(), &end, 10);
+	if (errno == ERANGE || result < INT_MIN || result > INT_MAX)
 	{
 		scalar.impossible |= CHAR_IMPOSSIBLE
 						   | INT_IMPOSSIBLE
@@ -161,11 +138,12 @@ static void convertFromInt(const std::string& input, ScalarConverter::Scalar& sc
 						   | DOUBLE_IMPOSSIBLE;
 		return ;
 	}
+	int i = static_cast<int>(result);
+	scalar.i = i;
 	if( i < 0 || i > 127)
 		scalar.impossible |= CHAR_IMPOSSIBLE;
 	else
 		scalar.c = static_cast<char>(i);
-	scalar.i = i;
 	scalar.f = static_cast<float>(i);
 	scalar.d = static_cast<double>(i);
 }
