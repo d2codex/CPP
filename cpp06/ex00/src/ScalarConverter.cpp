@@ -222,16 +222,22 @@ static void convertFromDouble(const std::string& input, Scalar& scalar)
 		return ;
 	}
 	if (d < -FLT_MAX || d > FLT_MAX)
+	{
 		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE | FLOAT_IMPOSSIBLE;
+		scalar.d = d;
+	}
 	scalar.f = static_cast<float>(d);
+	scalar.d = d;
 	if (d < INT_MIN || d > INT_MAX)
 		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE;
-	scalar.i = static_cast<int>(d);
-	if (scalar.i < 0 || scalar.i > 127)
-		scalar.impossible |= CHAR_IMPOSSIBLE;
 	else
-		scalar.c = static_cast<char>(scalar.i);
-	scalar.d = d;
+	{
+		scalar.i = static_cast<int>(d);
+		if (scalar.i < 0 || scalar.i > 127)
+			scalar.impossible |= CHAR_IMPOSSIBLE;
+		else
+			scalar.c = static_cast<char>(scalar.i);
+	}
 }
 /*****************************************************************************
  *                             DISPATCH HELPERS                              *
