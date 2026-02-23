@@ -168,6 +168,7 @@ static void convertFromFloat(const std::string& input, Scalar& scalar)
 		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE;
 		scalar.f = static_cast<float>(d);
 		scalar.d = d;
+		return ;
 	}
 
 	//float overflow
@@ -191,6 +192,7 @@ static void convertFromDouble(const std::string& input, Scalar& scalar)
 		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE;
 		scalar.f = static_cast<float>(d);
 		scalar.d = d;
+		return ;
 	}
 	if (d < -FLT_MAX || d > FLT_MAX)
 		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE | FLOAT_IMPOSSIBLE;
