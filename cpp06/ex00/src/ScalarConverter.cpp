@@ -5,6 +5,8 @@
 #include <climits>
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
+#include <cerrno>
 
 ScalarConverter::ScalarConverter() {}
 ScalarConverter::ScalarConverter(const ScalarConverter&) {}
@@ -18,6 +20,15 @@ struct Scalar
 	int		i;
 	float	f;
 	double	d;
+	int		impossible;
+};
+
+enum ImpossibleFlags
+{
+	CHAR_IMPOSSIBLE = 1 << 0,
+	INT_IMPOSSIBLE = 1 << 1,
+	FLOAT_IMPOSSIBLE = 1 << 2,
+	DOUBLE_IMPOSSIBLE = 1 << 3
 };
 
 static bool isCharType(const std::string& input)
@@ -48,8 +59,21 @@ static bool isIntType(const std::string& input)
 	}
 	return (false);
 }
-
-//static bool isFloatType(const std::string& input)
+/*
+static bool isFloatType(const std::string& input)
+{
+	if (input == "-inff" || input == "+inff" || input == "nanf")
+		return (true);
+	if (input.back() != 'f')
+		return (false);
+	char* end;
+	errno = 0;
+	std::strtod(input.c_str(), &end);
+	if (errno == ERANGE)
+		return (false);
+	return (end == input.c_str() + input.size() - 1);
+}
+*/
 //static bool isDoubleType(const std::string& input)
 
 static bool	safeAtoi(const std::string& input, int* out)
@@ -92,14 +116,33 @@ static void convertFromInt(const std::string& input, Scalar& scalar)
 	if (!safeAtoi(input, &i))
 	{
 		// marke as impossible
+		scalar.impossible |= CHAR_IMPOSSIBLE
+						   | INT_IMPOSSIBLE
+						   | FLOAT_IMPOSSIBLE
+						   | DOUBLE_IMPOSSIBLE;
 		return ;
 	}
-	scalar.c = (i >= 0 && i <= 127) ? static_cast<char>(i) : 0;
+	if( i < 0 && i > 127)
+		scalar.impossible |= CHAR_IMPOSSIBLE;
+	else
+		scalar.c = static_cast<char>(i);
 	scalar.i = i;
 	scalar.f = static_cast<float>(i);
 	scalar.d = static_cast<double>(i);
 }
+/*
+static void convertFromFloat(const std::string& input, Scalar& scalar)
+{
+	//check range of float
+	char *end;
+	double f = strtod(input.c_str(), &end);
+	if (f < -FLT_MAX || f > FLT_MAX)
+	{
+		
+	}
 
+}
+*/
 static void convertFromDouble(const std::string& input, Scalar& scalar)
 {
 	(void)input;
@@ -132,16 +175,12 @@ ConvertFunction strategies[] =
 
 static void printScalar(const Scalar& scalar)
 {
-	
-	if (scalar.i >= 32 && scalar.i < 127)
-	{
-		if (std::isprint(static_cast<unsigned char>(scalar.c)))
-			std::cout << "Char: '" << scalar.c << "'\n";
-		else
-			std::cout << "Char: Non displayable\n";
-	}
-	else
+	if (scalar.impossible & CHAR_IMPOSSIBLE)
 		std::cout << "Char: impossible\n";
+	else if (!std::isprint(static_cast<unsigned char>(scalar.c)))
+			std::cout << "Char: Non displayable\n";
+	else
+			std::cout << "Char: '" << scalar.c << "'\n";
 
 	std::cout << std::fixed << std::setprecision(1);
 	std::cout << "Int: " << scalar.i << '\n';
@@ -151,11 +190,22 @@ static void printScalar(const Scalar& scalar)
 
 void ScalarConverter::convert(const std::string& input)
 {
-	Scalar scalar;
+	Scalar scalar = {}; //sets all to 0 (possible)
+
+	if (scalar.c == '\0')
+		LOG_DEBUG() << "scalar.c: null character";
+	LOG_DEBUG() << "scalar.i: " << scalar.i;
+	LOG_DEBUG() << "scalar.f: " << scalar.f;
+	LOG_DEBUG() << "scalar.d: " << scalar.d;
+	LOG_DEBUG() << "scalar impossible: " << scalar.impossible;
 	LOG_DEBUG() << "raw input: " << input;
 
 	ScalarConverter::InputType type = getType(input);
-	if (type >= ScalarConverter::CHAR)
-		strategies[type](input, scalar);
+	if (type == ScalarConverter::NONE)
+	{
+		std::cerr << red("Error: unrecognized type\n");
+		return ;
+	}
+	strategies[type](input, scalar);
 	printScalar(scalar);
 }

@@ -15,11 +15,12 @@ public:
 	};
 
 	static void	convert(const std::string& input);
-	static InputType getType(const std::string& input);
 
 private:
 	ScalarConverter();  // should not be instantiable
 	ScalarConverter(const ScalarConverter&);
 	ScalarConverter& operator=(const ScalarConverter&);
 	~ScalarConverter();
+
+	static InputType getType(const std::string& input);
 };
