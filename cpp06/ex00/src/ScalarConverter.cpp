@@ -195,6 +195,7 @@ static void convertFromDouble(const std::string& input, ScalarConverter::Scalar&
 	{
 		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE | FLOAT_IMPOSSIBLE;
 		scalar.d = d;
+		return ;
 	}
 	scalar.f = static_cast<float>(d);
 	scalar.d = d;
