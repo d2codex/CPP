@@ -26,6 +26,15 @@ struct Scalar
 	int		impossible;
 };
 
+enum InputType
+{
+	NONE = -1,
+	CHAR = 0,
+	INT = 1,
+	FLOAT = 2,
+	DOUBLE = 3,
+};
+
 enum ImpossibleFlags
 {
 	CHAR_IMPOSSIBLE = 1 << 0,
@@ -138,7 +147,6 @@ static void convertFromInt(const std::string& input, Scalar& scalar)
 	int i;
 	if (!safeAtoi(input, &i))
 	{
-		// mark as impossible
 		scalar.impossible |= CHAR_IMPOSSIBLE
 						   | INT_IMPOSSIBLE
 						   | FLOAT_IMPOSSIBLE
@@ -171,7 +179,6 @@ static void convertFromFloat(const std::string& input, Scalar& scalar)
 		return ;
 	}
 
-	//float overflow
 	if (d < -FLT_MAX || d > FLT_MAX)
 		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE | FLOAT_IMPOSSIBLE;
 	scalar.i = static_cast<int>(d);
@@ -207,17 +214,17 @@ static void convertFromDouble(const std::string& input, Scalar& scalar)
 	scalar.d = d;
 }
 
-ScalarConverter::InputType ScalarConverter::getType(const std::string& input)
+InputType getType(const std::string& input)
 {
 	if (isCharType(input))
-		return (ScalarConverter::CHAR);
+		return (CHAR);
 	if (isIntType(input))
-		return (ScalarConverter::INT);
+		return (INT);
 	if (isFloatType(input))
 		return (FLOAT);
 	if (isDoubleType(input))
 		return (DOUBLE);
-	return (ScalarConverter::NONE);
+	return (NONE);
 }
 
 typedef void (*ConvertFunction)(const std::string&, Scalar&);
@@ -269,9 +276,9 @@ void ScalarConverter::convert(const std::string& input)
 	LOG_DEBUG() << "scalar impossible: " << scalar.impossible;
 	LOG_DEBUG() << "raw input: " << input;
 
-	ScalarConverter::InputType type = getType(input);
+	InputType type = getType(input);
 	LOG_DEBUG() << "type: " << type;
-	if (type == ScalarConverter::NONE)
+	if (type == NONE)
 	{
 		std::cerr << red("Error: unrecognized type\n");
 		return ;
