@@ -49,6 +49,11 @@ int	main(int argc, char **argv)
 		return (1);
 
 	const std::string input = argv[1];
+	if (input.empty())
+	{
+		std::cerr << red("Error. Input cannot be empty\n");
+		return (1);
+	}
 
 	ScalarConverter::convert(input);
 }
