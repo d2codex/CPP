@@ -26,6 +26,9 @@ ScalarConverter::~ScalarConverter() {}
  *                              INTERNAL TYPES                               *
  *****************************************************************************/
 
+/**
+ * @brief Input types detected from string input.
+ */
 enum InputType
 {
 	NONE = -1,
@@ -39,6 +42,10 @@ enum InputType
  *                              TYPE DETECTION                               *
  *****************************************************************************/
 
+/**
+ * @brief Checks if input represents a char literal.
+ * Accepts single non-digit chars or quoted chars ('a').
+ */
 static bool isCharType(const std::string& input)
 {
 	char c = input[0];
@@ -54,6 +61,10 @@ static bool isCharType(const std::string& input)
 	return (false);
 }
 
+/**
+ * @brief Checks if input represents an integer.
+ * Supports optional sign followed by digits.
+ */
 static bool isIntType(const std::string& input)
 {
 	size_t len = input.length();
@@ -69,6 +80,10 @@ static bool isIntType(const std::string& input)
 	return (true);
 }
 
+/**
+ * @brief Checks if input represents a float.
+ * Accepts literals ending in 'f' and pseudo literals.
+ */
 static bool isFloatType(const std::string& input)
 {
 	if (input == "-inff" || input == "+inff" || input == "nanf")
@@ -84,6 +99,10 @@ static bool isFloatType(const std::string& input)
 	return (end == input.c_str() + input.size() - 1);
 }
 
+/**
+ * @brief Checks if input represents a double.
+ * Requires '.', 'e', or 'E', or matches pseudo literals.
+ */
 static bool isDoubleType(const std::string& input)
 {
 	if (input == "-inf" || input == "+inf" || input == "nan")
@@ -106,6 +125,10 @@ static bool isDoubleType(const std::string& input)
  *                            ASSIGNMENT HELPERS                             *
  *****************************************************************************/
 
+/**
+ * @brief Assigns int and char from a double value.
+ * Sets flags if value is out of int or char range.
+ */
 static void assignFromDouble(double d, ScalarConverter::Scalar& scalar)
 {
     if (d < INT_MIN || d > INT_MAX)
@@ -126,6 +149,11 @@ static void assignFromDouble(double d, ScalarConverter::Scalar& scalar)
     }
 }
 
+/**
+ * @brief Handles pseudo literals (nan, inf).
+ * Sets float/double values and marks char/int impossible.
+ * @return true if input is a pseudo literal.
+ */
 static bool assignPseudoLitterals(const std::string& input, ScalarConverter::Scalar& s)
 {
 	if (input == "nan" || input == "nanf")
@@ -162,6 +190,9 @@ static bool assignPseudoLitterals(const std::string& input, ScalarConverter::Sca
  *                            CONVERSION HELPERS                             *
  *****************************************************************************/
 
+/**
+ * @brief Converts a char literal to all scalar types.
+ */
 static void	convertFromChar(const std::string& input, ScalarConverter::Scalar& scalar)
 {
 	char c = (input.length() == 1) ? input[0] : input[1];
@@ -171,6 +202,10 @@ static void	convertFromChar(const std::string& input, ScalarConverter::Scalar& s
 	scalar.d = static_cast<double>(c);
 }
 
+/**
+ * @brief Converts an integer string to scalar types.
+ * @throws std::out_of_range if int is out of bounds.
+ */
 static void convertFromInt(const std::string& input, ScalarConverter::Scalar& scalar)
 {
 	char *end;
@@ -183,6 +218,11 @@ static void convertFromInt(const std::string& input, ScalarConverter::Scalar& sc
 	assignFromDouble(d, scalar);
 }
 
+/**
+ * @brief Converts a float string to scalar types.
+ * Handles pseudo literals and range validation.
+ * @throws std::out_of_range if float is out of bounds.
+ */
 static void convertFromFloat(const std::string& input, ScalarConverter::Scalar& scalar)
 {
 	if (assignPseudoLitterals(input, scalar))
@@ -199,6 +239,11 @@ static void convertFromFloat(const std::string& input, ScalarConverter::Scalar& 
 	assignFromDouble(d, scalar);
 }
 
+/**
+ * @brief Converts a double string to scalar types.
+ * Handles pseudo literals and range validation.
+ * @throws std::out_of_range if double is out of bounds.
+ */
 static void convertFromDouble(const std::string& input, ScalarConverter::Scalar& scalar)
 {
 	if (assignPseudoLitterals(input, scalar))
@@ -221,12 +266,21 @@ static void convertFromDouble(const std::string& input, ScalarConverter::Scalar&
 	scalar.d = d;
 	assignFromDouble(d, scalar);
 }
+
 /*****************************************************************************
  *                             DISPATCH HELPERS                              *
  *****************************************************************************/
 
+/**
+ * @brief Function pointer type for conversion strategies.
+ */
 typedef void (*ConvertFunction)(const std::string&, ScalarConverter::Scalar&);
 
+/**
+ * @brief Array of conversion functions indexed by detected type.
+ * Maps each scalar type to its corresponding conversion function,
+ * allowing dispatch without conditional branching.
+ */
 ConvertFunction strategies[] =
 {
 	convertFromChar,
@@ -235,6 +289,9 @@ ConvertFunction strategies[] =
 	convertFromDouble
 };
 
+/**
+ * @brief Returns detected input type.
+ */
 InputType getType(const std::string& input)
 {
 	if (isCharType(input))
@@ -252,6 +309,10 @@ InputType getType(const std::string& input)
  *                                   OUTPUT                                  *
  *****************************************************************************/
 
+/**
+ * @brief Prints scalar values with formatting.
+ * Handles impossible and non-displayable cases.
+ */
 static void printScalar(const ScalarConverter::Scalar& scalar)
 {
 	if (scalar.impossible & ScalarConverter::CHAR_IMPOSSIBLE)
@@ -283,12 +344,23 @@ static void printScalar(const ScalarConverter::Scalar& scalar)
  *                              PUBLIC INTERFACE                             *
  *****************************************************************************/
 
+/**
+ * @brief Converts input string to scalar representation.
+ *
+ * Detects type, applies conversion, and prints result.
+ *
+ * @param input Input string to convert.
+ * @return Scalar containing converted values and flags.
+ *
+ * @throws std::invalid_argument if input is invalid.
+ * @throws std::out_of_range if value exceeds limits.
+ */
 ScalarConverter::Scalar ScalarConverter::convert(const std::string& input)
 {
 	if (input.empty())
 		throw std::invalid_argument("Error: input cannot be empty");
 
-	ScalarConverter::Scalar scalar = {}; //sets all to 0 (possible)
+	ScalarConverter::Scalar scalar = {};
 
 	LOG_DEBUG() << "raw input: " << input;
 

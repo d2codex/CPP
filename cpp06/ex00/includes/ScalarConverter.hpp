@@ -2,6 +2,12 @@
 
 #include <string>
 
+/**
+ * @brief Converts a string input to scalar types.
+ *
+ * Provides conversion to char, int, float, and double.
+ * Uses flags to indicate impossible or non-displayable values.
+ */
 class ScalarConverter
 {
 public:	
@@ -16,17 +22,17 @@ public:
 
 	enum ImpossibleFlags
 	{
-	CHAR_IMPOSSIBLE = 1 << 0,
-	INT_IMPOSSIBLE = 1 << 1,
-	FLOAT_IMPOSSIBLE = 1 << 2,
-	DOUBLE_IMPOSSIBLE = 1 << 3,
-	CHAR_NONDISPLAYABLE = 1 << 4,
+		CHAR_IMPOSSIBLE = 1 << 0,
+		INT_IMPOSSIBLE = 1 << 1,
+		FLOAT_IMPOSSIBLE = 1 << 2,
+		DOUBLE_IMPOSSIBLE = 1 << 3,
+		CHAR_NONDISPLAYABLE = 1 << 4,
 	};
 
 	static Scalar	convert(const std::string& input);
 
 private:
-	ScalarConverter();  // should not be instantiable
+	ScalarConverter();
 	ScalarConverter(const ScalarConverter&);
 	ScalarConverter& operator=(const ScalarConverter&);
 	~ScalarConverter();
