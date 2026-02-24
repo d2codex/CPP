@@ -11,7 +11,7 @@ int	testFloat()
 	// test int 0
 	{
 		printHeader("float 0.0f");
-		ScalarConverter::Scalar s = ScalarConverter::convert("0.0");
+		ScalarConverter::Scalar s = ScalarConverter::convert("0.0f");
 
 		assert(s.impossible & ScalarConverter::CHAR_NONDISPLAYABLE);
 		assert(s.i == 0);
@@ -120,7 +120,7 @@ int	testFloat()
 	}
 	// int underflow
 	{
-		printHeader("int underflow -2147483649");
+		printHeader("int underflow -2147483649.0f");
 		ScalarConverter::Scalar s = ScalarConverter::convert("-2147483649.0f");
 
 		assert(s.impossible & ScalarConverter::CHAR_IMPOSSIBLE);
@@ -143,7 +143,7 @@ int	testFloat()
 	}
 	// float min
 	{
-		printHeader("float min -3.40282e+38");
+		printHeader("float min -3.40282e+38f");
 		ScalarConverter::Scalar s = ScalarConverter::convert("-3.40282e+38f");
 
 		assert(s.impossible & ScalarConverter::CHAR_IMPOSSIBLE);
@@ -152,16 +152,16 @@ int	testFloat()
 		assert(s.d == -3.40282e+38);
 		total++;
 	}
-	// float overflow
+	// float overflow lowercase e
 	{
 		printHeader("float overflow expect throw 3.40283e+38f");
 		expect_throw("3.40283e+38f");
 		total++;
 	}
-	// float underflow
+	// float underflow capitla E
 	{
-		printHeader("float underflow expect throw -3.40283e+38f");
-		expect_throw("-3.40283e+38f");
+		printHeader("float underflow expect throw -3.40283E+38f");
+		expect_throw("-3.40283E+38f");
 		total++;
 	}
 	// float number no dot
@@ -231,7 +231,6 @@ int	testFloat()
 		assert(std::isnan(s.d));
 		total++;
 	}
-
 
 	printSummary(failed, total);
 	return (failed);
