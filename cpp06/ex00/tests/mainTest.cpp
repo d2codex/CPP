@@ -24,9 +24,9 @@ int	main(void)
 	totalTestSuites++;
 	totalFailures += testFloat();
 
-/*	totalTestSuites++;
+	totalTestSuites++;
 	totalFailures += testDouble();
-*/
+
 	std::cout << blu("Test Suites Summary\n")
 			  << wht("Total test suits: ") << totalTestSuites << '\n'
 			  << red("total failures: ") << totalFailures << '\n'

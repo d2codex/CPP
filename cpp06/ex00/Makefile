@@ -34,6 +34,7 @@ APP_SRCS = src/main.cpp \
 
 TEST_SRCS = tests/mainTest.cpp \
 			tests/testChar.cpp \
+			tests/testDouble.cpp \
 			tests/testFloat.cpp \
 			tests/testInt.cpp \
 			tests/tests.cpp

@@ -82,3 +82,4 @@ void expect_throw(const std::string& input);
 int	testChar();
 int testInt();
 int testFloat();
+int	testDouble();
