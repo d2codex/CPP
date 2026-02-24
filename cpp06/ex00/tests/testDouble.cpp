@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 13:22:07 by diade-so          #+#    #+#             */
-/*   Updated: 2026/02/24 13:24:11 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/02/24 14:46:24 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,64 @@ int	testDouble()
 		assert(almostEqual(s.d, -3.40283e+38, 1e-10));
 		total++;
 	}
+	// DBL_MAX (largest positive)
+	{
+		printHeader("DBL MAX 1.79769e+308");
+		ScalarConverter::Scalar s = ScalarConverter::convert("1.79769e+308");
+
+		assert(s.impossible & ScalarConverter::CHAR_IMPOSSIBLE);
+		assert(s.impossible & ScalarConverter::INT_IMPOSSIBLE);
+		assert(s.impossible & ScalarConverter::FLOAT_IMPOSSIBLE);
+		assert(s.d == 1.79769e+308);
+		total++;
+	}
+	// DBL_MIN (smallest positive number)
+	{
+		printHeader("DBL MIN 2.2250738585072014e-308");
+		ScalarConverter::Scalar s = ScalarConverter::convert("2.2250738585072014e-308");
+
+		assert(s.impossible & ScalarConverter::CHAR_NONDISPLAYABLE);
+		assert(s.i == 0);
+		assert(s.f == 0.0f);
+		assert(s.d == 2.2250738585072014e-308);
+		total++;
+	}
+	// -DBL_MAX (largest negative)
+	{
+		printHeader("-DBL_MAX -1.79769e+308");
+		ScalarConverter::Scalar s = ScalarConverter::convert("-1.79769e+308");
+
+		assert(s.impossible & ScalarConverter::CHAR_IMPOSSIBLE);
+		assert(s.impossible & ScalarConverter::INT_IMPOSSIBLE);
+		assert(s.impossible & ScalarConverter::FLOAT_IMPOSSIBLE);
+		assert(s.d == -1.79769e+308);
+		total++;
+	}
+	// -DBL_MIN (smallest negative number)
+	{
+		printHeader("-DBL_MIN -2.2250738585072014e-308");
+		ScalarConverter::Scalar s = ScalarConverter::convert("-2.2250738585072014e-308");
+
+		assert(s.impossible & ScalarConverter::CHAR_NONDISPLAYABLE);
+		assert(s.i == 0);
+		assert(s.f == 0.0f);
+		assert(s.d == -2.2250738585072014e-308);
+		total++;
+	}
+/*	// double overflow lowercase e
+	{
+		printHeader("double overflow expect throw 3.40283e+38f");
+		expect_throw("3.40283e+38f");
+		total++;
+	}
+	// double underflow capitla E
+	{
+		printHeader("double underflow expect throw -3.40283E+38f");
+		expect_throw("-3.40283E+38f");
+		total++;
+	}
+*/
+
 	// double number leading dot
 	{
 		printHeader("double number leading dot .123456");
