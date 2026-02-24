@@ -173,8 +173,8 @@ static void convertFromFloat(const std::string& input, ScalarConverter::Scalar& 
 	{
 		throw std::out_of_range("Error: Float out of range");
 	}
-	scalar.f = static_cast<float>(d);
-	scalar.d = d;
+	if (d < INT_MIN || d > INT_MAX)
+		scalar.impossible |= ScalarConverter::INT_IMPOSSIBLE;
 	scalar.i = static_cast<int>(d);
 	if (scalar.i < 0 || scalar.i > 127)
 		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE;
@@ -184,6 +184,8 @@ static void convertFromFloat(const std::string& input, ScalarConverter::Scalar& 
 			scalar.impossible |= ScalarConverter::CHAR_NONDISPLAYABLE;
 		scalar.c = static_cast<char>(scalar.i);
 	}
+	scalar.f = static_cast<float>(d);
+	scalar.d = d;
 }
 
 static void convertFromDouble(const std::string& input, ScalarConverter::Scalar& scalar)
