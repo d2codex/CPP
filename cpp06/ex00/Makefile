@@ -33,6 +33,8 @@ CORE_SRCS = src/Logger.cpp \
 APP_SRCS = src/main.cpp \
 
 TEST_SRCS = tests/mainTest.cpp \
+			tests/testChar.cpp \
+			tests/testInt.cpp \
 			tests/tests.cpp
 
 # ============================================================
