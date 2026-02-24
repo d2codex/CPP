@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 13:22:07 by diade-so          #+#    #+#             */
-/*   Updated: 2026/02/24 14:46:24 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/02/24 14:57:36 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,19 +230,18 @@ int	testDouble()
 		assert(s.d == -2.2250738585072014e-308);
 		total++;
 	}
-/*	// double overflow lowercase e
+	// double overflow lowercase e
 	{
 		printHeader("double overflow expect throw 3.40283e+38f");
-		expect_throw("3.40283e+38f");
+		expect_throw("1.79770e+308");
 		total++;
 	}
 	// double underflow capitla E
 	{
 		printHeader("double underflow expect throw -3.40283E+38f");
-		expect_throw("-3.40283E+38f");
+		expect_throw("1.79770e+308");
 		total++;
 	}
-*/
 
 	// double number leading dot
 	{
