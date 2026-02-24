@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/24 16:03:52 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/24 16:03:54 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ScalarConverter.hpp"
 #include "Logger.hpp"
 #include "colors.hpp"
@@ -36,13 +48,6 @@ bool initLogger(int argc, char **argv)
 	std::cout << cyn("log levels: debug(debug build only) info warning\n");
 	return (false);
 }
-
-void printTestName(const std::string& testName)
-{
-	std::cout << yel("======================================================\n");
-	std::cout << YEL << "Testing " << testName << RESET << '\n';
-}
-
 
 int	main(int argc, char **argv)
 {
