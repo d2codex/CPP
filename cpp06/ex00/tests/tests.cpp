@@ -1,9 +1,9 @@
+#include "ScalarConverter.hpp"
+#include "tests.hpp"
 #include "Logger.hpp"
-#include "colors.hpp"
-#include <iostream>
-#include <cstring>
 #include <fstream>
 #include <string>
+
 
 void printHeader(const std::string& testName)
 {
@@ -50,4 +50,21 @@ bool fileDoesNotExist(const std::string& testName, const std::string& filename)
         std::cout << red("FAIL ") << testName << '\n';
         return false;
     }
+}
+
+void expect_throw(const std::string& input)
+{
+    bool thrown = false;
+
+    try
+    {
+        ScalarConverter::convert(input);
+    }
+    catch (const std::invalid_argument& e)
+    {
+        thrown = true;
+		std::cout << e.what() << '\n';
+    }
+
+    assert(thrown);
 }

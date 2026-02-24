@@ -4,6 +4,7 @@
 #include <string>
 #include <cstring>
 #include "colors.hpp"
+#include <cassert>
 
 void	printHeader(const std::string& testName);
 void	printSummary(int failed, int total);
@@ -68,8 +69,7 @@ bool	assertNotEqual(const char* testName, const T1& expected,
 bool fileExists(const std::string& testName, const std::string& filename);
 bool fileDoesNotExist(const std::string& testName, const std::string& filename);
 
-int	testBureaucrat();
-int	testShrubberyCreationForm();
-int	testRobotomyRequestForm();
-int	testPresidentialPardonForm();
-int	testIntern();
+void expect_throw(const std::string& input);
+
+int	testChar();
+int testInt();
