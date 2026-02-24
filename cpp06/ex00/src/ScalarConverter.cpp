@@ -91,8 +91,6 @@ static bool isDoubleType(const std::string& input)
 	char* end;
 	errno = 0;
 	std::strtod(input.c_str(), &end);
-	if (errno == ERANGE)
-		return (false);
 
 	if (end != input.c_str() + input.size())
 		return (false);
