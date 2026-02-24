@@ -34,14 +34,15 @@ enum InputType
 	FLOAT = 2,
 	DOUBLE = 3,
 };
-
+/*
 enum ImpossibleFlags
 {
 	CHAR_IMPOSSIBLE = 1 << 0,
 	INT_IMPOSSIBLE = 1 << 1,
 	FLOAT_IMPOSSIBLE = 1 << 2,
-	DOUBLE_IMPOSSIBLE = 1 << 3
-};
+	DOUBLE_IMPOSSIBLE = 1 << 3,
+	CHAR_NONDISPLAYABLE = 1 << 4,
+};*/
 
 /*****************************************************************************
  *                              TYPE DETECTION                               *
@@ -132,18 +133,22 @@ static void convertFromInt(const std::string& input, ScalarConverter::Scalar& sc
 	long result = strtol(input.c_str(), &end, 10);
 	if (errno == ERANGE || result < INT_MIN || result > INT_MAX)
 	{
-		scalar.impossible |= CHAR_IMPOSSIBLE
-						   | INT_IMPOSSIBLE
-						   | FLOAT_IMPOSSIBLE
-						   | DOUBLE_IMPOSSIBLE;
+		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE
+						   | ScalarConverter::INT_IMPOSSIBLE
+						   | ScalarConverter::FLOAT_IMPOSSIBLE
+						   | ScalarConverter::DOUBLE_IMPOSSIBLE;
 		return ;
 	}
 	int i = static_cast<int>(result);
-	scalar.i = i;
 	if( i < 0 || i > 127)
-		scalar.impossible |= CHAR_IMPOSSIBLE;
+		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE;
 	else
+	{
+		if (i < 32 || i > 126)
+			scalar.impossible |= ScalarConverter::CHAR_NONDISPLAYABLE;
 		scalar.c = static_cast<char>(i);
+	}
+	scalar.i = i;
 	scalar.f = static_cast<float>(i);
 	scalar.d = static_cast<double>(i);
 }
@@ -152,7 +157,8 @@ static void convertFromFloat(const std::string& input, ScalarConverter::Scalar& 
 {
 	if (input == "-inff" || input == "+inff" || input == "nanf")
 	{
-		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE;
+		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE
+						   | ScalarConverter::INT_IMPOSSIBLE;
 		if (input == "nanf")
 		{
 			scalar.f = std::numeric_limits<float>::quiet_NaN();
@@ -179,24 +185,31 @@ static void convertFromFloat(const std::string& input, ScalarConverter::Scalar& 
 
 	if (d < -FLT_MAX || d > FLT_MAX)
 	{
-		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE | FLOAT_IMPOSSIBLE
-			| DOUBLE_IMPOSSIBLE;
+		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE
+						   | ScalarConverter:: INT_IMPOSSIBLE
+						   | ScalarConverter::FLOAT_IMPOSSIBLE
+						   | ScalarConverter::DOUBLE_IMPOSSIBLE;
 		return ;
 	}
 	scalar.f = static_cast<float>(d);
 	scalar.d = d;
 	scalar.i = static_cast<int>(d);
 	if (scalar.i < 0 || scalar.i > 127)
-		scalar.impossible |= CHAR_IMPOSSIBLE;
+		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE;
 	else
+	{
+		if (scalar.i < 32 || scalar.i > 126)
+			scalar.impossible |= ScalarConverter::CHAR_NONDISPLAYABLE;
 		scalar.c = static_cast<char>(scalar.i);
+	}
 }
 
 static void convertFromDouble(const std::string& input, ScalarConverter::Scalar& scalar)
 {
 	if (input == "-inf" || input == "+inf" || input == "nan")
 	{
-		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE;
+		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE
+						   | ScalarConverter::INT_IMPOSSIBLE;
 		if (input == "nan")
 		{
 			scalar.f = std::numeric_limits<float>::quiet_NaN();
@@ -218,21 +231,28 @@ static void convertFromDouble(const std::string& input, ScalarConverter::Scalar&
 	double d = strtod(input.c_str(), &end);
 	if (d < -FLT_MAX || d > FLT_MAX)
 	{
-		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE | FLOAT_IMPOSSIBLE;
+		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE
+						   | ScalarConverter::INT_IMPOSSIBLE
+						   | ScalarConverter::FLOAT_IMPOSSIBLE;
 		scalar.d = d;
 		return ;
 	}
 	scalar.f = static_cast<float>(d);
 	scalar.d = d;
 	if (d < INT_MIN || d > INT_MAX)
-		scalar.impossible |= CHAR_IMPOSSIBLE | INT_IMPOSSIBLE;
+		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE
+						   | ScalarConverter::INT_IMPOSSIBLE;
 	else
 	{
 		scalar.i = static_cast<int>(d);
 		if (scalar.i < 0 || scalar.i > 127)
-			scalar.impossible |= CHAR_IMPOSSIBLE;
+			scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE;
 		else
-			scalar.c = static_cast<char>(scalar.i);
+		{
+			if (scalar.i < 32 || scalar.i > 126)
+				scalar.impossible |= ScalarConverter::CHAR_NONDISPLAYABLE;
+			scalar.c = static_cast<char>(d);
+		}
 	}
 }
 /*****************************************************************************
@@ -268,7 +288,7 @@ InputType getType(const std::string& input)
 
 static void printScalar(const ScalarConverter::Scalar& scalar)
 {
-	if (scalar.impossible & CHAR_IMPOSSIBLE)
+	if (scalar.impossible & ScalarConverter::CHAR_IMPOSSIBLE)
 		std::cout << "Char: impossible\n";
 	else if (!std::isprint(static_cast<unsigned char>(scalar.c)))
 			std::cout << "Char: Non displayable\n";
@@ -277,17 +297,17 @@ static void printScalar(const ScalarConverter::Scalar& scalar)
 
 	std::cout << std::fixed << std::setprecision(1);
 
-	if (scalar.impossible & INT_IMPOSSIBLE)
+	if (scalar.impossible & ScalarConverter::INT_IMPOSSIBLE)
 		std::cout << "Int: impossible\n";
 	else
 		std::cout << "Int: " << scalar.i << '\n';
 
-	if (scalar.impossible & FLOAT_IMPOSSIBLE)
+	if (scalar.impossible & ScalarConverter::FLOAT_IMPOSSIBLE)
 		std::cout << "Float: impossible\n";
 	else
 		std::cout << "Float: " << scalar.f << "f\n";
 	
-	if (scalar.impossible & DOUBLE_IMPOSSIBLE)
+	if (scalar.impossible & ScalarConverter::DOUBLE_IMPOSSIBLE)
 		std::cout << "Double: impossible\n";
 	else
 		std::cout << "Double: " << scalar.d << '\n';
@@ -315,7 +335,7 @@ ScalarConverter::Scalar ScalarConverter::convert(const std::string& input)
 	InputType type = getType(input);
 	LOG_DEBUG() << "type: " << type;
 	if (type == NONE)
-		throw std::invalid_argument("Error: unrecognized type\n");
+		throw std::invalid_argument("Error: unrecognized type");
 	strategies[type](input, scalar);
 	printScalar(scalar);
 	return (scalar);
