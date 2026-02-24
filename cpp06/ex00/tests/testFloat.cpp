@@ -130,9 +130,9 @@ int	testFloat()
 		total++;
 	}
 
-	// float max
+	// FLT_MAX
 	{
-		printHeader("float max 3.40282e+38f");
+		printHeader("FLT_MAX 3.40282e+38f");
 		ScalarConverter::Scalar s = ScalarConverter::convert("3.40282e+38f");
 
 		assert(s.impossible & ScalarConverter::CHAR_IMPOSSIBLE);
@@ -141,15 +141,37 @@ int	testFloat()
 		assert(s.d == 3.40282e+38);
 		total++;
 	}
-	// float min
+	// -FLT_MAX
 	{
-		printHeader("float min -3.40282e+38f");
+		printHeader("-FLT_MAX -3.40282e+38f");
 		ScalarConverter::Scalar s = ScalarConverter::convert("-3.40282e+38f");
 
 		assert(s.impossible & ScalarConverter::CHAR_IMPOSSIBLE);
 		assert(s.impossible & ScalarConverter::INT_IMPOSSIBLE);
 		assert(s.f == -3.40282e+38f);
 		assert(s.d == -3.40282e+38);
+		total++;
+	}
+	// FLT_MIN
+	{
+		printHeader("FLT_MIN 1.17549435e-38f");
+		ScalarConverter::Scalar s = ScalarConverter::convert("1.17549435e-38f");
+
+		assert(s.impossible & ScalarConverter::CHAR_NONDISPLAYABLE);
+		assert(s.i == 0);
+		assert(s.f == 1.17549435e-38f);
+		assert(s.d == 1.17549435e-38);
+		total++;
+	}
+	// -FLT_MIN
+	{
+		printHeader("-FLT_MIN -1.17549435e-38f");
+		ScalarConverter::Scalar s = ScalarConverter::convert("-1.17549435e-38f");
+
+		assert(s.impossible & ScalarConverter::CHAR_NONDISPLAYABLE);
+		assert(s.i == 0);
+		assert(s.f == -1.17549435e-38f);
+		assert(s.d == -1.17549435e-38);
 		total++;
 	}
 	// float overflow lowercase e
@@ -235,5 +257,3 @@ int	testFloat()
 	printSummary(failed, total);
 	return (failed);
 }
-
-
