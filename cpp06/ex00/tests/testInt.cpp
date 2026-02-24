@@ -21,7 +21,7 @@ int	testInt()
 	// highest displayable char 126
 	{
 		printHeader("highest displayable char 126");
-		ScalarConverter::Scalar s = ScalarConverter::convert("~");
+		ScalarConverter::Scalar s = ScalarConverter::convert("126");
 
 		assert(s.c == '~');
 		assert(s.i == 126);
@@ -95,7 +95,7 @@ int	testInt()
 		assert(s.d == 2147483647.0);
 		total++;
 	}
-	// int max
+	// int min
 	{
 		printHeader("int min -2147483648");
 		ScalarConverter::Scalar s = ScalarConverter::convert("-2147483648");
@@ -106,13 +106,13 @@ int	testInt()
 		assert(s.d == -2147483648.0);
 		total++;
 	}
-	// out of range max+
+	// out of range 2147483648
 	{
 		printHeader("out of range 2147483648 should throw");
 		expect_throw("2147483648");
 		total++;
 	}
-	// out of range min-
+	// out of range -2147483649
 	{
 		printHeader("out of range -2147483649 should throw");
 		expect_throw("-2147483649");
