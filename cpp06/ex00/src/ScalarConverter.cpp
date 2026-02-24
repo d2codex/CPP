@@ -103,6 +103,62 @@ static bool isDoubleType(const std::string& input)
 }
 
 /*****************************************************************************
+ *                            ASSIGNMENT HELPERS                             *
+ *****************************************************************************/
+
+static void assignFromDouble(double d, ScalarConverter::Scalar& scalar)
+{
+    if (d < INT_MIN || d > INT_MAX)
+    {
+        scalar.impossible |= ScalarConverter::INT_IMPOSSIBLE
+                           | ScalarConverter::CHAR_IMPOSSIBLE;
+        return;
+    }
+    scalar.i = static_cast<int>(d);
+
+    if (scalar.i < 0 || scalar.i > 127)
+        scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE;
+    else
+    {
+        if (scalar.i < 32 || scalar.i > 126)
+            scalar.impossible |= ScalarConverter::CHAR_NONDISPLAYABLE;
+        scalar.c = static_cast<char>(scalar.i);
+    }
+}
+
+static bool assignPseudoLitterals(const std::string& input, ScalarConverter::Scalar& s)
+{
+	if (input == "nan" || input == "nanf")
+    {
+        s.impossible |= ScalarConverter::CHAR_IMPOSSIBLE
+                      | ScalarConverter::INT_IMPOSSIBLE;
+        s.f = std::numeric_limits<float>::quiet_NaN();
+        s.d = std::numeric_limits<double>::quiet_NaN();
+        return true;
+    }
+
+    if (input == "+inf" || input == "+inff")
+    {
+        s.impossible |= ScalarConverter::CHAR_IMPOSSIBLE
+                      | ScalarConverter::INT_IMPOSSIBLE;
+        s.f = std::numeric_limits<float>::infinity();
+        s.d = std::numeric_limits<double>::infinity();
+        return true;
+    }
+
+    if (input == "-inf" || input == "-inff")
+    {
+        s.impossible |= ScalarConverter::CHAR_IMPOSSIBLE
+                      | ScalarConverter::INT_IMPOSSIBLE;
+        s.f = -std::numeric_limits<float>::infinity();
+        s.d = -std::numeric_limits<double>::infinity();
+        return true;
+    }
+
+    return false;
+}
+
+/*****************************************************************************
  *                            CONVERSION HELPERS                             *
  *****************************************************************************/
 
@@ -119,96 +175,35 @@ static void convertFromInt(const std::string& input, ScalarConverter::Scalar& sc
 {
 	char *end;
 	errno = 0;
-	long result = strtol(input.c_str(), &end, 10);
-	if (errno == ERANGE || result < INT_MIN || result > INT_MAX)
+	double d = strtod(input.c_str(), &end);
+	if (errno == ERANGE || d < INT_MIN || d > INT_MAX)
 		throw std::out_of_range("Error: Int out of range");
-
-	int i = static_cast<int>(result);
-	if( i < 0 || i > 127)
-		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE;
-	else
-	{
-		if (i < 32 || i > 126)
-			scalar.impossible |= ScalarConverter::CHAR_NONDISPLAYABLE;
-		scalar.c = static_cast<char>(i);
-	}
-	scalar.i = i;
-	scalar.f = static_cast<float>(i);
-	scalar.d = static_cast<double>(i);
+	scalar.f = static_cast<float>(d);
+	scalar.d = d;
+	assignFromDouble(d, scalar);
 }
 
 static void convertFromFloat(const std::string& input, ScalarConverter::Scalar& scalar)
 {
-	if (input == "-inff" || input == "+inff" || input == "nanf")
-	{
-		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE
-						   | ScalarConverter::INT_IMPOSSIBLE;
-		if (input == "nanf")
-		{
-			scalar.f = std::numeric_limits<float>::quiet_NaN();
-			scalar.d = std::numeric_limits<double>::quiet_NaN();
-		}
-		else if (input == "+inff")
-		{
-			scalar.f = std::numeric_limits<float>::infinity();
-			scalar.d = std::numeric_limits<double>::infinity();
-		}
-		else
-		{
-			scalar.f = -std::numeric_limits<float>::infinity();
-			scalar.d = -std::numeric_limits<double>::infinity();
-		}
+	if (assignPseudoLitterals(input, scalar))
 		return ;
-	}
 	std::string s = input;
 	if (!s.empty() && s[s.size() - 1] == 'f')
 		s.resize(s.size() - 1);
-
 	char *end;
 	double d = strtod(s.c_str(), &end);
-
 	if (d < -FLT_MAX || d > FLT_MAX)
-	{
 		throw std::out_of_range("Error: Float out of range");
-	}
-	if (d < INT_MIN || d > INT_MAX)
-		scalar.impossible |= ScalarConverter::INT_IMPOSSIBLE;
-	scalar.i = static_cast<int>(d);
-	if (scalar.i < 0 || scalar.i > 127)
-		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE;
-	else
-	{
-		if (scalar.i < 32 || scalar.i > 126)
-			scalar.impossible |= ScalarConverter::CHAR_NONDISPLAYABLE;
-		scalar.c = static_cast<char>(scalar.i);
-	}
 	scalar.f = static_cast<float>(d);
 	scalar.d = d;
+	assignFromDouble(d, scalar);
 }
 
 static void convertFromDouble(const std::string& input, ScalarConverter::Scalar& scalar)
 {
-	if (input == "-inf" || input == "+inf" || input == "nan")
-	{
-		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE
-						   | ScalarConverter::INT_IMPOSSIBLE;
-		if (input == "nan")
-		{
-			scalar.f = std::numeric_limits<float>::quiet_NaN();
-			scalar.d = std::numeric_limits<double>::quiet_NaN();
-		}
-		else if (input == "+inf")
-		{
-			scalar.f = std::numeric_limits<float>::infinity();
-			scalar.d = std::numeric_limits<double>::infinity();
-		}
-		else
-		{
-			scalar.f = -std::numeric_limits<float>::infinity();
-			scalar.d = -std::numeric_limits<double>::infinity();
-		}
+	if (assignPseudoLitterals(input, scalar))
 		return ;
-	}
+	
 	char* end;
 	errno = 0;
 	double d = strtod(input.c_str(), &end);
@@ -224,21 +219,7 @@ static void convertFromDouble(const std::string& input, ScalarConverter::Scalar&
 	}
 	scalar.f = static_cast<float>(d);
 	scalar.d = d;
-	if (d < INT_MIN || d > INT_MAX)
-		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE
-						   | ScalarConverter::INT_IMPOSSIBLE;
-	else
-	{
-		scalar.i = static_cast<int>(d);
-		if (scalar.i < 0 || scalar.i > 127)
-			scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE;
-		else
-		{
-			if (scalar.i < 32 || scalar.i > 126)
-				scalar.impossible |= ScalarConverter::CHAR_NONDISPLAYABLE;
-			scalar.c = static_cast<char>(d);
-		}
-	}
+	assignFromDouble(d, scalar);
 }
 /*****************************************************************************
  *                             DISPATCH HELPERS                              *
@@ -309,12 +290,6 @@ ScalarConverter::Scalar ScalarConverter::convert(const std::string& input)
 
 	ScalarConverter::Scalar scalar = {}; //sets all to 0 (possible)
 
-	if (scalar.c == '\0')
-		LOG_DEBUG() << "scalar.c: null character";
-	LOG_DEBUG() << "scalar.i: " << scalar.i;
-	LOG_DEBUG() << "scalar.f: " << scalar.f;
-	LOG_DEBUG() << "scalar.d: " << scalar.d;
-	LOG_DEBUG() << "scalar impossible: " << scalar.impossible;
 	LOG_DEBUG() << "raw input: " << input;
 
 	InputType type = getType(input);
