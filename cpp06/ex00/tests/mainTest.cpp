@@ -21,14 +21,11 @@ int	main(void)
 	totalTestSuites++;
 	totalFailures += testInt();
 
+	totalTestSuites++;
+	totalFailures += testFloat();
+
 /*	totalTestSuites++;
-	totalFailures += testRobotomyRequestForm();
-
-	totalTestSuites++;
-	totalFailures += testPresidentialPardonForm();
-
-	totalTestSuites++;
-	totalFailures += testIntern();
+	totalFailures += testDouble();
 */
 	std::cout << blu("Test Suites Summary\n")
 			  << wht("Total test suits: ") << totalTestSuites << '\n'
