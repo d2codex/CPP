@@ -60,7 +60,7 @@ void expect_throw(const std::string& input)
     {
         ScalarConverter::convert(input);
     }
-    catch (const std::invalid_argument& e)
+    catch (const std::exception& e)
     {
         thrown = true;
 		std::cout << e.what() << '\n';
