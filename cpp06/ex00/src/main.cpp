@@ -54,8 +54,8 @@ int	main(int argc, char **argv)
 	{
 		ScalarConverter::convert(input);
 	}
-	catch (std::invalid_argument& e)
+	catch (const std::exception& e)
 	{
-		LOG_ERROR() << e.what();
+		std::cerr << RED << e.what() << RESET << '\n';
 	}
 }

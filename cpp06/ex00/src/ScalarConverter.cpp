@@ -34,15 +34,6 @@ enum InputType
 	FLOAT = 2,
 	DOUBLE = 3,
 };
-/*
-enum ImpossibleFlags
-{
-	CHAR_IMPOSSIBLE = 1 << 0,
-	INT_IMPOSSIBLE = 1 << 1,
-	FLOAT_IMPOSSIBLE = 1 << 2,
-	DOUBLE_IMPOSSIBLE = 1 << 3,
-	CHAR_NONDISPLAYABLE = 1 << 4,
-};*/
 
 /*****************************************************************************
  *                              TYPE DETECTION                               *
@@ -132,13 +123,8 @@ static void convertFromInt(const std::string& input, ScalarConverter::Scalar& sc
 	errno = 0;
 	long result = strtol(input.c_str(), &end, 10);
 	if (errno == ERANGE || result < INT_MIN || result > INT_MAX)
-	{
-		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE
-						   | ScalarConverter::INT_IMPOSSIBLE
-						   | ScalarConverter::FLOAT_IMPOSSIBLE
-						   | ScalarConverter::DOUBLE_IMPOSSIBLE;
-		return ;
-	}
+		throw std::out_of_range("Error: Int out of range");
+
 	int i = static_cast<int>(result);
 	if( i < 0 || i > 127)
 		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE;
@@ -185,11 +171,7 @@ static void convertFromFloat(const std::string& input, ScalarConverter::Scalar& 
 
 	if (d < -FLT_MAX || d > FLT_MAX)
 	{
-		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE
-						   | ScalarConverter:: INT_IMPOSSIBLE
-						   | ScalarConverter::FLOAT_IMPOSSIBLE
-						   | ScalarConverter::DOUBLE_IMPOSSIBLE;
-		return ;
+		throw std::out_of_range("Error: Float out of range");
 	}
 	scalar.f = static_cast<float>(d);
 	scalar.d = d;
@@ -228,7 +210,10 @@ static void convertFromDouble(const std::string& input, ScalarConverter::Scalar&
 		return ;
 	}
 	char* end;
+	errno = 0;
 	double d = strtod(input.c_str(), &end);
+	if (errno == ERANGE)
+		throw std::out_of_range("Error: double out of range");
 	if (d < -FLT_MAX || d > FLT_MAX)
 	{
 		scalar.impossible |= ScalarConverter::CHAR_IMPOSSIBLE
