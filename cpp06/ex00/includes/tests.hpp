@@ -5,6 +5,8 @@
 #include <cstring>
 #include "colors.hpp"
 #include <cassert>
+#include <cmath>
+#include <cassert>
 
 void	printHeader(const std::string& testName);
 void	printSummary(int failed, int total);
@@ -66,6 +68,12 @@ bool	assertNotEqual(const char* testName, const T1& expected,
 	return (false);
 }
 
+template<typename T>
+bool almostEqual(T value, T expected, T tolerance)
+{
+    return std::fabs(value - expected) < tolerance;
+}
+
 bool fileExists(const std::string& testName, const std::string& filename);
 bool fileDoesNotExist(const std::string& testName, const std::string& filename);
 
@@ -73,3 +81,4 @@ void expect_throw(const std::string& input);
 
 int	testChar();
 int testInt();
+int testFloat();
