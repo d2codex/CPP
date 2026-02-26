@@ -45,8 +45,12 @@ void printTestName(const std::string& testName)
 
 int	main(int argc, char **argv)
 {
+
 	if (!initLogger(argc, argv))
 		return (1);
+
+	std::srand(std::time(NULL));
+
 	// Identify type by pointer - heap allocation
 	{
 		printTestName("Identify type by pointer - heap allocation");

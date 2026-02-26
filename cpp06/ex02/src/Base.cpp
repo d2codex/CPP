@@ -10,12 +10,6 @@ Base::~Base()
 
 Base* generate(void)
 {
-	static bool seeded = false;
-	if (!seeded)
-	{
-		std::srand(std::time(NULL));
-		seeded = true;
-	}
 	int random = std::rand() % 3;
 
 	if (random == 0)
