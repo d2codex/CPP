@@ -10,11 +10,12 @@ Base* generate(void)
 {
 	int random = std::rand() % 3;
 
-	if (random == 0)
-		return (new A);
-	if (random == 1)
-		return (new B);
-	return (new C);
+	switch(random)
+	{
+		case 0: return (new A);
+		case 1: return (new B);
+		default: return (new C);
+	}
 }
 
 void identify(Base* p)
@@ -68,8 +69,10 @@ Type	identifyType(Base* p)
 		return (A_TYPE);
 	else if (dynamic_cast<B*>(p))
 		return (B_TYPE);
-	else
+	else if (dynamic_cast<C*(p))
 		return (C_TYPE);
+	else
+		return (UNKNOWN_TYPE);
 }
 
 Type	identifyType(Base& p)
