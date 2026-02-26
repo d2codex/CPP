@@ -1,7 +1,13 @@
 #include "Base.hpp"
+#include "BaseUtils.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 #include "Logger.hpp"
 #include "colors.hpp"
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 #include <cassert>
 
 bool initLogger(int argc, char **argv)

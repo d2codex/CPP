@@ -29,6 +29,7 @@ TEST_NAME = $(BIN_DIR)/test_runner
 
 CORE_SRCS = src/Logger.cpp \
 			src/Base.cpp \
+			src/BaseUtils.cpp
 
 APP_SRCS = src/main.cpp \
 
