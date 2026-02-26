@@ -68,12 +68,12 @@ int	main(int argc, char **argv)
 		{
 			Base* obj = generate();
 			identify(obj);
-			Type t = identifyType(obj);
-			if (t == A_TYPE)
+			Type t = getType(obj);
+			if (t == TYPE_A)
 				countA++;
-			if (t == B_TYPE)
+			if (t == TYPE_B)
 				countB++;
-			if (t == C_TYPE)
+			if (t == TYPE_C)
 				countC++;
 			delete obj;
 		}
@@ -92,12 +92,12 @@ int	main(int argc, char **argv)
 		{
 			Base* obj = generate();
 			identify(obj);
-			Type t = identifyType(*obj);
-			if (t == A_TYPE)
+			Type t = getType(*obj);
+			if (t == TYPE_A)
 				countA++;
-			if (t == B_TYPE)
+			if (t == TYPE_B)
 				countB++;
-			if (t == C_TYPE)
+			if (t == TYPE_C)
 				countC++;
 			delete obj;
 		}
@@ -110,7 +110,6 @@ int	main(int argc, char **argv)
 		printTestName("null pointer");
 		Base* obj = NULL;
 		identify(obj);
-		identifyType(obj);
 	}
 	// Identify type by pointer - stack
 	{
@@ -120,30 +119,30 @@ int	main(int argc, char **argv)
 		C c;
 		
 		identify(&a);
-		Type tA = identifyType(&a);
-		assert(A_TYPE == tA);
+		Type tA = getType(&a);
+		assert(TYPE_A == tA);
 
 		identify(&b);
-		Type tB = identifyType(&b);
-		assert(B_TYPE == tB);
+		Type tB = getType(&b);
+		assert(TYPE_B == tB);
 
 		identify(&c);
-		Type tC = identifyType(&c);
-		assert(C_TYPE == tC);
+		Type tC = getType(&c);
+		assert(TYPE_C == tC);
 
 		// Identify type by reference - stack
 		printTestName("Identify type by reference - stack");
 
 		identify(a);
-		Type tA_ref = identifyType(a);
-		assert(A_TYPE == tA_ref);
+		Type tA_ref = getType(a);
+		assert(TYPE_A == tA_ref);
 
 		identify(b);
-		Type tB_ref = identifyType(b);
-		assert(B_TYPE == tB_ref);
+		Type tB_ref = getType(b);
+		assert(TYPE_B == tB_ref);
 
 		identify(c);
-		Type tC_ref = identifyType(c);
-		assert(C_TYPE == tC_ref);
+		Type tC_ref = getType(c);
+		assert(TYPE_C == tC_ref);
 	}
 }

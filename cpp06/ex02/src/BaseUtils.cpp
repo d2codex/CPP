@@ -5,6 +5,7 @@
 #include "C.hpp"
 #include "colors.hpp"
 #include <iostream>
+#include <cstdlib>
 
 Base* generate(void)
 {
@@ -18,76 +19,60 @@ Base* generate(void)
 	}
 }
 
-void identify(Base* p)
+Type	getType(Base* p)
 {
 	if (!p)
-	{
-		std::cout << mag("Pointer is null.\n");
-		return ;
-	}
+		return (TYPE_UNKNOWN);
 	if (dynamic_cast<A*>(p))
-		std::cout << "Base type: A\n";
+		return (TYPE_A);
 	else if (dynamic_cast<B*>(p))
-		std::cout << "Base type: B\n";
+		return (TYPE_B);
 	else if (dynamic_cast<C*>(p))
-		std::cout << "Base type: C\n";
-}
-
-void identify(Base& p)
-{
-	try
-	{
-		(void)dynamic_cast<A&>(p);
-		std::cout << "Base type: A\n";
-		return ;
-	}
-	catch (...) {}
-	try
-	{
-		(void)dynamic_cast<B&>(p);
-		std::cout << "Base type: B\n";
-		return ;
-	}
-	catch (...) {}
-	try
-	{
-		(void)dynamic_cast<C&>(p);
-		std::cout << "Base type: C\n";
-		return ;
-	}
-	catch (...) {}
-}
-
-Type	identifyType(Base* p)
-{
-	if (!p)
-	{
-		std::cout << mag("Pointer is null.\n");
-		return (UNKNOWN_TYPE);
-	}
-	if (dynamic_cast<A*>(p))
-		return (A_TYPE);
-	else if (dynamic_cast<B*>(p))
-		return (B_TYPE);
-	else if (dynamic_cast<C*(p))
-		return (C_TYPE);
+		return (TYPE_C);
 	else
-		return (UNKNOWN_TYPE);
+		return (TYPE_UNKNOWN);
 }
 
-Type	identifyType(Base& p)
+Type	getType(Base& p)
 {
     try
 	{
         (void)dynamic_cast<A&>(p);
-        return A_TYPE;
+        return TYPE_A;
     }
 	catch (...) {}
 	try
 	{
         (void)dynamic_cast<B&>(p);
-        return B_TYPE;
+        return TYPE_B;
     }
 	catch (...) {}
-    return C_TYPE;
+    return TYPE_C;
+}
+
+void identify(Base* p)
+{
+	Type t = getType(p);
+	if (t == TYPE_UNKNOWN)
+	{
+		std::cout << mag("Pointer is null.\n");
+		return ;
+	}
+	if (t == TYPE_A)
+		std::cout << "Base type: A\n";
+	else if (t == TYPE_B)
+		std::cout << "Base type: B\n";
+	else if (t == TYPE_C)
+		std::cout << "Base type: C\n";
+}
+
+void identify(Base& p)
+{
+	Type t = getType(p);
+	if (t == TYPE_A)
+		std::cout << "Base type: A\n";
+	else if (t == TYPE_B)
+		std::cout << "Base type: B\n";
+	else
+		std::cout << "Base type: C\n";
 }

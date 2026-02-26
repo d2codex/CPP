@@ -2,14 +2,14 @@
 
 enum Type
 {
-	A_TYPE,
-	B_TYPE,
-	C_TYPE,
-	UNKNOWN_TYPE,
+	TYPE_A,
+	TYPE_B,
+	TYPE_C,
+	TYPE_UNKNOWN,
 };
 
 Base*	generate(void);
+Type	getType(Base* p);
+Type	getType(Base& p);
 void	identify(Base* p);
 void	identify(Base& p);
-Type	identifyType(Base* p);
-Type	identifyType(Base& p);
