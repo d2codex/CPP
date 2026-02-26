@@ -2,6 +2,7 @@
 #include "Logger.hpp"
 #include "colors.hpp"
 #include <iostream>
+#include <cassert>
 
 bool initLogger(int argc, char **argv)
 {
@@ -46,17 +47,17 @@ int	main(int argc, char **argv)
 {
 	if (!initLogger(argc, argv))
 		return (1);
-	// Identify type by pointer
+	// Identify type by pointer - heap allocation
 	{
-		printTestName("Identify type by pointer");
-		size_t numTests = 100000;
+		printTestName("Identify type by pointer - heap allocation");
+		size_t numTests = 10;
 		size_t countA = 0;
 		size_t countB = 0;
 		size_t countC = 0;
 		for (size_t i = 0; i < numTests; i++)
 		{
 			Base* obj = generate();
-			//identify(obj);
+			identify(obj);
 			Type t = identifyType(obj);
 			if (t == A_TYPE)
 				countA++;
@@ -70,17 +71,17 @@ int	main(int argc, char **argv)
 		std::cout << "Total B type: " << countB << std::endl;
 		std::cout << "Total C type: " << countC << std::endl;
 	}
-	// Identify type by reference
+	// Identify type by reference - heap allocation
 	{
-		printTestName("Identify type by reference");
-		size_t numTests = 100000;
+		printTestName("Identify type by reference - heap allocation");
+		size_t numTests = 10;
 		size_t countA = 0;
 		size_t countB = 0;
 		size_t countC = 0;
 		for (size_t i = 0; i < numTests; i++)
 		{
 			Base* obj = generate();
-			//identify(obj);
+			identify(obj);
 			Type t = identifyType(*obj);
 			if (t == A_TYPE)
 				countA++;
@@ -93,5 +94,46 @@ int	main(int argc, char **argv)
 		std::cout << "Total A type: " << countA << std::endl;
 		std::cout << "Total B type: " << countB << std::endl;
 		std::cout << "Total C type: " << countC << std::endl;
+	}
+	// null pointer test (pointer only)
+	{
+		printTestName("null pointer");
+		Base* obj = NULL;
+		identify(obj);
+		identifyType(obj);
+	}
+	// Identify type by pointer - stack
+	{
+		printTestName("Identify type by pointer - stack");
+		A a;
+		B b;
+		C c;
+		
+		identify(&a);
+		Type tA = identifyType(&a);
+		assert(A_TYPE == tA);
+
+		identify(&b);
+		Type tB = identifyType(&b);
+		assert(B_TYPE == tB);
+
+		identify(&c);
+		Type tC = identifyType(&c);
+		assert(C_TYPE == tC);
+
+		// Identify type by reference - stack
+		printTestName("Identify type by reference - stack");
+
+		identify(a);
+		Type tA_ref = identifyType(a);
+		assert(A_TYPE == tA_ref);
+
+		identify(b);
+		Type tB_ref = identifyType(b);
+		assert(B_TYPE == tB_ref);
+
+		identify(c);
+		Type tC_ref = identifyType(c);
+		assert(C_TYPE == tC_ref);
 	}
 }
