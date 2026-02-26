@@ -27,6 +27,11 @@ Base* generate(void)
 
 void identify(Base* p)
 {
+	if (!p)
+	{
+		std::cout << mag("Pointer is null.\n");
+		return ;
+	}
 	if (dynamic_cast<A*>(p))
 		std::cout << "Base type: A\n";
 	else if (dynamic_cast<B*>(p))
@@ -62,6 +67,11 @@ void identify(Base& p)
 
 Type	identifyType(Base* p)
 {
+	if (!p)
+	{
+		std::cout << mag("Pointer is null.\n");
+		return (UNKNOWN_TYPE);
+	}
 	if (dynamic_cast<A*>(p))
 		return (A_TYPE);
 	else if (dynamic_cast<B*>(p))

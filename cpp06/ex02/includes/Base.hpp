@@ -15,6 +15,7 @@ enum Type
 	A_TYPE,
 	B_TYPE,
 	C_TYPE,
+	UNKNOWN_TYPE,
 };
 
 Base*	generate(void);
