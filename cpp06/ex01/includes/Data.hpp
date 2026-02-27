@@ -1,7 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Data.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/27 01:09:30 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/27 01:09:31 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 
-// we dont put this in Serializer cause it shouldn't own or
-// define the thing it is serializing.
+/**
+ * @struct Data
+ * @brief Simple data container for serialization exercises.
+ *
+ * Holds an integer value. Not owned or managed by Serializer.
+ */
 struct Data
 {
 	int value;
