@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   BaseUtils.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/27 00:58:23 by diade-so          #+#    #+#             */
+/*   Updated: 2026/02/27 00:58:24 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Base.hpp"
 #include "BaseUtils.hpp"
 #include "A.hpp"
@@ -7,6 +19,11 @@
 #include <iostream>
 #include <cstdlib>
 
+/**
+ * @brief Generate a random derived instance (A, B, or C).
+ * Uses std::rand() to select a type and allocates it on the heap.
+ * @return Pointer to newly allocated Base-derived object.
+ */
 Base* generate(void)
 {
 	int random = std::rand() % 3;
@@ -19,6 +36,13 @@ Base* generate(void)
 	}
 }
 
+/**
+ * @brief Identify dynamic type from a Base pointer.
+ * Uses dynamic_cast on pointer. Returns TYPE_UNKNOWN if null
+ * or no match is found.
+ * @param p Pointer to Base object.
+ * @return Corresponding Type enum.
+ */
 Type	getType(Base* p)
 {
 	if (!p)
@@ -33,6 +57,13 @@ Type	getType(Base* p)
 		return (TYPE_UNKNOWN);
 }
 
+/**
+ * @brief Identify dynamic type from a Base reference.
+ * Uses dynamic_cast on reference. Relies on exceptions
+ * to detect failed casts.
+ * @param p Reference to Base object.
+ * @return Corresponding Type enum.
+ */
 Type	getType(Base& p)
 {
     try
@@ -50,6 +81,11 @@ Type	getType(Base& p)
     return TYPE_C;
 }
 
+/**
+ * @brief Print type of object from Base pointer.
+ * Prints a message based on detected type. Handles null pointer.
+ * @param p Pointer to Base object.
+ */
 void identify(Base* p)
 {
 	Type t = getType(p);
@@ -66,6 +102,11 @@ void identify(Base* p)
 		std::cout << "Base type: C\n";
 }
 
+/**
+ * @brief Print type of object from Base reference.
+ * Assumes valid reference. Prints detected dynamic type.
+ * @param p Reference to Base object.
+ */
 void identify(Base& p)
 {
 	Type t = getType(p);
