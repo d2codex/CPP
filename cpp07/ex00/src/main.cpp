@@ -59,34 +59,44 @@ int	main(int argc, char **argv)
 		std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
 		std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
 	}
-/*
+	// demo test ints swap
 	{
 		int a = 2;
 		int b = 3;
 
-		printTestName("swap int");
+		printTestName("swap int (2,3)");
 		::swap(a, b);
+	}
+	// demo test int min / max
+	{
+		int a = 2;
+		int b = 3;
 
-		printTestName("max int, max is second");
+		printTestName("max int (2, 3)");
 		::max(a , b);
 
-		printTestName("min int, min is first");
+		printTestName("min int (2, 3)");
 		::min(a , b);
-
-		std::string c = "chaine1";
-		std::string d = "chaine2";
-
-		printTestName("swap std::string");
-		::swap(c, d);
-
-		int e = 2;
-		int f = 2;
-
-		printTestName("min equal, second is returned");
-		::min(e, f);
-
-		printTestName("max equal, second is returned");
-		::max(e, f);
 	}
-*/
+	// demo test strings
+	{
+		std::string s1 = "hello";
+		std::string s2 = "world";
+
+		printTestName("swap std::string (hello, world)");
+		::swap(s1, s2);
+	}
+	// demo test int equals returns second 
+	{
+		int a = 2;
+		int b = 2;
+
+		printTestName("min equal (2, 2), second is returned");
+		::min(a, b);
+
+		printTestName("max equal (2, 2), second is returned");
+		::max(a, b);
+	}
+	
+
 }
