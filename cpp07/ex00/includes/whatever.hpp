@@ -1,7 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/01 19:38:20 by diade-so          #+#    #+#             */
+/*   Updated: 2026/03/01 19:38:21 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 
 #include "Logger.hpp"
 
+/**
+ * @brief Swap two values of any type.
+ *
+ * Uses a temporary variable initialized directly from @p a.
+ * This avoids requiring a default constructor and prevents
+ * an extra assignment.
+ *
+ * Example:
+ * @code
+ * struct Point
+ * {
+ *     int x, y;
+ *     Point(int x, int y) : x(x), y(y) {}
+ * };
+ *
+ * Point a(1, 2);
+ * Point b(3, 4);
+ * swap(a, b); // OK
+ *
+ * // T temp; temp = a; would fail (no default ctor)
+ * @endcode
+ *
+ * @tparam T Type supporting copy and assignment.
+ * @param a First value.
+ * @param b Second value.
+ */
 template<typename T> 
 void	swap(T& a, T& b)
 {
@@ -47,9 +85,23 @@ const T& min(const T& a, const T& b)
 	}
 	LOG_DEBUG() << "min is second: " << b << ", " << static_cast<const void*>(&b);
 	return (b);
-	//return (b > a ? a : b);
 }
 
+/**
+ * @brief Returns the greater of two values.
+ *
+ * Compares @p a and @p b and returns the larger one. The parameters are
+ * passed as const references to avoid copying large objects (like
+ * std::string, structs, or classes) and to allow using literals directly.
+ *
+ * @tparam T Type of the values to compare. Must support operator<.
+ * @param a First value.
+ * @param b Second value.
+ * @return const T& Reference to the larger value.
+ *
+ * @note Returning a const reference avoids unnecessary copies, and
+ *       allows calls like max(5, x) without creating temporary objects.
+ */
 template<typename T>
 const T& max(const T& a, const T& b)
 {
@@ -62,5 +114,4 @@ const T& max(const T& a, const T& b)
 	}
 	LOG_DEBUG() << "max is second: " << b << ", " << static_cast<const void*>(&b);
 	return (b);
-	//return (b > a ? a : b);
 }
