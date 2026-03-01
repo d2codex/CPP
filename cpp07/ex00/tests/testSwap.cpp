@@ -1,5 +1,6 @@
 #include "tests.hpp"
 #include "whatever.hpp"
+#include <climits>
 #include <ostream>
 
 struct Point
@@ -22,95 +23,105 @@ int	testSwap()
 	printHeader("Swap suite");
 	// test int positive
 	{
-		printHeader("testing int postive...");
 		int a = 2;
 		int b = 3;
 		::swap(a, b);
-		assert(a == 3);
-		assert(b == 2);
+		if (!assertEqual("int (2, 3) confirm a", 3, a))
+			failed++;
+		if (!assertEqual("int (2, 3) confirm b", 2, b))
+			failed++;
 		total++;
 	}
 	// test int negative
 	{
-		printHeader("testing int negative...");
 		int a = -2;
 		int b = -3;
 		::swap(a, b);
-		assert(a == -3);
-		assert(b == -2);
+		if (!assertEqual("int (-2, -3) confirm a", -3, a))
+			failed++;
+		if (!assertEqual("int (-2, -3) confirm b", -2, b))
+			failed++;
 		total++;
 	}
-	// test int zero
+	// test int zero / INT_MAX
 	{
-		printHeader("testing int zero...");
 		int a = 0;
-		int b = 0;
+		int b = INT_MAX;
 		::swap(a, b);
-		assert(a == 0);
-		assert(b == 0);
+		if (!assertEqual("int (0, INT_MAX) confirm a", INT_MAX, a))
+			failed++;
+		if (!assertEqual("int (0, INT_MAX) confirm b", 0, b))
+			failed++;
 		total++;
 	}
 	// test float
 	{
-		printHeader("testing float...");
 		float a = -2.f;
 		float b = 25.00f;
 		::swap(a, b);
-		assert(a == 25.00f);
-		assert(b == -2.f);
+		if (!assertEqual("float (-2.f, 25.00) confirm a", 25.00f, a))
+			failed++;
+		if (!assertEqual("float (-2.f, 25.00) confirm b", -2.f, b))
+			failed++;
 		total++;
 	}
 	// test double
 	{
-		printHeader("testing double...");
-		double a = 10.0;
+		double a = 10.0123456789;
 		double b = -25.00;
 		::swap(a, b);
-		assert(a == -25.00);
-		assert(b == 10.0);
+		if (!assertEqual("double (10.0123456789, -25.00) confirm a", -25.00, a))
+			failed++;
+		if (!assertEqual("double (10.0123456789, -25.00) confirm b", 10.0123456789, b))
+			failed++;
 		total++;
 	}
 	// test char
 	{
-		printHeader("testing char...");
 		char a = 'z';
 		char b = 'm';
 		::swap(a, b);
-		assert(a == 'm');
-		assert(b == 'z');
+		if (!assertEqual("char (z, m) confirm a", 'm', a))
+			failed++;
+		if (!assertEqual("char (z, m) confirm b", 'z', b))
+			failed++;
 		total++;
 	}
 	// test bool
 	{
-		printHeader("testing bool...");
 		bool a = true;
 		bool b = false;
 		::swap(a, b);
-		assert(a == false);
-		assert(b == true);
+		if (!assertEqual("bool (true, false) confirm a", false, a))
+			failed++;
+		if (!assertEqual("bool (true, false) confirm b", true, b))
+			failed++;
 		total++;
 	}
 	// test std::string
 	{
-		printHeader("testing std::string...");
 		std::string a = "hello";
 		std::string b = "world";
 		::swap(a, b);
-		assert(a == "world");
-		assert(b == "hello");
+		if (!assertEqual("std::string (hello, world) confirm a", "world", a))
+			failed++;
+		if (!assertEqual("std::string (hello, world) confirm b", "hello", b))
+			failed++;
 		total++;
 	}
 	// test struct
 	{
-		printHeader("testing struct...");
-	
 		Point a = {1, 2};
 		Point b = {3, 4};
 		::swap(a, b);
-		assert(a.x == 3);
-		assert(a.y == 4);
-		assert(b.x == 1);
-		assert(b.y == 2);
+		if (!assertEqual("struct a(1,2), b(3,4) confirm a.x", 3, a.x))
+			failed++;
+		if (!assertEqual("struct a(1,2), b(3,4) confirm a.y", 4, a.y))
+			failed++;
+		if (!assertEqual("struct a(1,2), b(3,4) confirm b.x", 1, b.x))
+			failed++;
+		if (!assertEqual("struct a(1,2), b(3,4) confirm b.y", 2, b.y))
+			failed++;
 		total++;
 	}
 	printSummary(failed, total);
