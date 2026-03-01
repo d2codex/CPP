@@ -51,7 +51,7 @@ bool equalHelper(T* a, const T* b)
 template<typename T>
 bool equalHelper(const T* a, const T* b)
 {
-	return (a = b);
+	return (a == b);
 }
 
 /* template assertEqual using equalHelper */
