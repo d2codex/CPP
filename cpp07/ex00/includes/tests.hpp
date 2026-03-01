@@ -35,6 +35,25 @@ bool equalHelper(const T& a, const T& b)
 	return (a == b);
 }
 
+/* generic helper for pointers */
+template<typename T>
+bool equalHelper(const T* a, T* b)
+{
+	return (a == b);
+}
+
+template<typename T>
+bool equalHelper(T* a, const T* b)
+{
+	return (a == b);
+}
+
+template<typename T>
+bool equalHelper(const T* a, const T* b)
+{
+	return (a = b);
+}
+
 /* template assertEqual using equalHelper */
 template<typename T1, typename T2>
 bool	assertEqual(const char* testName, const T1& expected,
@@ -68,16 +87,15 @@ bool	assertNotEqual(const char* testName, const T1& expected,
 	return (false);
 }
 
-template<typename T>
-bool almostEqual(T value, T expected, T tolerance)
+inline bool almostEqual(float value, float expected, float tolerance)
 {
-    return std::fabs(value - expected) < tolerance;
+	return std::fabs(value - expected) < tolerance;
 }
 
-bool fileExists(const std::string& testName, const std::string& filename);
-bool fileDoesNotExist(const std::string& testName, const std::string& filename);
-
-void expect_throw(const std::string& input);
+inline bool almostEqual(double value, double expected, double tolerance)
+{
+	return std::fabs(value - expected) < tolerance;
+}
 
 int	testSwap();
 int	testMin();
