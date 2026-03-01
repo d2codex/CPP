@@ -5,7 +5,7 @@
 
 int	main(void)
 {
-	Logger::logLevel level = Logger::DEBUG;
+	Logger::logLevel level = Logger::INFO;
 
 	Logger::get().setThreshold(level);
 	LOG_DEBUG() << "test";
