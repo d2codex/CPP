@@ -87,14 +87,34 @@ bool	assertNotEqual(const char* testName, const T1& expected,
 	return (false);
 }
 
-inline bool almostEqual(float value, float expected, float tolerance)
+inline bool almostEqual(const char* testName,
+						float actual, float expected, float tolerance)
 {
-	return std::fabs(value - expected) < tolerance;
+	if (std::fabs(actual - expected) < tolerance)
+	{
+		std::cout << grn("PASS ") << testName << '\n';
+		return (true);
+	}
+	std::cout << red("FAIL ") << testName << '\n'
+			  << "expected: " << expected << '\n'
+			  << "actual:   " << actual << '\n';
+	return (false);
+
 }
 
-inline bool almostEqual(double value, double expected, double tolerance)
+inline bool almostEqual(const char* testName,
+						double actual, double expected, double tolerance)
 {
-	return std::fabs(value - expected) < tolerance;
+	if (std::fabs(actual - expected) < tolerance)
+	{
+		std::cout << grn("PASS ") << testName << '\n';
+		return (true);
+	}
+	std::cout << red("FAIL ") << testName << '\n'
+			  << "expected: " << expected << '\n'
+			  << "actual:   " << actual << '\n';
+	return (false);
+
 }
 
 int	testSwap();
