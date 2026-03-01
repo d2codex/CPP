@@ -2,6 +2,7 @@
 #include "whatever.hpp"
 #include <climits>
 #include <cfloat>
+#include <limits>
 
 const float  FLT_TOLERANCE  = 1e-5;
 const double DBL_TOLERANCE = 1e-12;
@@ -125,7 +126,7 @@ int	testMin()
 		float a = -INFINITY;
 		float b = INFINITY;
 		float result = ::min(a, b);
-		if (!assertEqual("float (-INFINITY, INFINITY)", a, result))
+		if (!assertEqual("float (-INFINITY, INFINITY)", -INFINITY, result))
 			failed++;
 	}
 	// double positive
@@ -141,7 +142,7 @@ int	testMin()
 		double a = -2.51234567;
 		double b = 0.01234567;
 		double result = ::min(a, b);
-		if (!almostEqual("double (-2.5, 0.0", -2.51234567, result, DBL_TOLERANCE))
+		if (!almostEqual("double (-2.5, 0.0)", -2.51234567, result, DBL_TOLERANCE))
 			failed++;
 		total++;
 	}
@@ -165,11 +166,13 @@ int	testMin()
 	}
 	// double INFINITY
 	{
-		double a = -INFINITY;
-		double b = INFINITY;
-		double result = ::min(a, b);
-		if (!assertEqual("double (-INFINITY, INFINITY)", a, result))
+		double a = -std::numeric_limits<double>::infinity();
+		double b = std::numeric_limits<double>::infinity();
+		double result = ::max(a, b);
+		if (!assertEqual("double (-INFINITY, INFINITY)",
+				std::numeric_limits<double>::infinity(), static_cast<double>(result)))
 			failed++;
+		total++;
 	}
 	// double NAN
 	{
@@ -203,7 +206,7 @@ int	testMin()
 		std::string a = "ABC";
 		std::string b = "ABC";
 		const std::string& result = ::min(a, b);
-		if (!assertEqual("std::string (abc, def) returns second", &b, &result))
+		if (!assertEqual("std::string (ABC, ABC) returns second", &b, &result))
 			failed++;
 		total++;
 	}
@@ -221,4 +224,3 @@ int	testMin()
 	printSummary(failed, total);
 	return (failed);
 }
-
