@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstddef>
+
 /**
  * @brief Applies a function to each element of an array.
  *
