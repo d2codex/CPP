@@ -41,17 +41,17 @@ Requirements:
 - iter function template must work with any type of array
   - a regular function
   - a function template instantiation
-  - any callable  
 - the callable must accept
-  - either a const reference or a non-const reference depending on the array's type
+  - a const reference OR
+  - non-const reference
 
  Purpose:
-- Understand how template type deduction works
+- Understand how template type deduction for array Elements (T)
 - Observe how constness propagates automatically
 - Learn how templates enforce type safety at compile time
 
  Key learnings:
-- Compiler deduces T:
+- Compiler deduces T from the array:
   - T = int -> T* = int*
   - T = const int -> T* = const int*
 - Const correctness is enforced automatically
@@ -59,6 +59,8 @@ Requirements:
   - A function taking const T& works in all cases
 - The callable must be compatible with
   - function(array[i]
+- Template functions passed as iter's 3rd argument must be explicity instantiated
+  - example: print<iter> 
 - caller is repsponsible for correct array size input  
   - The array size, N, is not validated
   - Incorrect values lead to undefined behavior
