@@ -1,12 +1,13 @@
 ## ex00: Start With a Few Functions
-
 Description:
-Implement swap, min, and max function templates.
+- Implement swap, min, and max function templates.
 
-### Purpose:
-To learn how to create function templates, practice correct syntax, and understand const correctness in C++.
+Purpose:
+- learn how to create function templates
+- practice correct syntax
+- understand const correctness in C++.
 
-### Key Learnings:
+Key Learnings:
 - Passing by reference vs. by value:
 - For complex types such as std::string, structs, or classes, passing by reference avoids unnecessary copying and improves efficiency.
 - For simple types like int, float, or double, passing by value is sufficient.
@@ -14,18 +15,64 @@ To learn how to create function templates, practice correct syntax, and understa
   - Using templates in the testing framework allowed comparing different types in a single function, e.g., const char* with std::string.
 - Overloading for specific cases:
   - Some comparisons, like pointer types (const T* vs. T*), required explicit overloads to handle const/non-const differences.
----
+
 ## Build and Run:
 ```
 Build and run the main program:
 make
 ./bin/whatever [log level]
 
-Run unit tests:
+Run unit tests: (log mode set at compiler time)
 > make tests
-> ./bin/test_runner [log level]
+> ./bin/test_runner
 
 Debug mode with logging:
 > make debug
 > ./bin/whatever [log level]
 ```
+---
+## ex01: Iter
+Description: 
+Implement a function template that takes 3 parameters and returns nothing.
+- parameter 1: address of an array (pointer to the first element of the array)
+- parameter 2: number of elements in the array
+- parameter 3: function that will be called on every element of the array
+Requirements:
+- iter function template must work with any type of array
+  - a regular function
+  - a function template instantiation
+  - any callable  
+- the callable must accept
+  - either a const reference or a non-const reference depending on the array's type
+
+ Purpose:
+- Understand how template type deduction works
+- Observe how constness propagates automatically
+- Learn how templates enforce type safety at compile time
+
+ Key learnings:
+- Compiler deduces T:
+  - T = int -> T* = int*
+  - T = const int -> T* = const int*
+- Const correctness is enforced automatically
+  - A function taking T& cannot be used with const T
+  - A function taking const T& works in all cases
+- The callable must be compatible with
+  - function(array[i]
+- caller is repsponsible for correct array size input  
+  - The array size, N, is not validated
+  - Incorrect values lead to undefined behavior
+
+## Build and Run:
+```
+Build and run the main program:
+make
+./bin/iter [log level]
+
+Run unit tests: (log mode set at compiler time)
+> make tests
+> ./bin/test_runner
+
+Debug mode with logging:
+> make debug
+> ./bin/whatever [log level]
