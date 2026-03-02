@@ -11,10 +11,50 @@ struct Point
 	int y;
 };
 
+// the object acts as a function when called 
+// with int& x passed as the parameter
+struct Doubler
+{
+	void operator()(int& x) const
+	{
+		x *= 2;
+	}
+};
+
 std::ostream& operator<<(std::ostream& os, const Point& p)
 {
 	os << "(" << p.x << ", " << p.y << ")";
 	return (os);
+}
+
+Point operator++(Point& p, int)
+{
+	Point temp = p;
+	p.x++;
+	p.y++;
+	return (temp);
+}
+template<typename T>
+void	print(const T& x)
+{
+	std::cout << x << " ";
+}
+
+template<typename T>
+void increment(T& x)
+{
+	x++;
+}
+
+template<typename T>
+void	tryMutate(const T& x)
+{
+	x++;
+}
+
+void	printHello(const std::string& name)
+{
+	std::cout << "Hello " << name << std::endl;
 }
 
 bool initLogger(int argc, char **argv)
@@ -48,18 +88,6 @@ void printTestName(const std::string& testName)
 	std::cout << YEL << "Testing " << testName << RESET << '\n';
 }
 
-template<typename T>
-void	print(const T& x)
-{
-	std::cout << x << " ";
-}
-
-template<typename T>
-void increment(T& x)
-{
-	x++;
-}
-
 int	main(int argc, char **argv)
 {
 
@@ -67,6 +95,7 @@ int	main(int argc, char **argv)
 		return (1);
 
 	// const array support type int
+	// must specify type for function templates
 	{
 		printTestName("const array support type int");
 		const int array[] = {1, 2, 3};
@@ -138,8 +167,12 @@ int	main(int argc, char **argv)
 	}
 	// custom struct Point non-const array
 	{
-		printTestName("non-const array support type Point");
+		printTestName("non-const array support type Point modification");
 		Point array[] = { {1, 2}, {3, 4}, {5, 6} };
+		iter(array, 3, print<Point>);
+		std::cout << std::endl;
+
+		iter(array, 3, increment<Point>);
 		iter(array, 3, print<Point>);
 		std::cout << std::endl;
 	}
@@ -165,6 +198,53 @@ int	main(int argc, char **argv)
 		int oneElement[] = {42};
 		iter(oneElement, 2, print<int>);
 		std::cout << std::endl;
-		LOG_INFO() << "N invalid, exhibits undefined behavior";
+		LOG_WARNING() << "invalid N exhibits undefined behavior and may segfault";
 	}
+
+	// test non template function
+	// no need to spcify type, compiler deduces automatically
+	{
+		printTestName("non template function");
+		const std::string array[] = {"Spongebob", "Gary", "Patrick"};
+
+		iter(array, 3, print<std::string>);
+		std::cout << std::endl;
+		iter(array, 3, printHello);
+	}
+	// test functor
+	{
+	printTestName("functor test");
+	int array[] = {1, 2, 3};
+
+	std::cout << "before: ";
+	iter(array, 3, print<int>);
+	std::cout << std::endl;
+
+	iter(array, 3, Doubler());
+
+	std::cout << "after:  ";
+	iter(array, 3, print<int>);
+	std::cout << std::endl;
+}
+    // NULL function pointer -compiles, but undefined behavior
+    // F is a template parameter, NULL has no deducible type
+    // caller is responsible for passing a valid callable
+    {
+        printTestName("NULL function pointer");
+		LOG_WARNING() <<
+			"passing a null function exhibits undefined behavior and may segfault";
+        int array[] = {1, 2, 3};
+        void (*nullFunc)(int&) = NULL;
+        iter(array, 3, nullFunc); // segfault, UB
+    }
+/*	// tryMutate on const parameter - should fail / not compile
+	// compiler prevents const mutation
+	{
+		printTestName("const array support type int");
+		const int array[] = {1, 2, 3};
+		iter(array, 3, print<int>);
+		iter(array, 3, tryMutate<int>);
+		std::cout << std::endl;
+	}
+*/
 }
