@@ -57,10 +57,10 @@ Requirements:
 - Const correctness is enforced automatically
   - A function taking T& cannot be used with const T
   - A function taking const T& works in all cases
-- The callable must be compatible with
-  - function(array[i]
-- Template functions passed as iter's 3rd argument must be explicity instantiated
-  - example: print<iter> 
+- Template functions passed as iter's 3rd argument
+  - for non-template functions, compiler deduces function type automatically
+  - for function templates, must explicitly specify the type
+    - example: print<iter> 
 - caller is repsponsible for correct array size input  
   - The array size, N, is not validated
   - Incorrect values lead to undefined behavior
