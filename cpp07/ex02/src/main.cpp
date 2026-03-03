@@ -46,8 +46,7 @@ int	main(int argc, char **argv)
 	{
 		printTestName("int heap allocation");
 		int* a = new int();
-		std::cout << "a address: " << a << std::endl;
-		std::cout << "int value: \n" << *a << std::endl;
+		std::cout << "int value: " << *a << std::endl;
 		delete a;
 /*
 		// without () we get unitialized values and will have garbage values
@@ -63,14 +62,39 @@ int	main(int argc, char **argv)
 	{
 		printTestName("array object heap allocation");
 		Array<int>* b = new Array<int>();
-		std::cout << "b address: " << b << std::endl;
-		std::cout << "array contents: \n" << *b << std::endl;
+		std::cout << "array contents b: \n" << *b;
 		delete b;
 	}
 	// default ctor
 	{
 		printTestName("array object stack allocation");
 		Array<int> a;
-		std::cout << "array contents: \n" << a << std::endl;
+		std::cout << "array contents a: \n" << a;
+	}
+	// integration test
+	{
+		printTestName("integration test");
+		Array<std::string> a(3);
+		a[0] = "hello";
+		a[1] = "Spongebob";
+		a[2] = "!";
+
+		std::cout << "array contents a: \n" << a;
+		Array<std::string> b;
+		std::cout << "array contents b: \n" << b;
+
+		b = a;
+		
+		Array<std::string> c(a);
+		std::cout << "array contents c: \n" << c;
+		
+		try
+		{
+			b[3];
+		}
+		catch (std::exception& e)
+		{
+			LOG_ERROR() << e.what();
+		}
 	}
 }

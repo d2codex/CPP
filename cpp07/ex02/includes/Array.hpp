@@ -116,7 +116,7 @@ template<typename T>
 std::ostream& operator<<(std::ostream& os, const Array<T> a)
 {
 	if (a.size() == 0)
-		os << "Array is empty (size is 0)";
+		os << "Array is empty (size: " << a.size() << ")\n";
 	
 	for (unsigned int i = 0; i < a.size(); i++)
 	{
