@@ -34,6 +34,7 @@ Point operator++(Point& p, int)
 	p.y++;
 	return (temp);
 }
+
 template<typename T>
 void	print(const T& x)
 {
@@ -226,6 +227,7 @@ int	main(int argc, char **argv)
 	iter(array, 3, print<int>);
 	std::cout << std::endl;
 }
+/*
     // NULL function pointer -compiles, but undefined behavior
     // F is a template parameter, NULL has no deducible type
     // caller is responsible for passing a valid callable
@@ -237,7 +239,7 @@ int	main(int argc, char **argv)
         void (*nullFunc)(int&) = NULL;
         iter(array, 3, nullFunc); // segfault, UB
     }
-/*	// tryMutate on const parameter - should fail / not compile
+	// tryMutate on const parameter - should fail / not compile
 	// compiler prevents const mutation
 	{
 		printTestName("const array support type int");
