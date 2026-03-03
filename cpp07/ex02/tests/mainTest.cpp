@@ -22,6 +22,15 @@ int	main(void)
 	totalTestSuites++;
 	totalFailures += testParamCtor();
 
+	totalTestSuites++;
+	totalFailures += testCopyCtor();
+
+	totalTestSuites++;
+	totalFailures += testAssignment();
+
+	totalTestSuites++;
+	totalFailures += testSubscriptOperator();
+
 		std::cout << blu("Test Suites Summary\n")
 			  << wht("Total test suits: ") << totalTestSuites << '\n'
 			  << red("total failures: ") << totalFailures << '\n'
