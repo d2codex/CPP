@@ -27,8 +27,11 @@ CORE_SRCS = src/Logger.cpp \
 APP_SRCS = src/main.cpp \
 
 TEST_SRCS = tests/mainTest.cpp \
+			tests/testAssignment.cpp \
+			tests/testCopyCtor.cpp \
 			tests/testDefaultCtor.cpp \
 			tests/testParamCtor.cpp \
+			tests/testSubscriptOperator.cpp \
 			tests/tests.cpp
 
 # ============================================================
