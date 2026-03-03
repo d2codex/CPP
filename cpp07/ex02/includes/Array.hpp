@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Logger.hpp"
-#include <stddef>
 
 //TODO add in README why I chose hybrid template - declare class,
 //but define outside of class and in the same file
@@ -49,7 +48,7 @@ Array<T>::Array(unsigned int n) : _array(new T[n]()), _size(n)
 // runs since it calls delete[] on an unitialized pointer causing
 // undefined behavior
 template<typename T>
-Array<T>::Array(Array& other) : _array(new T[other._size], _size(other._size)
+Array<T>::Array(const Array& other) : _array(new T[other._size]), _size(other._size)
 {
 	for (unsigned int i = 0; i < _size; i++)
 		_array[i] = other._array[i];
@@ -87,7 +86,7 @@ template<typename T>
 Array<T>::~Array()
 {
 	LOG_DEBUG() << "Array destructor called";
-	delete[] _array
+	delete[] _array;
 }
 
 template<typename T>
@@ -110,4 +109,19 @@ template<typename T>
 unsigned int	Array<T>::size() const
 {
 	return (_size);
+}
+
+// free function
+template<typename T>
+std::ostream& operator<<(std::ostream& os, const Array<T> a)
+{
+	if (a.size() == 0)
+		os << "Array is empty (size is 0)";
+	
+	for (unsigned int i = 0; i < a.size(); i++)
+	{
+		os << "[" << i << "]" << " "
+			<< a[i] << "\n";
+	}
+	return (os);
 }
