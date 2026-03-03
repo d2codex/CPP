@@ -131,3 +131,4 @@ inline bool almostEqual(const char* testName,
 
 int	testDefaultCtor();
 int	testParamCtor();
+int	testCopyCtor();
