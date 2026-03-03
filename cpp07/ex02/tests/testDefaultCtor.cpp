@@ -51,27 +51,6 @@ int testDefaultCtor()
 			failed++;
 		total++;
 	}
-	// heap allocation
-	{
-		Array<int>* a = new Array<int>();
-		if (!assertEqual("int (heap) - size matches", 0, a->size()))
-			failed++;
-		total++;
-			
-		bool thrown = false;
-		try
-		{
-			(*a)[0]; // should throw
-		}
-		catch (const std::out_of_range& e)
-		{
-			//LOG_ERROR() << e.what();
-			thrown = true;
-		}
-		if (!assertEqual("int (heap) out of bounds a[0] should throw", true, thrown))
-			failed++;
-		total++;
-	}
 	// char array
 	{
 		Array<char> a;

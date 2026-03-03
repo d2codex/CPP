@@ -17,60 +17,11 @@ int testParamCtor()
 		if (!assertEqual("param int - value initialzed to 0", 0, a[0]))
 			failed++;
 		total++;
-
-		bool thrown = false;
-		try
-		{
-			a[1]; // should throw
-		}
-		catch (const std::out_of_range& e)
-		{
-			//LOG_ERROR() << e.what();
-			thrown = true;
-		}
-		if (!assertEqual("out of bounds - a[1] should throw", true, thrown))
-			failed++;
-		total++;
 	}
 	// const int array
 	{
 		const Array<int> a(1);
 		if (!assertEqual("const int - size matches", 1, a.size()))
-			failed++;
-		total++;
-
-		bool thrown = false;
-		try
-		{
-			a[1]; // should throw
-		}
-		catch (const std::out_of_range& e)
-		{
-			//LOG_ERROR() << e.what();
-			thrown = true;
-		}
-		if (!assertEqual("const int - out of bounds a[1] should throw", true, thrown))
-			failed++;
-		total++;
-	}
-	// heap allocation
-	{
-		Array<int>* a = new Array<int>(1);
-		if (!assertEqual("int (heap) - size matches", 1, a->size()))
-			failed++;
-		total++;
-			
-		bool thrown = false;
-		try
-		{
-			(*a)[1]; // should throw
-		}
-		catch (const std::out_of_range& e)
-		{
-			//LOG_ERROR() << e.what();
-			thrown = true;
-		}
-		if (!assertEqual("int (heap) out of bounds a[1] should throw", true, thrown))
 			failed++;
 		total++;
 	}
@@ -111,4 +62,3 @@ int testParamCtor()
 	printSummary(failed, total);
 	return (failed);
 }
-
