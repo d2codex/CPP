@@ -28,7 +28,7 @@ Run unit tests: (log mode set at compiler time)
 
 Debug mode with logging:
 > make debug
-> ./bin/whatever [log level]
+> ./bin/whatever_debug [log level]
 ```
 ---
 ## ex01: Iter
@@ -37,6 +37,7 @@ Implement a function template that takes 3 parameters and returns nothing.
 - parameter 1: address of an array (pointer to the first element of the array)
 - parameter 2: number of elements in the array
 - parameter 3: function that will be called on every element of the array
+
 Requirements:
 - iter function template must work with any type of array
   - a regular function
@@ -45,12 +46,13 @@ Requirements:
   - a const reference OR
   - non-const reference
 
- Purpose:
+Purpose:
 - Understand how template type deduction for array Elements (T)
 - Observe how constness propagates automatically
 - Learn how templates enforce type safety at compile time
 
- Key learnings:
+
+Key learnings:
 - Compiler deduces T from the array:
   - T = int -> T* = int*
   - T = const int -> T* = const int*
@@ -77,4 +79,48 @@ Run unit tests: (log mode set at compiler time)
 
 Debug mode with logging:
 > make debug
-> ./bin/whatever [log level]
+> ./bin/iter_debug [log level]
+```
+---
+## ex02: Array
+Description:
+- make a class template Array with:
+
+Requirements:
+- a constructor with no parameter that creates an empty array
+- a constructor with an unsigned int n as a parameter, the number of elements
+  initialized by default
+- use operator new[] to allocate memory
+- implement the subscript operator []
+  - throws a  std::exception when it is out of bounds
+- implement a member function size() that returns the number of elements in the array
+
+Key Learnings:
+- Using hybrid template to declare a class and define functions in the same file
+  - good for small to medium projects
+  - better readability - all in one place
+  - user friendly, only one .hpp to add
+- Tradeoffs
+  - less flexible than with separate .tpp
+  - slower compilation
+  - no control over instantiation
+- Without () the elements are default-initialized and may contain garbage
+  `new T[n]()` value-initializes them (zero / default values).
+- using operator= to copy in the copy constructor is unsafe
+  - operator= calls delete[] and members can be unitialized causing UB
+- For operator=
+  - allocate first before deleting, to avoid dangling pointers if it fails
+
+```
+Build and run the main program:
+make
+./bin/array [log level]
+
+Run unit tests: (log mode set at compiler time)
+> make tests
+> ./bin/test_runner
+
+Debug mode with logging:
+> make debug
+> ./bin/array_debug [log level]
+```
