@@ -193,15 +193,6 @@ int	main(int argc, char **argv)
 		iter(array, 0, print<int>);
 		LOG_INFO() << "N is 0, function not called";
 	}
-	// single element - catches off by one errors
-	{
-		printTestName("N is wrong size");
-		int oneElement[] = {42};
-		iter(oneElement, 2, print<int>);
-		std::cout << std::endl;
-		LOG_WARNING() << "invalid N exhibits undefined behavior and may segfault";
-	}
-
 	// test non template function
 	// no need to spcify type, compiler deduces automatically
 	{
@@ -228,6 +219,14 @@ int	main(int argc, char **argv)
 	std::cout << std::endl;
 }
 /*
+	// single element - catches off by one errors
+	{
+		printTestName("N is wrong size");
+		int oneElement[] = {42};
+		iter(oneElement, 2, print<int>);
+		std::cout << std::endl;
+		LOG_WARNING() << "invalid N exhibits undefined behavior and may segfault";
+	}
     // NULL function pointer -compiles, but undefined behavior
     // F is a template parameter, NULL has no deducible type
     // caller is responsible for passing a valid callable
