@@ -9,13 +9,12 @@ int	testDequeContainer()
 	int	failed = 0;
 	int	total = 0;
 
-	printHeader("container demo");
+	printHeader("deque container demo");
 	// Demo
 	{
 		// create the container(dynamically allocated array)
 		std::deque<int> container;
 		// populate the container
-		//container.push_back(1);
 		container.push_back(3);
 		container.push_back(3);
 		container.push_back(7);
@@ -24,7 +23,6 @@ int	testDequeContainer()
 		container.push_back(INT_MIN);
 		container.push_back(INT_MAX);
 		container.push_front(1);
-
 
 		//print the array
 		printContainer(container);
@@ -108,4 +106,3 @@ int	testDequeContainer()
 		return (failed);
 	}
 }
-

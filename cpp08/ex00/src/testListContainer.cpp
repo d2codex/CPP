@@ -1,28 +1,23 @@
 #include "easyfind.hpp"
 #include "tests.hpp"
 #include "Logger.hpp"
-#include <vector>
+#include <list>
 #include <climits>
 
-int	testVectorContainer()
+int	testListContainer()
 {
 	int	failed = 0;
 	int	total = 0;
 
-	printHeader("vector container demo");
+	printHeader("list container demo");
 	// Demo
 	{
 		// create the container(dynamically allocated array)
-		std::vector<int> container;
-		// optional set the array to a desired size
-		std::vector<int>::size_type size;
-		container.reserve(5);
+		std::list<int> container;
 		// verify the size of the container
-		size = container.capacity();
-		LOG_DEBUG() << "Capicity manually set to: " << size;
+		LOG_DEBUG() << "Capicity manually set to: " << container.size();
 		// populate the container
-		container.push_back(1);
-		container.push_back(3);
+		container.push_front(1);
 		container.push_back(3);
 		container.push_back(7);
 		container.push_back(-7);
@@ -33,7 +28,16 @@ int	testVectorContainer()
 		//print the array
 		printContainer(container);
 
-		LOG_DEBUG() << "Capicity dynamically resized to: " << container.capacity();
+		std::list<int>::iterator it = container.begin();
+		std::advance(it, 1); // move to second element
+		//insert in middle
+		container.insert(it, 3);
+		std::cout << yel("======================================\n");
+		std::cout << yel("after insertion\n");
+		printContainer(container);
+
+
+		LOG_DEBUG() << "Capicity dynamically resized to: " << container.size();
 		LOG_DEBUG() << "Potential Max size is: " << container.max_size();
 
 		std::cout << yel("======================================\n");
@@ -41,35 +45,43 @@ int	testVectorContainer()
 		// first occurance of 3 findable
 		{
 			easyfind(container, 3);
-			if (!assertEqual("duplicate returns first occurrance", 3, container[1]))
+		//	std::advance(it, 1); // move to second element
+			if (!assertEqual("duplicate returns first occurrance", 3, *it))
 				failed++;
 			total++;
 		}
 		// find 0
 		{
 			easyfind(container, 0);
-			if (!assertEqual("0 is findable", 0, container[5]))
+			std::list<int>::iterator it = container.begin();
+			std::advance(it, 5);
+			if (!assertEqual("0 is findable", 0, *it))
 				failed++;
 			total++;
 		}
 		// find INT_MIN
 		{
 			easyfind(container, INT_MIN);
-			if (!assertEqual("INT_MIN is findable", INT_MIN, container[6]))
+			std::list<int>::iterator it = container.begin();
+			std::advance(it, 6);
+			if (!assertEqual("INT_MIN is findable", INT_MIN, *it))
 				failed++;
 			total++;
 		}
 		// find last element
 		{
 			easyfind(container, INT_MAX);
-			if (!assertEqual("find last element", INT_MAX, container[7]))
+			std::list<int>::iterator it = container.begin();
+			std::advance(it, 7);
+			if (!assertEqual("find last element", INT_MAX, *it))
 				failed++;
 			total++;
 		}
 		// find first element
 		{
-			easyfind(container, 1);
-			if (!assertEqual("find first element", 1, container[0]))
+			easyfind(container, 0);
+			//std::list<int>::iterator it = container.begin();
+			if (!assertEqual("find first element", 1, container.front()))
 				failed++;
 			total++;
 		}
@@ -92,7 +104,7 @@ int	testVectorContainer()
 		}
 		// empty array
 		{
-			std::vector<int> empty;
+			std::list<int> empty;
 
 			bool thrown = false;
 			try

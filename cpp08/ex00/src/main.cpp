@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 23:17:48 by diade-so          #+#    #+#             */
-/*   Updated: 2026/03/07 00:04:09 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/03/07 00:49:00 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ int	main(int argc, char **argv)
 
 	totalTestSuites++;
 	totalFailures += testDequeContainer();
+
+	totalTestSuites++;
+	totalFailures += testListContainer();
 
 		std::cout << blu("Test Suites Summary\n")
 			  << wht("Total test suits: ") << totalTestSuites << '\n'
