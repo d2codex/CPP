@@ -3,7 +3,7 @@
 #include "Logger.hpp"
 #include <climits>
 
-int	testIntContainer()
+int	testVectorContainer()
 {
 	int	failed = 0;
 	int	total = 0;
