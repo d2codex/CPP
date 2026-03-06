@@ -6,7 +6,7 @@
 /*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 10:16:46 by diade-so          #+#    #+#             */
-/*   Updated: 2026/03/06 23:43:24 by diade-so         ###   ########.fr       */
+/*   Updated: 2026/03/07 00:13:32 by diade-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@
 #include <string>
 #include <cstring>
 #include "colors.hpp"
-#include <cassert>
 #include <cmath>
-#include <cassert>
-#include <vector>
 
 void	printHeader(const std::string& testName);
 void	printSummary(int failed, int total);
@@ -143,9 +140,9 @@ inline bool almostEqual(const char* testName,
 }
 
 template<typename T>
-void	printVector(const std::vector<T>& container)
+void	printContainer(const T& container)
 {
-	typename std::vector<T>::const_iterator it;
+	typename T::const_iterator it;
 	for( it = container.begin(); it != container.end(); it++)
 	{
 		std::cout << "container[" << std::distance(container.begin(), it) << "]: "
@@ -154,3 +151,5 @@ void	printVector(const std::vector<T>& container)
 }
 
 int	testVectorContainer();
+int	testListContainer();
+int testDequeContainer();
