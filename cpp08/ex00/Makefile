@@ -23,6 +23,8 @@ TEST_NAME = $(BIN_DIR)/test_runner
 # ============================================================
 
 CORE_SRCS = src/Logger.cpp \
+			src/testDequeContainer.cpp \
+			src/testListContainer.cpp \
 			src/testVectorContainer.cpp \
 			src/tests.cpp \
 
