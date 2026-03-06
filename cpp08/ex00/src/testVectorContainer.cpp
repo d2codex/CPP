@@ -1,6 +1,7 @@
 #include "easyfind.hpp"
 #include "tests.hpp"
 #include "Logger.hpp"
+#include <vector>
 #include <climits>
 
 int	testVectorContainer()
@@ -30,13 +31,8 @@ int	testVectorContainer()
 		container.push_back(INT_MAX);
 
 		//print the array
-		for (std::vector<int>::iterator it = container.begin();
-									   it != container.end();
-									   it++)
-		{
-			std::cout << "container[" << std::distance(container.begin(), it) << "]: ";
-			std::cout << *it << "\n";
-		}
+		printContainer(container);
+
 		LOG_DEBUG() << "Capicity dynamically resized to: " << container.capacity();
 		LOG_DEBUG() << "Potential Max size is: " << container.max_size();
 
