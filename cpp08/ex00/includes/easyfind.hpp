@@ -14,7 +14,7 @@ typename T::iterator easyfind(T& container, int value)
 	if (it == container.end())
 		throw std::runtime_error("Value not found");
 	
-	LOG_DEBUG() << "Value: " << value << " found at index "
+	LOG_DEBUG() << "Value: " << value << " found at position "
 				<< std::distance(container.begin(), it);
 
 	return (it);
