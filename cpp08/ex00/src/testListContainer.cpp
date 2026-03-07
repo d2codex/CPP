@@ -15,7 +15,7 @@ int	testListContainer()
 		// create the container(dynamically allocated array)
 		std::list<int> container;
 		// verify the size of the container
-		LOG_DEBUG() << "Capicity manually set to: " << container.size();
+		LOG_DEBUG() << "Capicity: " << container.size();
 		// populate the container
 		container.push_front(1);
 		container.push_back(3);
@@ -27,6 +27,7 @@ int	testListContainer()
 
 		//print the array
 		printContainer(container);
+		LOG_DEBUG() << "Capicity: " << container.size();
 
 		std::list<int>::iterator it = container.begin();
 		std::advance(it, 1); // move to second element
@@ -45,7 +46,8 @@ int	testListContainer()
 		// first occurance of 3 findable
 		{
 			easyfind(container, 3);
-		//	std::advance(it, 1); // move to second element
+			std::list<int>::iterator it = container.begin();
+			std::advance(it, 1); // move to second element
 			if (!assertEqual("duplicate returns first occurrance", 3, *it))
 				failed++;
 			total++;
@@ -79,7 +81,7 @@ int	testListContainer()
 		}
 		// find first element
 		{
-			easyfind(container, 0);
+			easyfind(container, 1);
 			//std::list<int>::iterator it = container.begin();
 			if (!assertEqual("find first element", 1, container.front()))
 				failed++;
