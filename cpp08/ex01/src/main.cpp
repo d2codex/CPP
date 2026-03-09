@@ -7,7 +7,7 @@ bool initLogger(int argc, char **argv)
 {
 	if (argc == 1)
 	{
-		Logger::get().setThreshold(Logger::NONE);
+		Logger::get().setThreshold(Logger::ERROR);
 		return (true);
 	}
 	if (argc == 2)
@@ -77,5 +77,37 @@ int	main(int argc, char **argv)
 		b = a;
 		b.addNumber(1);
 		b.printVector();
+	}
+		// longestSpan
+	{
+		printTestName("longestSpan - not enough numbers");
+		Span a(3);
+
+		a.addNumber(1);
+		a.addNumber(1000);
+		a.addNumber(10);
+
+		a.printVector();
+
+		a.longestSpan();
+	}
+	// longestSpan - throws
+	{
+		printTestName("longestSpan - not enough numbers");
+		Span a(3);
+		try
+		{
+			a.addNumber(1);
+//			a.addNumber(1000);
+//			a.addNumber(10);
+			a.printVector();
+			a.longestSpan();	
+		}
+		catch(Span::NoSpanException& e)
+		{
+			LOG_ERROR() << e.what();
+		}
+		
+		//a.longestSpan();	
 	}
 }
