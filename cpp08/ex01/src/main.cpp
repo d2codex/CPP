@@ -2,6 +2,7 @@
 #include "Logger.hpp"
 #include "colors.hpp"
 #include <iostream>
+#include <climits>
 
 bool initLogger(int argc, char **argv)
 {
@@ -40,7 +41,7 @@ int	main(int argc, char **argv)
 		return (1);
 	// demo 1
 	{
-		printTestName("demo 1 - copy");
+		printTestName("copy");
 		Span a(3);
 		Span b(a);
 
@@ -61,7 +62,7 @@ int	main(int argc, char **argv)
 	}
 	// demo 2
 	{
-		printTestName("demo 2 - assign");
+		printTestName("assign");
 		Span a(3);
 		Span b(0);
 		// add number when size is 0
@@ -80,15 +81,14 @@ int	main(int argc, char **argv)
 	}
 		// longestSpan
 	{
-		printTestName("longestSpan - not enough numbers");
+		printTestName("longestSpan - difference fits in unsigned int");
 		Span a(3);
 
-		a.addNumber(1);
+		a.addNumber(INT_MIN);
 		a.addNumber(1000);
-		a.addNumber(10);
+		a.addNumber(INT_MAX);
 
 		a.printVector();
-
 		a.longestSpan();
 	}
 	// longestSpan - throws
@@ -98,8 +98,6 @@ int	main(int argc, char **argv)
 		try
 		{
 			a.addNumber(1);
-//			a.addNumber(1000);
-//			a.addNumber(10);
 			a.printVector();
 			a.longestSpan();	
 		}
@@ -107,7 +105,29 @@ int	main(int argc, char **argv)
 		{
 			LOG_ERROR() << e.what();
 		}
-		
-		//a.longestSpan();	
+	}
+	//shortest Span fits in unsigned int
+	{
+		printTestName("shortestSpan - difference fits in unsigned int");
+		Span a(2);
+
+		a.addNumber(INT_MIN);
+		a.addNumber(INT_MAX);
+
+		a.shortestSpan();
+		a.printVector();
+	}
+	//shortest Span fits in unsigned int
+	{
+		printTestName("shortestSpan - difference fits in unsigned int");
+		Span a(4);
+
+		a.addNumber(1);
+		a.addNumber(1);
+		a.addNumber(1);
+		a.addNumber(1);
+
+		a.shortestSpan();
+		a.printVector();
 	}
 }
