@@ -28,11 +28,8 @@ bool initLogger(int argc, char **argv)
 	return (false);
 }
 
-
-
 int	main(int argc, char **argv)
 {
-
 	if (!initLogger(argc, argv))
 		return (1);
 	
@@ -44,6 +41,7 @@ int	main(int argc, char **argv)
 	b.addNumber(-3);
 	b.addNumber(29);
 
+	b.printVector();
 	try
 	{
 		c.addNumber(1);
@@ -52,4 +50,8 @@ int	main(int argc, char **argv)
 	{
 		LOG_ERROR() << e.what();
 	}
+
+	c = b;
+	c.addNumber(1);
+	c.printVector();
 }

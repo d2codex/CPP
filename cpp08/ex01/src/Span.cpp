@@ -5,9 +5,7 @@ Span::Span(unsigned int N) : _maxNumbers(N), _vector(0)
 {
 	LOG_DEBUG() << "Span Parameterized constructor called";
 	LOG_DEBUG() << "max numbers:     " << _maxNumbers;
-	LOG_DEBUG() << "vector capacity: " << _vector.capacity();
 	LOG_DEBUG() << "vector size:     " << _vector.size();
-//	LOG_DEBUG() << *this; // may have to overload this to print out
 }
 
 Span::Span(const Span& other) :
@@ -15,9 +13,25 @@ Span::Span(const Span& other) :
 	_vector(other._vector)
 {
 	LOG_DEBUG() << "Span copy constructor called"; 
-	LOG_DEBUG() << "max numbers:           " << _maxNumbers;
-	LOG_DEBUG() << "(cpy) vector capacity: " << _vector.capacity();
-	LOG_DEBUG() << "(cpy) vector size:     " << _vector.size();
+	LOG_DEBUG() << "(copy) max numbers:     " << _maxNumbers;
+	LOG_DEBUG() << "(copy) vector size:     " << _vector.size();
+}
+
+Span& Span::operator=(const Span& other)
+{
+	if (this != &other)
+	{
+		_maxNumbers = other._maxNumbers;
+		_vector = other._vector;
+	}
+	else
+		LOG_WARNING() << "Span self-assignment ignored";
+
+	LOG_DEBUG() << "Span assignment operator called"; 
+	LOG_DEBUG() << "(assign) max numbers:     " << _maxNumbers;
+	LOG_DEBUG() << "(assign) vector size:     " << _vector.size();
+
+	return (*this);
 }
 
 Span::~Span()
@@ -32,7 +46,11 @@ void	Span:: addNumber(int n)
 
 	_vector.push_back(n);
 
-	LOG_DEBUG() << "(add) vector capacity: " << _vector.capacity();
 	LOG_DEBUG() << "(add) vector size:     " << _vector.size();
 }
 
+void	Span::printVector() const
+{
+	for (unsigned int i = 0; i < _vector.size(); i++)
+		std::cout << "index[" << i << "]: " << _vector.at(i) << '\n';
+}

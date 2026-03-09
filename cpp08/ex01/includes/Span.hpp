@@ -7,7 +7,7 @@ class Span
 public:
 	Span(unsigned int N);
 	Span(const Span& other);
-	Span& operator=( const Span& other);
+	Span& operator=(const Span& other);
 	~Span();
 
 	void			addNumber(int n);
@@ -22,6 +22,9 @@ public:
 				return ("Span is full");
 			}
 	};
+
+	//print function
+	void printVector() const;
 
 private:
 	unsigned int		_maxNumbers;
