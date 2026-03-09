@@ -28,30 +28,54 @@ bool initLogger(int argc, char **argv)
 	return (false);
 }
 
+void printTestName(const std::string& testName)
+{
+	std::cout << yel("======================================================\n");
+	std::cout << YEL << "Testing " << testName << RESET << '\n';
+}
+
 int	main(int argc, char **argv)
 {
 	if (!initLogger(argc, argv))
 		return (1);
-	
-	Span a(20);
-	Span b(a);
-	Span c(0);
-
-	b.addNumber(5);
-	b.addNumber(-3);
-	b.addNumber(29);
-
-	b.printVector();
-	try
+	// demo 1
 	{
-		c.addNumber(1);
-	}
-	catch (Span::SpanFullException& e)
-	{
-		LOG_ERROR() << e.what();
-	}
+		printTestName("demo 1 - copy");
+		Span a(3);
+		Span b(a);
 
-	c = b;
-	c.addNumber(1);
-	c.printVector();
+		b.addNumber(5);
+		b.addNumber(-3);
+		b.addNumber(29);
+
+		b.printVector();
+		// add number when full should throw
+		try
+		{
+			b.addNumber(928);
+		}
+		catch (Span::SpanFullException& e)
+		{
+			LOG_ERROR() << e.what();
+		}
+	}
+	// demo 2
+	{
+		printTestName("demo 2 - assign");
+		Span a(3);
+		Span b(0);
+		// add number when size is 0
+		try
+		{
+			b.addNumber(1);
+		}
+		catch (Span::SpanFullException& e)
+		{
+			LOG_ERROR() << e.what();
+		}
+
+		b = a;
+		b.addNumber(1);
+		b.printVector();
+	}
 }
