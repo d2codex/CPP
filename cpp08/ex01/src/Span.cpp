@@ -15,6 +15,7 @@ Span::Span(const Span& other) :
 	_vector(other._vector)
 {
 	LOG_DEBUG() << "Span copy constructor called"; 
+	LOG_DEBUG() << "max numbers:           " << _maxNumbers;
 	LOG_DEBUG() << "(cpy) vector capacity: " << _vector.capacity();
 	LOG_DEBUG() << "(cpy) vector size:     " << _vector.size();
 }
