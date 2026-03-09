@@ -1,6 +1,7 @@
 #include "Span.hpp"
 #include "Logger.hpp"
 #include <algorithm>
+#include <climits>
 
 Span::Span(unsigned int N) : _maxNumbers(N), _vector(0)
 {
@@ -44,7 +45,7 @@ Span::~Span()
 	LOG_DEBUG() << "Span deconstructor called";
 }
 
-void	Span:: addNumber(int n)
+void	Span::addNumber(int n)
 {
 	if (_vector.size() >= _maxNumbers)
 		throw SpanFullException();
@@ -70,9 +71,8 @@ unsigned int	Span::shortestSpan() const
 {
 	std::vector<int> tmp = getSortedVector();
 
-	long long shortest = static_cast<long long>(tmp[1]) -
-						 static_cast<long long>(tmp[0]);
-	for (size_t i = 1; i < tmp.size() - 1; i++)
+	long long shortest = LLONG_MAX;
+	for (size_t i = 0; i < tmp.size() - 1; i++)
 	{
 		long long	diff = static_cast<long long>(tmp[i + 1]) -
 						   static_cast<long long>(tmp[i]);
@@ -89,7 +89,7 @@ unsigned int	Span::longestSpan() const
 	
 	long long longest = (static_cast<long long>(tmp.back()) -
 						 static_cast<long long>(tmp.front()));
-	LOG_INFO() << "Longest Span: " << longest;
+	LOG_INFO() << "Longest Span: " << static_cast<unsigned int>(longest);
 
 	return (static_cast<unsigned int>(longest));
 }

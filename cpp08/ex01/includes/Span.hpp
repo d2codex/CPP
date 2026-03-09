@@ -1,6 +1,10 @@
 #pragma once
 
 #include <vector>
+#include <cstddef>
+#include <cstdlib>
+#include <ctime>
+#include <climits>
 
 class Span
 {
@@ -9,12 +13,6 @@ public:
 	Span(const Span& other);
 	Span& operator=(const Span& other);
 	~Span();
-
-	void			addNumber(int n);
-	unsigned int	shortestSpan() const;
-	unsigned int	longestSpan() const;
-
-	//addRangeIterator
 
 	//exceptions
 	class SpanFullException : public std::exception
@@ -34,6 +32,18 @@ public:
 			}
 	};
 
+	// methods
+	void			addNumber(int n);
+	unsigned int	shortestSpan() const;
+	unsigned int	longestSpan() const;
+
+	template<typename Iterator>
+	void			addNumber(Iterator begin, Iterator end)
+	{
+		for(; begin != end; ++begin)
+			addNumber(*begin);
+	}
+
 	//utility functions
 	void	printVector() const;
 
@@ -42,3 +52,22 @@ private:
 	unsigned int		_maxNumbers;
 	std::vector<int>	_vector;
 };
+
+template<typename Container>
+Container generateRandomNumbers(size_t n)
+{
+	Container c;
+	
+	const size_t MAX_SIZE = 2000000;
+	if (n > MAX_SIZE)
+		n = MAX_SIZE;
+
+	for (size_t i = 0; i < n; i++)
+	{
+		int num = rand() % n;
+		if (rand() % 2)
+			num = -num;
+		c.push_back(num);
+	}
+	return (c);
+}
