@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 {
 	if (!initLogger(argc, argv))
 		return (1);
-	// demo 1
+	// demo 1 - copy
 	{
 		printTestName("copy");
 		Span a(3);
@@ -60,7 +60,7 @@ int	main(int argc, char **argv)
 			LOG_ERROR() << e.what();
 		}
 	}
-	// demo 2
+	// demo 2 - assign
 	{
 		printTestName("assign");
 		Span a(3);
@@ -119,7 +119,7 @@ int	main(int argc, char **argv)
 	}
 	//shortest Span fits in unsigned int
 	{
-		printTestName("shortestSpan - difference fits in unsigned int");
+		printTestName("shortestSpan - smallest difference");
 		Span a(4);
 
 		a.addNumber(1);
@@ -130,4 +130,29 @@ int	main(int argc, char **argv)
 		a.shortestSpan();
 		a.printVector();
 	}
+	// add multiple numbers 5
+	{
+		printTestName("add multiple numbers - 5");
+		srand(time(NULL));
+		std::vector<int> numbers = generateRandomNumbers< std::vector<int> >(5);
+	
+		Span a(5);
+		a.addNumber(numbers.begin(), numbers.end());
+		a.printVector();
+		a.shortestSpan();
+		a.longestSpan();
+	}
+/*
+	// add multiple numbers 2000000
+	{
+		printTestName("add multiple numbers - 2000000");
+		srand(time(NULL));
+		std::vector<int> numbers = generateRandomNumbers< std::vector<int> >(2000000);
+	
+		Span a(2000000);
+		a.addNumber(numbers.begin(), numbers.end());
+		a.shortestSpan();
+		a.longestSpan();
+	}
+*/
 }
