@@ -38,8 +38,18 @@ int	main(int argc, char **argv)
 	
 	Span a(20);
 	Span b(a);
+	Span c(0);
 
 	b.addNumber(5);
 	b.addNumber(-3);
 	b.addNumber(29);
+
+	try
+	{
+		c.addNumber(1);
+	}
+	catch (Span::SpanFullException& e)
+	{
+		LOG_ERROR() << e.what();
+	}
 }
