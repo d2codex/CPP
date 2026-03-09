@@ -1,11 +1,14 @@
 #include "Span.hpp"
 #include "Logger.hpp"
+#include <algorithm>
 
 Span::Span(unsigned int N) : _maxNumbers(N), _vector(0)
 {
+	_vector.reserve(N);
 	LOG_DEBUG() << "Span Parameterized constructor called";
 	LOG_DEBUG() << "max numbers:     " << _maxNumbers;
 	LOG_DEBUG() << "vector size:     " << _vector.size();
+	LOG_DEBUG() << "vector capacity: " << _vector.capacity();
 }
 
 Span::Span(const Span& other) :
@@ -15,6 +18,7 @@ Span::Span(const Span& other) :
 	LOG_DEBUG() << "Span copy constructor called"; 
 	LOG_DEBUG() << "(copy) max numbers:     " << _maxNumbers;
 	LOG_DEBUG() << "(copy) vector size:     " << _vector.size();
+	LOG_DEBUG() << "(copy) vector capacity: " << _vector.capacity();
 }
 
 Span& Span::operator=(const Span& other)
@@ -30,6 +34,7 @@ Span& Span::operator=(const Span& other)
 	LOG_DEBUG() << "Span assignment operator called"; 
 	LOG_DEBUG() << "(assign) max numbers:     " << _maxNumbers;
 	LOG_DEBUG() << "(assign) vector size:     " << _vector.size();
+	LOG_DEBUG() << "(assign) vector capacity: " << _vector.capacity();
 
 	return (*this);
 }
@@ -47,6 +52,20 @@ void	Span:: addNumber(int n)
 	_vector.push_back(n);
 
 	LOG_DEBUG() << "(add) vector size:     " << _vector.size();
+	LOG_DEBUG() << "(add) vector capacity: " << _vector.capacity();
+}
+
+unsigned int	Span::longestSpan() const
+{
+	if (_vector.size() < 2)
+		throw NoSpanException();
+
+	std::vector<int> tmp(_vector);
+	std::sort(tmp.begin(), tmp.end());
+	unsigned int longestSpan = (tmp.back() - tmp.front());
+	LOG_DEBUG() << "Longest Span: " << longestSpan;
+
+	return (longestSpan);
 }
 
 void	Span::printVector() const

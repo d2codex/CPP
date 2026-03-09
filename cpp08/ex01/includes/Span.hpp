@@ -11,6 +11,9 @@ public:
 	~Span();
 
 	void			addNumber(int n);
+	unsigned int	shortestSpan() const;
+	unsigned int	longestSpan() const;
+
 	//addRangeIterator
 
 	//exceptions
@@ -22,9 +25,17 @@ public:
 				return ("Span is full");
 			}
 	};
+	class NoSpanException : public std::exception
+	{
+		public:
+			const char* what() const throw()
+			{
+				return ("No span possible. Must have at least 2 numbers.");
+			}
+	};
 
-	//print function
-	void printVector() const;
+	//utility functions
+	void	printVector() const;
 
 private:
 	unsigned int		_maxNumbers;
