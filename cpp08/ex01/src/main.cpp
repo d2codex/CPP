@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/11 08:42:20 by diade-so          #+#    #+#             */
+/*   Updated: 2026/03/11 08:47:18 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Span.hpp"
 #include "Logger.hpp"
 #include "colors.hpp"
 #include <iostream>
 #include <climits>
+#include <list>
 
 bool initLogger(int argc, char **argv)
 {
@@ -39,6 +52,9 @@ int	main(int argc, char **argv)
 {
 	if (!initLogger(argc, argv))
 		return (1);
+
+	srand(time(NULL));
+
 	// demo 1 - copy
 	{
 		printTestName("copy");
@@ -133,8 +149,18 @@ int	main(int argc, char **argv)
 	// add multiple numbers 5
 	{
 		printTestName("add multiple numbers - 5");
-		srand(time(NULL));
 		std::vector<int> numbers = generateRandomNumbers< std::vector<int> >(5);
+	
+		Span a(5);
+		a.addNumber(numbers.begin(), numbers.end());
+		a.printVector();
+		a.shortestSpan();
+		a.longestSpan();
+	}
+	// add multiple numbers from list container
+	{
+		printTestName("add multiple numbers from list container");
+		std::list<int> numbers = generateRandomNumbers< std::list<int> >(5);
 	
 		Span a(5);
 		a.addNumber(numbers.begin(), numbers.end());
@@ -146,7 +172,6 @@ int	main(int argc, char **argv)
 	// add multiple numbers 2000000
 	{
 		printTestName("add multiple numbers - 2000000");
-		srand(time(NULL));
 		std::vector<int> numbers = generateRandomNumbers< std::vector<int> >(2000000);
 	
 		Span a(2000000);
