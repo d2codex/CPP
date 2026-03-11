@@ -56,7 +56,7 @@ void	Span::addNumber(int n)
 	LOG_DEBUG() << "(add) vector capacity: " << _vector.capacity();
 }
 
-std::vector<int>	Span::getSortedVector() const
+unsigned int	Span::shortestSpan() const
 {
 	if (_vector.size() < 2)
 		throw NoSpanException();
@@ -64,12 +64,6 @@ std::vector<int>	Span::getSortedVector() const
 	std::vector<int> tmp(_vector);
 	std::sort(tmp.begin(), tmp.end());
 
-	return (tmp);
-}
-
-unsigned int	Span::shortestSpan() const
-{
-	std::vector<int> tmp = getSortedVector();
 
 	long long shortest = LLONG_MAX;
 	for (size_t i = 0; i < tmp.size() - 1; i++)
@@ -85,11 +79,14 @@ unsigned int	Span::shortestSpan() const
 
 unsigned int	Span::longestSpan() const
 {
-	std::vector<int> tmp = getSortedVector();
+	if (_vector.size() < 2)
+		throw NoSpanException();
 	
-	long long longest = (static_cast<long long>(tmp.back()) -
-						 static_cast<long long>(tmp.front()));
-	LOG_INFO() << "Longest Span: " << static_cast<unsigned int>(longest);
+	std::vector<int>::const_iterator min = std::min_element(_vector.begin(), _vector.end());
+	std::vector<int>::const_iterator max = std::max_element(_vector.begin(), _vector.end());
+
+	long long longest = static_cast<long long>(*max) - static_cast<long long>(*min);
+	LOG_INFO() << "Longest span: " << static_cast<unsigned int>(longest);
 
 	return (static_cast<unsigned int>(longest));
 }

@@ -48,7 +48,6 @@ public:
 	void	printVector() const;
 
 private:
-	std::vector<int>	getSortedVector() const;
 	unsigned int		_maxNumbers;
 	std::vector<int>	_vector;
 };
