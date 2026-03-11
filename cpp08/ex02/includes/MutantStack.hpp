@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   MutantStack.hpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/11 09:12:24 by diade-so          #+#    #+#             */
+/*   Updated: 2026/03/11 09:13:44 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 
 #include <stack>
@@ -5,18 +17,15 @@
 #include <iostream>
 #include <iterator>
 
-// MutantStack inherits from std::stack (see documentation from
-// gcc/libstdc++-v3/include/bits/stl_stack.h)
-// template<typename _Tp, typename _Sequence = deque<_Tp>>
-// so stack takes 2 parameters the first is the element type ex: int
-// and the second is the container type, if not specified it is
-// defaulted to a deque(double ended queue) container
-// stack has public memeber (among others):
-//   typedef _Sequence	container_type;
-//  and protected (allows access to derived classes):
-//     _Sequence c;
-//  c is the underlying container so i can use that to access
-//  it's member functions, in this exercise that would be the iterators
+/**
+ * @brief A stack that supports iteration over its elements.
+ * Inherits from std::stack and exposes iterators (forward, reverse, const).
+ * Maintains normal LIFO behavior for push/pop/top while allowing traversal
+ * of the underlying container. Iterators can read from any compatible container.
+ *
+ * @tparam T Type of elements stored in the stack.
+ * @tparam Container Type of underlying container (defaults to std::deque<T>).
+ */
 template<typename T, typename Container = std::deque<T> >
 class MutantStack : public std::stack<T, Container>
 {
@@ -50,6 +59,14 @@ public:
 	const_reverse_iterator rend() const { return (this->c.rend()); }
 };
 
+/**
+ * @brief Print elements of any container with indices.
+ * Iterates from begin() to end() and prints the index and value of
+ * each element. Works with any container that provides const iterators.
+ *
+ * @tparam T Type of the container.
+ * @param container The container whose elements will be printed.
+ */
 template<typename T>
 void printElements(const T& container)
 {

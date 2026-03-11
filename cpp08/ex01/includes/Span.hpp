@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Span.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/11 08:57:20 by diade-so          #+#    #+#             */
+/*   Updated: 2026/03/11 09:01:25 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #pragma once
 
 #include <vector>
@@ -6,6 +18,16 @@
 #include <ctime>
 #include <climits>
 
+/**
+ * @brief Stores a fixed number of integers and computes spans.
+ *
+ * The Span class allows adding integers up to a maximum N and
+ * provides methods to find the shortest and longest span
+ * (difference) between any two stored numbers.
+ *
+ * Numbers can be added individually or using a range of iterators,
+ * allowing data to be read from any container type (vector, list, etc.).
+ */
 class Span
 {
 public:
@@ -52,6 +74,17 @@ private:
 	std::vector<int>	_vector;
 };
 
+/**
+ * @brief Generates a container filled with random integers.
+ *
+ * This function creates a container of type Container with `n`
+ * random integers. Each integer can be positive or negative.
+ * The function supports any container type that has push_back().
+ *
+ * @tparam Container Type of the container to generate (e.g., vector, list).
+ * @param n Number of random integers to generate (max 2,000,000).
+ * @return Container filled with random integers.
+ */
 template<typename Container>
 Container generateRandomNumbers(size_t n)
 {

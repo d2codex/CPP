@@ -1,8 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Span.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: diade-so <diade-so@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/11 09:09:13 by diade-so          #+#    #+#             */
+/*   Updated: 2026/03/11 09:09:18 by diade-so         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Span.hpp"
 #include "Logger.hpp"
 #include <algorithm>
 #include <climits>
 
+/**
+ * @brief Constructs a Span with a maximum number of integers.
+ * @param N Maximum number of integers the Span can store.
+ */
 Span::Span(unsigned int N) : _maxNumbers(N), _vector(0)
 {
 	_vector.reserve(N);
@@ -12,6 +28,10 @@ Span::Span(unsigned int N) : _maxNumbers(N), _vector(0)
 	LOG_DEBUG() << "vector capacity: " << _vector.capacity();
 }
 
+/**
+ * @brief Copy constructor for Span.
+ * @param other Span instance to copy from.
+ */
 Span::Span(const Span& other) :
 	_maxNumbers(other._maxNumbers),
 	_vector(other._vector)
@@ -22,6 +42,11 @@ Span::Span(const Span& other) :
 	LOG_DEBUG() << "(copy) vector capacity: " << _vector.capacity();
 }
 
+/**
+ * @brief Assignment operator for Span.
+ * @param other Span instance to assign from.
+ * @return Reference to this Span.
+ */
 Span& Span::operator=(const Span& other)
 {
 	if (this != &other)
@@ -40,11 +65,19 @@ Span& Span::operator=(const Span& other)
 	return (*this);
 }
 
+/**
+ * @brief Destructor for Span.
+ */
 Span::~Span()
 {
 	LOG_DEBUG() << "Span deconstructor called";
 }
 
+/**
+ * @brief Adds a single number to the Span.
+ * Throws SpanFullException if Span is full.
+ * @param n Number to add.
+ */
 void	Span::addNumber(int n)
 {
 	if (_vector.size() >= _maxNumbers)
@@ -56,6 +89,18 @@ void	Span::addNumber(int n)
 	LOG_DEBUG() << "(add) vector capacity: " << _vector.capacity();
 }
 
+/**
+ * @brief Computes the shortest span between numbers in the Span.
+ * The method first creates a copy of the stored numbers and sorts it.
+ * Then it iterates pairwise to find the minimum difference between
+ * consecutive elements.
+ *
+ * Throws NoSpanException if fewer than 2 numbers are stored.
+ *
+ * @return Shortest span as unsigned int.
+ * @note Time complexity: O(n log n) due to sorting, where n is the
+ *       number of elements in the Span.
+ */
 unsigned int	Span::shortestSpan() const
 {
 	if (_vector.size() < 2)
@@ -77,6 +122,17 @@ unsigned int	Span::shortestSpan() const
 	return (static_cast<unsigned int>(shortest));
 }
 
+/**
+ * @brief Computes the longest span between numbers in the Span.
+ * The method finds the minimum and maximum values in the stored numbers
+ * and calculates their difference.
+ *
+ * Throws NoSpanException if fewer than 2 numbers are stored.
+ *
+ * @return Longest span as unsigned int.
+ * @note Time complexity: O(n) to find min and max, where n is the number
+ *       of elements in the Span.
+ */
 unsigned int	Span::longestSpan() const
 {
 	if (_vector.size() < 2)
@@ -91,6 +147,9 @@ unsigned int	Span::longestSpan() const
 	return (static_cast<unsigned int>(longest));
 }
 
+/**
+ * @brief Prints all stored numbers in the Span with their indices.
+ */
 void	Span::printVector() const
 {
 	for (unsigned int i = 0; i < _vector.size(); i++)
