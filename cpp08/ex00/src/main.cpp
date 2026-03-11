@@ -41,11 +41,8 @@ bool initLogger(int argc, char **argv)
 	return (false);
 }
 
-
-
 int	main(int argc, char **argv)
 {
-
 	if (!initLogger(argc, argv))
 		return (1);
 
