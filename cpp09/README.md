@@ -10,7 +10,7 @@ input file of date/value pairs, printing each value multiplied by the closest
 earlier exchange rate.
 
 **Key points**
-- `std::map` for ordered date storage and `lower_bound` for closest-date lookup
+- `std::map` for ordered date storage and `upper_bound` for closest-date lookup
 - Full date validation including leap year handling
 - `strtod` with `errno` and `*end` checks for robust float parsing
 - Per-line error recovery — bad lines print to stderr and processing continues
@@ -28,7 +28,7 @@ argument using a stack.
 **Key points**
 - `std::stack` backed by `std::list` (vector and deque reserved for ex02)
 - Operator dispatch via switch on char
-- Overflow detection using `long long` widening with explicit `INT_MAX`/`INT_MIN` bounds check
+- Overflow detection using `long long` widening with explicit bounds check
 - Private unimplemented canonical form — copying an RPN evaluator is meaningless
 
 **Usage**
@@ -65,7 +65,7 @@ make debug
 ## Building
 
 ```bash
-make        # build all three exercises
+make        # build
 make clean  # remove objects
 make fclean # remove objects and binaries
 make re     # rebuild from scratch
