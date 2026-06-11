@@ -17,7 +17,7 @@ earlier exchange rate.
 
 **Usage**
 ```bash
-./btc input.txt
+./bin/btc input.txt
 ```
 
 ## ex01 — RPN
@@ -33,7 +33,7 @@ argument using a stack.
 
 **Usage**
 ```bash
-./RPN "8 9 * 9 - 9 - 9 - 4 - 1 +"
+./bin/RPN "8 9 * 9 - 9 - 9 - 4 - 1 +"
 ```
 
 ## ex02 — PmergeMe
@@ -52,8 +52,8 @@ Ford-Johnson merge-insert sort algorithm, applied independently to a
 
 **Usage**
 ```bash
-./PmergeMe 3 5 9 7 4
-./PmergeMe `shuf -i 1-1000 -n 100 | tr "\n" " "`
+./bin/PmergeMe 3 5 9 7 4
+./bin/PmergeMe `shuf -i 1-1000 -n 100 | tr "\n" " "`
 ```
 
 **Debug build** (prints pairs, chains, and Jacobsthal order)
