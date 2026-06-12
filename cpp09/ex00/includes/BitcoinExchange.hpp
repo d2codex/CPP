@@ -3,6 +3,10 @@
 #include <string>
 #include <map>
 
+/**
+ * @brief Manages Bitcoin exchange rate data loaded from a CSV database
+ *        and provides date-based rate lookups for value conversions.
+ */
 class BitcoinExchange
 {
 public:

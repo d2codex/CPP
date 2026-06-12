@@ -7,73 +7,120 @@
 #include <iostream>
 
 namespace {
-	const char* DATABASE_FILE = "data.csv";
-	const std::string WHITESPACE = " \t\n\r\f\v";
+/// Path to the Bitcoin exchange rate database file.
+const char* DATABASE_FILE = "data.csv";
+/// Characters considered whitespace for string trimming.
+const std::string WHITESPACE = " \t\n\r\f\v";
 
-	void trim(std::string& str) {
-		std::string::size_type start = str.find_first_not_of(WHITESPACE);
-		std::string::size_type end = str.find_last_not_of(WHITESPACE);
+/**
+ * @brief Removes leading and trailing whitespace from a string.
+ * @param str String to trim.
+ */
+void trim(std::string& str) {
+	std::string::size_type start = str.find_first_not_of(WHITESPACE);
+	std::string::size_type end = str.find_last_not_of(WHITESPACE);
 
-		if (start == std::string::npos) {
-			str.clear();
-			return;
-		}
-		str = str.substr(start, end - start + 1);
+	if (start == std::string::npos) {
+		str.clear();
+		return;
 	}
-
-	bool isDigits(std::string& str) {
-		for (size_t i = 0; i < str.size(); i++) {
-			if (!std::isdigit(str[i]))
-				return false;
-		}
-		return true;
-	}
-
-	int daysInMonth(int year, int month) {
-		switch (month) {
-			case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-				return 31;
-			case 4: case 6: case 9: case 11:
-				return 30;
-			case 2:
-				if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
-					return 29;
-				return 28;
-		}
-		return 0;
-	}
-
-	double strToDouble(const std::string& str) {
-		char *end;
-		errno = 0;
-		double value = std::strtod(str.c_str(), &end);
-
-		if (errno == ERANGE)
-			throw std::runtime_error("Over/underflow");
-		if (end == str.c_str() || *end != '\0')
-			throw std::runtime_error("Invalid number");
-		return value;
-	}
+	str = str.substr(start, end - start + 1);
 }
 
+/**
+ * @brief Checks whether a string contains only digits.
+ * @param str String to check.
+ * @return true if the string contains only digits, false otherwise.
+ */
+bool isDigits(std::string& str) {
+	for (size_t i = 0; i < str.size(); i++) {
+		if (!std::isdigit(str[i]))
+			return false;
+	}
+	return true;
+}
+
+/**
+ * @brief Returns the number of days in a given month.
+ * @param year Year used to determine leap years.
+ * @param month Month in the range [1, 12].
+ * @return Number of days in the month.
+ */
+int daysInMonth(int year, int month) {
+	switch (month) {
+		case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+			return 31;
+		case 4: case 6: case 9: case 11:
+			return 30;
+		case 2:
+			if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+				return 29;
+			return 28;
+	}
+	return 0;
+}
+
+/**
+ * @brief Converts a string to a double.
+ * @param str String to convert.
+ * @return Converted double value.
+ * @throws std::runtime_error If the string is invalid or overflows.
+ */
+double strToDouble(const std::string& str) {
+	char *end;
+	errno = 0;
+	double value = std::strtod(str.c_str(), &end);
+
+	if (errno == ERANGE)
+		throw std::runtime_error("Overflow");
+	if (end == str.c_str() || *end != '\0')
+		throw std::runtime_error("Invalid number");
+	return value;
+}
+
+} // end namespace
+
+/**
+ * @brief Constructs a BitcoinExchange and loads the exchange rate database.
+ */
 BitcoinExchange::BitcoinExchange() {
 	loadDatabase(DATABASE_FILE);
 }
 
+/**
+ * @brief Disabled copy constructor.
+ * Present only to satisfy the Orthodox Canonical Form.
+ */
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) {
-	*this = other;
+	*(void)other;
 }
 
+/**
+ * @brief Disabled assignment operator.
+ * Present only to satisfy the Orthodox Canonical Form.
+ */
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
-	if (this != &other) {
-		_rates = other._rates;
-	}
+	(void)other;
 	return *this;
 }
 
+/**
+ * @brief Destroys the BitcoinExchange.
+ */
 BitcoinExchange::~BitcoinExchange() {
 }
 
+/**
+ * @brief Loads and validates exchange rate data from a CSV file.
+ *
+ * Ensures format correctness, validates dates and rates, and prevents
+ * duplicate dates in the database.
+ *
+ * @param filename Database file to load.
+ * @throws std::runtime_error If the file cannot be read or contains
+ *         malformed data (including duplicate dates or bad header).
+ * @throws std::invalid_argument If a date is invalid.
+ */
 void BitcoinExchange::loadDatabase(const std::string& filename) {
 	std::ifstream file(filename.c_str());
 	if (!file)
@@ -98,7 +145,7 @@ void BitcoinExchange::loadDatabase(const std::string& filename) {
 
 		std::string rateStr = line.substr(comma + 1);
 		trim(rateStr);
-		double rate = strToDouble(rateStr); //
+		double rate = strToDouble(rateStr);
 	
 		std::pair<std::map<std::string, double>::iterator, bool> result;
 		result = _rates.insert(std::make_pair(date, rate));
@@ -135,6 +182,15 @@ bool BitcoinExchange::isValidDate(const std::string& date) const {
 	return true;
 }
 
+/**
+ * @brief Validates a date string in YYYY-MM-DD format.
+ *
+ * Checks format correctness, numeric fields, and calendar validity
+ * (including month length and leap years).
+ *
+ * @param date Date string to validate.
+ * @return true if the date is valid, false otherwise.
+ */
 bool BitcoinExchange::isValidValue(double value) const {
 	if (value < 0) {
 		std::cerr << "Error: not a positive number.\n";
@@ -147,6 +203,18 @@ bool BitcoinExchange::isValidValue(double value) const {
 	return true;
 }
 
+/**
+ * @brief Processes an input file and performs Bitcoin value conversions.
+ *
+ * Reads a file containing lines in the format `date | value`, validates
+ * each entry, and outputs the converted result using stored exchange rates.
+ *
+ * Input lines are validated individually; malformed lines are skipped
+ * with an error message. The file header is ignored and not validated.
+ *
+ * @param filename Input file to process.
+ * @throws std::runtime_error If the file cannot be opened or is empty.
+ */
 void BitcoinExchange::processInput(const std::string& filename) {
 	std::ifstream file(filename.c_str());
 	if (!file)
@@ -191,6 +259,17 @@ void BitcoinExchange::processInput(const std::string& filename) {
 	}
 }
 
+/**
+ * @brief Retrieves the Bitcoin exchange rate for a given date.
+ *
+ * Finds the closest available rate for the requested date.
+ * If an exact match is not found, returns the most recent
+ * previous date's rate.
+ *
+ * @param date Date in YYYY-MM-DD format.
+ * @return Exchange rate for the given date or nearest earlier date.
+ * @throws std::runtime_error If the date is earlier than any stored rate.
+ */
 double BitcoinExchange::getRate(const std::string& date) const {
 	std::map<std::string, double>::const_iterator it;
 	it = _rates.upper_bound(date);
