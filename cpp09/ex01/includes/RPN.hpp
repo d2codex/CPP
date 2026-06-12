@@ -7,6 +7,12 @@
 #define YEL		"\033[33m"
 #define RESET	"\033[0m"
 
+/**
+ * @brief Evaluates Reverse Polish Notation (RPN) expressions.
+ *
+ * Provides functionality to parse and evaluate mathematical expressions
+ * written in postfix notation using a stack-based approach.
+ */
 class RPN {
 public:
 	RPN();

@@ -7,23 +7,45 @@
 #include <sstream>
 #include <limits>
 
+/**
+ * @brief Constructs an empty RPN evaluator.
+ */
 RPN::RPN() {
 }
 
+/**
+ * @brief Disabled copy constructor (canonical form requirement only).
+ */
 RPN::RPN(const RPN& other) {
 	(void)other;
 }
 
+/**
+ * @brief Disabled assignment operator (canonical form requirement only).
+ */
 RPN& RPN::operator=(const RPN& other) {
-	if (this != & other) {
-		(void)other;
-	}
+	(void)other;
 	return *this;
 }
 
+/**
+ * @brief Destroys the RPN evaluator.
+ */
 RPN::~RPN() {
 }
 
+/**
+ * @brief Evaluates a Reverse Polish Notation (RPN) expression.
+ *
+ * Parses a space-separated expression and computes its result using
+ * a stack-based evaluation algorithm. Supports single-digit operands
+ * and basic arithmetic operators.
+ *
+ * @param expression RPN expression to evaluate.
+ * @return Result of the evaluated expression.
+ * @throws std::runtime_error If the expression is invalid, contains
+ *         invalid tokens, or has incorrect operand/operator structure.
+ */
 int RPN::evaluate(const std::string& expression) {
 	std::stack<int, std::list<int> > stack;
 	std::istringstream iss(expression);
@@ -58,10 +80,31 @@ int RPN::evaluate(const std::string& expression) {
 	return stack.top();
 }
 
+/**
+ * @brief Checks whether a token is a supported arithmetic operator.
+ *
+ * Supported operators are: +, -, *, /.
+ *
+ * @param token String token to check.
+ * @return true if the token is an operator, false otherwise.
+ */
 bool RPN::isOperator(const std::string& token) const {
 	return (token == "+" || token == "-" || token == "*" || token == "/");
 }
 
+/**
+ * @brief Applies an arithmetic operator to two operands.
+ *
+ * Performs the operation in a wider type to detect overflow safely.
+ * Division by zero is not allowed.
+ *
+ * @param op Arithmetic operator (+, -, *, /).
+ * @param lhs Left-hand operand.
+ * @param rhs Right-hand operand.
+ * @return Result of the operation.
+ * @throws std::runtime_error If the operator is unknown, division by
+ *         zero occurs, or overflow is detected.
+ */
 int RPN::applyOperator(char op, int lhs, int rhs) const {
 	long long result;
 
