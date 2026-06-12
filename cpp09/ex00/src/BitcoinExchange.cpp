@@ -92,7 +92,7 @@ BitcoinExchange::BitcoinExchange() {
  * Present only to satisfy the Orthodox Canonical Form.
  */
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) {
-	*(void)other;
+	(void)other;
 }
 
 /**
