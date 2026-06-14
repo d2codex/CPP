@@ -14,6 +14,26 @@
 #define CYN		"\033[36m"
 #define RESET	"\033[0m"
 
+/**
+ * @brief Implements Ford–Johnson (merge-insertion) sorting algorithm.
+ *
+ * This class parses integer input and sorts it using the Ford–Johnson
+ * strategy on both std::vector and std::deque containers.
+ *
+ * The algorithm:
+ * - Groups elements into pairs (a < b)
+ * - Sorts pairs by their larger element
+ * - Builds a main chain from b-elements
+ * - Inserts a-elements using Jacobsthal-ordered insertion
+ *   to reduce the number of comparisons
+ *
+ * Two parallel implementations are maintained:
+ * - std::vector-based version
+ * - std::deque-based version
+ *
+ * @note Assumes valid integer input and no duplicates.
+ * @warning Copy operations are disabled to avoid accidental state duplication.
+ */
 class PmergeMe {
 public:
 	PmergeMe();
@@ -47,6 +67,7 @@ private:
 	void fordJohnson(Container& data, PairContainer& pairs);
 
 	// utils
+	bool isDigits(const std::string& str);
 	template <typename Container>
 	bool isSorted(const Container& container) const;
 	
@@ -57,6 +78,14 @@ private:
 	std::deque<std::pair<int, int> >	_dequePairs;
 };
 
+/**
+ * @brief Prints all elements of a container to stdout.
+ *
+ * Iterates through the container using const iterators and prints
+ * each element separated by a space.
+ *
+ * @tparam Container Any iterable container supporting const_iterator.
+ */
 template <typename Container>
 void printContainer(const Container& c) {
 	for (typename Container::const_iterator it = c.begin();
@@ -66,6 +95,19 @@ void printContainer(const Container& c) {
 	std::cout << std::endl;
 }
 
+/**
+ * @brief Checks if a container is sorted in ascending order.
+ *
+ * Compares each adjacent pair of elements to verify non-decreasing order.
+ *
+ * @tparam Container Any container supporting const_iterator.
+ *
+ * @param container Container to check.
+ *
+ * @return true if sorted in ascending order or size < 2, false otherwise.
+ *
+ * @note Runs in O(n) time.
+ */
 template <typename Container>
 bool PmergeMe::isSorted(const Container& container) const {
 	if (container.size() < 2)
@@ -85,6 +127,18 @@ bool PmergeMe::isSorted(const Container& container) const {
 	return true;
 }
 
+/**
+ * @brief Splits input data into sorted pairs.
+ *
+ * Iterates through the container two elements at a time, forming pairs.
+ * Each pair is ordered so that first <= second.
+ *
+ * @tparam Container Input container type.
+ * @tparam PairContainer Container holding pairs of integers.
+ *
+ * @param data Input container of integers.
+ * @param pairs Output container storing ordered pairs (a <= b).
+ */
 template <typename Container, typename PairContainer>
 void PmergeMe::createPairs(const Container& data, PairContainer& pairs) {
 	pairs.clear();
@@ -105,6 +159,20 @@ void PmergeMe::createPairs(const Container& data, PairContainer& pairs) {
 #endif	
 }
 
+/**
+ * @brief Merges two sorted pair containers.
+ *
+ * Merges two containers of pairs ordered by their `.second` value
+ * into a single sorted result container.
+ *
+ * Sorting is stable with respect to the `.second` element.
+ *
+ * @tparam PairContainer Container of std::pair<int,int>.
+ *
+ * @param left First sorted container.
+ * @param right Second sorted container.
+ * @param result Output merged and sorted container.
+ */
 template <typename PairContainer>
 void PmergeMe::mergePairs(const PairContainer& left,
 				const PairContainer& right,
@@ -124,6 +192,24 @@ void PmergeMe::mergePairs(const PairContainer& left,
 		result.push_back(right[j++]);
 }
 
+/**
+ * @brief Recursively sorts pairs by their larger element.
+ *
+ * Implements a merge sort on a container of pairs, using the `.second`
+ * value (larger element of each pair) as the sorting key.
+ *
+ * The container is split into two halves, each sorted recursively,
+ * then merged back using mergePairs().
+ *
+ * @tparam PairContainer Container of std::pair<int,int>.
+ *
+ * @param pairs Container of pairs to be sorted in-place by `.second`.
+ *
+ * @note This is part of the preprocessing step of the Ford–Johnson
+ * algorithm before building the main and pend sequences.
+ *
+ * @complexity O(n log n)
+ */
 template <typename PairContainer>
 void PmergeMe::sortPairsByLarger(PairContainer& pairs) {
 	if (pairs.size() <= 1)
@@ -137,6 +223,21 @@ void PmergeMe::sortPairsByLarger(PairContainer& pairs) {
 	mergePairs(left, right, pairs);
 }
 
+/**
+ * @brief Ford–Johnson merge-insertion sort.
+ *
+ * Builds pairs (a < b), sorts by b, then inserts a-elements into the
+ * main chain using a Jacobsthal order to reduce comparisons.
+ *
+ * Each a[i] is searched only up to its paired b[i]. Because insertions
+ * shift positions, `inserted` is used to correct indices.
+ *
+ * bound = main.begin() + idx + inserted + 1;
+ * (+1 because lower_bound uses a half-open range [first, last))
+ *
+ * @note Assumes no duplicate values (required so each a[i] maps
+ * uniquely to a b[i] and binary insertion bounds remain valid).
+ */
 template<typename Container, typename PairContainer>
 void PmergeMe::fordJohnson(Container& data, PairContainer& pairs) {
 	if (data.size() <= 1)
@@ -198,6 +299,9 @@ void PmergeMe::fordJohnson(Container& data, PairContainer& pairs) {
 			if (idx == 0)
 				bound = main.begin() + 1;
 			else
+				// idx = original position
+				// inserted = shift caused by previous insertions
+				// shift the upper bound one past the last element we want to include
 				bound = main.begin() + idx + inserted + 1;
 		typename Container::iterator pos =
 			std::lower_bound(main.begin(), bound,  pend[idx]);
